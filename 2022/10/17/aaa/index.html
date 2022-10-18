@@ -17,23 +17,25 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>aaa | Gladdduck</title>
+  <title>aaa | Hexo</title>
   <meta name="description" content="666666">
 <meta property="og:type" content="article">
 <meta property="og:title" content="aaa">
 <meta property="og:url" content="https://gladdduck.github.io/2022/10/17/aaa/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Gladdduck">
 <meta property="og:description" content="666666">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-17T15:56:55.000Z">
 <meta property="article:modified_time" content="2022-10-17T15:57:46.109Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="syxue">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="https://gladdduck.github.io/2022/10/17/aaa/index.html">
   
+    <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
   
-    <link rel="icon" href="../images/logo.png" type="image/x-icon">
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
   
   
 <link rel="stylesheet" href="/css/style.css">
@@ -44,8 +46,7 @@
   
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
   
-<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 <body class="main-center theme-green" itemscope itemtype="http://schema.org/WebPage">
@@ -165,14 +166,6 @@
     	
         <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
         
-        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
-        
-        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
-        
-        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
-        
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
-        
     </ul>
 
     </nav>
@@ -188,7 +181,7 @@
     <div class="widget-body">
         <div id="board">
             <div class="content">
-                <p>记录所思所想所见，欢迎留言交流。</p>
+                <p>欢迎交流与分享经验!</p>
             </div>
         </div>
     </div>
@@ -412,14 +405,14 @@
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade active in" id="alipay">
               <div class="donate-payimg">
-                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+                <img src="/images/donate/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
               </div>
               <p class="text-muted mv">扫码打赏，你说多少就多少</p>
               <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
             </div>
             <div role="tabpanel" class="tab-pane fade" id="wechatpay">
               <div class="donate-payimg">
-                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+                <img src="/images/donate/wechatpayimg.jpg" alt="扫码支持" title="扫一扫" />
               </div>
               <p class="text-muted mv">扫码打赏，你说多少就多少</p>
               <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
@@ -453,14 +446,6 @@
     <ul class="social-links">
     	
         <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
-        
-        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
-        
-        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
-        
-        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
-        
-        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
         
     </ul>
 
@@ -526,7 +511,8 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
     id: md5(location.pathname),
     distractionFreeMode: true,
     language: 'zh-CN',
-    enableHotKey: ''
+    enableHotKey: '',
+    proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token',
   })
   gitalk.render('comments')
   </script>
