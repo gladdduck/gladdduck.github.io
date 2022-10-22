@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://gladdduck.github.io/2022/10/22/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://gladdduck.github.io/2022/10/22/hello-picgo/</loc>
     
     <lastmod>2022-10-22</lastmod>
     
@@ -20,7 +20,16 @@
   </url>
   
   <url>
-    <loc>https://gladdduck.github.io/2022/10/22/hello-picgo/</loc>
+    <loc>https://gladdduck.github.io/2022/10/22/hello-gitalk/</loc>
+    
+    <lastmod>2022-10-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://gladdduck.github.io/2022/10/22/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/</loc>
     
     <lastmod>2022-10-22</lastmod>
     
@@ -39,15 +48,6 @@
   
   <url>
     <loc>https://gladdduck.github.io/2022/10/22/emoji/</loc>
-    
-    <lastmod>2022-10-20</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://gladdduck.github.io/2022/10/20/hello-gitalk/</loc>
     
     <lastmod>2022-10-20</lastmod>
     
