@@ -1,7 +1,9 @@
-https://gladdduck.github.io/2022/10/20/hello-picgo/
+https://gladdduck.github.io/2022/10/22/hello-picgo/
+https://gladdduck.github.io/2022/10/22/hello-hexo/
+https://gladdduck.github.io/2022/10/22/markdown/
+https://gladdduck.github.io/2022/10/22/emoji/
+https://gladdduck.github.io/2022/10/22/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/
 https://gladdduck.github.io/2022/10/20/hello-gitalk/
-https://gladdduck.github.io/2022/10/18/hello-hexo/
-https://gladdduck.github.io/2022/10/17/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/
 https://gladdduck.github.io/about/index.html
 https://gladdduck.github.io/tags/index.html
 https://gladdduck.github.io/links/index.html
@@ -14,5 +16,7 @@ https://gladdduck.github.io/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/
 https://gladdduck.github.io/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/
 https://gladdduck.github.io/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/
 https://gladdduck.github.io/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/
+https://gladdduck.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/
 https://gladdduck.github.io/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/
 https://gladdduck.github.io/categories/%E6%9D%82%E8%B0%88/
+https://gladdduck.github.io/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/
