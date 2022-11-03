@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://gladdduck.github.io/2022/11/03/Neo4j%E5%AE%89%E8%A3%85/</loc>
+    <lastmod>2022-11-03</lastmod>
+  </url>
+  <url>
     <loc>https://gladdduck.github.io/2022/10/26/%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D/</loc>
     <lastmod>2022-10-26</lastmod>
   </url>

@@ -17,25 +17,33 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>多个域名访问同一个服务器 | Gladdduck</title>
-  <meta name="description" content="需求 有时候服务器少，但是项目多，好几个项目部署到一个服务器上。 或者不同的项目有不同的端口。 但是只有一个域名，是不是只能用一个项目呢？ NONONO 🙅🙅🙅🙅🙅 比如 我有三个域名(A,B,C)(怎么把一个域名变成三个域名，在有办法)，三个项目在服务器上(a,b,c) 研究一下怎么把A-a，B-b，C-c  首先，把一个域名变成多个 比如，我在腾讯云上申请了一个yayan.xyz的">
+  <title>Neo4j&amp;JDK安装踩坑 | Gladdduck</title>
+  <meta name="description" content="前言 最近要开始打工了 😟 😟 😟 😟 创建一个知识图谱(可视化)嵌入到一个系统里面,当作子系统. 期待的效果是百度百科影视图谱,任务太艰巨了. 😔 😔 😔 😔 如果你看到了这篇博客,有好的解决方案都可以帮帮我. 😘 😘 😘 😘  正文  踩坑 😭😭😭😭  问题: 123想创建多个数据库用,刚开始默认有两个,一个neo4j,一个system.希望创建别的数据库.比">
 <meta property="og:type" content="article">
-<meta property="og:title" content="多个域名访问同一个服务器">
-<meta property="og:url" content="https://gladdduck.github.io/2022/10/26/%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D/index.html">
+<meta property="og:title" content="Neo4j&amp;JDK安装踩坑">
+<meta property="og:url" content="https://gladdduck.github.io/2022/11/03/Neo4j%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="Gladdduck">
-<meta property="og:description" content="需求 有时候服务器少，但是项目多，好几个项目部署到一个服务器上。 或者不同的项目有不同的端口。 但是只有一个域名，是不是只能用一个项目呢？ NONONO 🙅🙅🙅🙅🙅 比如 我有三个域名(A,B,C)(怎么把一个域名变成三个域名，在有办法)，三个项目在服务器上(a,b,c) 研究一下怎么把A-a，B-b，C-c  首先，把一个域名变成多个 比如，我在腾讯云上申请了一个yayan.xyz的">
+<meta property="og:description" content="前言 最近要开始打工了 😟 😟 😟 😟 创建一个知识图谱(可视化)嵌入到一个系统里面,当作子系统. 期待的效果是百度百科影视图谱,任务太艰巨了. 😔 😔 😔 😔 如果你看到了这篇博客,有好的解决方案都可以帮帮我. 😘 😘 😘 😘  正文  踩坑 😭😭😭😭  问题: 123想创建多个数据库用,刚开始默认有两个,一个neo4j,一个system.希望创建别的数据库.比">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://image.yayan.xyz/20221026152805.png">
-<meta property="og:image" content="https://image.yayan.xyz/20221026152932.png">
-<meta property="og:image" content="https://image.yayan.xyz/20221026153242.png">
-<meta property="article:published_time" content="2022-10-26T07:22:34.389Z">
-<meta property="article:modified_time" content="2022-10-26T07:41:55.193Z">
+<meta property="og:image" content="https://image.yayan.xyz/20221103175926.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103180045.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103175926.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103180846.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103181021.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103174240.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103174641.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103174753.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103174829.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103175408.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103175425.png">
+<meta property="article:published_time" content="2022-11-03T09:31:04.917Z">
+<meta property="article:modified_time" content="2022-11-03T10:14:10.146Z">
 <meta property="article:author" content="syxue">
-<meta property="article:tag" content="多个域名访问同一个服务器">
+<meta property="article:tag" content="neo4j安装">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://image.yayan.xyz/20221026152805.png">
+<meta name="twitter:image" content="https://image.yayan.xyz/20221103175926.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://gladdduck.github.io/2022/10/26/%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D/index.html">
+  <link rel="canonical" href="https://gladdduck.github.io/2022/11/03/Neo4j%E5%AE%89%E8%A3%85/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
   
@@ -378,21 +386,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text"> 需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A6%96%E5%85%88%E6%8A%8A%E4%B8%80%E4%B8%AA%E5%9F%9F%E5%90%8D%E5%8F%98%E6%88%90%E5%A4%9A%E4%B8%AA"><span class="toc-number">2.</span> <span class="toc-text"> 首先，把一个域名变成多个</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%84%B6%E5%90%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text"> 然后，服务器配置</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E6%96%87"><span class="toc-number">2.</span> <span class="toc-text"> 正文</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B8%A9%E5%9D%91"><span class="toc-number">2.1.</span> <span class="toc-text"> 踩坑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">2.1.1.</span> <span class="toc-text"> 问题:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3"><span class="toc-number">2.1.2.</span> <span class="toc-text"> 解决:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%89%8D%E9%A1%BB%E7%9F%A5"><span class="toc-number">2.2.</span> <span class="toc-text"> 配置前须知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jdk%E5%AE%89%E8%A3%85"><span class="toc-number">2.3.</span> <span class="toc-text"> JDK安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#neo4j%E5%AE%89%E8%A3%85"><span class="toc-number">2.4.</span> <span class="toc-text"> neo4j安装</span></a></li></ol></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-一个服务器使用多个域名" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Neo4j安装" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      多个域名访问同一个服务器
+      Neo4j&amp;JDK安装踩坑
     </h1>
   
 
@@ -400,8 +408,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2022/10/26/%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D/" class="article-date">
-	  <time datetime="2022-10-26T07:22:34.389Z" itemprop="datePublished">2022-10-26</time>
+	<a href="/2022/11/03/Neo4j%E5%AE%89%E8%A3%85/" class="article-date">
+	  <time datetime="2022-11-03T09:31:04.917Z" itemprop="datePublished">2022-11-03</time>
 	</a>
 </span>
         
@@ -413,7 +421,7 @@
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">多个域名访问同一个服务器</a>
+	<a class="article-tag-link-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a>
   </span>
 
 
@@ -426,74 +434,110 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/10/26/%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/11/03/Neo4j%E5%AE%89%E8%A3%85/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 517(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.4k(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 2(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5(分)</span>
 	
 
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h2 id="需求"><a class="markdownIt-Anchor" href="#需求"></a> 需求</h2>
-<p>有时候服务器少，但是项目多，好几个项目部署到一个服务器上。<br />
-或者不同的项目有不同的端口。<br />
-但是只有一个域名，是不是只能用一个项目呢？</p>
-<p>NONONO<br />
-🙅🙅🙅🙅🙅</p>
-<p>比如<br />
-我有三个域名(A,B,C)(怎么把一个域名变成三个域名，在有办法)，三个项目在服务器上(a,b,c)</p>
-<p>研究一下怎么把A-a，B-b，C-c</p>
-<h2 id="首先把一个域名变成多个"><a class="markdownIt-Anchor" href="#首先把一个域名变成多个"></a> 首先，把一个域名变成多个</h2>
-<p>比如，我在腾讯云上申请了一个<strong>yayan.xyz</strong>的域名(其他云没搞过，但是同理)。</p>
+        <h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>最近要开始打工了<br />
+😟 😟 😟 😟<br />
+创建一个知识图谱(可视化)嵌入到一个系统里面,当作子系统.</p>
+<p>期待的效果是<a target="_blank" rel="noopener" href="https://baike.baidu.com/lemmagraph/graphview?lemmaId=56059649&amp;featureId=06a4e94ff6154c81ede88422&amp;classify=teleplay&amp;fromModule=lemma_graph-tree">百度百科影视图谱</a>,任务太艰巨了.<br />
+😔 😔 😔 😔<br />
+如果你看到了这篇博客,有好的解决方案都可以帮帮我.<br />
+😘 😘 😘 😘</p>
+<h1 id="正文"><a class="markdownIt-Anchor" href="#正文"></a> 正文</h1>
+<h2 id="踩坑"><a class="markdownIt-Anchor" href="#踩坑"></a> 踩坑</h2>
+<p>😭😭😭😭</p>
+<h3 id="问题"><a class="markdownIt-Anchor" href="#问题"></a> 问题:</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">想创建多个数据库用,刚开始默认有两个,一个neo4j,一个system.</span><br><span class="line">希望创建别的数据库.</span><br><span class="line">比如:</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.yayan.xyz/20221103175926.png" alt="" /></p>
+<p>网上搜索了很多办法,最坑的一个:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">创建:create database name</span><br><span class="line">删除:drop database name</span><br></pre></td></tr></table></figure>
+<p>看着挺好,试了很多遍报错</p>
+<p><img src="https://image.yayan.xyz/20221103180045.png" alt="" /></p>
+<p>看了<a target="_blank" rel="noopener" href="https://neo4j.com/docs/cypher-manual/4.2/administration/databases/">文档</a>才知道,<strong>这是企业版专属命令,社区版用不了…</strong></p>
+<hr />
+<h3 id="解决"><a class="markdownIt-Anchor" href="#解决"></a> 解决:</h3>
+<p><strong>新建数据库</strong><br />
+在 <code>neo4j\conf\neo4j.conf</code>中,<br />
+找到 <code>dbms.default_database=defaultdatabase</code><br />
+修改后面的名字</p>
+<blockquote>
+<p>如果数据库不存在,就会创建一个新的<br />
+如果存在,启动之后就会设为默认的数据库</p>
+</blockquote>
+<p>但是有一个弊端:<br />
+<img src="https://image.yayan.xyz/20221103175926.png" alt="" /><br />
+这种方式还是切换不了数据库</p>
+<p>cypher命令 <code>use databasename</code>也不能用</p>
+<p>上面两种方法都会报错<br />
+<img src="https://image.yayan.xyz/20221103180846.png" alt="" /></p>
+<p>因为<strong>社区版只能开启一个数据库…</strong></p>
+<p>如果想切换数据库只能修改配置文件,然后重启(neo4j restart)或者开一个新的进程(neo4j start).</p>
+<hr />
+<p><strong>删除数据库</strong></p>
+<p>把 <code>neo4j\data\</code>文件夹下面的<br />
+<img src="https://image.yayan.xyz/20221103181021.png" alt="" /><br />
+对应的数据库名字删除,即可.</p>
+<h2 id="配置前须知"><a class="markdownIt-Anchor" href="#配置前须知"></a> 配置前须知</h2>
+<p>neo4j现在已经到5.x了,<br />
+neo4j 3.x版本需要jdk8<br />
+neo4j 4.x版本需要jdk11</p>
+<p>安装之前需要把jdk安装好,我用的neo4j4.3.19,<br />
+jdk11.2</p>
+<h2 id="jdk安装"><a class="markdownIt-Anchor" href="#jdk安装"></a> JDK安装</h2>
+<p>jdk有很多资料,建议找一个时间最近的,不要找好几年前的.</p>
 <ol>
-<li>打开<a target="_blank" rel="noopener" href="https://console.dnspod.cn/dns">腾讯云的控制台</a>，域名解析，点进要解析的域名</li>
-</ol>
-<p><img src="https://image.yayan.xyz/20221026152805.png" alt="" /></p>
-<ol start="2">
-<li>讲解一下重要的字段</li>
-</ol>
-<p><img src="https://image.yayan.xyz/20221026152932.png" alt="" /></p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">主机记录：就是我们想要的域名，比如主机记录填&quot;aaa&quot;,那么就有一个新的域名aaa.yayan.xyz</span><br><span class="line">记录类型:用的不多，选A就行，有CHAME(加速?)，TXT(验证?),NS(DNS)?</span><br><span class="line">记录值:如果是A就是自己域名绑定的ip，其他的要根据你干啥填</span><br><span class="line">TTL:路由跳转的最大跳数，不重要吧?</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>点击新增字段，输入自己想要的域名，确定之后，几分钟就行了<br />
-<img src="https://image.yayan.xyz/20221026153242.png" alt="" /></li>
-</ol>
-<h2 id="然后服务器配置"><a class="markdownIt-Anchor" href="#然后服务器配置"></a> 然后，服务器配置</h2>
-<ol>
-<li>
-<p>服务器下个nginx(之前觉得麻烦，没想到这么好用)<br />
-这个网上很多，一个命令就行了，忘了是啥了，可以搜搜</p>
-</li>
-<li>
-<p>修改nginx配置文件<br />
-我的是：</p>
-</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/nginx/sites-available/default</span><br></pre></td></tr></table></figure>
-<p><strong>vscode连接服务器的在前一篇</strong></p>
-<ol start="3">
-<li>修改监听端口对应的域名<br />
-我用的http所以是80，<br />
-https应该是443</li>
+<li>下载jdk安装包<br />
+<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/">官网下载</a>需要注册,可以用<a target="_blank" rel="noopener" href="https://repo.huaweicloud.com/java/jdk/">其他镜像</a></li>
+<li>如果需要,更改路径,但是要记住<br />
+<img src="https://image.yayan.xyz/20221103174240.png" alt="" /><br />
+(没图了,网上找的图)</li>
+<li>一路next之后,如果jdk目录里没有jre</li>
 </ol>
 <blockquote>
-<p>一个例子</p>
+<p>命令:<br />
+bin\jlink.exe --module-path jmods --add-modules java desktop --output jre<br />
+就多了一个jre文件夹</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen	80;</span><br><span class="line">	listen [::]:80;</span><br><span class="line">	server_name unsplash.yayan.xyz;</span><br><span class="line">	location / &#123;</span><br><span class="line">		proxy_pass http://服务器ip:6666;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">	listen	80;</span><br><span class="line">	listen [::]:80;</span><br><span class="line">	server_name www.yayan.xyz;</span><br><span class="line">	location / &#123;</span><br><span class="line">		root /anaconda/pythoncode/ChargingMonitor;</span><br><span class="line">		index index.html index.php index.jsp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>重启nginx服务</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx restart</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>现在：<br />
-访问unsplash.yayan.xyz 就会跳转到6666端口对应的服务，比如gradio或者flask搭的项目接口<br />
-访问<br />
-www.yayan.xyz 就会跳转到/anaconda/pythoncode/ChargingMonitor文件夹下对应的index.html或者其他</p>
-</blockquote>
-<p>💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪💪</p>
+<ol start="4">
+<li>配置环境变量<br />
+<img src="https://image.yayan.xyz/20221103174641.png" alt="" /></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%JAVA_HOME%\bin</span><br><span class="line">%JAVA_HOME%\jre\bin</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.yayan.xyz/20221103174753.png" alt="" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.yayan.xyz/20221103174829.png" alt="" /></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zll-wyf/p/15095664.html">解释每个变量的作用</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME</span><br><span class="line">    变量名：JAVA_HOME</span><br><span class="line">    变量值：C:\develop\Java\jdk1.8.0_191</span><br><span class="line">    用途：定义一个变量，供其他地方使用</span><br><span class="line"></span><br><span class="line">Path</span><br><span class="line">    变量名：Path</span><br><span class="line">    变量值：%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;</span><br><span class="line">    用途：让系统在任何路径下都可以识别java、javac、javap等命令</span><br><span class="line"></span><br><span class="line">CLASSPATH</span><br><span class="line">    变量名：CLASSPATH</span><br><span class="line">    变量值：.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar</span><br><span class="line">    用途：告诉jvm要使用或执行的class放在什么路径上，便于JVM加载class文件，.;表示当前路径，tools.jar和dt.jar为类库路径</span><br><span class="line"></span><br><span class="line">CLASSPATH详解</span><br><span class="line">    - tools.jar</span><br><span class="line">    工具类库(编译和运行等)，它跟我们程序中用到的基础类库没有关系。我们注意到在Path中变量值bin目录下的各个exe工具的大小都很小，一般都在27KB左右，这是因为它们实际上仅仅相当于是一层代码的包装，这些工具的实现所要用到的类库都在tools.jar中，用压缩软件打开tools.jar，你会发现有很多文件是和bin目录下的exe工具相对性的。当然，如果tools.jar的功能只有这些的话，那么我们根本不用把它加入到CLASSPATH变量中，因为bin目录下的工具自己可以完成对这些类库的调用，因此tools.jar应该还有其他的功能。在里面还可以看到有Applet和RMI等相关的文件，因此tools.jar应该还是远程调用等必须的jar包。tools.jar的其他作用可以查看其他资料。</span><br><span class="line"></span><br><span class="line">    - dt.jar</span><br><span class="line">    运行环境类库，主要是Swing包，这一点通过用压缩软件打开dt.jar也可以看到。如果在开发时候没有用到Swing包，那么可以不用将dt.jar添加到CLASSPATH变量中。</span><br><span class="line">    CLASSPATH中的类库是由Application ClassLoader或者我们自定义的类加载器来加载的，这里当然不能包括基础类库，如果包括基础类库的话，并用两个不同的自定义类加载器去加载该基础类，那它得到的该基础类就不是唯一的了，这样便不能保证Java类的安全性。</span><br><span class="line"></span><br><span class="line">    - 基本类库和扩展类库rt.jar</span><br><span class="line">    基本类库是所有的 import java.* 开头的类，在 %JAVA_HOME%\jre\lib 目录下（如其中的 rt.jar、resource.jar ），类加载机制提到，该目录下的类会由 Bootstrap ClassLoader 自动加载，并通过亲委派模型保证了基础类库只会被Bootstrap ClassLoader加载，这也就保证了基础类的唯一性。</span><br><span class="line"></span><br><span class="line">    - 扩展类库是所有的 import javax.* 开头的类，在 %JAVA_HOME%\jre\lib\ext 目录下，该目录下的类是由Extension ClassLoader 自动加载，不需要我们指定。</span><br><span class="line"></span><br><span class="line">    - rt.jar 默认就在根ClassLoader的加载路径里面，放在CLASSPATH也是多此一举。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>验证</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmd里输入:</span><br><span class="line">java -version</span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
+<h2 id="neo4j安装"><a class="markdownIt-Anchor" href="#neo4j安装"></a> neo4j安装</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">neo4j有三个版本</span><br><span class="line">一个是社区版:和桌面版基本上没区别,桌面版就是一个应用程序,社区版需要用命令行启动</span><br><span class="line">一个是企业版:收费,没用过,功能很多,上面有体会</span><br><span class="line">一个是桌面版:有可以操作的页面,方便,但是会有点慢</span><br></pre></td></tr></table></figure>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://neo4j.com/download-center/">官网下载</a>,找对应的安装zip(社区版)</li>
+<li>下载解压</li>
+<li>配置环境变量<br />
+<img src="https://image.yayan.xyz/20221103175408.png" alt="" /><br />
+<img src="https://image.yayan.xyz/20221103175425.png" alt="" /></li>
+<li>cmd中输入:neo4j start 就可以启动了,浏览器输入访问</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:7474/browser/</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>默认用户名密码都是<strong>neo4j</strong></li>
+</ol>
 
       
     </div>
@@ -503,7 +547,7 @@ www.yayan.xyz 就会跳转到/anaconda/pythoncode/ChargingMonitor文件夹下对
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://gladdduck.github.io/2022/10/26/%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D/" title="多个域名访问同一个服务器" target="_blank" rel="external">https://gladdduck.github.io/2022/10/26/一个服务器使用多个域名/</a>
+      <a href="https://gladdduck.github.io/2022/11/03/Neo4j%E5%AE%89%E8%A3%85/" title="Neo4j&amp;JDK安装踩坑" target="_blank" rel="external">https://gladdduck.github.io/2022/11/03/Neo4j安装/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -549,13 +593,9 @@ www.yayan.xyz 就会跳转到/anaconda/pythoncode/ChargingMonitor文件夹下对
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2022/11/03/Neo4j%E5%AE%89%E8%A3%85/" title="Neo4j&amp;JDK安装踩坑"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2022/10/26/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91/" title="Vscode连接阿里云服务器"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2022/10/26/%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D/" title="多个域名访问同一个服务器"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
