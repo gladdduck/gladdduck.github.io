@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gladdduck.github.io/2022/10/22/hello-hexo/</loc>
+    
+    <lastmod>2022-11-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://gladdduck.github.io/2022/11/03/Neo4j%E5%AE%89%E8%A3%85/</loc>
     
     <lastmod>2022-11-03</lastmod>
@@ -23,15 +32,6 @@
     <loc>https://gladdduck.github.io/2022/10/26/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91/</loc>
     
     <lastmod>2022-10-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://gladdduck.github.io/2022/10/22/hello-hexo/</loc>
-    
-    <lastmod>2022-10-22</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

@@ -1,7 +1,7 @@
+https://gladdduck.github.io/2022/10/22/hello-hexo/
 https://gladdduck.github.io/2022/11/03/Neo4j%E5%AE%89%E8%A3%85/
 https://gladdduck.github.io/2022/10/26/%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D/
 https://gladdduck.github.io/2022/10/26/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91/
-https://gladdduck.github.io/2022/10/22/hello-hexo/
 https://gladdduck.github.io/2022/10/22/hello-picgo/
 https://gladdduck.github.io/2022/10/22/hello-gitalk/
 https://gladdduck.github.io/2022/10/22/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/
