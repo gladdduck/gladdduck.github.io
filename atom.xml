@@ -6,7 +6,7 @@
   <link href="https://gladdduck.github.io/atom.xml" rel="self"/>
   
   <link href="https://gladdduck.github.io/"/>
-  <updated>2022-11-03T10:35:37.710Z</updated>
+  <updated>2022-11-04T09:26:04.829Z</updated>
   <id>https://gladdduck.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Neo4j浏览器端快捷键</title>
+    <link href="https://gladdduck.github.io/2022/11/04/Neo4j/"/>
+    <id>https://gladdduck.github.io/2022/11/04/Neo4j/</id>
+    <published>2022-11-04T09:24:08.889Z</published>
+    <updated>2022-11-04T09:26:04.829Z</updated>
+    
+    <content type="html"><![CDATA[<p>1、 执行当前命令： ctrl+enter<br />2、 历史上一个命令：ctrl+向上箭头<br />3、 切换到多行编辑：shift+enter<br />4、 将焦点转移到编辑器： /<br />5、 切换到全屏编辑： esc</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;1、 执行当前命令： ctrl+enter&lt;br /&gt;
+2、 历史上一个命令：ctrl+向上箭头&lt;br /&gt;
+3、 切换到多行编辑：shift+enter&lt;br /&gt;
+4、 将焦点转移到编辑器： /&lt;br /&gt;
+5、 切换到全屏编辑： esc&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    <category term="快捷命令" scheme="https://gladdduck.github.io/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/"/>
+    
+    
+    <category term="Neo4j快捷命令" scheme="https://gladdduck.github.io/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/"/>
+    
+  </entry>
   
   <entry>
     <title>Neo4j&amp;JDK安装踩坑</title>
