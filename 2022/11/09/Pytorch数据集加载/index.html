@@ -17,17 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Gladdduck</title>
-  <meta name="description" content="123456789title: 详解PyTorch中加载数据的方法--Dataset、Dataloader、Sampler、collate-fncategories:  - 学习笔记tags:  - Dataset  - Dataloader  - Sampler  - collate_fntoc: true# 是否启用内容索引 转载 作者pytorch其他笔记 数据读取是所有训练模型任务中最基础">
+  <title>详解PyTorch中加载数据的方法--Dataset、Dataloader、Sampler、collate-fn | Gladdduck</title>
+  <meta name="description" content="转载 作者pytorch其他笔记 数据读取是所有训练模型任务中最基础最重要的一步，PyTorch为数据集的读取、加载和使用提供了很好的机制，使得数据加载的工作变得异常简单而且具有非常高的定制性。  Dataset、Dataloader、Sampler的关系 PyTorch中对于数据集的处理有三个非常重要的类：Dataset、Dataloader、Sampler，它们均是 torch.utils.d">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Gladdduck">
+<meta property="og:title" content="详解PyTorch中加载数据的方法--Dataset、Dataloader、Sampler、collate-fn">
 <meta property="og:url" content="https://gladdduck.github.io/2022/11/09/Pytorch%E6%95%B0%E6%8D%AE%E9%9B%86%E5%8A%A0%E8%BD%BD/index.html">
 <meta property="og:site_name" content="Gladdduck">
-<meta property="og:description" content="123456789title: 详解PyTorch中加载数据的方法--Dataset、Dataloader、Sampler、collate-fncategories:  - 学习笔记tags:  - Dataset  - Dataloader  - Sampler  - collate_fntoc: true# 是否启用内容索引 转载 作者pytorch其他笔记 数据读取是所有训练模型任务中最基础">
+<meta property="og:description" content="转载 作者pytorch其他笔记 数据读取是所有训练模型任务中最基础最重要的一步，PyTorch为数据集的读取、加载和使用提供了很好的机制，使得数据加载的工作变得异常简单而且具有非常高的定制性。  Dataset、Dataloader、Sampler的关系 PyTorch中对于数据集的处理有三个非常重要的类：Dataset、Dataloader、Sampler，它们均是 torch.utils.d">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-09T10:38:42.428Z">
-<meta property="article:modified_time" content="2022-11-09T11:22:12.687Z">
+<meta property="article:modified_time" content="2022-11-09T11:28:39.538Z">
 <meta property="article:author" content="syxue">
+<meta property="article:tag" content="Dataset">
+<meta property="article:tag" content="Dataloader">
+<meta property="article:tag" content="Sampler">
+<meta property="article:tag" content="collate_fn">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
   <link rel="canonical" href="https://gladdduck.github.io/2022/11/09/Pytorch%E6%95%B0%E6%8D%AE%E9%9B%86%E5%8A%A0%E8%BD%BD/index.html">
@@ -192,7 +196,7 @@
   <div class="widget">
     <h3 class="widget-title">分类</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">hexo博客配置</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/">快捷命令</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">hexo博客配置</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/">快捷命令</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -202,7 +206,7 @@
   <div class="widget">
     <h3 class="widget-title">标签</h3>
     <div class="widget-body">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Cypher学习笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Neo4j快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">Vscode连接阿里云服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-Time-out/" rel="tag">git Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-Time-out/" rel="tag">github Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" rel="tag">hexo博客配置gitalk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" rel="tag">hexo博客配置picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" rel="tag">hexo博客配置pure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">多个域名访问同一个服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag">搭建博客</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Cypher学习笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataloader/" rel="tag">Dataloader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataset/" rel="tag">Dataset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Neo4j快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sampler/" rel="tag">Sampler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">Vscode连接阿里云服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collate-fn/" rel="tag">collate_fn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-Time-out/" rel="tag">git Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-Time-out/" rel="tag">github Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" rel="tag">hexo博客配置gitalk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" rel="tag">hexo博客配置picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" rel="tag">hexo博客配置pure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">多个域名访问同一个服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag">搭建博客</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -212,7 +216,7 @@
   <div class="widget">
     <h3 class="widget-title">标签云</h3>
     <div class="widget-body tagcloud">
-      <a href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13px;">Cypher学习笔记</a> <a href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Neo4j快捷命令</a> <a href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">Vscode连接阿里云服务器</a> <a href="/tags/git-Time-out/" style="font-size: 13px;">git Time out</a> <a href="/tags/github-Time-out/" style="font-size: 13px;">github Time out</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" style="font-size: 13px;">hexo博客配置gitalk</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" style="font-size: 13px;">hexo博客配置picgo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" style="font-size: 13px;">hexo博客配置pure</a> <a href="/tags/neo4j%E5%AE%89%E8%A3%85/" style="font-size: 13px;">neo4j安装</a> <a href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">多个域名访问同一个服务器</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 13px;">快捷键</a> <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="font-size: 13px;">搭建博客</a>
+      <a href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13px;">Cypher学习笔记</a> <a href="/tags/Dataloader/" style="font-size: 13px;">Dataloader</a> <a href="/tags/Dataset/" style="font-size: 13px;">Dataset</a> <a href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Neo4j快捷命令</a> <a href="/tags/Sampler/" style="font-size: 13px;">Sampler</a> <a href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">Vscode连接阿里云服务器</a> <a href="/tags/collate-fn/" style="font-size: 13px;">collate_fn</a> <a href="/tags/git-Time-out/" style="font-size: 13px;">git Time out</a> <a href="/tags/github-Time-out/" style="font-size: 13px;">github Time out</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" style="font-size: 13px;">hexo博客配置gitalk</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" style="font-size: 13px;">hexo博客配置picgo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" style="font-size: 13px;">hexo博客配置pure</a> <a href="/tags/neo4j%E5%AE%89%E8%A3%85/" style="font-size: 13px;">neo4j安装</a> <a href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">多个域名访问同一个服务器</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 13px;">快捷键</a> <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="font-size: 13px;">搭建博客</a>
     </div>
   </div>
 
@@ -272,10 +276,10 @@
             
             <div class="item-inner">
               <p class="item-category">
-                
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
               </p>
               <p class="item-title">
-                <a href="/2022/11/09/Pytorch%E6%95%B0%E6%8D%AE%E9%9B%86%E5%8A%A0%E8%BD%BD/" class="title">(no title)</a>
+                <a href="/2022/11/09/Pytorch%E6%95%B0%E6%8D%AE%E9%9B%86%E5%8A%A0%E8%BD%BD/" class="title">详解PyTorch中加载数据的方法--Dataset、Dataloader、Sampler、collate-fn</a>
               </p>
               <p class="item-date">
                 <time datetime="2022-11-09T10:38:42.428Z" itemprop="datePublished">2022-11-09</time>
@@ -369,11 +373,28 @@
 
   
   
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#dataset-dataloader-sampler%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">1.</span> <span class="toc-text"> Dataset、Dataloader、Sampler的关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dataset"><span class="toc-number">2.</span> <span class="toc-text"> Dataset</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#dataloader"><span class="toc-number">3.</span> <span class="toc-text"> Dataloader</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#dataloader%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text"> Dataloader的一些常用参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dataloader%E5%8F%82%E6%95%B0%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BA%92%E6%96%A5"><span class="toc-number">3.2.</span> <span class="toc-text"> Dataloader参数之间的互斥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#dataloader%E7%9A%84%E5%AE%9E%E4%BE%8B"><span class="toc-number">3.3.</span> <span class="toc-text"> Dataloader的实例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sampler"><span class="toc-number">4.</span> <span class="toc-text"> Sampler</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sequentialsampler"><span class="toc-number">4.1.</span> <span class="toc-text"> SequentialSampler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#randmsampler"><span class="toc-number">4.2.</span> <span class="toc-text"> RandmSampler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#subsetrandomsampler"><span class="toc-number">4.3.</span> <span class="toc-text"> SubsetRandomSampler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#weightedrandomsampler"><span class="toc-number">4.4.</span> <span class="toc-text"> WeightedRandomSampler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#batchsampler"><span class="toc-number">4.5.</span> <span class="toc-text"> BatchSampler</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#collate_fn"><span class="toc-number">5.</span> <span class="toc-text"> collate_fn</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pytorch%E9%9B%86%E6%88%90%E7%9A%84%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">6.</span> <span class="toc-text"> PyTorch集成的数据集</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
 <main class="main" role="main">
   <div class="content">
   <article id="post-Pytorch数据集加载" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      详解PyTorch中加载数据的方法--Dataset、Dataloader、Sampler、collate-fn
+    </h1>
+  
+
       
       <div class="article-meta">
         <span class="article-date">
@@ -383,7 +404,17 @@
 	</a>
 </span>
         
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </span>
+
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Dataloader/" rel="tag">Dataloader</a>, <a class="article-tag-link-link" href="/tags/Dataset/" rel="tag">Dataset</a>, <a class="article-tag-link-link" href="/tags/Sampler/" rel="tag">Sampler</a>, <a class="article-tag-link-link" href="/tags/collate-fn/" rel="tag">collate_fn</a>
+  </span>
+
 
         
 	<span class="article-read hidden-xs">
@@ -407,8 +438,7 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">title: 详解PyTorch中加载数据的方法--Dataset、Dataloader、Sampler、collate-fn</span><br><span class="line">categories:</span><br><span class="line">  - 学习笔记</span><br><span class="line">tags:</span><br><span class="line">  - Dataset</span><br><span class="line">  - Dataloader</span><br><span class="line">  - Sampler</span><br><span class="line">  - collate_fn</span><br><span class="line">toc: true# 是否启用内容索引</span><br></pre></td></tr></table></figure>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1651ed9d48c9">转载</a><br />
+        <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1651ed9d48c9">转载</a><br />
 <a target="_blank" rel="noopener" href="https://www.jianshu.com/nb/48831659">作者pytorch其他笔记</a></p>
 <p>数据读取是所有训练模型任务中最基础最重要的一步，<code>PyTorch</code>为数据集的读取、加载和使用提供了很好的机制，使得数据加载的工作变得异常简单而且具有非常高的定制性。</p>
 <h2 id="dataset-dataloader-sampler的关系"><a class="markdownIt-Anchor" href="#dataset-dataloader-sampler的关系"></a> Dataset、Dataloader、Sampler的关系</h2>
@@ -529,7 +559,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://gladdduck.github.io/2022/11/09/Pytorch%E6%95%B0%E6%8D%AE%E9%9B%86%E5%8A%A0%E8%BD%BD/" title="" target="_blank" rel="external">https://gladdduck.github.io/2022/11/09/Pytorch数据集加载/</a>
+      <a href="https://gladdduck.github.io/2022/11/09/Pytorch%E6%95%B0%E6%8D%AE%E9%9B%86%E5%8A%A0%E8%BD%BD/" title="详解PyTorch中加载数据的方法--Dataset、Dataloader、Sampler、collate-fn" target="_blank" rel="external">https://gladdduck.github.io/2022/11/09/Pytorch数据集加载/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -584,6 +614,14 @@
       <a href="/2022/11/05/cypther/" title="Cypher学习笔记"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
     
   </ul>
   
