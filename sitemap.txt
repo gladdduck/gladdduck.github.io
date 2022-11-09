@@ -1,5 +1,5 @@
 https://gladdduck.github.io/2022/11/09/githuberror/
-https://gladdduck.github.io/2022/11/09/Pytorch_Dataloader./
+https://gladdduck.github.io/2022/11/09/Pytorch-Dataloader/
 https://gladdduck.github.io/2022/11/05/cypther/
 https://gladdduck.github.io/2022/11/04/Neo4j/
 https://gladdduck.github.io/2022/10/22/hello-hexo/
