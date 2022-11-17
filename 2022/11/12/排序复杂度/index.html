@@ -17,28 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Vscode连接阿里云服务器 | Gladdduck</title>
-  <meta name="description" content="有个阿里云ECS服务器，之前一直用宝塔面板连接，方便时方便，但是有时候太占内容了。 本来服务器就小，一个宝塔占的差不多了。 后期改成Vscode。 其他能远程连接的软件很多，但是vscode是个神器，很推荐。  方法1：密钥对 用密钥对个人觉得有点，类似hexo博客搭建里面连接github.   在阿里云控制台，找到密钥对，点进去创建密钥对    创建一个新的，名字随便起     绑定到实例中，然">
+  <title>排序算法复杂度 | Gladdduck</title>
+  <meta name="description" content="算法 稳定性 空间复杂度 时间复杂度 分类     插入排序 ★稳定 O(1)O(1)O(1) $O(n^2) $ 插入类   希尔排序 不稳定 O(1)O(1)O(1) $O(n{1.3}-n2) $ 插入类   冒泡排序 ★稳定 O(1)O(1)O(1) O(n2)O(n^2)O(n2) 交换类   快速排序 不稳定 O(log2(n))O(log_2(n))O(log2​(n)) O(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vscode连接阿里云服务器">
-<meta property="og:url" content="https://gladdduck.github.io/2022/10/26/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91/index.html">
+<meta property="og:title" content="排序算法复杂度">
+<meta property="og:url" content="https://gladdduck.github.io/2022/11/12/%E6%8E%92%E5%BA%8F%E5%A4%8D%E6%9D%82%E5%BA%A6/index.html">
 <meta property="og:site_name" content="Gladdduck">
-<meta property="og:description" content="有个阿里云ECS服务器，之前一直用宝塔面板连接，方便时方便，但是有时候太占内容了。 本来服务器就小，一个宝塔占的差不多了。 后期改成Vscode。 其他能远程连接的软件很多，但是vscode是个神器，很推荐。  方法1：密钥对 用密钥对个人觉得有点，类似hexo博客搭建里面连接github.   在阿里云控制台，找到密钥对，点进去创建密钥对    创建一个新的，名字随便起     绑定到实例中，然">
+<meta property="og:description" content="算法 稳定性 空间复杂度 时间复杂度 分类     插入排序 ★稳定 O(1)O(1)O(1) $O(n^2) $ 插入类   希尔排序 不稳定 O(1)O(1)O(1) $O(n{1.3}-n2) $ 插入类   冒泡排序 ★稳定 O(1)O(1)O(1) O(n2)O(n^2)O(n2) 交换类   快速排序 不稳定 O(log2(n))O(log_2(n))O(log2​(n)) O(">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://image.yayan.xyz/20221026144912.png">
-<meta property="og:image" content="https://image.yayan.xyz/20221026145018.png">
-<meta property="og:image" content="https://image.yayan.xyz/20221026145102.png">
-<meta property="og:image" content="https://image.yayan.xyz/20221026145352.png">
-<meta property="og:image" content="https://image.yayan.xyz/20221026150342.png">
-<meta property="og:image" content="https://image.yayan.xyz/20221026150532.png">
-<meta property="article:published_time" content="2022-10-26T06:43:08.377Z">
-<meta property="article:modified_time" content="2022-10-26T07:11:48.620Z">
+<meta property="article:published_time" content="2022-11-12T13:53:00.287Z">
+<meta property="article:modified_time" content="2022-11-15T12:59:44.578Z">
 <meta property="article:author" content="syxue">
-<meta property="article:tag" content="Vscode连接阿里云服务器">
+<meta property="article:tag" content="排序算法">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://image.yayan.xyz/20221026144912.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://gladdduck.github.io/2022/10/26/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91/index.html">
+  <link rel="canonical" href="https://gladdduck.github.io/2022/11/12/%E6%8E%92%E5%BA%8F%E5%A4%8D%E6%9D%82%E5%BA%A6/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
   
@@ -381,21 +374,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">文章目录</h3>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%951%E5%AF%86%E9%92%A5%E5%AF%B9"><span class="toc-number">1.</span> <span class="toc-text"> 方法1：密钥对</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%952%E7%94%A8%E6%88%B7%E5%90%8D%E5%AF%86%E7%A0%81%E8%BF%9E%E6%8E%A5"><span class="toc-number">2.</span> <span class="toc-text"> 方法2：用户名密码连接</span></a></li></ol>
+      
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-Vscode连接阿里云" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-排序复杂度" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      Vscode连接阿里云服务器
+      排序算法复杂度
     </h1>
   
 
@@ -403,20 +396,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2022/10/26/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91/" class="article-date">
-	  <time datetime="2022-10-26T06:43:08.377Z" itemprop="datePublished">2022-10-26</time>
+	<a href="/2022/11/12/%E6%8E%92%E5%BA%8F%E5%A4%8D%E6%9D%82%E5%BA%A6/" class="article-date">
+	  <time datetime="2022-11-12T13:53:00.287Z" itemprop="datePublished">2022-11-12</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">Vscode连接阿里云服务器</a>
+	<a class="article-tag-link-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a>
   </span>
 
 
@@ -429,89 +422,96 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/10/26/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/11/12/%E6%8E%92%E5%BA%8F%E5%A4%8D%E6%9D%82%E5%BA%A6/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 673(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 250(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 2(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 1(分)</span>
 	
 
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>有个阿里云ECS服务器，之前一直用宝塔面板连接，方便时方便，但是有时候太占内容了。<br />
-本来服务器就小，一个宝塔占的差不多了。<br />
-后期改成Vscode。<br />
-其他能远程连接的软件很多，但是vscode是个神器，很推荐。</p>
-<h2 id="方法1密钥对"><a class="markdownIt-Anchor" href="#方法1密钥对"></a> 方法1：密钥对</h2>
-<p>用密钥对个人觉得有点，类似<strong>hexo博客搭建里面连接github</strong>.</p>
-<ol>
-<li>
-<p>在阿里云控制台，找到密钥对，点进去创建密钥对<br />
-<img src="https://image.yayan.xyz/20221026144912.png" alt="" /></p>
-</li>
-<li>
-<p>创建一个新的，名字随便起</p>
-</li>
-</ol>
-<p><img src="https://image.yayan.xyz/20221026145018.png" alt="" /></p>
-<ol start="3">
-<li>绑定到实例中，然后重启<br />
-<img src="https://image.yayan.xyz/20221026145102.png" alt="" /></li>
-</ol>
-<p><strong>绑定完会自动下载一个.pem文件，尽量存到C:\user\username</strong>里面的一个问价夹</p>
-<p>如果直接放桌面或者公共文件夹，后期会报一个too open的错误</p>
-<ol start="4">
-<li>打开vscode，下载remote-ssh插件，打开ssh的配置文件</li>
-</ol>
-<p><img src="https://image.yayan.xyz/20221026145352.png" alt="" /><br />
-应该是<strong>C:\Users\username\.ssh\config</strong><br />
-在配置文件中添加</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host 起个名字</span><br><span class="line">  HostName 服务器的ip(192.168.1.1)</span><br><span class="line">  IdentityFile pem的路径\xxx.pem</span><br><span class="line">  User 用户名(root)</span><br></pre></td></tr></table></figure>
-<p>或者点击”+“号，输入命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -i <span class="string">&quot;pem路径&quot;</span> root@服务器ip</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>配置完成，打开就行了,后面会选操作系统，选个continue，忘记要不要输密码了</li>
-</ol>
-<blockquote>
-<p>目前单台云服务器只支持绑定单个密钥对。若您选择已经绑定过其他密钥对的云服务器，新绑定的密钥对将会覆盖以前绑定的密钥对。绑定/解绑密钥对需要在控制台重启ECS实例才能生效</p>
-</blockquote>
-<blockquote>
-<p>太麻烦了，而且我自己用的时候很多次显示Permission denied (publickey).无解，<br />
-强烈推荐下面一种方式</p>
-</blockquote>
-<h2 id="方法2用户名密码连接"><a class="markdownIt-Anchor" href="#方法2用户名密码连接"></a> 方法2：用户名密码连接</h2>
-<p>先贴一个<a target="_blank" rel="noopener" href="https://help.aliyun.com/document_detail/71529.html">阿里云官网文档</a>，通过密码或密钥认证登录Linux实例-为Linux实例开启root用户远程登录</p>
-<ol>
-<li>
-<p>先用VNC连接一下，修改配置文件<br />
-<img src="https://image.yayan.xyz/20221026150342.png" alt="" /><br />
-输入用户名密码。<br />
-如果密码忘了，在菜单栏的实例中，修改密码<br />
-<img src="https://image.yayan.xyz/20221026150532.png" alt="" /></p>
-</li>
-<li>
-<p>终端中，输入</p>
-</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ssh/sshd_config</span><br><span class="line"><span class="comment"># 如果不是root，就输入</span></span><br><span class="line">sudo vi /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>往下翻，基本上在最后</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># PermitRootLogin no修改为PermitRootLogin yes。</span></span><br><span class="line"><span class="comment"># PasswordAuthentication no修改为PasswordAuthentication yes。</span></span><br><span class="line"><span class="comment"># 修改方法：</span></span><br><span class="line"><span class="comment"># 1. 找到要修改的位置，点击&quot;i&quot;,就进入编辑模式了</span></span><br><span class="line"><span class="comment"># 2. 修改改完之后按Esc键，输入:wq保存修改。</span></span><br><span class="line"><span class="comment"># 如果不是root，输入:wq!保存</span></span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>重启sshd服务</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service sshd restart</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>在vscode的远程连接中，修改配置文件或者直接输入</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host 起个名字</span><br><span class="line">  HostName 服务器的ip(192.168.1.1)</span><br><span class="line">  User 用户名(root)</span><br><span class="line"><span class="comment"># 或者输入 ssh root@服务器ip</span></span><br></pre></td></tr></table></figure>
-<p>输入实例密码就连接成功了！</p>
-<p>👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍👍</p>
+        <table>
+<thead>
+<tr>
+<th>算法</th>
+<th>稳定性</th>
+<th>空间复杂度</th>
+<th>时间复杂度</th>
+<th>分类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em><strong>插入排序</strong></em></td>
+<td>★稳定</td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td>
+<td>$O(n^2) $</td>
+<td>插入类</td>
+</tr>
+<tr>
+<td>希尔排序</td>
+<td>不稳定</td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td>
+<td>$O(n<sup>{1.3}-n</sup>2) $</td>
+<td>插入类</td>
+</tr>
+<tr>
+<td><em><strong>冒泡排序</strong></em></td>
+<td>★稳定</td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></td>
+<td>交换类</td>
+</tr>
+<tr>
+<td>快速排序</td>
+<td>不稳定</td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(log_2(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>−</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlog_2(n)-n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></td>
+<td>交换类</td>
+</tr>
+<tr>
+<td>选择排序</td>
+<td>不稳定</td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></td>
+<td>选择类</td>
+</tr>
+<tr>
+<td>堆排序</td>
+<td>不稳定</td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span></td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlog_2(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></td>
+<td>选择类</td>
+</tr>
+<tr>
+<td>堆排序</td>
+<td><strong>建堆</strong></td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td>
+<td><strong>调整</strong></td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(log_2(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></td>
+</tr>
+<tr>
+<td><em><strong>归并排序</strong></em></td>
+<td>★稳定</td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlog_2(n))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></td>
+<td></td>
+</tr>
+<tr>
+<td><em><strong>基数排序</strong></em></td>
+<td>★稳定</td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>r</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(r)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mclose">)</span></span></span></span></td>
+<td><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>d</mi><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mi>r</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(d(n+r))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">d</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">后面慢慢补充每个算法的代码</span><br><span class="line">顺便记一下:学校的考试真sb</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -521,7 +521,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://gladdduck.github.io/2022/10/26/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91/" title="Vscode连接阿里云服务器" target="_blank" rel="external">https://gladdduck.github.io/2022/10/26/Vscode连接阿里云/</a>
+      <a href="https://gladdduck.github.io/2022/11/12/%E6%8E%92%E5%BA%8F%E5%A4%8D%E6%9D%82%E5%BA%A6/" title="排序算法复杂度" target="_blank" rel="external">https://gladdduck.github.io/2022/11/12/排序复杂度/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -568,12 +568,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2022/10/26/%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D/" title="多个域名访问同一个服务器"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+      <a href="/2022/11/17/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Linux的一些常用命令记录"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2022/10/22/hello-gitalk/" title="print(Hello gitalk)"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2022/11/09/githuberror/" title="git Time out error解决"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     

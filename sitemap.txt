@@ -1,3 +1,5 @@
+https://gladdduck.github.io/2022/11/17/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/
+https://gladdduck.github.io/2022/11/12/%E6%8E%92%E5%BA%8F%E5%A4%8D%E6%9D%82%E5%BA%A6/
 https://gladdduck.github.io/2022/11/09/Pytorch%E6%95%B0%E6%8D%AE%E9%9B%86%E5%8A%A0%E8%BD%BD/
 https://gladdduck.github.io/2022/11/09/githuberror/
 https://gladdduck.github.io/2022/11/05/cypther/
@@ -35,6 +37,8 @@ https://gladdduck.github.io/tags/Dataset/
 https://gladdduck.github.io/tags/Dataloader/
 https://gladdduck.github.io/tags/Sampler/
 https://gladdduck.github.io/tags/collate-fn/
+https://gladdduck.github.io/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/
+https://gladdduck.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/
 https://gladdduck.github.io/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/
 https://gladdduck.github.io/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/
 https://gladdduck.github.io/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/
