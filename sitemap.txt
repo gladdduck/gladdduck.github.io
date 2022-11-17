@@ -1,7 +1,7 @@
+https://gladdduck.github.io/2022/11/09/githuberror/
 https://gladdduck.github.io/2022/11/17/Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/
 https://gladdduck.github.io/2022/11/12/%E6%8E%92%E5%BA%8F%E5%A4%8D%E6%9D%82%E5%BA%A6/
 https://gladdduck.github.io/2022/11/09/Pytorch%E6%95%B0%E6%8D%AE%E9%9B%86%E5%8A%A0%E8%BD%BD/
-https://gladdduck.github.io/2022/11/09/githuberror/
 https://gladdduck.github.io/2022/11/05/cypther/
 https://gladdduck.github.io/2022/11/04/Neo4j/
 https://gladdduck.github.io/2022/10/22/hello-hexo/
