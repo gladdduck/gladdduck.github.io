@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>print(Hello hexo) &amp; github connected error | Gladdduck</title>
+  <meta name="description" content="中间过程可能会出现链接不上github的情况，这个因人而异。 不是操作问题，是墙的问题。 自己尝试解决办法。  配置简单博客  安装前配置  git安装(下一步者)，测试：git -v nodejs安装(下一步者)，测试：node -v npm安装(装完node就有)，测试：npm -v hexo安装(npm install hexo -g)，测试：hexo -v 其他需要安装的依赖如下(主题部分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="print(Hello hexo) &amp; github connected error">
+<meta property="og:url" content="https://gladdduck.github.io/2022/10/22/hello-hexo/index.html">
+<meta property="og:site_name" content="Gladdduck">
+<meta property="og:description" content="中间过程可能会出现链接不上github的情况，这个因人而异。 不是操作问题，是墙的问题。 自己尝试解决办法。  配置简单博客  安装前配置  git安装(下一步者)，测试：git -v nodejs安装(下一步者)，测试：node -v npm安装(装完node就有)，测试：npm -v hexo安装(npm install hexo -g)，测试：hexo -v 其他需要安装的依赖如下(主题部分">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.yayan.xyz/1666186035942.png">
+<meta property="og:image" content="https://image.yayan.xyz/1666186511107.png">
+<meta property="og:image" content="https://image.yayan.xyz/1666186551655.png">
+<meta property="og:image" content="https://image.yayan.xyz/1666186590011.png">
+<meta property="og:image" content="https://image.yayan.xyz/1666186600564.png">
+<meta property="article:published_time" content="2022-10-22T00:58:32.348Z">
+<meta property="article:modified_time" content="2022-11-03T10:38:27.726Z">
+<meta property="article:author" content="syxue">
+<meta property="article:tag" content="hexo博客配置pure">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.yayan.xyz/1666186035942.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://gladdduck.github.io/2022/10/22/hello-hexo/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body class="main-center theme-green" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/gladdduck" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">gladdduck</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> SuZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>分享所思所见所想,欢迎留言交流!6666</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">hexo博客配置</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/">快捷命令</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Cypher学习笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataloader/" rel="tag">Dataloader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataset/" rel="tag">Dataset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/" rel="tag">FFT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Linux快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Neo4j快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Python学习笔记</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sampler/" rel="tag">Sampler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">Vscode连接阿里云服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collate-fn/" rel="tag">collate_fn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-Time-out/" rel="tag">git Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-Time-out/" rel="tag">github Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" rel="tag">hexo博客配置gitalk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" rel="tag">hexo博客配置picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" rel="tag">hexo博客配置pure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB%E8%AE%BA%E6%96%87/" rel="tag">垃圾分类论文</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">多个域名访问同一个服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B9%98%E6%B3%95/" rel="tag">多项式乘法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" rel="tag">快速傅里叶变换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" rel="tag">知识图谱表示</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">算法刷题笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E8%BF%B0/" rel="tag">综述</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13px;">Cypher学习笔记</a> <a href="/tags/Dataloader/" style="font-size: 13px;">Dataloader</a> <a href="/tags/Dataset/" style="font-size: 13px;">Dataset</a> <a href="/tags/FFT/" style="font-size: 13px;">FFT</a> <a href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Linux快捷命令</a> <a href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Neo4j快捷命令</a> <a href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 14px;">Python学习笔记</a> <a href="/tags/Sampler/" style="font-size: 13px;">Sampler</a> <a href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">Vscode连接阿里云服务器</a> <a href="/tags/collate-fn/" style="font-size: 13px;">collate_fn</a> <a href="/tags/git-Time-out/" style="font-size: 13px;">git Time out</a> <a href="/tags/github-Time-out/" style="font-size: 13px;">github Time out</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" style="font-size: 13px;">hexo博客配置gitalk</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" style="font-size: 13px;">hexo博客配置picgo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" style="font-size: 13px;">hexo博客配置pure</a> <a href="/tags/neo4j%E5%AE%89%E8%A3%85/" style="font-size: 13px;">neo4j安装</a> <a href="/tags/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB%E8%AE%BA%E6%96%87/" style="font-size: 13px;">垃圾分类论文</a> <a href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">多个域名访问同一个服务器</a> <a href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B9%98%E6%B3%95/" style="font-size: 13px;">多项式乘法</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 13px;">快捷键</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" style="font-size: 13px;">快速傅里叶变换</a> <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 13px;">排序算法</a> <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="font-size: 13px;">搭建博客</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" style="font-size: 13px;">知识图谱表示</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" style="font-size: 13.5px;">算法刷题笔记</a> <a href="/tags/%E7%BB%BC%E8%BF%B0/" style="font-size: 13px;">综述</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/03/17/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/17/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB/" class="title">垃圾分类论文</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-17T05:47:10.581Z" itemprop="datePublished">2023-03-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/03/16/LeetCode%E5%89%91%E6%8C%87offer1/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/16/LeetCode%E5%89%91%E6%8C%87offer1/" class="title">LeecCode剑指offer1</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-16T01:35:17.779Z" itemprop="datePublished">2023-03-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/03/09/python3lib/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/09/python3lib/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-09T15:01:28.592Z" itemprop="datePublished">2023-03-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/03/07/python100%E5%A4%A931-40/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/07/python100%E5%A4%A931-40/" class="title">python100天31-40</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-07T10:33:08.243Z" itemprop="datePublished">2023-03-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/02/28/Python%EF%BC%93%E6%A0%87%E5%87%86%E5%BA%93/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/02/28/Python%EF%BC%93%E6%A0%87%E5%87%86%E5%BA%93/" class="title">Python3标准库</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-02-28T03:49:43.091Z" itemprop="datePublished">2023-02-28</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%AE%80%E5%8D%95%E5%8D%9A%E5%AE%A2"><span class="toc-number">1.</span> <span class="toc-text"> 配置简单博客</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%89%8D%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text"> 安装前配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#github%E4%B8%8A%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.2.</span> <span class="toc-text"> github上的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0hexo%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.</span> <span class="toc-text"> 本地hexo的操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-number">1.4.</span> <span class="toc-text"> 配置自己的信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">1.4.1.</span> <span class="toc-text"> 网站的配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo-%E9%85%8D%E7%BD%AE%E8%87%AA%E5%B7%B1%E5%96%9C%E6%AC%A2%E7%9A%84%E4%B8%BB%E9%A2%98"><span class="toc-number">2.</span> <span class="toc-text"> hexo 配置自己喜欢的主题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5"><span class="toc-number">2.1.</span> <span class="toc-text"> 文章增删改查</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B8%A9%E5%9D%91"><span class="toc-number">2.2.</span> <span class="toc-text"> 踩坑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%AB%99%E7%9A%84%E9%85%8D%E7%BD%AE-2"><span class="toc-number">2.2.1.</span> <span class="toc-text"> 网站的配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5github%E6%98%BE%E7%A4%BAcode128time-out-error"><span class="toc-number">3.</span> <span class="toc-text"> 连接Github显示code128(Time out error)</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-hello-hexo" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      print(Hello hexo) &amp; github connected error
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/10/22/hello-hexo/" class="article-date">
+	  <time datetime="2022-10-22T00:58:32.348Z" itemprop="datePublished">2022-10-22</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">hexo博客配置</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" rel="tag">hexo博客配置pure</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/10/22/hello-hexo/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.6k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 6(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>中间过程可能会出现链接不上github的情况，这个因人而异。<br />
+不是操作问题，是墙的问题。<br />
+自己尝试解决办法。</p>
+<h1 id="配置简单博客"><a class="markdownIt-Anchor" href="#配置简单博客"></a> 配置简单博客</h1>
+<h2 id="安装前配置"><a class="markdownIt-Anchor" href="#安装前配置"></a> 安装前配置</h2>
+<ul>
+<li>git安装(下一步者)，测试：git -v</li>
+<li>nodejs安装(下一步者)，测试：node -v</li>
+<li>npm安装(装完node就有)，测试：npm -v</li>
+<li>hexo安装(npm install hexo -g)，测试：hexo -v</li>
+<li>其他需要安装的依赖如下(主题部分会用到)(npm install depandence)，测试：npm init</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">+-- hexo-deployer-git@3.0.0</span><br><span class="line">+-- hexo-generator-archive@1.0.0</span><br><span class="line">+-- hexo-generator-baidu-sitemap@0.1.9</span><br><span class="line">+-- hexo-generator-category@1.0.0</span><br><span class="line">+-- hexo-generator-feed@3.0.0</span><br><span class="line">+-- hexo-generator-index@2.0.0</span><br><span class="line">+-- hexo-generator-json-content@4.2.3</span><br><span class="line">+-- hexo-generator-sitemap@3.0.1</span><br><span class="line">+-- hexo-generator-tag@1.0.0</span><br><span class="line">+-- hexo-renderer-ejs@1.0.0</span><br><span class="line">+-- hexo-renderer-markdown-it-plus@1.0.6</span><br><span class="line">+-- hexo-renderer-stylus@2.1.0</span><br><span class="line">+-- hexo-server@2.0.0</span><br><span class="line">+-- hexo-theme-landscape@0.0.3</span><br><span class="line">+-- hexo-wordcount@6.0.1</span><br><span class="line">+-- hexo@5.4.2</span><br></pre></td></tr></table></figure>
+<h2 id="github上的操作"><a class="markdownIt-Anchor" href="#github上的操作"></a> github上的操作</h2>
+<ol>
+<li>新建一个仓库(repository)<br />
+<img src="https://image.yayan.xyz/1666186035942.png" alt="" /><br />
+<strong>仓库名字一定是自己的用户名</strong><br />
+<strong><a target="_blank" rel="noopener" href="http://xxxxx.github.io">xxxxx.github.io</a></strong></li>
+<li>git命令板链接仓库生成公钥</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#如果第一次下git应该要设置一下，我没设置后面报错了</span></span><br><span class="line">git config --<span class="keyword">global</span> user.name <span class="string">&quot;username&quot;</span></span><br><span class="line">git config --<span class="keyword">global</span> user.email <span class="string">&quot;email&quot;</span></span><br><span class="line"><span class="comment"># 生成公钥</span></span><br><span class="line">ssh-keygen -t rsa  -C <span class="string">&quot;email&quot;</span></span><br><span class="line"><span class="comment"># 会在C:\Users\你的用户名\.ssh下生成id_rsa和id_rsa.pub</span></span><br><span class="line"><span class="comment"># 复制id_rsa.pub内容</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://image.yayan.xyz/1666186511107.png" alt="" /><br />
+在setting中<br />
+<img src="https://image.yayan.xyz/1666186551655.png" alt="" /><br />
+<img src="https://image.yayan.xyz/1666186590011.png" alt="" /><br />
+<img src="https://image.yayan.xyz/1666186600564.png" alt="" /><br />
+title可以随便填，key就是id_rsa.pub中的内容</p>
+<p>然后在git命令版中测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@gitbuh.com</span><br></pre></td></tr></table></figure>
+<p>中间可能会输个yes<br />
+看见successfully就成功了</p>
+<h2 id="本地hexo的操作"><a class="markdownIt-Anchor" href="#本地hexo的操作"></a> 本地hexo的操作</h2>
+<ol>
+<li>本地建一个空文件夹—暂且叫他dir方便后面说，这个就是博客全部内容</li>
+<li>执行完下面命令，文件夹内会多出东西，</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果执行失败，去github找到hexo-starter的库，下载解压，记得改名字</span></span><br><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+<p>3.如果不需要额外的hexo主题，执行下面命令就可以了完成了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hexo 把本地的东西，生成静态文件(html,css这些)</span></span><br><span class="line">hexo g</span><br><span class="line"><span class="comment"># hexo s在本地运行，可以进自己的浏览器看看</span></span><br><span class="line">hexo s </span><br><span class="line"><span class="comment"># hexo d 部署文件到github</span></span><br><span class="line">hexo d</span><br><span class="line"></span><br><span class="line"><span class="comment"># hexo d -g可以直接生成并部署</span></span><br><span class="line"><span class="comment"># 访问xxxxx.github.io 就能看见自己的博客了</span></span><br></pre></td></tr></table></figure>
+<h2 id="配置自己的信息"><a class="markdownIt-Anchor" href="#配置自己的信息"></a> 配置自己的信息</h2>
+<p>修改dir文件夹内的_config.yml配置文件<br />
+把链接什么的改成自己的链接就OK了</p>
+<h3 id="网站的配置"><a class="markdownIt-Anchor" href="#网站的配置"></a> 网站的配置</h3>
+<p>即dir文件夹下面的_config.yml</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 配置主题的文字，不然主题都是英文，这个必须在dir中配置，在主题中配置没有用</span></span><br><span class="line">language: zh-CN</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 如果用主题，主题的配置，不是hexo-theme-pure，就是pure</span></span><br><span class="line">theme: pure</span><br></pre></td></tr></table></figure>
+<h1 id="hexo-配置自己喜欢的主题"><a class="markdownIt-Anchor" href="#hexo-配置自己喜欢的主题"></a> hexo 配置自己喜欢的主题</h1>
+<p><strong>如果不是自己特别喜欢的主题，建议找一个大众的用的人多的主题，<br />
+因为用的人多，出现的问题解决办法就多</strong></p>
+<p>以pure为例，更多的主题访问:<br />
+<a target="_blank" rel="noopener" href="https://hexo.io/themes/">hexo官网</a></p>
+<p>在配置主题过程中，建议参考pure官方文档:<a target="_blank" rel="noopener" href="https://github.com/cofess/hexo-theme-pure">hhexo-theme-pure</a></p>
+<ol>
+<li>先把主题下载下来，除了git命令，其他的都建议在windows的cmd中使用</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果失败了，同样可以去github，hexo-theme-pure 下载解压，注意改文件夹名字</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/cofess/hexo-theme-pure.git themes/pure</span><br><span class="line"><span class="comment"># 然后把官方文档建议的一大堆依赖下下来</span></span><br><span class="line"><span class="comment"># 第一部分下过的可以省略</span></span><br><span class="line">npm install hexo-wordcount --save</span><br><span class="line">npm install hexo-generator-json-content --save</span><br><span class="line">npm install hexo-generator-feed --save</span><br><span class="line">npm install hexo-generator-sitemap --save</span><br><span class="line">npm install hexo-generator-baidu-sitemap --save</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>修改dir文件夹内的_config.yml中的theme</li>
+</ol>
+<p>如果没有自己添加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: pure</span><br></pre></td></tr></table></figure>
+<h2 id="文章增删改查"><a class="markdownIt-Anchor" href="#文章增删改查"></a> 文章增删改查</h2>
+<p>增删改文件，直接在_post里修改md文件，上传即可。</p>
+<h2 id="踩坑"><a class="markdownIt-Anchor" href="#踩坑"></a> 踩坑</h2>
+<p>下面说几个自己踩过的坑，网站配置还好，<br />
+主题的配置一堆，而且pure用的人不多，问题全靠自己解决<br />
+以下的修改都在theme/pure/_cofig.yml文件中</p>
+<h3 id="网站的配置-2"><a class="markdownIt-Anchor" href="#网站的配置-2"></a> 网站的配置</h3>
+<ol>
+<li>网站的名字和logo</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">site:</span><br><span class="line">  logo:</span><br><span class="line">    enabled: true</span><br><span class="line">    width: 40</span><br><span class="line">    height: 40</span><br><span class="line">    url: ../images/logo.png</span><br><span class="line">  title: Gladdduck # 页面title</span><br><span class="line">  favicon: /favicon.png</span><br><span class="line">  board: &lt;p&gt;分享所思所见所想,欢迎留言交流!6666&lt;/p&gt; # 站点公告</span><br><span class="line">  copyright: false # 底部版权信息</span><br><span class="line"># 修改logo一定不要修改logo.url里面的图片路径</span><br><span class="line"># 要修改favicon的路径，修改logo.url的路径没用，反而文章的详情页面不会出现logo了</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>关于home，archives等不是中文的问题</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  Home: .</span><br><span class="line">  Archives: archives  # 归档</span><br><span class="line">  Categories: categories  # 分类</span><br><span class="line">  Tags: tags  # 标签</span><br><span class="line">  Links: links  # 友链</span><br><span class="line">  About: about  # 关于</span><br><span class="line"># 把这个地方的Home等改了不起作用，应该修改dir文件夹下面的配置文件，增加language: zh-CN</span><br><span class="line"># ：后面的是访问url路径，需要和source文件夹下面的几个文件夹名字对应</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>菜单栏无法访问 Connot get</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">需要把theme/pure/source文件夹下面的几个文件夹</span><br><span class="line">移动到dir文件夹下面的source中</span><br><span class="line"></span><br><span class="line"># 现在hexo s 打开浏览器应该就可以看见自己的博客了，点击对应的菜单也会跳转</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>其他配置根据配置文件内的注释修改即可</li>
+</ol>
+<p>– 后面会记录</p>
+<ul>
+<li>GitHub+gitalk配置评论</li>
+<li>七牛云+PicGO配置图床，方便markdown书写</li>
+</ul>
+<h1 id="连接github显示code128time-out-error"><a class="markdownIt-Anchor" href="#连接github显示code128time-out-error"></a> 连接Github显示code128(Time out error)</h1>
+<p><strong>错误信息</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/gladdduck/gladdduck.github.io.git/&#x27;:</span><br><span class="line">Failed to connect to github.com port 443 after 21048 ms: Timed out</span><br><span class="line">FATAL &#123;</span><br><span class="line">  err: Error: Spawn failed</span><br><span class="line">  at ChildProcess.&lt;anonymous&gt; (D:\BaiduSyncdisk\Blog\node_modules\hexo-util\lib\spawn.js:51:21)</span><br><span class="line">      at ChildProcess.emit (node:events:513:28)</span><br><span class="line">      at ChildProcess.cp.emit (D:\BaiduSyncdisk\Blog\node_modules\cross-spawn\lib\enoent.js:34:29)</span><br><span class="line">      at Process.ChildProcess._handle.onexit (node:internal/child_process:293:12) &#123;</span><br><span class="line">    code: 128</span><br><span class="line">  &#125;</span><br><span class="line">&#125; Something&#x27;s wrong. Maybe you can find the solution here: %s https://hexo.io/docs/troubleshooting.html</span><br></pre></td></tr></table></figure>
+<p><strong>解决办法</strong></p>
+<ol>
+<li>设置host文件–没用</li>
+<li>关闭VPN-- 没用</li>
+<li>连手机热点–偶尔有用</li>
+<li>取消代理–偶尔有用</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">取消全局代理：</span><br><span class="line">git config --global --unset http.proxy</span><br><span class="line"> </span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>配置host文件</li>
+</ol>
+<p>在C:\Windows\System32\drivers\etc中的host文件下新增(没有访问权限可以copy一份在桌面修改完之后覆盖)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">140.82.113.4 github.com </span><br><span class="line">199.232.69.194 github.global.ssl.fastly.net</span><br><span class="line">185.199.108.153 assets-cdn.github.com</span><br><span class="line">185.199.109.153 assets-cdn.github.com</span><br><span class="line">185.199.110.153 assets-cdn.github.com</span><br><span class="line">185.199.111.153 assets-cdn.github.com</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>cmd中<strong>ipconfig /flushdns刷新dns缓存</strong></p>
+<p>!!!</p>
+<p>😳 😳 😳 😳<br />
+单独刷新dns也能用!<br />
+cmd中<code>ipconfig /flushdns</code><br />
+然后<code>hexo d -g</code> 就完全Ok了<br />
+😍 😍 😍 😍</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://gladdduck.github.io/2022/10/22/hello-hexo/" title="print(Hello hexo) &amp; github connected error" target="_blank" rel="external">https://gladdduck.github.io/2022/10/22/hello-hexo/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/gladdduck" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/gladdduck" target="_blank"><span class="text-dark">gladdduck</span><small class="ml-1x"></small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/10/22/hello-picgo/" title="print(Hello picgo)"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.jpg" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '644a1091cfd20b8f33ef',
+    clientSecret: '4c5cc91dbfe067c804fcef958817d41acc9ba545',
+    repo: 'gladdduck.github.io',
+    owner: 'gladdduck',
+    admin: ['gladdduck'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: '',
+    proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token',
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>

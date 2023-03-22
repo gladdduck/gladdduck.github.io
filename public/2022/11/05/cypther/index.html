@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Cypher学习笔记 | Gladdduck</title>
+  <meta name="description" content="1# CQL:C-ypher Q-uery L-nguage 123# 中文:http:&#x2F;&#x2F;neo4j.com.cn&#x2F;public&#x2F;cypher&#x2F;default.html# ★英文:https:&#x2F;&#x2F;neo4j.com&#x2F;docs&#x2F;cypher-manual&#x2F;current&#x2F;introduction&#x2F;# 中文:https:&#x2F;&#x2F;www.w3cschool.cn&#x2F;neo4j&#x2F;  表达式 123456789">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cypher学习笔记">
+<meta property="og:url" content="https://gladdduck.github.io/2022/11/05/cypther/index.html">
+<meta property="og:site_name" content="Gladdduck">
+<meta property="og:description" content="1# CQL:C-ypher Q-uery L-nguage 123# 中文:http:&#x2F;&#x2F;neo4j.com.cn&#x2F;public&#x2F;cypher&#x2F;default.html# ★英文:https:&#x2F;&#x2F;neo4j.com&#x2F;docs&#x2F;cypher-manual&#x2F;current&#x2F;introduction&#x2F;# 中文:https:&#x2F;&#x2F;www.w3cschool.cn&#x2F;neo4j&#x2F;  表达式 123456789">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-11-05T09:16:38.119Z">
+<meta property="article:modified_time" content="2022-11-05T09:19:43.134Z">
+<meta property="article:author" content="syxue">
+<meta property="article:tag" content="Cypher学习笔记">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://gladdduck.github.io/2022/11/05/cypther/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body class="main-center theme-green" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/gladdduck" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">gladdduck</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> SuZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>分享所思所见所想,欢迎留言交流!6666</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">hexo博客配置</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/">快捷命令</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Cypher学习笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataloader/" rel="tag">Dataloader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataset/" rel="tag">Dataset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/" rel="tag">FFT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Linux快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Neo4j快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Python学习笔记</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sampler/" rel="tag">Sampler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">Vscode连接阿里云服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collate-fn/" rel="tag">collate_fn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-Time-out/" rel="tag">git Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-Time-out/" rel="tag">github Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" rel="tag">hexo博客配置gitalk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" rel="tag">hexo博客配置picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" rel="tag">hexo博客配置pure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB%E8%AE%BA%E6%96%87/" rel="tag">垃圾分类论文</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">多个域名访问同一个服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B9%98%E6%B3%95/" rel="tag">多项式乘法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" rel="tag">快速傅里叶变换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" rel="tag">知识图谱表示</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">算法刷题笔记</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E8%BF%B0/" rel="tag">综述</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13px;">Cypher学习笔记</a> <a href="/tags/Dataloader/" style="font-size: 13px;">Dataloader</a> <a href="/tags/Dataset/" style="font-size: 13px;">Dataset</a> <a href="/tags/FFT/" style="font-size: 13px;">FFT</a> <a href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Linux快捷命令</a> <a href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Neo4j快捷命令</a> <a href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 14px;">Python学习笔记</a> <a href="/tags/Sampler/" style="font-size: 13px;">Sampler</a> <a href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">Vscode连接阿里云服务器</a> <a href="/tags/collate-fn/" style="font-size: 13px;">collate_fn</a> <a href="/tags/git-Time-out/" style="font-size: 13px;">git Time out</a> <a href="/tags/github-Time-out/" style="font-size: 13px;">github Time out</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" style="font-size: 13px;">hexo博客配置gitalk</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" style="font-size: 13px;">hexo博客配置picgo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" style="font-size: 13px;">hexo博客配置pure</a> <a href="/tags/neo4j%E5%AE%89%E8%A3%85/" style="font-size: 13px;">neo4j安装</a> <a href="/tags/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB%E8%AE%BA%E6%96%87/" style="font-size: 13px;">垃圾分类论文</a> <a href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">多个域名访问同一个服务器</a> <a href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B9%98%E6%B3%95/" style="font-size: 13px;">多项式乘法</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 13px;">快捷键</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" style="font-size: 13px;">快速傅里叶变换</a> <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 13px;">排序算法</a> <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="font-size: 13px;">搭建博客</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" style="font-size: 13px;">知识图谱表示</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" style="font-size: 13.5px;">算法刷题笔记</a> <a href="/tags/%E7%BB%BC%E8%BF%B0/" style="font-size: 13px;">综述</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/03/17/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/17/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB/" class="title">垃圾分类论文</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-17T05:47:10.581Z" itemprop="datePublished">2023-03-17</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/03/16/LeetCode%E5%89%91%E6%8C%87offer1/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/16/LeetCode%E5%89%91%E6%8C%87offer1/" class="title">LeecCode剑指offer1</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-16T01:35:17.779Z" itemprop="datePublished">2023-03-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/03/09/python3lib/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/09/python3lib/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-09T15:01:28.592Z" itemprop="datePublished">2023-03-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/03/07/python100%E5%A4%A931-40/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/03/07/python100%E5%A4%A931-40/" class="title">python100天31-40</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-03-07T10:33:08.243Z" itemprop="datePublished">2023-03-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/02/28/Python%EF%BC%93%E6%A0%87%E5%87%86%E5%BA%93/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/02/28/Python%EF%BC%93%E6%A0%87%E5%87%86%E5%BA%93/" class="title">Python3标准库</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-02-28T03:49:43.091Z" itemprop="datePublished">2023-02-28</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text"> 表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#list"><span class="toc-number">1.0.1.</span> <span class="toc-text"> list</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map"><span class="toc-number">1.0.2.</span> <span class="toc-text"> map</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#null"><span class="toc-number">1.0.3.</span> <span class="toc-text"> null</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text"> 基础语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#create"><span class="toc-number">2.1.</span> <span class="toc-text"> CREATE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#match"><span class="toc-number">2.2.</span> <span class="toc-text"> MATCH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#return"><span class="toc-number">2.3.</span> <span class="toc-text"> RETURN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#creatematchreturn"><span class="toc-number">2.4.</span> <span class="toc-text"> CREATE+MATCH+RETURN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#where"><span class="toc-number">2.5.</span> <span class="toc-text"> WHERE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#delete"><span class="toc-number">2.6.</span> <span class="toc-text"> DELETE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#removw"><span class="toc-number">2.7.</span> <span class="toc-text"> REMOVW</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#set"><span class="toc-number">2.8.</span> <span class="toc-text"> SET</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#order-by"><span class="toc-number">2.9.</span> <span class="toc-text"> ORDER BY</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#union-all"><span class="toc-number">2.10.</span> <span class="toc-text"> UNION [ALL]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#limit-skip"><span class="toc-number">2.11.</span> <span class="toc-text"> LIMIT &amp; SKIP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#merge"><span class="toc-number">2.12.</span> <span class="toc-text"> MERGE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#null%E5%80%BC"><span class="toc-number">2.13.</span> <span class="toc-text"> NULL值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#in"><span class="toc-number">2.14.</span> <span class="toc-text"> IN</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cql%E5%87%BD%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text"> CQL函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95"><span class="toc-number">3.0.1.</span> <span class="toc-text"> 创建索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%A6%E6%9D%9F"><span class="toc-number">3.0.2.</span> <span class="toc-text"> 创建约束</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%A5%E5%85%85"><span class="toc-number">4.</span> <span class="toc-text"> 补充</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#with"><span class="toc-number">4.1.</span> <span class="toc-text"> WITH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#unwind"><span class="toc-number">4.2.</span> <span class="toc-text"> UNWIND</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#foreach"><span class="toc-number">4.3.</span> <span class="toc-text"> FOREACH</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#call"><span class="toc-number">4.4.</span> <span class="toc-text"> CALL</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-cypther" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Cypher学习笔记
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/11/05/cypther/" class="article-date">
+	  <time datetime="2022-11-05T09:16:38.119Z" itemprop="datePublished">2022-11-05</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Cypher学习笔记</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/11/05/cypther/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4.5k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 25(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CQL:C-ypher Q-uery L-nguage</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 中文:http://neo4j.com.cn/public/cypher/default.html</span></span><br><span class="line"><span class="comment"># ★英文:https://neo4j.com/docs/cypher-manual/current/introduction/</span></span><br><span class="line"><span class="comment"># 中文:https://www.w3cschool.cn/neo4j/</span></span><br></pre></td></tr></table></figure>
+<h1 id="表达式"><a class="markdownIt-Anchor" href="#表达式"></a> 表达式</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (n:Person)</span><br><span class="line">RETURN</span><br><span class="line">CASE </span><br><span class="line">  WHEN n.born&gt;<span class="number">1980</span>  THEN <span class="number">1</span></span><br><span class="line">  WHEN n.born&lt;<span class="number">1980</span> THEN <span class="number">2</span></span><br><span class="line">  ELSE <span class="number">3</span></span><br><span class="line">END AS result</span><br><span class="line">limit <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'result': 2&#125;, &#123;'result': 2&#125;, &#123;'result': 2&#125;, &#123;'result': 2&#125;, &#123;'result': 2&#125;]
+</code></pre>
+<h3 id="list"><a class="markdownIt-Anchor" href="#list"></a> list</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">RETURN <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">10</span>)[<span class="number">0.</span>.-<span class="number">5</span>]</span><br><span class="line">//[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>]左闭右开</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'range(0, 10)': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">RETURN [x IN <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">10</span>) WHERE x % <span class="number">2</span> = <span class="number">0</span> ] AS result</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">RETURN [x IN <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">10</span>) | x^<span class="number">3</span> ] AS result</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (a:Person &#123;name: <span class="string">&#x27;Keanu Reeves&#x27;</span>&#125;)</span><br><span class="line">RETURN [(a)--&gt;(b:Movie) WHERE b.title CONTAINS <span class="string">&#x27;Matrix&#x27;</span> | b.released] AS years</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'years': [1999, 2003, 2003]&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (a:Person &#123;name: <span class="string">&#x27;Keanu Reeves&#x27;</span>&#125;)</span><br><span class="line">WITH [(a)--&gt;(b:Movie) | b.released] AS years</span><br><span class="line">UNWIND years AS year</span><br><span class="line">WITH year ORDER BY year</span><br><span class="line">RETURN COLLECT(year) AS sorted_years</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'sorted_years': [1995, 1997, 1999, 2000, 2003, 2003, 2003]&#125;]
+</code></pre>
+<h3 id="map"><a class="markdownIt-Anchor" href="#map"></a> map</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (actor:Person)-[:ACTED_IN]-&gt;(movie:Movie)</span><br><span class="line">WITH actor, count(movie) AS nbrOfMovies</span><br><span class="line">RETURN actor&#123;.name, nbrOfMovies&#125;</span><br><span class="line">limit <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'actor': &#123;'nbrOfMovies': 1, 'name': 'Emil Eifrem'&#125;&#125;,
+ &#123;'actor': &#123;'nbrOfMovies': 7, 'name': 'Keanu Reeves'&#125;&#125;,
+ &#123;'actor': &#123;'nbrOfMovies': 3, 'name': 'Laurence Fishburne'&#125;&#125;,
+ &#123;'actor': &#123;'nbrOfMovies': 5, 'name': 'Hugo Weaving'&#125;&#125;,
+ &#123;'actor': &#123;'nbrOfMovies': 3, 'name': 'Carrie-Anne Moss'&#125;&#125;]
+</code></pre>
+<h3 id="null"><a class="markdownIt-Anchor" href="#null"></a> null</h3>
+<h1 id="基础语法"><a class="markdownIt-Anchor" href="#基础语法"></a> 基础语法</h1>
+<p><a target="_blank" rel="noopener" href="https://neo4j.com/docs/cypher-manual/current/clauses/">官网</a></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CREATE</td>
+<td>创建节点\关系\属性</td>
+</tr>
+<tr>
+<td>MATCH</td>
+<td>检索节点\关系\属性</td>
+</tr>
+<tr>
+<td>RETURN</td>
+<td>返回查询结果</td>
+</tr>
+<tr>
+<td>WHERE</td>
+<td>提供过滤条件</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>删除节点\关系</td>
+</tr>
+<tr>
+<td>REMOVE</td>
+<td>删除节点\关系的属性\标签</td>
+</tr>
+<tr>
+<td>ORDER BY</td>
+<td>排序检索数据</td>
+</tr>
+<tr>
+<td>SET</td>
+<td>添加或更新标签</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%load_ext icypher</span><br><span class="line">%cypher http://neo4j:<span class="number">111222</span>@localhost:<span class="number">7474</span>/db/data</span><br></pre></td></tr></table></figure>
+<h2 id="create"><a class="markdownIt-Anchor" href="#create"></a> CREATE</h2>
+<ul>
+<li>创建没有属性的节点</li>
+<li>使用属性创建节点</li>
+<li>在没有属性的节点之间创建关系</li>
+<li>使用属性创建节点之间的关系</li>
+<li>为节点或关系创建单个或多个标签</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">CREATE (dept:Dept &#123; deptno:<span class="number">10</span>,dname:<span class="string">&#x27;Accounting&#x27;</span>,location:<span class="string">&#x27;苏州&#x27;</span>,isperson:true &#125;)</span><br><span class="line">//一个节点多个属性一个标签</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">create (m:MOVIE:Cinema:Film:Picture&#123;labels:true&#125;)</span><br><span class="line">//一个节点多个标签</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (n:MOVIE:Cinema)</span><br><span class="line"><span class="keyword">return</span> n</span><br><span class="line">//区分大小写</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'n': Node('Cinema', 'Film', 'MOVIE', 'Picture')&#125;,
+ &#123;'n': Node('Cinema', 'Film', 'MOVIE', 'Picture', labels=True)&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配合json使用</span></span><br><span class="line"><span class="comment"># &#123;</span></span><br><span class="line"><span class="comment">#   &#x27;props&#x27; : [ &#123;</span></span><br><span class="line"><span class="comment">#     &#x27;name&#x27; : &#x27;Andy&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;position&#x27; : &#x27;Developer&#x27;</span></span><br><span class="line"><span class="comment">#   &#125;, &#123;</span></span><br><span class="line"><span class="comment">#     &#x27;name&#x27; : &#x27;Michael&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;position&#x27; : &#x27;Developer&#x27;</span></span><br><span class="line"><span class="comment">#   &#125; ]</span></span><br><span class="line"><span class="comment"># &#125;</span></span><br><span class="line"><span class="comment"># UNWIND $props AS map</span></span><br><span class="line"><span class="comment"># CREATE (n)</span></span><br><span class="line"><span class="comment"># SET n = map</span></span><br></pre></td></tr></table></figure>
+<h2 id="match"><a class="markdownIt-Anchor" href="#match"></a> MATCH</h2>
+<ul>
+<li>从数据库获取有关节点和属性的数据</li>
+<li>从数据库获取有关节点，关系和属性的数据</li>
+<li><strong>需要和别的语句搭配使用</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (p:Dept &#123;location:<span class="string">&#x27;苏州&#x27;</span>&#125;) RETURN p.location</span><br><span class="line">//这是注释 不能放上面</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'p.location': '苏州'&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (p:Dept)</span><br><span class="line">WHERE p.location = <span class="string">&#x27;苏州&#x27;</span></span><br><span class="line">RETURN p</span><br><span class="line">//等价上面的</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'p': Node('Dept', deptno=10, dname='Accounting', isperson=True, location='苏州')&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (director:Movie)--(movie)</span><br><span class="line">RETURN movie</span><br><span class="line">limit <span class="number">5</span></span><br><span class="line">//--表示关系 不考虑方向(--&gt;)和属性</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'movie': Node('Person', born=1978, name='Emil Eifrem')&#125;,
+ &#123;'movie': Node('Person', born=1952, name='Joel Silver')&#125;,
+ &#123;'movie': Node('Person', born=1965, name='Lana Wachowski')&#125;,
+ &#123;'movie': Node('Person', born=1967, name='Lilly Wachowski')&#125;,
+ &#123;'movie': Node('Person', born=1960, name='Hugo Weaving')&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (wallstreet &#123;title: <span class="string">&#x27;Joe Versus the Volcano&#x27;</span>&#125;)&lt;-[:ACTED_IN|DIRECTED]-(person)</span><br><span class="line">RETURN person.name</span><br><span class="line">limit <span class="number">5</span></span><br><span class="line">//查询多个关系</span><br><span class="line">//如果关系名字里面有空格 用反引号``</span><br><span class="line">//[:TYPE*minHops..maxHops] 代表关系的长度</span><br><span class="line">//shortestPath((martin)-[*.<span class="number">.15</span>]-(oliver)) 最短路径,最大长度为<span class="number">15</span></span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'person.name': 'Meg Ryan'&#125;,
+ &#123;'person.name': 'Tom Hanks'&#125;,
+ &#123;'person.name': 'John Patrick Stanley'&#125;,
+ &#123;'person.name': 'Nathan Lane'&#125;,
+ &#123;'person.name': 'Meg Ryan'&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (charlie &#123;name: <span class="string">&#x27;Tom Hanks&#x27;</span>&#125;)-[:ACTED_IN]-&gt;(movie)&lt;-[:DIRECTED]-(director)</span><br><span class="line">RETURN movie.title, director.name</span><br><span class="line">limit <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'movie.title': &quot;You've Got Mail&quot;, 'director.name': 'Nora Ephron'&#125;,
+ &#123;'movie.title': 'Sleepless in Seattle', 'director.name': 'Nora Ephron'&#125;,
+ &#123;'movie.title': 'Joe Versus the Volcano',
+  'director.name': 'John Patrick Stanley'&#125;,
+ &#123;'movie.title': 'That Thing You Do', 'director.name': 'Tom Hanks'&#125;,
+ &#123;'movie.title': 'Cloud Atlas', 'director.name': 'Tom Tykwer'&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># OPTIONAL MATCH </span></span><br><span class="line"><span class="comment"># using nulls for missing parts </span></span><br></pre></td></tr></table></figure>
+<h2 id="return"><a class="markdownIt-Anchor" href="#return"></a> RETURN</h2>
+<ul>
+<li>检索节点的某些属性</li>
+<li>检索节点的所有属性</li>
+<li>检索节点和关联关系的某些属性</li>
+<li>检索节点和关联关系的所有属性</li>
+<li><strong>需要和别的语句搭配使用</strong></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># return * return 所有出现过的变量</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (`This isn\<span class="string">&#x27;t a common variable`)</span></span><br><span class="line"><span class="string">WHERE `This isn\&#x27;t a common variable`.name = &#x27;</span>Kiefer Sutherland<span class="string">&#x27;</span></span><br><span class="line"><span class="string">RETURN `This isn\&#x27;t a common variable`.born  as othername</span></span><br><span class="line"><span class="string">//DISTINCT 返回不重复的值</span></span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'othername': 1966&#125;, &#123;'othername': 1966&#125;]
+</code></pre>
+<h2 id="creatematchreturn"><a class="markdownIt-Anchor" href="#creatematchreturn"></a> CREATE+MATCH+RETURN</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">CREATE (e:Customer&#123;<span class="built_in">id</span>:<span class="string">&#x27;1001&#x27;</span>,name:<span class="string">&#x27;Abc&#x27;</span>,dob:<span class="string">&#x27;01/10/1982&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">CREATE (cc:CreditCard&#123;<span class="built_in">id</span>:<span class="string">&#x27;5001&#x27;</span>,number:<span class="string">&#x27;1234567890&#x27;</span>,cvv:<span class="string">&#x27;888&#x27;</span>,expiredate:<span class="string">&#x27;20/17&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 使用现有节点创建没有属性的关系</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (e:Customer),(cc:CreditCard)</span><br><span class="line">create (e)-[r:DO_SHOPPING_WITH]-&gt;(cc)</span><br><span class="line">RETURN r</span><br><span class="line">//不加<span class="keyword">return</span> 也可以</span><br><span class="line">//只能创建有向关系,查询的时候可以查双向关系</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'r': DO_SHOPPING_WITH(Node('Customer', dob='01/10/1982', id='1001', name='Abc'), Node('CreditCard', cvv='888', expiredate='20/17', id='5001', number='1234567890'))&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (e:Customer)-[r ]-&gt;(cc) </span><br><span class="line">RETURN r</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'r': second_relation(Node('Customer', dob='01/10/1982', id='1001', name='Abc'), Node('CreditCard', cvv='888', expiredate='20/17', id='5001', number='1234567890'))&#125;,
+ &#123;'r': DO_SHOPPING_WITH(Node('Customer', dob='01/10/1982', id='1001', name='Abc'), Node('CreditCard', cvv='888', expiredate='20/17', id='5001', number='1234567890'))&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH whole=(e)-[r ]-&gt;(cc:Movie) </span><br><span class="line">RETURN whole</span><br><span class="line">limit <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'whole': Path(Node('Person', born=1978, name='Emil Eifrem'), ACTED_IN(Node('Person', born=1978, name='Emil Eifrem'), Node('Movie', released=1999, tagline='Welcome to the Real World', title='The Matrix')))&#125;,
+ &#123;'whole': Path(Node('Person', born=1952, name='Joel Silver'), PRODUCED(Node('Person', born=1952, name='Joel Silver'), Node('Movie', released=1999, tagline='Welcome to the Real World', title='The Matrix')))&#125;,
+ &#123;'whole': Path(Node('Person', born=1965, name='Lana Wachowski'), DIRECTED(Node('Person', born=1965, name='Lana Wachowski'), Node('Movie', released=1999, tagline='Welcome to the Real World', title='The Matrix')))&#125;,
+ &#123;'whole': Path(Node('Person', born=1967, name='Lilly Wachowski'), DIRECTED(Node('Person', born=1967, name='Lilly Wachowski'), Node('Movie', released=1999, tagline='Welcome to the Real World', title='The Matrix')))&#125;,
+ &#123;'whole': Path(Node('Person', born=1960, name='Hugo Weaving'), ACTED_IN(Node('Person', born=1960, name='Hugo Weaving'), Node('Movie', released=1999, tagline='Welcome to the Real World', title='The Matrix')))&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 2. 使用现有节点创建有属性的关系</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (e:Customer),(cc:CreditCard)</span><br><span class="line">create (e)-[r:DO_SHOPPING_WITH&#123;shopdata:<span class="string">&#x27;12/12/2014&#x27;</span>,price:<span class="number">5500</span>&#125;]-&gt;(cc)</span><br><span class="line">RETURN r</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'r': DO_SHOPPING_WITH(Node('Customer', dob='01/10/1982', id='1001', name='Abc'), Node('CreditCard', cvv='888', expiredate='20/17', id='5001', number='1234567890'), price=5500, shopdata='12/12/2014')&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3.使用新节点创建有/无属性的关系</span></span><br><span class="line"><span class="comment"># 和1.2.的区别是 1.2.需要先match</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">create (fb1:FaceBookProfile)-[like:LIKES]-&gt;(fb2:FaceBookProfile)</span><br><span class="line">//创建了两个新节点喝一个新关系</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">create (video1:YoutubeVideo&#123;title:<span class="string">&#x27;Action Movie1&#x27;</span>,update_by:<span class="string">&#x27;Abc&#x27;</span>,uploaded_data:<span class="string">&#x27;10/10/2010&#x27;</span>&#125;)</span><br><span class="line">-[movie:ACTION_MOVIES&#123;rating:<span class="number">1</span>&#125;]-&gt;</span><br><span class="line">(video2:YoutubeVideo&#123;title:<span class="string">&#x27;Action Movie2&#x27;</span>,update_by:<span class="string">&#x27;Xyz&#x27;</span>,uploaded_data:<span class="string">&#x27;12/12/2012&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (cust)-[r:DO_SHOPPING_WITH]-&gt;(cc)</span><br><span class="line"><span class="keyword">return</span> cust,r,cc</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'cust': Node('Customer', dob='01/10/1982', id='1001', name='Abc'),
+  'r': DO_SHOPPING_WITH(Node('Customer', dob='01/10/1982', id='1001', name='Abc'), Node('CreditCard', cvv='888', expiredate='20/17', id='5001', number='1234567890')),
+  'cc': Node('CreditCard', cvv='888', expiredate='20/17', id='5001', number='1234567890')&#125;,
+ &#123;'cust': Node('Customer', dob='01/10/1982', id='1001', name='Abc'),
+  'r': DO_SHOPPING_WITH(Node('Customer', dob='01/10/1982', id='1001', name='Abc'), Node('CreditCard', cvv='888', expiredate='20/17', id='5001', number='1234567890')),
+  'cc': Node('CreditCard', cvv='888', expiredate='20/17', id='5001', number='1234567890')&#125;,
+ &#123;'cust': Node('Customer', dob='01/10/1982', id='1001', name='Abc'),
+  'r': DO_SHOPPING_WITH(Node('Customer', dob='01/10/1982', id='1001', name='Abc'), Node('CreditCard', cvv='888', expiredate='20/17', id='5001', number='1234567890'), price=5500, shopdata='12/12/2014'),
+  'cc': Node('CreditCard', cvv='888', expiredate='20/17', id='5001', number='1234567890')&#125;]
+</code></pre>
+<h2 id="where"><a class="markdownIt-Anchor" href="#where"></a> WHERE</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WHERE &lt;condition&gt; &lt;boolean-operator&gt; &lt;condition&gt; </span><br><span class="line">&lt;condition&gt;:            &lt;property-name&gt; &lt;comparison-operator&gt; &lt;value&gt;  </span><br><span class="line">&lt;comparison-operator&gt;:  =/&lt;&gt;/&lt;/&gt;/&lt;=/&gt;=/=~(正则)</span><br><span class="line">&lt;boolean-operator&gt;:     AND/OR/NOT/XOR</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (emp:YoutubeVideo) </span><br><span class="line">WHERE emp.aaaaa = <span class="string">&#x27;Xyz&#x27;</span></span><br><span class="line">RETURN <span class="built_in">id</span>(emp)</span><br><span class="line">//没有的属性认为<span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (emp:YoutubeVideo) </span><br><span class="line">WHERE emp.update_by = <span class="string">&#x27;Abc&#x27;</span> OR emp.update_by = <span class="string">&#x27;Xyz&#x27;</span></span><br><span class="line">RETURN <span class="built_in">id</span>(emp)</span><br><span class="line">//查询</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'id(emp)': 231&#125;, &#123;'id(emp)': 232&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (n:Dept),(c:CreditCard)</span><br><span class="line">where n.location=<span class="string">&#x27;苏州&#x27;</span> <span class="keyword">and</span> c.cvv=<span class="string">&#x27;888&#x27;</span></span><br><span class="line">create (n)-[r:no_relations&#123;prop:<span class="string">&#x27;随机创建的&#x27;</span>&#125;]-&gt;(c)</span><br><span class="line"><span class="keyword">return</span> r</span><br><span class="line"></span><br><span class="line">//创建 数字也要用<span class="string">&#x27;&#x27;</span>,直接<span class="number">888</span>查不到,创建的时候用<span class="string">&#x27;&#x27;</span>了</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'r': no_relations(Node('Dept', deptno=10, dname='Accounting', isperson=True, location='苏州'), Node('CreditCard', cvv='888', expiredate='20/17', id='5001', number='1234567890'), prop='随机创建的')&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (n:Person)</span><br><span class="line">WHERE n[<span class="string">&#x27;born&#x27;</span>] &gt; <span class="number">1980</span></span><br><span class="line">RETURN n.name, n.born</span><br><span class="line">limit <span class="number">5</span></span><br><span class="line">//n.name CONTAINS <span class="string">&#x27;ete&#x27;</span></span><br><span class="line">//n.name ENDS WITH <span class="string">&#x27;ter&#x27;</span></span><br><span class="line">//WHERE n.name STARTS WITH <span class="string">&#x27;Pet&#x27;</span></span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'n.name': 'Jonathan Lipnicki', 'n.born': 1996&#125;,
+ &#123;'n.name': 'Natalie Portman', 'n.born': 1981&#125;,
+ &#123;'n.name': 'Emile Hirsch', 'n.born': 1985&#125;,
+ &#123;'n.name': 'Rain', 'n.born': 1982&#125;,
+ &#123;'n.name': 'Jonathan Lipnicki', 'n.born': 1996&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (n:Person)-[r]-&gt;()</span><br><span class="line">WHERE n.name=<span class="string">&#x27;Angela Scope&#x27;</span> AND <span class="built_in">type</span>(r) =~ <span class="string">&#x27;F.*&#x27;</span></span><br><span class="line">RETURN <span class="built_in">type</span>(r), r</span><br><span class="line">limit <span class="number">5</span></span><br><span class="line">//A开头的关系</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'type(r)': 'FOLLOWS',
+  'r': FOLLOWS(Node('Person', name='Angela Scope'), Node('Person', name='Jessica Thompson'))&#125;,
+ &#123;'type(r)': 'FOLLOWS',
+  'r': FOLLOWS(Node('Person', name='Angela Scope'), Node('Person', name='Jessica Thompson'))&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (person:Person),(f:Person)</span><br><span class="line">WHERE EXISTS &#123;</span><br><span class="line">  MATCH (person)-[:FOLLOWS]-&gt;(f)</span><br><span class="line">  WHERE person.name = <span class="string">&#x27;Paul Blythe&#x27;</span> </span><br><span class="line">&#125;</span><br><span class="line">RETURN f.name AS name</span><br><span class="line">//嵌套查询 内层可用外层变量</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'name': 'Angela Scope'&#125;, &#123;'name': 'Angela Scope'&#125;]
+</code></pre>
+<h2 id="delete"><a class="markdownIt-Anchor" href="#delete"></a> DELETE</h2>
+<ul>
+<li>删除节点</li>
+<li>删除关系</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (e:Film) delete  e</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (n:Customer)-[r]-(c:CreditCard) delete n,c,r</span><br><span class="line">//删除节点时必要保证节点没有其他的关系相连</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (n:Movie)</span><br><span class="line">DETACH DELETE n</span><br><span class="line">//删除节点和相连的关系</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (n)-[r]-(c:Dept) <span class="keyword">return</span> r</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<h2 id="removw"><a class="markdownIt-Anchor" href="#removw"></a> REMOVW</h2>
+<ul>
+<li>删除节点或关系的标签</li>
+<li>删除节点或关系的属性</li>
+<li>keys(n) 查看n的所有属性</li>
+<li>labels(n) 查看n的所有标签</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">create (book:Book &#123;<span class="built_in">id</span>:<span class="number">122</span>,title:<span class="string">&#x27;Neo4j TUtorial&#x27;</span>,pages:<span class="number">333</span>,price:<span class="number">250</span>&#125;)</span><br><span class="line"><span class="keyword">return</span> book</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'book': Node('Book', id=122, pages=333, price=250, title='Neo4j TUtorial')&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (book:Book&#123;<span class="built_in">id</span>:<span class="number">122</span>&#125;)</span><br><span class="line">remove book.noattr</span><br><span class="line"><span class="keyword">return</span> book</span><br><span class="line">//没有这个属性也可以</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'book': Node('Book', id=122, pages=333, title='Neo4j TUtorial')&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (n:label1)</span><br><span class="line">remove n:label1</span><br><span class="line"><span class="keyword">return</span> n</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'n': Node('label2', 'label3', 'label4', labels=True)&#125;]
+</code></pre>
+<h2 id="set"><a class="markdownIt-Anchor" href="#set"></a> SET</h2>
+<ul>
+<li>向现有节点或关系添加新属性</li>
+<li>添加或更新属性值</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (n:Dept)</span><br><span class="line"><span class="built_in">set</span> n.dname=<span class="string">&#x27;帅哥&#x27;</span> ,n.<span class="built_in">type</span>=<span class="string">&#x27;666&#x27;</span></span><br><span class="line"><span class="keyword">return</span> n</span><br><span class="line">//有就修改 没有添加</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'n': Node('Dept', deptno=10, dname='帅哥', location='Hyderabad', type='666')&#125;,
+ &#123;'n': Node('Dept', deptno=10, dname='帅哥', isperson=True, location='苏州', type='666')&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (book:Book&#123;&#125;) </span><br><span class="line">SET book+=&#123;title:<span class="string">&#x27;neo4j tutorial&#x27;</span>&#125;</span><br><span class="line"><span class="keyword">return</span> book</span><br><span class="line">//book=&#123;offline:<span class="literal">True</span>&#125;会把原有是属性值全部删掉 book+=&#123;offline:<span class="literal">True</span>&#125; 不会删除原有属性 新增一个属性</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'book': Node('Book', offline=True, title='neo4j tutorial')&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (book:Book&#123;&#125;)  SET book:Knowledge RETURN book</span><br><span class="line">//新增一个标签</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'book': Node('Book', 'Knowledge', offline=True, title='neo4j tutorial')&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (book:Book&#123;&#125;) </span><br><span class="line">SET book.addtitle=book.title</span><br><span class="line">remove book.title</span><br><span class="line"><span class="keyword">return</span> book</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'book': Node('Book', 'Knowledge', addtitle='neo4j tutorial', offline=True)&#125;,
+ &#123;'book': Node('Book')&#125;,
+ &#123;'book': Node('Book', addtitle='neo4j start', offline=True)&#125;,
+ &#123;'book': Node('Book', addtitle='neo4j end', offline=False)&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (n &#123;dname: <span class="string">&#x27;帅哥&#x27;</span>&#125;)</span><br><span class="line">SET (CASE WHEN n.<span class="built_in">type</span> = <span class="number">666</span> THEN n END).worksIn = <span class="string">&#x27;Malmo&#x27;</span></span><br><span class="line">RETURN n</span><br><span class="line">//只有n.<span class="built_in">type</span> = <span class="number">666</span> 才设置</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'n': Node('Dept', deptno=10, dname='帅哥', location='Hyderabad', type='666')&#125;,
+ &#123;'n': Node('Dept', deptno=10, dname='帅哥', isperson=True, location='苏州', type='666')&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># &#123;</span></span><br><span class="line"><span class="comment">#   &#x27;props&#x27; : &#123;</span></span><br><span class="line"><span class="comment">#     &#x27;name&#x27; : &#x27;Andy&#x27;,</span></span><br><span class="line"><span class="comment">#     &#x27;position&#x27; : &#x27;Developer&#x27;</span></span><br><span class="line"><span class="comment">#   &#125;</span></span><br><span class="line"><span class="comment"># &#125;</span></span><br><span class="line"><span class="comment"># MATCH (n &#123;name: &#x27;Andy&#x27;&#125;)</span></span><br><span class="line"><span class="comment"># SET n = $props</span></span><br><span class="line"><span class="comment"># RETURN n.name, n.position, n.age, n.hungry</span></span><br></pre></td></tr></table></figure>
+<h2 id="order-by"><a class="markdownIt-Anchor" href="#order-by"></a> ORDER BY</h2>
+<ul>
+<li>默认是升序排列 DESC改为降序</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (movie:Movie)</span><br><span class="line"><span class="keyword">return</span> movie.released,movie.title</span><br><span class="line">order by movie.released DESC , movie.title</span><br><span class="line">limit <span class="number">15</span></span><br><span class="line">//多个属性排列</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'movie.released': None, 'movie.title': 'The Matrix'&#125;,
+ &#123;'movie.released': None, 'movie.title': 'The Matrix'&#125;,
+ &#123;'movie.released': None, 'movie.title': 'The Matrix Reloaded'&#125;,
+ &#123;'movie.released': None, 'movie.title': 'The Matrix Reloaded'&#125;,
+ &#123;'movie.released': None, 'movie.title': 'The Matrix Revolutions'&#125;,
+ &#123;'movie.released': None, 'movie.title': 'The Matrix Revolutions'&#125;]
+</code></pre>
+<h2 id="union-all"><a class="markdownIt-Anchor" href="#union-all"></a> UNION [ALL]</h2>
+<ul>
+<li>将两个不同的结果合并</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">create (n:CreditCard&#123;<span class="built_in">id</span>:<span class="number">1</span>,name:<span class="string">&#x27;ABX XYZ&#x27;</span>,number:<span class="string">&#x27;1234567890&#x27;</span>,cvv:<span class="number">1230</span>,valid_from:<span class="string">&#x27;6/14&#x27;</span>,valid_to:<span class="string">&#x27;6/24&#x27;</span>&#125;)</span><br><span class="line">,(n1:CreditCard&#123;<span class="built_in">id</span>:<span class="number">2</span>,name:<span class="string">&#x27;ABX1 XYZ1&#x27;</span>,number:<span class="string">&#x27;1234567891&#x27;</span>,cvv:<span class="number">1231</span>,valid_from:<span class="string">&#x27;6/141&#x27;</span>,valid_to:<span class="string">&#x27;6/241&#x27;</span>&#125;)</span><br><span class="line">,(n2:CreditCard&#123;<span class="built_in">id</span>:<span class="number">3</span>,name:<span class="string">&#x27;ABX2 XYZ2&#x27;</span>,number:<span class="string">&#x27;1234567892&#x27;</span>,cvv:<span class="number">1232</span>,valid_from:<span class="string">&#x27;6/142&#x27;</span>,valid_to:<span class="string">&#x27;6/242&#x27;</span>&#125;)</span><br><span class="line">,(n3:CreditCard&#123;<span class="built_in">id</span>:<span class="number">4</span>,name:<span class="string">&#x27;ABX3 XYZ3&#x27;</span>,number:<span class="string">&#x27;1234567893&#x27;</span>,cvv:<span class="number">1233</span>,valid_from:<span class="string">&#x27;6/143&#x27;</span>,valid_to:<span class="string">&#x27;6/243&#x27;</span>&#125;)</span><br><span class="line">,(n4:CreditCard&#123;<span class="built_in">id</span>:<span class="number">5</span>,name:<span class="string">&#x27;ABX XYZ&#x27;</span>,number:<span class="string">&#x27;1234567890&#x27;</span>,cvv:<span class="number">123</span>,valid_from:<span class="string">&#x27;6/14&#x27;</span>,valid_to:<span class="string">&#x27;6/24&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">create (n:DebitCard&#123;<span class="built_in">id</span>:<span class="number">1</span>,name:<span class="string">&#x27;ABX XYZ&#x27;</span>,number:<span class="string">&#x27;1234567890&#x27;</span>,cvv:<span class="number">1230</span>,valid_from:<span class="string">&#x27;6/14&#x27;</span>,valid_to:<span class="string">&#x27;6/24&#x27;</span>&#125;)</span><br><span class="line">,(n1:CreditCard&#123;<span class="built_in">id</span>:<span class="number">11</span>,name:<span class="string">&#x27;ABX1 XYZ1&#x27;</span>,number:<span class="string">&#x27;1234567891&#x27;</span>,cvv:<span class="number">1231</span>,valid_from:<span class="string">&#x27;6/141&#x27;</span>,valid_to:<span class="string">&#x27;6/241&#x27;</span>&#125;)</span><br><span class="line">,(n2:CreditCard&#123;<span class="built_in">id</span>:<span class="number">12</span>,name:<span class="string">&#x27;ABX2 XYZ2&#x27;</span>,number:<span class="string">&#x27;1234567892&#x27;</span>,cvv:<span class="number">1232</span>,valid_from:<span class="string">&#x27;6/142&#x27;</span>,valid_to:<span class="string">&#x27;6/242&#x27;</span>&#125;)</span><br><span class="line">,(n3:CreditCard&#123;<span class="built_in">id</span>:<span class="number">13</span>,name:<span class="string">&#x27;ABX3 XYZ3&#x27;</span>,number:<span class="string">&#x27;1234567893&#x27;</span>,cvv:<span class="number">1233</span>,valid_from:<span class="string">&#x27;6/143&#x27;</span>,valid_to:<span class="string">&#x27;6/243&#x27;</span>&#125;)</span><br><span class="line">,(n4:CreditCard&#123;<span class="built_in">id</span>:<span class="number">14</span>,name:<span class="string">&#x27;ABX XYZ&#x27;</span>,number:<span class="string">&#x27;1234567890&#x27;</span>,cvv:<span class="number">123</span>,valid_from:<span class="string">&#x27;6/14&#x27;</span>,valid_to:<span class="string">&#x27;6/24&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (cc:CreditCard) <span class="keyword">return</span> cc.<span class="built_in">id</span> <span class="keyword">as</span> <span class="built_in">id</span> ,cc.number <span class="keyword">as</span> number</span><br><span class="line">UNION </span><br><span class="line"><span class="keyword">match</span> (dc:DebitCard) <span class="keyword">return</span> dc.<span class="built_in">id</span>  <span class="keyword">as</span> <span class="built_in">id</span> ,dc.number <span class="keyword">as</span> number</span><br><span class="line">//自动去掉重复从行 不用<span class="keyword">as</span></span><br><span class="line">//这里既有信用卡式和借记卡具有相同的属性名：身份证和号码，但他们有不同的节点名称前缀。</span><br><span class="line">//这就是为什么UNION命令显示此错误消息。为了避免这种错误，Neo4j的CQL提供“AS”子句。</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'id': '5001', 'number': '1234567890'&#125;,
+ &#123;'id': 1, 'number': '1234567890'&#125;,
+ &#123;'id': 2, 'number': '1234567891'&#125;,
+ &#123;'id': 3, 'number': '1234567892'&#125;,
+ &#123;'id': 4, 'number': '1234567893'&#125;,
+ &#123;'id': 5, 'number': '1234567890'&#125;,
+ &#123;'id': 11, 'number': '1234567891'&#125;,
+ &#123;'id': 12, 'number': '1234567892'&#125;,
+ &#123;'id': 13, 'number': '1234567893'&#125;,
+ &#123;'id': 14, 'number': '1234567890'&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (cc:CreditCard) <span class="keyword">return</span> cc.<span class="built_in">id</span> <span class="keyword">as</span> <span class="built_in">id</span> ,cc.number <span class="keyword">as</span> number</span><br><span class="line">UNION  ALL</span><br><span class="line"><span class="keyword">match</span> (dc:DebitCard) <span class="keyword">return</span> dc.<span class="built_in">id</span>  <span class="keyword">as</span> <span class="built_in">id</span> ,dc.number <span class="keyword">as</span> number</span><br><span class="line">//显示所有的行</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'id': '5001', 'number': '1234567890'&#125;,
+ &#123;'id': 1, 'number': '1234567890'&#125;,
+ &#123;'id': 2, 'number': '1234567891'&#125;,
+ &#123;'id': 3, 'number': '1234567892'&#125;,
+ &#123;'id': 4, 'number': '1234567893'&#125;,
+ &#123;'id': 5, 'number': '1234567890'&#125;,
+ &#123;'id': 11, 'number': '1234567891'&#125;,
+ &#123;'id': 12, 'number': '1234567892'&#125;,
+ &#123;'id': 13, 'number': '1234567893'&#125;,
+ &#123;'id': 14, 'number': '1234567890'&#125;,
+ &#123;'id': 1, 'number': '1234567890'&#125;]
+</code></pre>
+<h2 id="limit-skip"><a class="markdownIt-Anchor" href="#limit-skip"></a> LIMIT &amp; SKIP</h2>
+<ul>
+<li>limit n 只取结果的前n行</li>
+<li>skip n 跳过结果的前n行</li>
+<li>可以放在一起用</li>
+<li>limit/skip 1 + toInteger(3 * rand())</li>
+</ul>
+<h2 id="merge"><a class="markdownIt-Anchor" href="#merge"></a> MERGE</h2>
+<ul>
+<li>MERGE命令在图中搜索给定模式</li>
+<li>如果存在，则返回结果</li>
+<li>如果它不存在于图中，则它创建新的节点/关系并返回结果。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (gp:GoogleProfile&#123; Id: <span class="number">201402</span>,Name:<span class="string">&#x27;Nokia&#x27;</span>&#125;)</span><br><span class="line"><span class="keyword">return</span>  <span class="built_in">id</span>(gp)</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MERGE (gp:GoogleProfile&#123; Id: <span class="number">201402</span>,Name:<span class="string">&#x27;Nokia&#x27;</span>&#125;)</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">id</span>(gp)</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'id(gp)': 248&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">merge (gp:GoogleProfile&#123;Id:<span class="number">201402</span>,Name:<span class="string">&#x27;Nokia&#x27;</span>&#125;)</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">id</span>(gp)</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'id(gp)': 248&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MERGE (keanu:Person &#123;name: <span class="string">&#x27;mergecreated&#x27;</span>&#125;)</span><br><span class="line">ON CREATE</span><br><span class="line">  SET keanu.created = timestamp()</span><br><span class="line">RETURN keanu.name, keanu.created</span><br><span class="line">//如果没有就会创建 并添加一个timestamp</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'keanu.name': 'mergecreated', 'keanu.created': 1667637911668&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MERGE (person:Person&#123;name: <span class="string">&#x27;mergecreatedfound&#x27;</span>&#125;)</span><br><span class="line">ON MATCH</span><br><span class="line">  SET person.found = true</span><br><span class="line">RETURN person.name, person.found</span><br><span class="line">limit <span class="number">5</span></span><br><span class="line">//如果找到了就添加  没找到就不添加found</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'person.name': 'mergecreatedfound', 'person.found': True&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MERGE (keanu:Person &#123;name: <span class="string">&#x27;Keanu Reeves&#x27;</span>&#125;)</span><br><span class="line">ON CREATE</span><br><span class="line">  SET keanu.created = timestamp()</span><br><span class="line">ON MATCH</span><br><span class="line">  SET keanu.lastSeen = timestamp()</span><br><span class="line">RETURN keanu.name, keanu.created, keanu.lastSeen</span><br><span class="line">//有就是lastSeen,没有就是created</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'keanu.name': 'Keanu Reeves',
+  'keanu.created': None,
+  'keanu.lastSeen': 1667638041825&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (person:Person)</span><br><span class="line">MERGE (city:City &#123;name: person.bornIn&#125;)</span><br><span class="line">MERGE (person)-[r:BORN_IN]-&gt;(city)</span><br><span class="line">RETURN person.name, person.bornIn, city</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CREATE CONSTRAINT ON (n:Person) ASSERT n.name IS UNIQUE;</span></span><br><span class="line"><span class="comment"># CREATE CONSTRAINT ON (n:Person) ASSERT n.role IS UNIQUE;</span></span><br><span class="line"><span class="comment"># For example, given two unique constraints on :Person(id) and :Person(ssn), </span></span><br><span class="line"><span class="comment"># a query such as MERGE (n:Person &#123;id: 12, ssn: 437&#125;) will fail, </span></span><br><span class="line"><span class="comment"># if there are two different nodes (one with id 12 and one with ssn 437) </span></span><br><span class="line"><span class="comment"># or if there is only one node with only one of the properties. </span></span><br><span class="line"><span class="comment"># In other words, there must be exactly one node that matches the pattern, or no matching nodes.</span></span><br></pre></td></tr></table></figure>
+<h2 id="null值"><a class="markdownIt-Anchor" href="#null值"></a> NULL值</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">create (n:Book)</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (e:Book) </span><br><span class="line">RETURN e.offline,e.title,e.sal</span><br><span class="line">// <span class="literal">None</span> 就是NULL</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'e.offline': True, 'e.title': 'neo4j tutorial', 'e.sal': None&#125;,
+ &#123;'e.offline': None, 'e.title': None, 'e.sal': None&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">match</span> (book:Book)</span><br><span class="line">where book.offline <span class="keyword">is</span> <span class="keyword">not</span> null</span><br><span class="line"><span class="keyword">return</span> book</span><br><span class="line">//where book.offline <span class="keyword">is</span> null</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'book': Node('Book', 'Knowledge', offline=True, title='neo4j tutorial')&#125;]
+</code></pre>
+<h2 id="in"><a class="markdownIt-Anchor" href="#in"></a> IN</h2>
+<ul>
+<li>同 python IN</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (e:Book) </span><br><span class="line">WHERE e.offline IN [true]</span><br><span class="line">RETURN e</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'e': Node('Book', 'Knowledge', offline=True, title='neo4j tutorial')&#125;,
+ &#123;'e': Node('Book', offline=True, title='neo4j start')&#125;]
+</code></pre>
+<h1 id="cql函数"><a class="markdownIt-Anchor" href="#cql函数"></a> CQL函数</h1>
+<p><a target="_blank" rel="noopener" href="https://neo4j.com/docs/cypher-manual/current/clauses/listing-functions/">官网</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line"><span class="keyword">return</span> datetime()</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'datetime()': '2022-11-04T07:36:17.068Z'&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">SHOW FUNCTIONS <span class="keyword">yield</span> name,category,description</span><br><span class="line">limit <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (a)-[movie:ACTED_IN]-&gt;(b) </span><br><span class="line">RETURN STARTNODE(movie),ENDNODE(movie)</span><br><span class="line">limit <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'STARTNODE(movie)': Node('Person', born=1964, name='Keanu Reeves'),
+  'ENDNODE(movie)': Node('Movie', released=2003, title=&quot;Something's Gotta Give&quot;)&#125;,
+ &#123;'STARTNODE(movie)': Node('Person', born=1964, name='Keanu Reeves'),
+  'ENDNODE(movie)': Node('Movie', released=2000, tagline='Pain heals, Chicks dig scars... Glory lasts forever', title='The Replacements')&#125;,
+ &#123;'STARTNODE(movie)': Node('Person', born=1964, name='Keanu Reeves'),
+  'ENDNODE(movie)': Node('Movie', released=1995, tagline='The hottest data on earth. In the coolest head in town', title='Johnny Mnemonic')&#125;,
+ &#123;'STARTNODE(movie)': Node('Person', born=1964, name='Keanu Reeves'),
+  'ENDNODE(movie)': Node('Movie', released=1997, tagline='Evil has its winning ways', title=&quot;The Devil's Advocate&quot;)&#125;,
+ &#123;'STARTNODE(movie)': Node('Person', born=1964, name='Keanu Reeves'),
+  'ENDNODE(movie)': Node('Movie', released=2003, tagline='Everything that has a beginning has an end', title='The Matrix Revolutions')&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (a)-[movie:ACTED_IN]-&gt;(b) </span><br><span class="line">RETURN ID(movie),TYPE(movie)</span><br><span class="line">limit <span class="number">5</span></span><br><span class="line">//<span class="built_in">type</span> 只能看relation</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'ID(movie)': 221, 'TYPE(movie)': 'ACTED_IN'&#125;,
+ &#123;'ID(movie)': 114, 'TYPE(movie)': 'ACTED_IN'&#125;,
+ &#123;'ID(movie)': 132, 'TYPE(movie)': 'ACTED_IN'&#125;,
+ &#123;'ID(movie)': 22, 'TYPE(movie)': 'ACTED_IN'&#125;,
+ &#123;'ID(movie)': 15, 'TYPE(movie)': 'ACTED_IN'&#125;]
+</code></pre>
+<h3 id="创建索引"><a class="markdownIt-Anchor" href="#创建索引"></a> 创建索引</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">CREATE INDEX ON :Movie (title)</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">DROP INDEX ON :Movie (title)</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<h3 id="创建约束"><a class="markdownIt-Anchor" href="#创建约束"></a> 创建约束</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (cc:CreditCard) </span><br><span class="line">RETURN cc.<span class="built_in">id</span>,cc.number,cc.name,cc.expiredate,cc.cvv</span><br><span class="line">limit <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">CREATE CONSTRAINT ON (cc:CreditCard)</span><br><span class="line">ASSERT cc.<span class="built_in">id</span> IS UNIQUE</span><br><span class="line">//如果已经存在重复的就不能创建,把重复的删除</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">create (cc:CreditCard&#123;<span class="built_in">id</span>:<span class="number">666</span>&#125;)</span><br><span class="line">//Node(<span class="number">246</span>) already exists <span class="keyword">with</span> label `CreditCard` <span class="keyword">and</span> <span class="built_in">property</span> `<span class="built_in">id</span>` = <span class="number">14</span></span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">DROP CONSTRAINT ON (cc:CreditCard)</span><br><span class="line">ASSERT cc.<span class="built_in">id</span> IS UNIQUE</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">create (cc:CreditCard&#123;<span class="built_in">id</span>:<span class="number">666</span>&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<h1 id="补充"><a class="markdownIt-Anchor" href="#补充"></a> 补充</h1>
+<h2 id="with"><a class="markdownIt-Anchor" href="#with"></a> WITH</h2>
+<ul>
+<li>allows query parts to be chained together</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (david &#123;name: <span class="string">&#x27;Jessica Thompson&#x27;</span>&#125;)--(otherPerson)--()</span><br><span class="line">WITH otherPerson, count(*) AS foaf</span><br><span class="line">WHERE foaf &gt; <span class="number">0</span></span><br><span class="line">RETURN otherPerson.name</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'otherPerson.name': 'Angela Scope'&#125;, &#123;'otherPerson.name': 'Angela Scope'&#125;]
+</code></pre>
+<h2 id="unwind"><a class="markdownIt-Anchor" href="#unwind"></a> UNWIND</h2>
+<ul>
+<li>expands a list into a sequence of rows.</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">UNWIND [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, null] AS x</span><br><span class="line">RETURN x, <span class="string">&#x27;val&#x27;</span> AS y</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'x': 1, 'y': 'val'&#125;,
+ &#123;'x': 2, 'y': 'val'&#125;,
+ &#123;'x': 3, 'y': 'val'&#125;,
+ &#123;'x': None, 'y': 'val'&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">WITH [<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>] AS coll</span><br><span class="line">UNWIND coll AS x</span><br><span class="line">WITH DISTINCT x</span><br><span class="line">RETURN collect(x) AS setOfVals</span><br><span class="line">//列表去重</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'setOfVals': [1, 2]&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">WITH</span><br><span class="line">  [<span class="number">1</span>, <span class="number">2</span>] AS a,</span><br><span class="line">  [<span class="number">3</span>, <span class="number">4</span>] AS b</span><br><span class="line">UNWIND (a + b) AS x</span><br><span class="line">RETURN x</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'x': 1&#125;, &#123;'x': 2&#125;, &#123;'x': 3&#125;, &#123;'x': 4&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">WITH [[<span class="number">1</span>, <span class="number">2</span>], [<span class="number">3</span>, <span class="number">4</span>], <span class="number">5</span>] AS nested</span><br><span class="line">UNWIND nested AS x</span><br><span class="line">UNWIND x AS y</span><br><span class="line">RETURN y</span><br><span class="line">//两重循环</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'y': 1&#125;, &#123;'y': 2&#125;, &#123;'y': 3&#125;, &#123;'y': 4&#125;, &#123;'y': 5&#125;]
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">WITH [] AS <span class="built_in">list</span></span><br><span class="line">UNWIND</span><br><span class="line">  CASE</span><br><span class="line">    WHEN <span class="built_in">list</span> = [] THEN [null]</span><br><span class="line">    ELSE <span class="built_in">list</span></span><br><span class="line">  END AS emptylist</span><br><span class="line">RETURN emptylist</span><br><span class="line">//避免列表为空</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'emptylist': None&#125;]
+</code></pre>
+<h2 id="foreach"><a class="markdownIt-Anchor" href="#foreach"></a> FOREACH</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH p=(start)-[*]-&gt;(finish)</span><br><span class="line">WHERE start.name = <span class="string">&#x27;Tom Hanks&#x27;</span> AND finish.title starts <span class="keyword">with</span> <span class="string">&#x27;C&#x27;</span></span><br><span class="line">FOREACH (n IN nodes(p) | SET n.marked = true)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">MATCH (a &#123;name: <span class="string">&#x27;Tom Hanks&#x27;</span> &#125;)</span><br><span class="line">FOREACH (name IN [<span class="string">&#x27;Mike&#x27;</span>, <span class="string">&#x27;Carl&#x27;</span>, <span class="string">&#x27;Bruce&#x27;</span>] |</span><br><span class="line">CREATE (a)-[:FRIEND]-&gt;(:Person &#123;name: name&#125;))</span><br></pre></td></tr></table></figure>
+<pre><code>[]
+</code></pre>
+<h2 id="call"><a class="markdownIt-Anchor" href="#call"></a> CALL</h2>
+<ul>
+<li>CALL {}</li>
+<li>CALL procedure</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">%%cypher</span><br><span class="line">UNWIND [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>] AS x</span><br><span class="line">CALL &#123;</span><br><span class="line">  WITH x</span><br><span class="line">  RETURN x * <span class="number">10</span> AS y</span><br><span class="line">&#125;</span><br><span class="line">RETURN x, y</span><br></pre></td></tr></table></figure>
+<pre><code>[&#123;'x': 0, 'y': 0&#125;, &#123;'x': 1, 'y': 10&#125;, &#123;'x': 2, 'y': 20&#125;]
+</code></pre>
+<p>LOAD　CSV</p>
+<ul>
+<li>LOAD CSV FROM ‘file:///artists.csv’ AS line -正常数据</li>
+<li>USING PERIODIC COMMIT 1000 LOAD CSV FROM ‘file:///artists.csv’ AS line -大数据,1000提交一次事物</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># SHOW PROCEDURES YIELD *.</span></span><br><span class="line"><span class="comment"># SHOW FUNCTIONS YIELD *.</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://gladdduck.github.io/2022/11/05/cypther/" title="Cypher学习笔记" target="_blank" rel="external">https://gladdduck.github.io/2022/11/05/cypther/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/gladdduck" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/gladdduck" target="_blank"><span class="text-dark">gladdduck</span><small class="ml-1x"></small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/11/09/Pytorch%E6%95%B0%E6%8D%AE%E9%9B%86%E5%8A%A0%E8%BD%BD/" title="详解PyTorch中加载数据的方法--Dataset、Dataloader、Sampler、collate-fn"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/11/04/Neo4j/" title="Neo4j浏览器端快捷键"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.jpg" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '644a1091cfd20b8f33ef',
+    clientSecret: '4c5cc91dbfe067c804fcef958817d41acc9ba545',
+    repo: 'gladdduck.github.io',
+    owner: 'gladdduck',
+    admin: ['gladdduck'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: '',
+    proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token',
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>
