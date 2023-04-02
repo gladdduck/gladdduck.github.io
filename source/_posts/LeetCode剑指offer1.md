@@ -1510,93 +1510,456 @@ class Solution:
 
 ### 第二十六天
 
-[]()
+[剑指 Offer 20. 表示数值的字符串](https://leetcode.cn/problems/biao-shi-shu-zhi-de-zi-fu-chuan-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fa86zc7)
 
 
-思路:
+思路:根据题目要求分别实现判断是不是小数,是不是整数,是不是科学计数(根据e分开,然后利用前两个函数),然后一起判断
 
 ```python
+class Solution:
+    def isNumber(self, s: str) -> bool:
+        s=s.strip()
+        def isint(a):
+            if len(a)==0:
+                return False
+            if a[0]=='-' or a[0]=='+':
+                a=a[1:]
+            if len(a)==0:
+                return False
+            for item in a:
+                if not item.isdecimal():
+                    return False
+            return True
+        
+        def isfloat(a):
+            if len(a)==0:
+                return False
+            if a[0]=='-' or a[0]=='+':
+                a=a[1:]
+            if len(a)==0:
+                return False
+            if a=='.':
+                return False
+            flag=True
+            for index,item in enumerate(a):
+                if not item.isdecimal():
+                    if item =='.' and flag:
+                        flag=False
+                        continue
+                    return False
+            return True
+
+        def isnum(a):
+            if len(a)==0:
+                return False
+            if a[0]=='-' or a[0]=='+':
+                a=a[1:]
+            if len(a)==0:
+                return False
+            index=0
+            if 'e' in a:
+                index=a.index('e')
+            elif 'E' in a:
+                index=a.index('E')
+            else:
+                return False
+            front=a[:index]
+            end=a[index+1:]
+            return (isfloat(front) or isint(front)) and isint(end)
+
+        return isint(s) or isfloat(s) or isnum(s)
+```
+
+[面试题67. 把字符串转换成整数](https://leetcode.cn/problems/ba-zi-fu-chuan-zhuan-huan-cheng-zheng-shu-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fa86zc7)
+
+
+思路:一个个字符遍历转为int,要判断是否越界了
+
+```python
+class Solution:
+    def strToInt(self, s: str) -> int:
+        s=s.strip()
+        if len(s)==0:
+            return 0
+        flag=1
+        if s[0]=='-':
+            s=s[1:]
+            flag=-1
+        elif s[0]=='+':
+            s=s[1:]
+        if len(s)==0:
+            return 0
+        if s[0].isalpha():
+            return 0
+        index=0
+        ans=0
+        while index<len(s) and s[index].isdecimal() :
+            ans=ans*10+int(s[index])
+            index+=1
+        INT_MAX=(1<<31)-1
+        INT_MIN=-(1<<31)
+        if ans*flag>INT_MAX:
+            return INT_MAX
+        if ans*flag<INT_MIN:
+            return INT_MIN
+        return ans*flag
+```
+### 第二十七天
+
+[面试题59 - II. 队列的最大值](https://leetcode.cn/problems/dui-lie-de-zui-da-zhi-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fa86zc7)
+
+
+思路:利用一个单调栈(递减栈)记录队列里的最大值,出栈的时候判断是不是单调栈的第一个元素,进栈的时候判断一下和栈顶元素的大小关系,把小于他的都弹出来(因为只要他在,前面的数的最大值都是他)
+
+```python
+import queue
+
+class MaxQueue:
+    def __init__(self):
+        self.queue = queue.Queue()
+        self.maxqueue = queue.deque()
+    def max_value(self) -> int:
+        if len(self.maxqueue)==0:
+            return -1
+        return self.maxqueue[0]
+    def push_back(self, x: int) -> None:
+        self.queue.put(x)
+        while self.maxqueue and x>self.maxqueue[-1]:
+            self.maxqueue.pop()
+        self.maxqueue.append(x)
+    def pop_front(self) -> int:
+        if not self.maxqueue:
+            return -1
+        temp=self.queue.get()
+        if temp==self.maxqueue[0]:
+            self.maxqueue.popleft()
+        return temp
+```
+
+[剑指 Offer 59 - I. 滑动窗口的最大值](https://leetcode.cn/problems/hua-dong-chuang-kou-de-zui-da-zhi-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fa86zc7)
+
+思路:可以直接用上一题的代码,维护一个区间,队列的长度就是区间的长度,每次进一个就弹出一个,获取队列,里面的最大值
+
+题解:单调队列实现
+
+```python
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        deq=MaxQueue()
+        for item in nums[:k-1]:
+            deq.push_back(item)
+        
+        ans=[]
+        for item in nums[k-1:]:
+            deq.push_back(item)
+            ans.append(deq.max_value())
+            deq.pop_front()
+        return ans
+
+```
+
+### 第二十八天
+
+[剑指 Offer 38. 字符串的排列](https://leetcode.cn/problems/zi-fu-chuan-de-pai-lie-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fa86zc7)
+
+
+思路:深搜,全排列,但是不能重复,用位运算来表示访问标识符
+
+```python
+class Solution:
+    def permutation(self, s: str) -> List[str]:
+        length=len(s)
+        visited=0
+        ans=set()
+        def dfs(index,cur):
+            if index==length:
+                ans.add("".join(cur))
+                return
+            for i in range(length):
+                nonlocal visited
+                if not (1<<i)&visited:
+                    visited|=(1<<i)
+                    dfs(index+1,cur+[s[i]])
+                    visited^=(1<<i)
+        dfs(0,[])
+        return list(ans)
+
+```
+
+[剑指 Offer 37. 序列化二叉树](https://leetcode.cn/problems/xu-lie-hua-er-cha-shu-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fa86zc7)
+
+
+思路:就是用某种方式存树,然后再把存的树还原成原本的树
+
+题解:层次遍历(深搜的三种遍历树不唯一),把一层的所有节点都存起来,包括空节点
+
+```python
+import collections
+class Codec:
+    def serialize(self, root):
+        if not root: return "[]"
+        queue = collections.deque()
+        queue.append(root)
+        res = []
+        while queue:
+            cur=queue.popleft()
+            if cur:
+                res.append(str(cur.val))
+                queue.append(cur.left)
+                queue.append(cur.right)
+            else:
+                res.append('null')
+        return '['+",".join(res)+']'
+        
+
+    def deserialize(self, data):
+        if data=='[]':return 
+        vals, i = data[1:-1].split(','), 1
+        root = TreeNode(int(vals[0]))
+        queue = collections.deque()
+        queue.append(root)
+        while queue:
+            cur=queue.popleft()
+            if vals[i]!='null':
+                temp = TreeNode(int(vals[i]))
+                cur.left=temp
+                queue.append(temp)
+            i+=1
+            if vals[i]!='null':
+                temp = TreeNode(int(vals[i]))
+                cur.right=temp
+                queue.append(temp)
+            i+=1
+        return root
+
+```
+
+### *第二十九天
+
+[剑指 Offer 19. 正则表达式匹配](https://leetcode.cn/problems/zheng-ze-biao-da-shi-pi-pei-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fa86zc7)
+
+
+思路:类似字符串最短编辑距离,$dp[i][j] $代表 $s[:i]$ 与 $p[:j]$ 是否可以匹配。s是字符串,p是模式串
+
+- 当p[j]=='*'时:
+  1. dp[i][j-2]:不记这个字符,当作他出现0次  s='' p="c*"
+  2. dp[i-1][j] and s[i]==p[j-1]:  *前面的字符和s这个位置上的字符一样
+  3. dp[i-1][j] and '*'==p[j-1]:  *前面的字符是.,随意匹配 (这两种情况可以视作,当前的p和s已经匹配了,s又加入了一个新字符,看这个新字符和p的最后一个是不是一样)
+
+- 当p[j]!='*'时:
+  1. dp[i-1][j-1] and s[i-1]==p[j-1]:前面的都能匹配,看当前位置的两个字符是不是一样
+  2. dp[i-1][j-1] and '.'==p[j-1]: .随意匹配
+
+实现的时候注意,dp的下标是从1开始,但是s,p的下标是从0开始,公式里面的sp下标要多减个1
+
+
+```python
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        m, n = len(s) + 1, len(p) + 1
+        dp = [[False] * n for _ in range(m)]
+        dp[0][0] = True
+        for j in range(2, n, 2):
+            dp[0][j] = dp[0][j - 2] and p[j - 1] == '*'
+        for i in range(1,m):
+            for j in range(1,n):
+                if p[j-1]=='*':
+                    if dp[i][j-2] or ( s[i-1]==p[j-2] and dp[i-1][j]) or  ( p[j-2]=='.' and dp[i-1][j]):
+                        dp[i][j]=True
+                else:
+                    if ( p[j-1]=='.' and dp[i-1][j-1]) or (( p[j-1]==s[i-1] and dp[i-1][j-1])):
+                        dp[i][j]=True
+
+        return dp[m-1][n-1]
 
 
 ```
 
-[]()
+[剑指 Offer 49. 丑数](https://leetcode.cn/problems/chou-shu-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fa86zc7)
 
 
-思路:
+思路:当前的数位x,下一个数一定是$(a*2,b*3,c*5)$之中最小的一个,而且$(a,b,c)$一定是之前的某个丑数:用三个指针,如果下一个是当前的指针指的数,这个指针加1指向下一个数,刚开始都指向1
+
+```python
+class Solution:
+    def nthUglyNumber(self, n: int) -> int:
+        # 最小堆
+        dp=[0]*n
+        dp[0]=1
+        a,b,c=0,0,0
+        for i in range(1,n):
+            dp[i]=min(dp[a]*2,dp[b]*3,dp[c]*5)
+            if dp[i]==dp[a]*2:
+                a+=1
+            if dp[i]==dp[b]*3:
+                b+=1
+            if dp[i]==dp[c]*5:
+                c+=1
+        
+        return dp[n-1]
+```
+
+[剑指 Offer 60. n个骰子的点数](https://leetcode.cn/problems/nge-tou-zi-de-dian-shu-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fa86zc7)
+
+
+思路:首先要知道,n个筛子可以扔出多少个点:[n,6n],共5*n+1个点,每个点,可以从少一个筛子的情况下得到,f(n,x)表示n个筛子得到x点
+![](https://image.yayan.xyz/20230327180014.png)
+
+
+$f(n,x)=f(n-1,x)+f(n-1,x-2)+,..,f(n-1,x-6)$得到,但是这样会越界
+
+上一层的x,可以贡献给这一层的6个数字
+$f(n,x+k)=f(n-1,x),k \in [1,2,3,4,5,6]$
+
+```python
+class Solution:
+    def dicesProbability(self, n: int) -> List[float]:
+        dp=[[0]*(5*(n+1)+1) for _ in range(n+1)]
+        for k in range(6):
+            dp[1][k]=1/6
+        for i in range(2,n+1):
+            for j in range(5*i+1):
+                for k in range(6):
+                    dp[i][j+k]+=(dp[i-1][j])/6
+        print(dp)
+        return dp[n][:5*n+1]
+```
+### 第三十天
+
+[剑指 Offer 17. 打印从1到最大的n位数](https://leetcode.cn/problems/da-yin-cong-1dao-zui-da-de-nwei-shu-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fa86zc7)
+
+
+思路:一行代码,但是考虑大整数的情况下,可以用深搜
+
+```python
+class Solution:
+    def printNumbers(self, n: int) -> List[int]:
+        right=pow(10,n)
+        return [i for i in range(1,right)]
+```
+
+[剑指 Offer 51. 数组中的逆序对](https://leetcode.cn/problems/shu-zu-zhong-de-ni-xu-dui-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fa86zc7)
+
+
+思路:快排,统计逆序对,用之前的代码
 
 ```python
 
+class Solution:
+    def reversePairs(self, nums: List[int]) -> int:
+        ans=0
+        def mergesort(seq):
+            """归并排序"""
+            if len(seq) <= 1:
+                return seq
+            mid = len(seq) // 2  # 将列表分成更小的两个列表
+            # 分别对左右两个列表进行处理，分别返回两个排序好的列表
+            left = mergesort(seq[:mid])
+            right = mergesort(seq[mid:])
+            # 对排序好的两个列表合并，产生一个新的排序好的列表
+            return merge(left, right)
 
+        def merge(left, right): 
+            """合并两个已排序好的列表，产生一个新的已排序好的列表"""
+            result = []  # 新的已排序好的列表
+            i = 0  # 下标
+            j = 0
+            # 对两个列表中的元素 两两对比。
+            # 将最小的元素，放到result中，并对当前列表下标加1
+            while i < len(left) and j < len(right):
+                # 左边的小,正常
+                if left[i] <= right[j]:
+                    result.append(left[i])
+                    i += 1
+                # 右边的小 ,是逆序,并且左边的往后也构成逆序
+                else:
+                    result.append(right[j])
+                    j += 1
+                    nonlocal ans
+                    ans+=len(left)-i
+            result += left[i:]
+            result += right[j:]
+            return result
+        mergesort(nums)
+        return ans 
 ```
 
-[]()
+### 第三十一天
+[剑指 Offer 14- II. 剪绳子 II](https://leetcode.cn/problems/jian-sheng-zi-ii-lcof/)
 
 
-思路:
+题解思路:根据证明,把n长的划分为长度为3的段时,乘积最大,利用剪绳子1的方法不行,因为$max(dp[i],dp[i-j]*dp[j])$,取模之后没法用,不取模又不准
 
 ```python
-
+class Solution:
+    def cuttingRope(self, n: int) -> int:
+        if n==2:return 1
+        if n==3:return 2
+        if n==4:return 4
+        MOD=1e9+7
+        ans=1
+        while n>4:
+            ans*=3
+            n-=3
+            ans%=MOD
+        return int((ans*n)%MOD)
 
 ```
+[剑指 Offer 43. 1～n 整数中 1 出现的次数](https://leetcode.cn/problems/1nzheng-shu-zhong-1chu-xian-de-ci-shu-lcof/)
 
-[]()
 
-
-思路:
+题解思路:主要是数学推到,对于123456这个数字,假设当前的位是百位他的前面一定就有123*100次1出现,但是他的后面要分情况,456还是会出现100次1,156只出现了56次,056不出现1.后面三种情况可以总结位$min(max(n-100+1,0),100)$,循环遍历每一位数字就行
 
 ```python
+class Solution:
+    def countDigitOne(self, n: int) -> int:
+        k=0
+        ans=0
+        # ppp=pow(10,k)
+        ppp=1
+        while n>=ppp:
+            temp=0
+            front=n//(ppp*10)
+            temp+=(front*ppp)
 
+            back=n%(ppp*10)
+            temp+=min(max(back-ppp+1,0),ppp)
+            ans+=temp
+            k+=1
+            ppp*=10
+        return ans 
 
 ```
+[剑指 Offer 44. 数字序列中某一位的数字](https://leetcode.cn/problems/shu-zi-xu-lie-zhong-mou-yi-wei-de-shu-zi-lcof/)
 
-[]()
 
-
-思路:
+思路:根据规律,前面是1位数长度是10个,2位数长度是$2*10*9$,三位数是$3*100*9$,...,根据这个规律,可以找到n应该是在几位数上,然后除以位数的长度,就找到了在哪个数字上,在对长度取余就是这个数字的第几位
 
 ```python
-
-
-```
-
-[]()
-
-
-思路:
-
-```python
-
-
-```
-
-[]()
-
-
-思路:
-
-```python
-
-
-```
-
-[]()
-
-
-思路:
-
-```python
-
+class Solution:
+    def findNthDigit(self, n: int) -> int:
+        if n<10:return n
+        # 10
+        # 20*9
+        # 300*9
+        # 4000*9
+        n-=10
+        index=2
+        while n:
+            temp=index*pow(10,index-1)*9
+            if n<temp:
+                break
+            n-=temp
+            index+=1
+        a=n//index
+        b=n%index
+        # 找到所在的数字
+        num=pow(10,index-1)+a
+        return int(str(num)[b])
 
 ```
 
-[]()
+### 总结
 
 
-思路:
-
-```python
-
-
-```
 
