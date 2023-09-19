@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Git学习笔记 | Gladdduck</title>
+  <meta name="description" content="😍😍😍  流程   远程仓库(github) 本地仓库(本机) 缓冲区(防止误提交) 工作区(写代码的地方)   github用户名密码存储在用户管理中的管理Windows凭据. git status 查看文件当前所处位置    gitignore 忽略文件 根目录创建  .gitignore  每个配置项单独一行 可以有空行,方便阅读 可以是文明目录名,路径或者匹配模式 如果一个文件已经被">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git学习笔记">
+<meta property="og:url" content="https://gladdduck.github.io/2023/09/09/Git/index.html">
+<meta property="og:site_name" content="Gladdduck">
+<meta property="og:description" content="😍😍😍  流程   远程仓库(github) 本地仓库(本机) 缓冲区(防止误提交) 工作区(写代码的地方)   github用户名密码存储在用户管理中的管理Windows凭据. git status 查看文件当前所处位置    gitignore 忽略文件 根目录创建  .gitignore  每个配置项单独一行 可以有空行,方便阅读 可以是文明目录名,路径或者匹配模式 如果一个文件已经被">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gladdduck.github.io/2023/09/09/Git/image/Git/1694228618814.png">
+<meta property="og:image" content="https://gladdduck.github.io/2023/09/09/Git/image/Git/1695030753653.png">
+<meta property="og:image" content="https://gladdduck.github.io/2023/09/09/Git/image/Git/1695086367249.png">
+<meta property="og:image" content="https://gladdduck.github.io/2023/09/09/Git/image/Git/1695087977610.png">
+<meta property="og:image" content="https://github-stats.ubrong.com/api?username=gladdduck&amp;show_icons=true&amp;theme=tokyonight">
+<meta property="og:image" content="https://github-stats.ubrong.com/api/top-langs/?username=gladdduck&amp;layout=compact&amp;theme=tokyonight">
+<meta property="og:image" content="https://github-stats.ubrong.com/api/pin/?username=gladdduck&amp;repo=HotelManagement&amp;theme=dark">
+<meta property="og:image" content="https://profile-counter.glitch.me/%7Bgladdduck%7D/count.svg">
+<meta property="og:image" content="https://stats.justsong.cn/api/github?username=gladdduck&amp;theme=dark&amp;lang=zh-CN">
+<meta property="og:image" content="https://stats.justsong.cn/api/csdn?id=weixin_44151595&amp;theme=dark&amp;lang=zh-CN">
+<meta property="og:image" content="https://stats.justsong.cn/api/bilibili/?id=384115063&amp;theme=dark&amp;lang=zh-CN">
+<meta property="og:image" content="https://badgen.net/badge/php/8.1/orange?icon=php">
+<meta property="og:image" content="https://badgen.net/badge/python/3.1.6/green?icon=packagephobia">
+<meta property="article:published_time" content="2023-09-09T02:24:47.503Z">
+<meta property="article:modified_time" content="2023-09-19T02:16:53.017Z">
+<meta property="article:author" content="syxue">
+<meta property="article:tag" content="Git 重要">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gladdduck.github.io/2023/09/09/Git/image/Git/1694228618814.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://gladdduck.github.io/2023/09/09/Git/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body class="main-center theme-green" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/gladdduck" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">gladdduck</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> SuZhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>分享所思所见所想,欢迎留言交流!6666</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">hexo博客配置</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">19</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/">快捷命令</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blazor/" rel="tag">Blazor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Cypher学习笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataloader/" rel="tag">Dataloader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataset/" rel="tag">Dataset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/" rel="tag">FFT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git-%E9%87%8D%E8%A6%81/" rel="tag">Git 重要</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Linux快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Neo4j快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Python学习笔记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sampler/" rel="tag">Sampler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">Vscode连接阿里云服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collate-fn/" rel="tag">collate_fn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-Time-out/" rel="tag">git Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-Time-out/" rel="tag">github Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" rel="tag">hexo博客配置gitalk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" rel="tag">hexo博客配置picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" rel="tag">hexo博客配置pure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" rel="tag">python3 标准库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB%E8%AE%BA%E6%96%87/" rel="tag">垃圾分类论文</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">多个域名访问同一个服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B9%98%E6%B3%95/" rel="tag">多项式乘法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" rel="tag">快速傅里叶变换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" rel="tag">知识图谱表示</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">算法刷题笔记</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E8%BF%B0/" rel="tag">综述</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">蓝桥杯 算法刷题笔记</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Blazor/" style="font-size: 13px;">Blazor</a> <a href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13px;">Cypher学习笔记</a> <a href="/tags/Dataloader/" style="font-size: 13px;">Dataloader</a> <a href="/tags/Dataset/" style="font-size: 13px;">Dataset</a> <a href="/tags/FFT/" style="font-size: 13px;">FFT</a> <a href="/tags/Git-%E9%87%8D%E8%A6%81/" style="font-size: 13px;">Git 重要</a> <a href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Linux快捷命令</a> <a href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Neo4j快捷命令</a> <a href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13.5px;">Python学习笔记</a> <a href="/tags/Sampler/" style="font-size: 13px;">Sampler</a> <a href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">Vscode连接阿里云服务器</a> <a href="/tags/collate-fn/" style="font-size: 13px;">collate_fn</a> <a href="/tags/git-Time-out/" style="font-size: 13px;">git Time out</a> <a href="/tags/github-Time-out/" style="font-size: 13px;">github Time out</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" style="font-size: 13px;">hexo博客配置gitalk</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" style="font-size: 13px;">hexo博客配置picgo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" style="font-size: 13px;">hexo博客配置pure</a> <a href="/tags/neo4j%E5%AE%89%E8%A3%85/" style="font-size: 13px;">neo4j安装</a> <a href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 13.5px;">python3 标准库</a> <a href="/tags/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB%E8%AE%BA%E6%96%87/" style="font-size: 13px;">垃圾分类论文</a> <a href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">多个域名访问同一个服务器</a> <a href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B9%98%E6%B3%95/" style="font-size: 13px;">多项式乘法</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 13px;">快捷键</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" style="font-size: 13px;">快速傅里叶变换</a> <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 13px;">排序算法</a> <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="font-size: 13px;">搭建博客</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" style="font-size: 13px;">知识图谱表示</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" style="font-size: 14px;">算法刷题笔记</a> <a href="/tags/%E7%BB%BC%E8%BF%B0/" style="font-size: 13px;">综述</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" style="font-size: 13px;">蓝桥杯 算法刷题笔记</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/09/16/C#-Blazor%E7%AC%94%E8%AE%B0/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/16/C#-Blazor%E7%AC%94%E8%AE%B0/" class="title">Blazor学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-16T05:56:55.560Z" itemprop="datePublished">2023-09-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/09/09/Git/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/09/Git/" class="title">Git学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-09T02:24:47.503Z" itemprop="datePublished">2023-09-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/06/04/AcWing%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE,/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/04/AcWing%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE,/" class="title">AcWing算法基础课</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-04T14:26:33.383Z" itemprop="datePublished">2023-06-04</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/06/03/%E5%9E%83%E5%9C%BE%E6%A3%80%E6%B5%8B%E4%BC%9A%E8%AE%AE/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/03/%E5%9E%83%E5%9C%BE%E6%A3%80%E6%B5%8B%E4%BC%9A%E8%AE%AE/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-03T07:02:51.042Z" itemprop="datePublished">2023-06-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/04/15/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/04/15/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB/" class="title">垃圾分类论文</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-04-15T08:51:40.893Z" itemprop="datePublished">2023-04-15</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B"><span class="toc-number">1.</span> <span class="toc-text"> 流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gitignore-%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text"> gitignore 忽略文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C"><span class="toc-number">3.</span> <span class="toc-text"> 分支操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#merge-%E5%90%88%E5%B9%B6"><span class="toc-number">4.</span> <span class="toc-text"> Merge 合并</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E5%9B%9E%E9%80%80"><span class="toc-number">5.</span> <span class="toc-text"> 版本回退</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%81%A2%E5%A4%8D"><span class="toc-number">6.</span> <span class="toc-text"> 文件恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97"><span class="toc-number">7.</span> <span class="toc-text"> 查看日志</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E7%AD%BE%E7%AE%A1%E7%90%86"><span class="toc-number">8.</span> <span class="toc-text"> 标签管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fork"><span class="toc-number">9.</span> <span class="toc-text"> fork</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E5%BA%93%E4%B8%8E%E8%BF%9C%E7%A8%8B%E5%BA%93%E8%BF%9B%E8%A1%8C%E5%85%B3%E8%81%94"><span class="toc-number">10.</span> <span class="toc-text"> 本地库与远程库进行关联</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#github%E4%BB%93%E5%BA%93%E7%BE%8E%E5%8C%96"><span class="toc-number">11.</span> <span class="toc-text"> github仓库美化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E7%A8%8B-2"><span class="toc-number">12.</span> <span class="toc-text"> 流程</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-Git" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Git学习笔记
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/09/09/Git/" class="article-date">
+	  <time datetime="2023-09-09T02:24:47.503Z" itemprop="datePublished">2023-09-09</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Git-%E9%87%8D%E8%A6%81/" rel="tag">Git 重要</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/09/09/Git/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.2k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 4(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>😍😍😍</p>
+<h3 id="流程"><a class="markdownIt-Anchor" href="#流程"></a> 流程</h3>
+<p><img src="image/Git/1694228618814.png" alt="1694228618814" /></p>
+<ul>
+<li>远程仓库(github)</li>
+<li>本地仓库(本机)</li>
+<li>缓冲区(防止误提交)</li>
+<li>工作区(写代码的地方)</li>
+</ul>
+<blockquote>
+<p>github用户名密码存储在用户管理中的管理Windows凭据.<br />
+git status 查看文件当前所处位置</p>
+</blockquote>
+<hr />
+<h3 id="gitignore-忽略文件"><a class="markdownIt-Anchor" href="#gitignore-忽略文件"></a> gitignore 忽略文件</h3>
+<p><code>根目录创建  .gitignore</code></p>
+<ol>
+<li>每个配置项单独一行</li>
+<li>可以有空行,方便阅读</li>
+<li>可以是文明目录名,路径或者匹配模式</li>
+<li>如果一个文件已经被提交过了,再ignore没有用</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">模式匹配</span><br><span class="line"><span class="comment"># 用于注释  \用于转义</span></span><br><span class="line"></span><br><span class="line">* 匹配任意字符任意次  ?匹配任意字符1次  但都不匹配/</span><br><span class="line"></span><br><span class="line">[] 用于匹配列表里面的一个字符</span><br><span class="line"></span><br><span class="line">**用于匹配多级目录</span><br><span class="line"></span><br><span class="line">/用户分隔目录</span><br><span class="line">    1)如果/在开头,则匹配根目录下的文件, 否则 所有子文件夹里的文件都会匹配</span><br><span class="line">    2)/ 在末尾时, 只匹配目录, 否则同名的文件和目录都会匹配</span><br><span class="line"></span><br><span class="line">! 用于重新包含某个文件, 如果这个文件的父级目录被排除了,那么它不回被包含了</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">例:</span><br><span class="line">1) 忽略所哟内容   </span><br><span class="line">    *</span><br><span class="line">2) 忽略所有目录   </span><br><span class="line">    */</span><br><span class="line">3) 忽略public 目录下的某个文件   </span><br><span class="line">    public/*</span><br><span class="line">    !public/xxxxxxx</span><br><span class="line">4) 只保留public目录下的某个文件</span><br><span class="line">    /*</span><br><span class="line">    !/public/</span><br><span class="line">    /public/*</span><br><span class="line">    !/public/a?z.*</span><br><span class="line"></span><br><span class="line">如何检查自己写的ignore规则是否对</span><br><span class="line"></span><br><span class="line">git check-ignore [-v] &#123;文件或目录路径&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="分支操作"><a class="markdownIt-Anchor" href="#分支操作"></a> 分支操作</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git branch -a  查看所有分支</span><br><span class="line">git branch dev  创建分支</span><br><span class="line">git checkout dev 切换分支</span><br><span class="line">git branch -d dev 删除分支</span><br><span class="line">git branch -m 旧名称 新名称 重命名分支</span><br><span class="line">git checkout -b dev 创建并切换分支</span><br><span class="line">git merge dev 合并分支  切换到主分支上,然后再合并子分支,将dev合并到当前分支</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将本地分支推送到远程</span></span><br><span class="line">git push origin --all</span><br><span class="line">git push origin 分支名</span><br><span class="line">git push origin -d 分支名  删除远端分支</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>修改分支名称</code>:<a target="_blank" rel="noopener" href="https://blog.jiabh.cn/2021/rename-branch-from-main-to-master/#:~:text=%E5%8F%AF%E4%BB%A5%E7%9C%8B%E5%88%B0%EF%BC%9A-,%E5%9C%A8GitHub%E4%B8%8A%E5%B0%86%E9%BB%98%E8%AE%A4%E5%88%86%E6%94%AF%E4%BF%AE%E6%94%B9%E4%B8%BA%20master,%E4%BA%86%E9%BB%98%E8%AE%A4%E5%88%86%E6%94%AF%E7%9A%84%E4%BF%AE%E6%94%B9%E3%80%82">参考</a></p>
+<hr />
+<h3 id="merge-合并"><a class="markdownIt-Anchor" href="#merge-合并"></a> Merge 合并</h3>
+<p><code>修改之前尽量先pull一下</code></p>
+<ul>
+<li>远程仓库已更新,本地没pull,直接修改,之后push,会显示push失败,会提示git pull.</li>
+<li>在git pull之后,</li>
+<li>
+<ol>
+<li>可能会有自动合并,auto-merging, 修改同一文件不同位置</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>需要手动合并,此时解决冲突需要和冲突者商量,合并时会新建一个临时分支</li>
+</ol>
+</li>
+<li>,修改之后重新提交,add commit push,修改同一文件同一位置</li>
+<li><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;HEAD  冲突开始</code></li>
+<li><code>=============== 不同的内容分隔符</code></li>
+<li><code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;冲突结束</code></li>
+</ul>
+<hr />
+<h3 id="版本回退"><a class="markdownIt-Anchor" href="#版本回退"></a> 版本回退</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 整个文件夹回退</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看历史记录,这个说明commit里面的说明一定要写详细,只会显示当前提交之前的版本</span></span><br><span class="line">git  <span class="built_in">log</span> --oneline</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回退到某一个版本,后面提交的就看不到了</span></span><br><span class="line">git reset --hard 输入版本号</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看从现在到最新的commit id</span></span><br><span class="line">git reflog </span><br><span class="line"></span><br><span class="line"><span class="comment"># 回到最新的版本</span></span><br><span class="line">git reset --hard commit <span class="built_in">id</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 单个文件回退,提交修正</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 对错误文件修正,提交时漏交文件,提交信息修正,长开发中小提交过多</span></span><br><span class="line"><span class="comment"># 修正之后不会在log中显示</span></span><br><span class="line">git commit --amend -m <span class="string">&quot;提交说明&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="文件恢复"><a class="markdownIt-Anchor" href="#文件恢复"></a> 文件恢复</h3>
+<ol>
+<li>
+<p>修改或删除之后,没有add</p>
+<ul>
+<li>git checkout 文件名</li>
+<li>会还原成上一次add的文件</li>
+</ul>
+</li>
+<li>
+<p>修改或删除之后,add了,但没有commit</p>
+<ul>
+<li>git checkout commit_id 文件名</li>
+</ul>
+</li>
+<li>
+<p>修改或删除之后,已commit</p>
+<ul>
+<li>git checkout commit_id 文件名</li>
+</ul>
+</li>
+</ol>
+<p><img src="image/Git/1695030753653.png" alt="1695030753653" /></p>
+<hr />
+<h3 id="查看日志"><a class="markdownIt-Anchor" href="#查看日志"></a> 查看日志</h3>
+<p><code>普通日志</code><br />
+<img src="image/Git/1695086367249.png" alt="1695086367249" /></p>
+<p><code>引用日志</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 项目的最后一根稻草</span></span><br><span class="line"><span class="comment"># 本地日志,不会上传到远端,会把文件回退修正的记录也列出来</span></span><br><span class="line">git reflog</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr />
+<h3 id="标签管理"><a class="markdownIt-Anchor" href="#标签管理"></a> 标签管理</h3>
+<p><img src="image/Git/1695087977610.png" alt="1695087977610" /></p>
+<p>发行: 在github上create a new release</p>
+<h3 id="fork"><a class="markdownIt-Anchor" href="#fork"></a> fork</h3>
+<p>复制别人的仓库<br />
+然后克隆到本地<br />
+修改提交…<br />
+向原仓库发生和并请求,contribute,open a pull request<br />
+等待原始仓库同意合并</p>
+<hr />
+<h3 id="本地库与远程库进行关联"><a class="markdownIt-Anchor" href="#本地库与远程库进行关联"></a> 本地库与远程库进行关联</h3>
+<ol>
+<li>github新建仓库</li>
+<li>本地git init初始化</li>
+<li>git remote add origin https://  关联远程</li>
+<li>git push -u origin 分支名称</li>
+<li>如果添加第二个远程仓库,修改origin为一个新的</li>
+<li>*git remote 参数,设置远程仓库的信息  -h查看命令帮助</li>
+<li>git remote -v 查看仓库</li>
+<li>git push 远端库名称 分支名称</li>
+</ol>
+<hr />
+<h3 id="github仓库美化"><a class="markdownIt-Anchor" href="#github仓库美化"></a> github仓库美化</h3>
+<p><img src="https://github-stats.ubrong.com/api?username=gladdduck&amp;show_icons=true&amp;theme=tokyonight" alt="GitHub账户信息统计" /></p>
+<p><img src="https://github-stats.ubrong.com/api/top-langs/?username=gladdduck&amp;layout=compact&amp;theme=tokyonight" alt="GitHub账户最常用语言" /></p>
+<p><img src="https://github-stats.ubrong.com/api/pin/?username=gladdduck&amp;repo=HotelManagement&amp;theme=dark" alt="GitHub仓库信息卡片" /></p>
+<p><img src="https://profile-counter.glitch.me/%7Bgladdduck%7D/count.svg" alt="Visitor Count" /></p>
+<p><img src="https://stats.justsong.cn/api/github?username=gladdduck&amp;theme=dark&amp;lang=zh-CN" alt="github统计" /></p>
+<p><img src="https://stats.justsong.cn/api/csdn?id=weixin_44151595&amp;theme=dark&amp;lang=zh-CN" alt="CSDN统计" /></p>
+<p><img src="https://stats.justsong.cn/api/bilibili/?id=384115063&amp;theme=dark&amp;lang=zh-CN" alt="B站统计" /></p>
+<p><img src="https://badgen.net/badge/php/8.1/orange?icon=php" alt="tip" /></p>
+<p><img src="https://badgen.net/badge/python/3.1.6/green?icon=packagephobia" alt="tip" /></p>
+<p><a target="_blank" rel="noopener" href="https://badgen.net/">图标修改</a></p>
+<hr />
+<h3 id="流程-2"><a class="markdownIt-Anchor" href="#流程-2"></a> 流程</h3>
+<p>git发布流程<br />
+分支合并发布流程：<br />
+git add .			# 将所有新增、修改或删除的文件添加到暂存区<br />
+git commit -m “版本发布” # 将暂存区的文件发版<br />
+git status 			# 查看是否还有文件没有发布上去<br />
+git checkout test	# 切换到要合并的分支<br />
+git pull			# 在test 分支上拉取最新代码，避免冲突<br />
+git merge dev   	# 在test 分支上合并 dev 分支上的代码<br />
+git push			# 上传test分支代码</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://gladdduck.github.io/2023/09/09/Git/" title="Git学习笔记" target="_blank" rel="external">https://gladdduck.github.io/2023/09/09/Git/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/gladdduck" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/gladdduck" target="_blank"><span class="text-dark">gladdduck</span><small class="ml-1x"></small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/09/16/C#-Blazor%E7%AC%94%E8%AE%B0/" title="Blazor学习笔记"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/06/04/AcWing%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE,/" title="AcWing算法基础课"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.jpg" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '644a1091cfd20b8f33ef',
+    clientSecret: '4c5cc91dbfe067c804fcef958817d41acc9ba545',
+    repo: 'gladdduck.github.io',
+    owner: 'gladdduck',
+    admin: ['gladdduck'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: '',
+    proxy: 'https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token',
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>
