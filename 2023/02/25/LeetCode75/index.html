@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>LeetCode75 | Hexo</title>
+  <meta name="description" content="LeetCode75学习计划  第一天 1480.一维数组的动态和 思路:前缀和 12345678# python的内置数据方法# https:&#x2F;&#x2F;docs.python.org&#x2F;3&#x2F;library&#x2F;itertools.html# accumulate([1,2,3,4,5]) --&gt; 1 3 6 10 15class Solution:    def runningSum(self, n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode75">
+<meta property="og:url" content="https://gladdduck.github.io/2023/02/25/LeetCode75/index.html">
+<meta property="og:site_name" content="Gladdduck">
+<meta property="og:description" content="LeetCode75学习计划  第一天 1480.一维数组的动态和 思路:前缀和 12345678# python的内置数据方法# https:&#x2F;&#x2F;docs.python.org&#x2F;3&#x2F;library&#x2F;itertools.html# accumulate([1,2,3,4,5]) --&gt; 1 3 6 10 15class Solution:    def runningSum(self, n">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-02-25T02:15:22.077Z">
+<meta property="article:modified_time" content="2023-02-25T03:47:06.966Z">
+<meta property="article:author" content="syxue">
+<meta property="article:tag" content="算法刷题笔记">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://gladdduck.github.io/2023/02/25/LeetCode75/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/cofess" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">hexo博客配置</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/">快捷命令</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blazor/" rel="tag">Blazor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blazor-Localization/" rel="tag">Blazor Localization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Cypher学习笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataloader/" rel="tag">Dataloader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataset/" rel="tag">Dataset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/" rel="tag">FFT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git-%E9%87%8D%E8%A6%81/" rel="tag">Git 重要</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Linux快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Neo4j快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Python学习笔记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sampler/" rel="tag">Sampler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">Vscode连接阿里云服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collate-fn/" rel="tag">collate_fn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-Time-out/" rel="tag">git Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-Time-out/" rel="tag">github Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" rel="tag">hexo博客配置gitalk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" rel="tag">hexo博客配置picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" rel="tag">hexo博客配置pure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" rel="tag">python3 标准库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB%E8%AE%BA%E6%96%87/" rel="tag">垃圾分类论文</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">多个域名访问同一个服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B9%98%E6%B3%95/" rel="tag">多项式乘法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" rel="tag">快速傅里叶变换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" rel="tag">知识图谱表示</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">算法刷题笔记</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E8%BF%B0/" rel="tag">综述</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">蓝桥杯 算法刷题笔记</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Blazor/" style="font-size: 13px;">Blazor</a> <a href="/tags/Blazor-Localization/" style="font-size: 13px;">Blazor Localization</a> <a href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13px;">Cypher学习笔记</a> <a href="/tags/Dataloader/" style="font-size: 13px;">Dataloader</a> <a href="/tags/Dataset/" style="font-size: 13px;">Dataset</a> <a href="/tags/FFT/" style="font-size: 13px;">FFT</a> <a href="/tags/Git-%E9%87%8D%E8%A6%81/" style="font-size: 13px;">Git 重要</a> <a href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Linux快捷命令</a> <a href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Neo4j快捷命令</a> <a href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13.5px;">Python学习笔记</a> <a href="/tags/Sampler/" style="font-size: 13px;">Sampler</a> <a href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">Vscode连接阿里云服务器</a> <a href="/tags/collate-fn/" style="font-size: 13px;">collate_fn</a> <a href="/tags/git-Time-out/" style="font-size: 13px;">git Time out</a> <a href="/tags/github-Time-out/" style="font-size: 13px;">github Time out</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" style="font-size: 13px;">hexo博客配置gitalk</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" style="font-size: 13px;">hexo博客配置picgo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" style="font-size: 13px;">hexo博客配置pure</a> <a href="/tags/neo4j%E5%AE%89%E8%A3%85/" style="font-size: 13px;">neo4j安装</a> <a href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 13.5px;">python3 标准库</a> <a href="/tags/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB%E8%AE%BA%E6%96%87/" style="font-size: 13px;">垃圾分类论文</a> <a href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">多个域名访问同一个服务器</a> <a href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B9%98%E6%B3%95/" style="font-size: 13px;">多项式乘法</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 13px;">快捷键</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" style="font-size: 13px;">快速傅里叶变换</a> <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 13px;">排序算法</a> <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="font-size: 13px;">搭建博客</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" style="font-size: 13px;">知识图谱表示</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" style="font-size: 14px;">算法刷题笔记</a> <a href="/tags/%E7%BB%BC%E8%BF%B0/" style="font-size: 13px;">综述</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" style="font-size: 13px;">蓝桥杯 算法刷题笔记</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/10/21/Few-shotDetection%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-10-21T05:40:02.230Z" itemprop="datePublished">2023-10-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/10/09/Blazor%E4%B8%AD%E7%9A%84Localization/" class="title">Blazor中的Localization</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-10-09T11:38:30.993Z" itemprop="datePublished">2023-10-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/16/C#-Blazor%E7%AC%94%E8%AE%B0/" class="title">Blazor学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-16T05:56:55.560Z" itemprop="datePublished">2023-09-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/09/Git/" class="title">Git学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-09T02:24:47.503Z" itemprop="datePublished">2023-09-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/04/AcWing%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE,/" class="title">AcWing算法基础课</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-04T14:26:33.383Z" itemprop="datePublished">2023-06-04</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#leetcode75%E5%AD%A6%E4%B9%A0%E8%AE%A1%E5%88%92"><span class="toc-number">1.</span> <span class="toc-text"> LeetCode75学习计划</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%A4%A9"><span class="toc-number">1.1.</span> <span class="toc-text"> 第一天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E5%A4%A9"><span class="toc-number">1.2.</span> <span class="toc-text"> 第二天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E5%A4%A9"><span class="toc-number">1.3.</span> <span class="toc-text"> 第三天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E5%A4%A9"><span class="toc-number">1.4.</span> <span class="toc-text"> 第四天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E5%A4%A9"><span class="toc-number">1.5.</span> <span class="toc-text"> 第五天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E5%A4%A9"><span class="toc-number">1.6.</span> <span class="toc-text"> 第六天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E5%A4%A9"><span class="toc-number">1.7.</span> <span class="toc-text"> 第七天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%85%AB%E5%A4%A9"><span class="toc-number">1.8.</span> <span class="toc-text"> 第八天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B9%9D%E5%A4%A9"><span class="toc-number">1.9.</span> <span class="toc-text"> 第九天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E5%A4%A9"><span class="toc-number">1.10.</span> <span class="toc-text"> 第十天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%80%E5%A4%A9"><span class="toc-number">1.11.</span> <span class="toc-text"> 第十一天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%A4%A9"><span class="toc-number">1.12.</span> <span class="toc-text"> 第十二天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%89%E5%A4%A9"><span class="toc-number">1.13.</span> <span class="toc-text"> 第十三天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E5%9B%9B%E5%A4%A9"><span class="toc-number">1.14.</span> <span class="toc-text"> 第十四天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%8D%81%E4%BA%94%E5%A4%A9"><span class="toc-number">1.15.</span> <span class="toc-text"> 第十五天</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.16.</span> <span class="toc-text"> 总结</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-LeetCode75" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LeetCode75
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/02/25/LeetCode75/" class="article-date">
+	  <time datetime="2023-02-25T02:15:22.077Z" itemprop="datePublished">2023-02-25</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">算法刷题笔记</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/02/25/LeetCode75/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="leetcode75学习计划"><a class="markdownIt-Anchor" href="#leetcode75学习计划"></a> LeetCode75学习计划</h2>
+<h3 id="第一天"><a class="markdownIt-Anchor" href="#第一天"></a> 第一天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/running-sum-of-1d-array/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">1480.一维数组的动态和</a></p>
+<p>思路:前缀和</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python的内置数据方法</span></span><br><span class="line"><span class="comment"># https://docs.python.org/3/library/itertools.html</span></span><br><span class="line"><span class="comment"># accumulate([1,2,3,4,5]) --&gt; 1 3 6 10 15</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">runningSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span>(accumulate(nums))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-pivot-index/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">724.寻找数组的中心下标</a></p>
+<p>思路: 先求前缀和,然后遍历下标,利用前缀和计算下标两边的和,左右两端的位置需要判断一下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pivotIndex</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        pre_sum=<span class="built_in">list</span>(accumulate(nums))</span><br><span class="line">        length=<span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">if</span> pre_sum[length-<span class="number">1</span>]-pre_sum[<span class="number">0</span>]==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,length-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> pre_sum[index-<span class="number">1</span>]==pre_sum[length-<span class="number">1</span>]-pre_sum[index]:</span><br><span class="line">                <span class="keyword">return</span> index</span><br><span class="line">        <span class="comment"># 返回最左边下标,防止有x,x,x,x,..0,0,0,0的情况</span></span><br><span class="line">        <span class="keyword">if</span> pre_sum[length-<span class="number">2</span>]==<span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> length-<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="第二天"><a class="markdownIt-Anchor" href="#第二天"></a> 第二天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/isomorphic-strings/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">205. 同构字符串</a></p>
+<p>思路:每个字符串对应位置的字母是一一对应的,用字典.<br />
+两个方向,一个是s对t的字母是一一对应,一个是t对s的字母是一一对应</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isIsomorphic1</span>(<span class="params">self, s: <span class="built_in">str</span>, t: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        dic=defaultdict(<span class="built_in">str</span>)</span><br><span class="line">        <span class="keyword">for</span> index,item <span class="keyword">in</span> <span class="built_in">enumerate</span>(s):</span><br><span class="line">            <span class="comment"># 检查s对t</span></span><br><span class="line">            <span class="keyword">if</span> item <span class="keyword">not</span> <span class="keyword">in</span> dic:</span><br><span class="line">                <span class="comment"># 检擦t对s</span></span><br><span class="line">                <span class="keyword">if</span> t[index] <span class="keyword">not</span> <span class="keyword">in</span> dic.values():</span><br><span class="line">                    dic[item]=t[index]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> dic[item]!=t[index]:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isIsomorphic</span>(<span class="params">self, s: <span class="built_in">str</span>, t: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">s,t</span>):</span><br><span class="line">            dic=defaultdict(<span class="built_in">str</span>)</span><br><span class="line">            <span class="keyword">for</span> index,item <span class="keyword">in</span> <span class="built_in">enumerate</span>(s):</span><br><span class="line">                <span class="keyword">if</span> item <span class="keyword">not</span> <span class="keyword">in</span> dic:</span><br><span class="line">                    dic[item]=t[index]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">if</span> dic[item]!=t[index]:</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> check(s,t) <span class="keyword">and</span> check(t,s)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/is-subsequence/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">392. 判断子序列</a></p>
+<p>思路:判断子序列,两个字符串不同位置的比较,双指针,ab指针,如果对应字符一样,都前进,如果不一样,指向母字符串的前进</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isSubsequence</span>(<span class="params">self, s: <span class="built_in">str</span>, t: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        length=<span class="built_in">len</span>(s)</span><br><span class="line">        <span class="keyword">if</span> length==<span class="number">0</span>:<span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        index=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> t:</span><br><span class="line">            <span class="keyword">if</span> item==s[index]:</span><br><span class="line">                index+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> index==length:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>332周赛</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-the-number-of-fair-pairs/">6355. 统计公平数对的数目</a><br />
+思路:对数组排序,对每一个数,用二分找到大小在lower和upper之间的下标,如果这个数也在下标中就-1,最后结果除2,(i,j)(j,i)都算了</p>
+<p>bilibili:两个数的和,枚举一个数,用其他方法处理另一个数</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/substring-xor-queries/">6356. 子字符串异或查询</a><br />
+思路:对每一个查询,a^b=c =&gt; a=c^b,然后把a转换成二进制字符串,剩下的就是在字符串中找子字符串在起始位置</p>
+<p>bilibili:预处理s中的二进制,把子字符串转换成数字存进dict,直接找a</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsequence-with-the-minimum-score/">6357. 最少得分子序列</a><br />
+没做出来思路:计算最长公共子序列,统计不在最长公共子序列中的下标,就是要删除的下标(可能错在需要找到最左边的最长子序列)</p>
+<p>bilibili:<br />
+1.删除[left,right]中间的几个和删除全部是一样的<br />
+2.枚举s,把s从中间划分,前面匹配t的前部分,后面匹配t的后部分<br />
+3.中间就是可以删掉的部分,找到最小的<br />
+4.实现的时候,先从后往前匹配s和t(全部匹配),然后从前往后,找到相应的答案</p>
+<h3 id="第三天"><a class="markdownIt-Anchor" href="#第三天"></a> 第三天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-two-sorted-lists/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">21. 合并两个有序链表</a></p>
+<p>思路:双指针比较交替,问题就是开头的细节,一种是用一个空链表头,一种就是先比较ab的大小直接赋值ab的头</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mergeTwoLists</span>(<span class="params">self, a: <span class="type">Optional</span>[ListNode], b: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> a:<span class="keyword">return</span> b</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> b:<span class="keyword">return</span> a</span><br><span class="line">        <span class="comment"># 空表头</span></span><br><span class="line">        prehead=ListNode(<span class="number">0</span>)</span><br><span class="line">        pre=prehead</span><br><span class="line">        <span class="keyword">while</span> a <span class="keyword">and</span> b:</span><br><span class="line">            <span class="keyword">if</span> a.val&gt;b.val:</span><br><span class="line">                pre.<span class="built_in">next</span>=b</span><br><span class="line">                b=b.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                pre.<span class="built_in">next</span>=a</span><br><span class="line">                a=a.<span class="built_in">next</span></span><br><span class="line">            pre=pre.<span class="built_in">next</span></span><br><span class="line">        pre.<span class="built_in">next</span>=a <span class="keyword">if</span> a <span class="keyword">else</span> b</span><br><span class="line">        <span class="keyword">return</span> prehead.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">206. 反转链表</a></p>
+<p>思路:反转链表需要标记连续的三个节点,a,b,c  把b指向a,然后a,b,c依次向后移动一个,注意边界情况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseList</span>(<span class="params">self, a: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> a:<span class="keyword">return</span> a</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> a.<span class="built_in">next</span>:<span class="keyword">return</span> a </span><br><span class="line">        b=a.<span class="built_in">next</span></span><br><span class="line">        c=a.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">        <span class="comment"># 这个地方不断掉会死循环</span></span><br><span class="line">        a.<span class="built_in">next</span>=<span class="literal">None</span></span><br><span class="line">        <span class="keyword">while</span> b:</span><br><span class="line">            b.<span class="built_in">next</span>=a</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> c:<span class="keyword">break</span></span><br><span class="line">            a=b</span><br><span class="line">            b=c</span><br><span class="line">            c=c.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> b</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="第四天"><a class="markdownIt-Anchor" href="#第四天"></a> 第四天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/middle-of-the-linked-list/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">876. 链表的中间结点</a></p>
+<p>思路:把链表存成数组,找数组长度一半的节点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">middleNode</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        nums=[]</span><br><span class="line">        <span class="keyword">while</span> head:</span><br><span class="line">            nums.append(head)</span><br><span class="line">            head=head.<span class="built_in">next</span></span><br><span class="line">        length=<span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">return</span> nums[length//<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<p>其他解法:1.第一次计算长度,第二次找节点  2.快慢指针</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle-ii/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">142. 环形链表 II</a></p>
+<p>自己错误思路:快慢指针,只能检查是否有环,找不到入口</p>
+<p>思路:1.字典存已经走过的  2.快慢指针经过数学推导计算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">detectCycle</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        nums=<span class="built_in">dict</span>()</span><br><span class="line">        <span class="keyword">while</span> head:</span><br><span class="line">            <span class="keyword">if</span> head <span class="keyword">in</span> nums.keys():</span><br><span class="line">                <span class="keyword">return</span> head</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                nums[head]=<span class="number">1</span></span><br><span class="line">                head=head.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> head</span><br></pre></td></tr></table></figure>
+<h3 id="第五天"><a class="markdownIt-Anchor" href="#第五天"></a> 第五天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">121. 买卖股票的最佳时机</a></p>
+<p>思路:如果今天减去昨天的利润,加上之前的利润小于0,说明今天是巨亏的,不如之前的不买,买今天的,如果今天减去昨天的利润,加上之前的利润仍然大于0,记录一下,继续往后加,说不定会涨</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxProfit</span>(<span class="params">self, prices: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        ans=<span class="number">0</span></span><br><span class="line">        profit=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,<span class="built_in">len</span>(prices)):</span><br><span class="line">            <span class="keyword">if</span> prices[index]-prices[index-<span class="number">1</span>]+profit&lt;<span class="number">0</span>:</span><br><span class="line">                profit=<span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                profit+=prices[index]-prices[index-<span class="number">1</span>]</span><br><span class="line">            ans=<span class="built_in">max</span>(ans,profit)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-palindrome/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">409. 最长回文串</a></p>
+<p>思路:统计字符的数量,注意加上一个奇数就行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestPalindrome</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        m=defaultdict(<span class="built_in">int</span>)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> s:</span><br><span class="line">            m[item]+=<span class="number">1</span></span><br><span class="line">        ans=<span class="number">0</span></span><br><span class="line">        flag=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> k,v <span class="keyword">in</span> m.items():</span><br><span class="line">            <span class="keyword">if</span> v&amp;<span class="number">1</span>:</span><br><span class="line">                 flag=<span class="number">1</span></span><br><span class="line">                 v-=<span class="number">1</span></span><br><span class="line">            ans+=v</span><br><span class="line">        <span class="keyword">return</span> ans+flag</span><br></pre></td></tr></table></figure>
+<h3 id="第六天"><a class="markdownIt-Anchor" href="#第六天"></a> 第六天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/n-ary-tree-preorder-traversal/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">589. N 叉树的前序遍历</a></p>
+<p>思路:二叉树的深搜,变成了多叉树的深搜</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">preorder</span>(<span class="params">self, a: <span class="string">&#x27;Node&#x27;</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        ans=[]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">root</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> ans</span><br><span class="line">            ans.append(root.val)</span><br><span class="line">            <span class="keyword">for</span> chi <span class="keyword">in</span> root.children:</span><br><span class="line">                dfs(chi)</span><br><span class="line">        dfs(a)</span><br><span class="line">        <span class="keyword">return</span> ans </span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-level-order-traversal/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">102. 二叉树的层序遍历</a></p>
+<p>思路:广搜,用一个额外的层数变量标记当前节点在第几层</p>
+<p>其他思路:记录当前栈内有几个节点,然后遍历完这些节点,这些节点之后的就是下一层的节点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">levelOrder</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        ans=[]</span><br><span class="line">        deq=[]</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:<span class="keyword">return</span> []</span><br><span class="line">        deq.insert(<span class="number">0</span>,(root,<span class="number">0</span>))</span><br><span class="line">        last=<span class="number">0</span></span><br><span class="line">        curlayer=[]</span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(deq):</span><br><span class="line">            (temp,layer)=deq.pop()</span><br><span class="line">            <span class="keyword">if</span> layer!=last:</span><br><span class="line">                ans.append(curlayer)</span><br><span class="line">                last=layer</span><br><span class="line">                curlayer=[]</span><br><span class="line">            curlayer.append(temp.val)</span><br><span class="line">            <span class="keyword">if</span> temp.left:</span><br><span class="line">                deq.insert(<span class="number">0</span>,(temp.left,layer+<span class="number">1</span>))</span><br><span class="line">            <span class="keyword">if</span> temp.right:</span><br><span class="line">                deq.insert(<span class="number">0</span>,(temp.right,layer+<span class="number">1</span>))</span><br><span class="line">        ans.append(curlayer)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+<h3 id="第七天"><a class="markdownIt-Anchor" href="#第七天"></a> 第七天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">704. 二分查找</a></p>
+<p>思路:正常二分,right要到能遍历到的边界</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-search/solutions/8337/er-fen-cha-zhao-xiang-jie-by-labuladong/">二分的细节&amp;边界</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">search</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        left,right=<span class="number">0</span>,<span class="built_in">len</span>(nums)-<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> left&lt;=right:</span><br><span class="line">            mid=(left+right)&gt;&gt;<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> nums[mid]&lt;target:</span><br><span class="line">                left=mid+<span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> nums[mid]&gt;target:</span><br><span class="line">                right=mid-<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> mid</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span> <span class="keyword">if</span> nums[mid]!=target <span class="keyword">else</span> mid</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/first-bad-version/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">278. 第一个错误的版本</a></p>
+<p>思路:二分查找的变换版,区别在于要记录mid量,纯二分是找到mid直接返回,这个找到的可能不是需要的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">firstBadVersion</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        left,right=<span class="number">1</span>,n</span><br><span class="line">        ans=<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left&lt;=right:</span><br><span class="line">            mid=(left+right)&gt;&gt;<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> isBadVersion(mid):</span><br><span class="line">                right=mid-<span class="number">1</span></span><br><span class="line">                ans=mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                left=mid+<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+<h3 id="第八天"><a class="markdownIt-Anchor" href="#第八天"></a> 第八天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/validate-binary-search-tree/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">98. 验证二叉搜索树</a></p>
+<p>错误思路:不能判断当前节点之后,然后再去分别判断左右子树</p>
+<p>正确×思路: 每棵左右子树节点的大小范围应该都是low-up,初始low=-inf,up=inf,左子树的范围是(low,root.val) 右子树是(root.val,up)  <strong>官方题解也是错的</strong></p>
+<p>其他:二叉搜素树中序遍历一定是升序的</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV14G411P7C1/?vd_source=602787b9249cd70cfca4def5e041f060">树的几种遍历</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">firstBadVersion</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        left,right=<span class="number">1</span>,n</span><br><span class="line">        ans=<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left&lt;=right:</span><br><span class="line">            mid=(left+right)&gt;&gt;<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> isBadVersion(mid):</span><br><span class="line">                right=mid-<span class="number">1</span></span><br><span class="line">                ans=mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                left=mid+<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">235. 二叉搜索树的最近公共祖先</a></p>
+<p>思路:1.寻找祖先路径,找到第一个不同的位置  2.一次遍历,如果都小就都找左边,如果都大就都找右边,如果有小有大就找到了分界点</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">lowestCommonAncestor</span>(<span class="params">self, r: <span class="string">&#x27;TreeNode&#x27;</span>, p: <span class="string">&#x27;TreeNode&#x27;</span>, q: <span class="string">&#x27;TreeNode&#x27;</span></span>) -&gt; <span class="string">&#x27;TreeNode&#x27;</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">if</span> r.val&gt;p.val <span class="keyword">and</span> r.val&gt;q.val:</span><br><span class="line">                r=r.left</span><br><span class="line">            <span class="keyword">elif</span> r.val&lt;p.val <span class="keyword">and</span> r.val &lt; q.val:</span><br><span class="line">                r=r.right</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> r</span><br></pre></td></tr></table></figure>
+<h3 id="第九天"><a class="markdownIt-Anchor" href="#第九天"></a> 第九天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/flood-fill/description/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">733. 图像渲染</a></p>
+<p>思路:广搜/深搜找同颜色的,上下左右判断边界,访问数组</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">floodFill</span>(<span class="params">self, image: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], sr: <span class="built_in">int</span>, sc: <span class="built_in">int</span>, color: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:       </span><br><span class="line">        n=<span class="built_in">len</span>(image) </span><br><span class="line">        m=<span class="built_in">len</span>(image[<span class="number">0</span>])</span><br><span class="line">        visited=[[<span class="number">0</span>]*m <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">        dq=deque()</span><br><span class="line">        dq.append((sr,sc))</span><br><span class="line">        oldcolor=image[sr][sc]</span><br><span class="line">        <span class="keyword">while</span> dq:</span><br><span class="line">            x,y=dq.popleft()</span><br><span class="line">            image[x][y]=color</span><br><span class="line">            visited[x][y]=<span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> x_,y_ <span class="keyword">in</span> [(<span class="number">0</span>,<span class="number">1</span>),(<span class="number">0</span>,-<span class="number">1</span>),(-<span class="number">1</span>,<span class="number">0</span>),(<span class="number">1</span>,<span class="number">0</span>)]:</span><br><span class="line">                <span class="keyword">if</span> x_+x&gt;=<span class="number">0</span> <span class="keyword">and</span> x_+x&lt;n <span class="keyword">and</span> y_+y&gt;=<span class="number">0</span> <span class="keyword">and</span> y_+y&lt;m:</span><br><span class="line">                    <span class="keyword">if</span> visited[x_+x][y_+y]:</span><br><span class="line">                        <span class="keyword">continue</span></span><br><span class="line">                    <span class="keyword">if</span> image[x_+x][y_+y]==oldcolor:</span><br><span class="line">                        dq.append((x_+x,y_+y))</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> image</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/number-of-islands/description/">200. 岛屿数量</a></p>
+<p>思路:深搜/广搜,从某点开始把连在一起的都访问一次,记录一共从几个点开始,这些点都是不同的岛屿</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numIslands</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">str</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n=<span class="built_in">len</span>(grid) </span><br><span class="line">        m=<span class="built_in">len</span>(grid[<span class="number">0</span>])</span><br><span class="line">        visited=[[<span class="number">0</span> <span class="keyword">if</span> grid[i][j]==<span class="string">&#x27;1&#x27;</span> <span class="keyword">else</span> <span class="number">1</span>  <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(m)] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">        ans=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> visited[i][j]:</span><br><span class="line">                    ans+=<span class="number">1</span></span><br><span class="line">                    dq=deque()</span><br><span class="line">                    dq.append((i,j))</span><br><span class="line">                    <span class="keyword">while</span> dq:</span><br><span class="line">                        x,y=dq.popleft()</span><br><span class="line">                        visited[x][y]=<span class="number">1</span></span><br><span class="line">                        <span class="keyword">for</span> x_,y_ <span class="keyword">in</span> [(<span class="number">0</span>,<span class="number">1</span>),(<span class="number">0</span>,-<span class="number">1</span>),(-<span class="number">1</span>,<span class="number">0</span>),(<span class="number">1</span>,<span class="number">0</span>)]:</span><br><span class="line">                            <span class="keyword">if</span> x_+x&gt;=<span class="number">0</span> <span class="keyword">and</span> x_+x&lt;n <span class="keyword">and</span> y_+y&gt;=<span class="number">0</span> <span class="keyword">and</span> y_+y&lt;m:</span><br><span class="line">                                <span class="keyword">if</span> <span class="keyword">not</span> visited[x_+x][y_+y]:</span><br><span class="line">                                    visited[x_+x][y_+y]=<span class="number">1</span></span><br><span class="line">                                    dq.append((x_+x,y_+y))</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>333周赛</p>
+</blockquote>
+<p><a href="">6365. 将整数减少到零需要的最少操作数</a><br />
+思路1:刚开始以为要转成二进制的01传,看0多还是1多,如果0多直接返回1的数量,但是668错了<br />
+思路2:打表100000之内2的次方,然后二分查找n在那两个数中间,找距离近的这个数的插值,然后+1递归下去,54-&gt;64-54=10-&gt;10-8=2-&gt;0</p>
+<p>bilibili:找到最低为的1,考虑这个1 是直接减掉还是加上同位置的1 ,枚举这两种可能.</p>
+<p><code>判断一个数是不是2的幂:(x &amp; ( x-1 ))==0</code></p>
+<p><code>找到最低位的1:lowbit: x &amp; -x</code></p>
+<p><a href="">☆6364. 无平方子集计数</a></p>
+<p>没思路:题型重灾区,应该是用dp做,但是毫无思路</p>
+<p>bilibili:对不起,等我学有所成再来看,什么jb玩意那么难</p>
+<p><a href="">6363. 找出对应 LCP 矩阵的字符串</a></p>
+<p>没思路</p>
+<h3 id="第十天"><a class="markdownIt-Anchor" href="#第十天"></a> 第十天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fibonacci-number/description/">509. 斐波那契数</a></p>
+<p>思路:.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.自顶向下,记忆化搜索</span></span><br><span class="line"><span class="comment"># 2.自底向上,dp数组</span></span><br><span class="line"><span class="comment"># 3.用a,b两个变量,空间复杂度降到O(1)</span></span><br><span class="line"><span class="comment"># 4.矩阵快速幂,时间复杂度降到O(logn)</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/climbing-stairs/description/">70. 爬楼梯</a></p>
+<p>思路:.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 斐波那契数列模板题</span></span><br></pre></td></tr></table></figure>
+<h3 id="第十一天"><a class="markdownIt-Anchor" href="#第十一天"></a> 第十一天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/description/">746. 使用最小花费爬楼梯</a></p>
+<p>思路:爬到今天的费用只能有两个来源,前一个和前两个,但是顶楼数组里没有,所以追加一个0,第一层第二层的费用就是本身,第二层为什么不是min(第一层,第二层)呢,因为如果是从第一层上到的第二层,第二层还要继续向上上,那么还得加上第二层的费用,就变成了(第一层+第二层)的费用了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minCostClimbingStairs</span>(<span class="params">self, cost: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        cost.append(<span class="number">0</span>)</span><br><span class="line">        n=<span class="built_in">len</span>(cost)</span><br><span class="line">        <span class="comment"># dp=[99999]*(n)</span></span><br><span class="line">        a=cost[<span class="number">0</span>]</span><br><span class="line">        b=cost[<span class="number">1</span>]</span><br><span class="line">        c=b</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,n):</span><br><span class="line">            c=<span class="built_in">min</span>(a,b)+cost[i]</span><br><span class="line">            a,b=b,c</span><br><span class="line">            <span class="comment"># dp[i]=min(dp[i-1],dp[i-2])+cost[i]</span></span><br><span class="line">        <span class="keyword">return</span> c</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/unique-paths/description/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">62. 不同路径</a></p>
+<p>思路:深搜和广搜的复杂度应该是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mn>2</mn><mi>n</mi></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(2^n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>,会超时,还是dp,当前位置只能从左边或者上边来到,就把左边和上边的方案数加起来就行,第一行第一列的方案数都是1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">uniquePaths</span>(<span class="params">self, m: <span class="built_in">int</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        a=[<span class="number">1</span> <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n) ]</span><br><span class="line">        b=[<span class="number">1</span> <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n) ]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n):</span><br><span class="line">                b[j]=a[j]+b[j-<span class="number">1</span>]</span><br><span class="line">            a=b[:]</span><br><span class="line">        <span class="keyword">return</span> b[-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># dp=[[0 for j in range(n) ]  for i in range(m)]</span></span><br><span class="line">        <span class="comment"># for i in range(m):</span></span><br><span class="line">        <span class="comment">#     for j in range(n):</span></span><br><span class="line">        <span class="comment">#         if i==0 or j==0:</span></span><br><span class="line">        <span class="comment">#             dp[i][j]=1</span></span><br><span class="line">        <span class="comment">#         else:</span></span><br><span class="line">        <span class="comment">#             dp[i][j]=dp[i][j-1]+dp[i-1][j]</span></span><br><span class="line">        <span class="comment"># return dp[m-1][n-1]</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># dq=deque([(0,0)])</span></span><br><span class="line">        <span class="comment"># ans=0</span></span><br><span class="line">        <span class="comment"># while dq:</span></span><br><span class="line">        <span class="comment">#     x,y=dq.pop()</span></span><br><span class="line">        <span class="comment">#     if x==m-1 and y==n-1:</span></span><br><span class="line">        <span class="comment">#         ans+=1</span></span><br><span class="line">        <span class="comment">#     for x_,y_ in  [(x+1,y),(x,y+1)]:</span></span><br><span class="line">        <span class="comment">#         if x_&gt;=0 and x_&lt;m and y_&gt;=0 and y_&lt;n:</span></span><br><span class="line">        <span class="comment">#             dq.append((x_,y_))</span></span><br><span class="line">        <span class="comment"># return ans </span></span><br></pre></td></tr></table></figure>
+<h3 id="第十二天"><a class="markdownIt-Anchor" href="#第十二天"></a> 第十二天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-all-anagrams-in-a-string/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">438. 找到字符串中所有字母异位词</a></p>
+<p>思路:双指针维护长度为第二个字符串的区间,对区间内的数字统计数量,数量一致答案加1,右移的时候,右侧字符加1,左侧字符减1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findAnagrams</span>(<span class="params">self, s: <span class="built_in">str</span>, p: <span class="built_in">str</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">val</span>(<span class="params">a,b</span>):</span><br><span class="line">            <span class="keyword">for</span> i,j <span class="keyword">in</span> <span class="built_in">zip</span>(a,b):</span><br><span class="line">                <span class="keyword">if</span> i!=j:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        pnums=[<span class="number">0</span>]*<span class="number">26</span></span><br><span class="line">        snums=[<span class="number">0</span>]*<span class="number">26</span></span><br><span class="line">        constant=<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> p:</span><br><span class="line">            pnums[<span class="built_in">ord</span>(item)-constant]+=<span class="number">1</span></span><br><span class="line">        left=right=<span class="number">0</span></span><br><span class="line">        lengths=<span class="built_in">len</span>(s)</span><br><span class="line">        lengthp=<span class="built_in">len</span>(p)</span><br><span class="line">        ans=[]</span><br><span class="line">        <span class="keyword">while</span> right&lt;lengths:</span><br><span class="line">            snums[<span class="built_in">ord</span>(s[right])-constant]+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> val(snums,pnums):</span><br><span class="line">                ans.append(left)</span><br><span class="line">            right+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> right&gt;=lengthp:</span><br><span class="line">                snums[<span class="built_in">ord</span>(s[left])-constant]-=<span class="number">1</span></span><br><span class="line">                left+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans </span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-repeating-character-replacement/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">424. 替换后的最长重复字符</a></p>
+<p>思路:没有思路,考虑到了应该是用双指针</p>
+<p>题解:双指针加一个maxhistory记录最多的相同字符个数,如果当前区间长度大于了k+maxhistory,说明不可能变成一样的,左边右移1,否则说明当前区间不是最大长度,还可增加新元素</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">characterReplacement</span>(<span class="params">self, s: <span class="built_in">str</span>, k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        constant=<span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>)</span><br><span class="line">        length=<span class="built_in">len</span>(s)</span><br><span class="line">        <span class="comment"># 左右指针</span></span><br><span class="line">        left=right=<span class="number">0</span></span><br><span class="line">        <span class="comment"># 用于记录left-right区间每个字母的个数</span></span><br><span class="line">        nums=[<span class="number">0</span>]*<span class="number">26</span></span><br><span class="line">        <span class="comment"># 用于记录区间内出现的 最多的相同字符的个数</span></span><br><span class="line">        historymax=<span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> right&lt;length:</span><br><span class="line">            <span class="comment"># 新加的字符个数加1</span></span><br><span class="line">            nums[<span class="built_in">ord</span>(s[right])-constant]+=<span class="number">1</span></span><br><span class="line">            <span class="comment"># 更新一下区间内最长的字符个数</span></span><br><span class="line">            historymax=<span class="built_in">max</span>(historymax,nums[<span class="built_in">ord</span>(s[right])-constant])</span><br><span class="line">            <span class="comment"># historymax+k 是目前可以达到的最长长度,已经包含了右节点了</span></span><br><span class="line">            <span class="comment"># 小于说明现在这个区间长度还小于最大长度</span></span><br><span class="line">            <span class="comment"># 大于说明把其它不是最多出现的字符替换以后，都不能填满这个滑动的窗口，说明此时 k 不够用</span></span><br><span class="line">            <span class="comment"># 这个时候须要考虑左边界向右移动</span></span><br><span class="line">            <span class="keyword">if</span> right-left+<span class="number">1</span>&gt;historymax+k:</span><br><span class="line">                nums[<span class="built_in">ord</span>(s[left])-constant]-=<span class="number">1</span></span><br><span class="line">                left+=<span class="number">1</span></span><br><span class="line">            right+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> right-left</span><br></pre></td></tr></table></figure>
+<h3 id="第十三天"><a class="markdownIt-Anchor" href="#第十三天"></a> 第十三天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/two-sum/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">1. 两数之和</a></p>
+<p>思路:数组排序,然后对每个数字,二分查找target减去她的值</p>
+<p>题解:用字典存储每个target-num的值,如果当前数字在字典中存在,找到答案,否则把target减他存进去</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">twoSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># nums=[(i,n) for i,n in enumerate(nums)]</span></span><br><span class="line">        <span class="comment"># nums=sorted(nums,key=lambda x:x[1])</span></span><br><span class="line">        <span class="comment"># length=len(nums)</span></span><br><span class="line">        <span class="comment"># for i in range(length):</span></span><br><span class="line">        <span class="comment">#     ttt=target-nums[i][1]</span></span><br><span class="line">        <span class="comment">#     index=bisect_left(nums,ttt,key=lambda x:x[1])</span></span><br><span class="line">        <span class="comment">#     if index==i:continue</span></span><br><span class="line">        <span class="comment">#     if index&lt;0 or index&gt;=length:continue</span></span><br><span class="line">        <span class="comment">#     if nums[index][1]==ttt:</span></span><br><span class="line">        <span class="comment">#         return [nums[i][0],nums[index][0]]</span></span><br><span class="line">        hashtable = <span class="built_in">dict</span>()</span><br><span class="line">        <span class="keyword">for</span> i, num <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            <span class="keyword">if</span> target - num <span class="keyword">in</span> hashtable:</span><br><span class="line">                <span class="keyword">return</span> [hashtable[target - num], i]</span><br><span class="line">            hashtable[nums[i]] = i</span><br><span class="line">        <span class="keyword">return</span> []</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/bulls-and-cows/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">299. 猜数字游戏</a></p>
+<p>思路:A数字好统计,对于B数字,分别存A,B中数字出现的个数,加入对他们重新排序,一定是只能匹配个数少的,所以直接取每个数字二者中的最小值,求和就是B.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getHint</span>(<span class="params">self, secret: <span class="built_in">str</span>, guess: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        hasA=[<span class="number">0</span>]*<span class="number">10</span></span><br><span class="line">        hasB=[<span class="number">0</span>]*<span class="number">10</span></span><br><span class="line">        A=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i,j <span class="keyword">in</span> <span class="built_in">zip</span>(secret,guess):</span><br><span class="line">            <span class="keyword">if</span> i==j:</span><br><span class="line">                A+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                hasA[<span class="built_in">int</span>(j)]+=<span class="number">1</span></span><br><span class="line">                hasB[<span class="built_in">int</span>(i)]+=<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        ans=<span class="built_in">sum</span>([<span class="built_in">min</span>(a,b) <span class="keyword">for</span> a,b <span class="keyword">in</span> <span class="built_in">zip</span>(hasA,hasB)])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&#x27;<span class="subst">&#123;A&#125;</span>A<span class="subst">&#123;ans&#125;</span>B&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="第十四天"><a class="markdownIt-Anchor" href="#第十四天"></a> 第十四天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/backspace-string-compare/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">844. 比较含退格的字符串</a></p>
+<p>思路:忘记用栈了，从后往前遍历数组，cnt记录当前#的数量，然后跳过cnt个字母。</p>
+<p>题解:用栈，遇见#退一个字符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backspaceCompare</span>(<span class="params">self, s: <span class="built_in">str</span>, t: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">a</span>):</span><br><span class="line">            length=<span class="built_in">len</span>(a)</span><br><span class="line">            ans=[]</span><br><span class="line">            cnt=<span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(length-<span class="number">1</span>,-<span class="number">1</span>,-<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">if</span> a[i]==<span class="string">&#x27;#&#x27;</span>:</span><br><span class="line">                    cnt+=<span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">if</span> cnt==<span class="number">0</span>:</span><br><span class="line">                        ans.append(a[i])</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        cnt-=<span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> ans</span><br><span class="line">        <span class="keyword">return</span> check(s)==check(t)</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/backspace-string-compare/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">394. 字符串解码</a></p>
+<p>思路:栈操作，一个数组存数字，一个栈用来弹字符，遇见]一直弹，直到弹出[。然后复制数字数组的最后一个数字便，在加入栈中，数字的处理有一点点麻烦</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decodeString</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        stack=[]</span><br><span class="line">        nums=[]</span><br><span class="line">        length=<span class="built_in">len</span>(s)</span><br><span class="line">        i=<span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i&lt;length:</span><br><span class="line">            <span class="keyword">if</span> s[i]==<span class="string">&#x27;]&#x27;</span>:</span><br><span class="line">                temp=[]</span><br><span class="line">                <span class="keyword">while</span> stack[-<span class="number">1</span>]!=<span class="string">&#x27;[&#x27;</span>:</span><br><span class="line">                    temp.append(stack.pop())</span><br><span class="line">                stack.pop()</span><br><span class="line">                temp=<span class="string">&quot;&quot;</span>.join(temp[::-<span class="number">1</span>])</span><br><span class="line">                stack.append(temp*nums[-<span class="number">1</span>])</span><br><span class="line">                nums.pop()</span><br><span class="line">                i+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> s[i].isnumeric():</span><br><span class="line">                n=<span class="number">0</span></span><br><span class="line">                <span class="keyword">while</span> i&lt;length  <span class="keyword">and</span> s[i].isnumeric():</span><br><span class="line">                    n*=<span class="number">10</span></span><br><span class="line">                    n+=<span class="built_in">int</span>(s[i])</span><br><span class="line">                    i+=<span class="number">1</span></span><br><span class="line">                nums.append(n)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                stack.append(s[i])</span><br><span class="line">                i+=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(stack)</span><br></pre></td></tr></table></figure>
+<h3 id="第十五天"><a class="markdownIt-Anchor" href="#第十五天"></a> 第十五天</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/last-stone-weight/description/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">1046. 最后一块石头的重量</a></p>
+<p>思路:大项堆，但是python的heapq只能实现小项堆，大项堆的实现要加负号</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">lastStoneWeight</span>(<span class="params">self, x: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        x=<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> x:-x,x))</span><br><span class="line">        <span class="comment"># 这一步的作用不是很明确</span></span><br><span class="line">        <span class="comment"># 注意heapify(包括heapq封装的其他操作)都不会更改数据结构(仍为list)，只会以堆的操作规范对其进行处理。</span></span><br><span class="line">        <span class="comment"># 虽然类型仍为list，但元素的顺序已经满足了堆的规范，所以从线性的角度看结果列表并非是有序的(是[1, 3, 7, 9, 5]而非[1, 3, 5, 7, 9])</span></span><br><span class="line">        heapq.heapify(x)</span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(x)&gt;<span class="number">1</span>:</span><br><span class="line">            a=heapq.heappop(x)</span><br><span class="line">            b=heapq.heappop(x)</span><br><span class="line">            <span class="keyword">if</span> a!=b:</span><br><span class="line">                newstore=<span class="built_in">abs</span>(<span class="built_in">max</span>(a,b)-<span class="built_in">min</span>(a,b))</span><br><span class="line">                heapq.heappush(x,-newstore)</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> -x[<span class="number">0</span>] <span class="keyword">if</span> <span class="built_in">len</span>(x) <span class="keyword">else</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/top-k-frequent-words/?envType=study-plan&amp;id=leetcode_75_level_1&amp;plan=leetcode_75&amp;plan_progress=jr2hbvs">692. 前K个高频单词</a></p>
+<p>思路:Counter统计单词数量，然后按照数量降序，字典序升序排列，返回k个</p>
+<p>题解：优先队列，元组（单词，词频）</p>
+<p>知识点：1.Counter的most_common()在计数相同的情况下是按出现顺序返回<br />
+2.python多关键字排序：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr=[(<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>),(<span class="number">1</span>,<span class="number">3</span>,<span class="number">3</span>),(<span class="number">2</span>,<span class="number">1</span>,<span class="number">4</span>),(<span class="number">3</span>,<span class="number">5</span>,<span class="number">1</span>)]</span><br><span class="line">arr.sort(key=<span class="keyword">lambda</span> s:(s[<span class="number">0</span>],-s[<span class="number">1</span>])) </span><br><span class="line"><span class="comment">#两个关键字排序,在需要倒序排列的关键字前加`-`号</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">topKFrequent</span>(<span class="params">self, words: <span class="type">List</span>[<span class="built_in">str</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">str</span>]:</span><br><span class="line">        c = Counter(words).items()</span><br><span class="line">        c = <span class="built_in">sorted</span>(c,key=<span class="keyword">lambda</span> x:(-x[<span class="number">1</span>],x[<span class="number">0</span>]))</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="keyword">lambda</span> x:x[<span class="number">0</span>],c[:k]))</span><br><span class="line">        <span class="comment"># return sorted((cnt := Counter(words)).keys(), key=lambda key: (-cnt[key], key))[:k]</span></span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h3>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://gladdduck.github.io/2023/02/25/LeetCode75/" title="LeetCode75" target="_blank" rel="external">https://gladdduck.github.io/2023/02/25/LeetCode75/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/02/27/python100%E5%A4%A91-15/" title="python100天1-15"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/02/18/python100%E5%A4%A916-30/" title="python100天16-30"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>

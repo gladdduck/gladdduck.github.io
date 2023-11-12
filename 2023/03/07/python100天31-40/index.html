@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>python100天31-40 | Hexo</title>
+  <meta name="description" content="12345678910111213141516171819202122# 01-15python基础# 16-20python进阶# 21-30前端概述# 31-35Linux# 36-40MySQL# 41-55Django# 56-60FaskAPI# 61-65爬虫与并发编程# 66-80numpy&amp;pandas# 81-90机器学习&amp;pytorch# 91-100项目  P">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python100天31-40">
+<meta property="og:url" content="https://gladdduck.github.io/2023/03/07/python100%E5%A4%A931-40/index.html">
+<meta property="og:site_name" content="Gladdduck">
+<meta property="og:description" content="12345678910111213141516171819202122# 01-15python基础# 16-20python进阶# 21-30前端概述# 31-35Linux# 36-40MySQL# 41-55Django# 56-60FaskAPI# 61-65爬虫与并发编程# 66-80numpy&amp;pandas# 81-90机器学习&amp;pytorch# 91-100项目  P">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.yayan.xyz/20230303141301.png">
+<meta property="og:image" content="https://image.yayan.xyz/20230311114517.png">
+<meta property="og:image" content="https://image.yayan.xyz/20230311114532.png">
+<meta property="og:image" content="https://image.yayan.xyz/20230311114459.png">
+<meta property="og:image" content="https://image.yayan.xyz/20230311122012.png">
+<meta property="og:image" content="https://image.yayan.xyz/20230311134621.png">
+<meta property="article:published_time" content="2023-03-07T10:33:08.243Z">
+<meta property="article:modified_time" content="2023-03-11T05:47:36.422Z">
+<meta property="article:author" content="syxue">
+<meta property="article:tag" content="Python学习笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.yayan.xyz/20230303141301.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://gladdduck.github.io/2023/03/07/python100%E5%A4%A931-40/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/cofess" target="_blank">
+          <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">标签</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books">
+            
+            <i class="icon icon-book-fill"></i>
+            
+            <span class="menu-title">书单</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links">
+            
+            <i class="icon icon-friendship"></i>
+            
+            <span class="menu-title">友链</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">hexo博客配置</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">20</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/">快捷命令</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blazor/" rel="tag">Blazor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blazor-Localization/" rel="tag">Blazor Localization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Cypher学习笔记</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataloader/" rel="tag">Dataloader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataset/" rel="tag">Dataset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/" rel="tag">FFT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git-%E9%87%8D%E8%A6%81/" rel="tag">Git 重要</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Linux快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Neo4j快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Python学习笔记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sampler/" rel="tag">Sampler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">Vscode连接阿里云服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collate-fn/" rel="tag">collate_fn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-Time-out/" rel="tag">git Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github-Time-out/" rel="tag">github Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" rel="tag">hexo博客配置gitalk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" rel="tag">hexo博客配置picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" rel="tag">hexo博客配置pure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" rel="tag">python3 标准库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB%E8%AE%BA%E6%96%87/" rel="tag">垃圾分类论文</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">多个域名访问同一个服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B9%98%E6%B3%95/" rel="tag">多项式乘法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" rel="tag">快速傅里叶变换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag">搭建博客</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" rel="tag">知识图谱表示</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">算法刷题笔记</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%BC%E8%BF%B0/" rel="tag">综述</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">蓝桥杯 算法刷题笔记</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Blazor/" style="font-size: 13px;">Blazor</a> <a href="/tags/Blazor-Localization/" style="font-size: 13px;">Blazor Localization</a> <a href="/tags/Cypher%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13px;">Cypher学习笔记</a> <a href="/tags/Dataloader/" style="font-size: 13px;">Dataloader</a> <a href="/tags/Dataset/" style="font-size: 13px;">Dataset</a> <a href="/tags/FFT/" style="font-size: 13px;">FFT</a> <a href="/tags/Git-%E9%87%8D%E8%A6%81/" style="font-size: 13px;">Git 重要</a> <a href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Linux快捷命令</a> <a href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Neo4j快捷命令</a> <a href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13.5px;">Python学习笔记</a> <a href="/tags/Sampler/" style="font-size: 13px;">Sampler</a> <a href="/tags/Vscode%E8%BF%9E%E6%8E%A5%E9%98%BF%E9%87%8C%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">Vscode连接阿里云服务器</a> <a href="/tags/collate-fn/" style="font-size: 13px;">collate_fn</a> <a href="/tags/git-Time-out/" style="font-size: 13px;">git Time out</a> <a href="/tags/github-Time-out/" style="font-size: 13px;">github Time out</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" style="font-size: 13px;">hexo博客配置gitalk</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" style="font-size: 13px;">hexo博客配置picgo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" style="font-size: 13px;">hexo博客配置pure</a> <a href="/tags/neo4j%E5%AE%89%E8%A3%85/" style="font-size: 13px;">neo4j安装</a> <a href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 13.5px;">python3 标准库</a> <a href="/tags/%E5%9E%83%E5%9C%BE%E5%88%86%E7%B1%BB%E8%AE%BA%E6%96%87/" style="font-size: 13px;">垃圾分类论文</a> <a href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">多个域名访问同一个服务器</a> <a href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E4%B9%98%E6%B3%95/" style="font-size: 13px;">多项式乘法</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 13px;">快捷键</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" style="font-size: 13px;">快速傅里叶变换</a> <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 13px;">排序算法</a> <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="font-size: 13px;">搭建博客</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" style="font-size: 13px;">知识图谱表示</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" style="font-size: 14px;">算法刷题笔记</a> <a href="/tags/%E7%BB%BC%E8%BF%B0/" style="font-size: 13px;">综述</a> <a href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF-%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" style="font-size: 13px;">蓝桥杯 算法刷题笔记</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2023/10/21/Few-shotDetection%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-10-21T05:40:02.230Z" itemprop="datePublished">2023-10-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/10/09/Blazor%E4%B8%AD%E7%9A%84Localization/" class="title">Blazor中的Localization</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-10-09T11:38:30.993Z" itemprop="datePublished">2023-10-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/16/C#-Blazor%E7%AC%94%E8%AE%B0/" class="title">Blazor学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-16T05:56:55.560Z" itemprop="datePublished">2023-09-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/09/09/Git/" class="title">Git学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-09-09T02:24:47.503Z" itemprop="datePublished">2023-09-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/06/04/AcWing%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE,/" class="title">AcWing算法基础课</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-06-04T14:26:33.383Z" itemprop="datePublished">2023-06-04</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#python100%E5%A4%A9%E5%AD%A6%E4%B9%A031-35"><span class="toc-number">1.</span> <span class="toc-text"> Python100天学习31-35</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python100%E5%A4%A9%E5%AD%A6%E4%B9%A036-40"><span class="toc-number">2.</span> <span class="toc-text"> Python100天学习36-40</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E7%B3%BB%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A7%E5%93%81"><span class="toc-number">2.1.</span> <span class="toc-text"> 关系数据库产品</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B"><span class="toc-number">2.2.</span> <span class="toc-text"> 安装教程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#mysql%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-number">2.3.</span> <span class="toc-text"> MySQL基本命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sql%E8%AF%AD%E5%8F%A5"><span class="toc-number">2.4.</span> <span class="toc-text"> SQL语句</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">2.4.1.</span> <span class="toc-text"> 数据库的基本操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c%E8%AF%AD%E8%A8%80%E4%B8%AD%E6%96%87%E7%BD%91sql%E6%95%99%E7%A8%8B"><span class="toc-number">2.5.</span> <span class="toc-text"> C语言中文网SQL教程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF"><span class="toc-number">2.5.0.1.</span> <span class="toc-text"> 常见错误</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1"><span class="toc-number">2.5.0.2.</span> <span class="toc-text"> 数据库设计</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mysql%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.5.0.3.</span> <span class="toc-text"> MySQL数据类型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#mysql%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E"><span class="toc-number">2.5.0.4.</span> <span class="toc-text"> MySQL存储引擎</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">2.5.0.5.</span> <span class="toc-text"> 数据表的基本操作</span></a></li></ol></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-python100天31-40" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python100天31-40
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/03/07/python100%E5%A4%A931-40/" class="article-date">
+	  <time datetime="2023-03-07T10:33:08.243Z" itemprop="datePublished">2023-03-07</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Python学习笔记</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/03/07/python100%E5%A4%A931-40/#comments" class="article-comment-link">评论</a></span>
+        
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 01-15python基础</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 16-20python进阶</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 21-30前端概述</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 31-35Linux</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 36-40MySQL</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 41-55Django</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 56-60FaskAPI</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 61-65爬虫与并发编程</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 66-80numpy&amp;pandas</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 81-90机器学习&amp;pytorch</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 91-100项目</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="python100天学习31-35"><a class="markdownIt-Anchor" href="#python100天学习31-35"></a> Python100天学习31-35</h2>
+<p><code>Linux</code></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jackfrued/Python-100-Days">资料连接</a></p>
+<h2 id="python100天学习36-40"><a class="markdownIt-Anchor" href="#python100天学习36-40"></a> Python100天学习36-40</h2>
+<p><code>MySQL</code></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/jackfrued/Python-100-Days">资料连接</a></p>
+<h3 id="关系数据库产品"><a class="markdownIt-Anchor" href="#关系数据库产品"></a> 关系数据库产品</h3>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.oracle.com/index.html">Oracle</a> - 目前世界上使用最为广泛的数据库管理系统，作为一个通用的数据库系统，它具有完整的数据管理功能；作为一个关系数据库，它是一个完备关系的产品；作为分布式数据库，它实现了分布式处理的功能。在 Oracle 最新的 12c 版本中，还引入了多承租方架构，使用该架构可轻松部署和管理数据库云。</li>
+<li><a target="_blank" rel="noopener" href="https://www.ibm.com/analytics/us/en/db2/">DB2</a> - IBM 公司开发的、主要运行于 Unix（包括 IBM 自家的 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/AIX">AIX</a>）、Linux、以及 Windows 服务器版等系统的关系数据库产品。DB2 历史悠久且被认为是最早使用 SQL 的数据库产品，它拥有较为强大的商业智能功能。</li>
+<li><a target="_blank" rel="noopener" href="https://www.microsoft.com/en-us/sql-server/">SQL Server</a> - 由 Microsoft 开发和推广的关系型数据库产品，最初适用于中小企业的数据管理，但是近年来它的应用范围有所扩展，部分大企业甚至是跨国公司也开始基于它来构建自己的数据管理系统。</li>
+<li><a target="_blank" rel="noopener" href="https://www.mysql.com/">MySQL</a> - MySQL 是开放源代码的，任何人都可以在 GPL（General Public License）的许可下下载并根据个性化的需要对其进行修改。MySQL 因为其速度、可靠性和适应性而备受关注。</li>
+<li><a href="">PostgreSQL</a> - 在 BSD 许可证下发行的开放源代码的关系数据库产品。</li>
+</ul>
+<h3 id="安装教程"><a class="markdownIt-Anchor" href="#安装教程"></a> 安装教程</h3>
+<p>windows</p>
+<p>linux</p>
+<p>macos</p>
+<h3 id="mysql基本命令"><a class="markdownIt-Anchor" href="#mysql基本命令"></a> MySQL基本命令</h3>
+<p><strong>查看命令</strong></p>
+<ol>
+<li>查看所有数据库</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> databases;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>查看所有字符集</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="type">character</span> <span class="keyword">set</span>;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>查看所有的排序规则</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">collation</span>;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>查看所有的引擎</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> engines;</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>查看所有日志文件</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="type">binary</span> logs;</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>查看数据库下所有表</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> tables;</span><br></pre></td></tr></table></figure>
+<p><strong>获取帮助</strong></p>
+<p>在 MySQL 命令行工具中，可以使用 <code>help</code>命令或 <code>?</code>来获取帮助，如下所示。</p>
+<ol>
+<li>
+<p>查看 <code>show</code>命令的帮助。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">? show</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>查看有哪些帮助内容。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">? contents</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>获取函数的帮助。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">? functions</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>获取数据类型的帮助。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">? data types</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="sql语句"><a class="markdownIt-Anchor" href="#sql语句"></a> SQL语句</h3>
+<h4 id="数据库的基本操作"><a class="markdownIt-Anchor" href="#数据库的基本操作"></a> 数据库的基本操作</h4>
+<p><code>SQL 包含以下 4 部分：</code></p>
+<ol>
+<li>数据定义语言（Data Definition Language，DDL）<br />
+用来创建或删除数据库以及表等对象，主要包含以下几种命令：</li>
+</ol>
+<ul>
+<li>DROP：删除数据库和表等对象</li>
+<li>CREATE：创建数据库和表等对象</li>
+<li>ALTER：修改数据库和表等对象的结构</li>
+</ul>
+<ol start="2">
+<li>数据操作语言（Data Manipulation Language，DML）<br />
+用来变更表中的记录，主要包含以下几种命令：</li>
+</ol>
+<ul>
+<li>SELECT：查询表中的数据</li>
+<li>INSERT：向表中插入新数据</li>
+<li>UPDATE：更新表中的数据</li>
+<li>DELETE：删除表中的数据</li>
+</ul>
+<ol start="3">
+<li>数据查询语言（Data Query Language，DQL）<br />
+用来查询表中的记录，主要包含 SELECT 命令，来查询表中的数据。</li>
+<li>数据控制语言（Data Control Language，DCL）<br />
+用来确认或者取消对数据库中的数据进行的变更。除此之外，还可以对数据库中的用户设定权限。主要包含以下几种命令：</li>
+</ol>
+<ul>
+<li>GRANT：赋予用户操作权限</li>
+<li>REVOKE：取消用户的操作权限</li>
+<li>COMMIT：确认对数据库中的数据进行的变更</li>
+<li>ROLLBACK：取消对数据库中的数据进行的变更</li>
+</ul>
+<p><code>基本语法</code></p>
+<ol>
+<li>SQL 语句不区分大小写</li>
+<li>SQL 语句中含有字符串的时候，需要像 ‘abc’ 这样，使用英文单引号’将字符串括起来，用来标识这是一个字符串。</li>
+<li>SQL 语句中含有日期的时候，同样需要使用英文单引号将其括起来。日期的格式有很多种（‘26 Jan 2010’ 或者’10/01/26’ 等），统一使用 ‘2020-01-26’ 这种’年-月-日’的格式。</li>
+<li>在 SQL 语句中书写数字的时候，不需要使用任何符号标识，直接写成 1000 这样的数字即可。</li>
+<li>SQL 语句要以分号;结尾.在 RDBMS （关系型数据库）当中，SQL 语句是逐条执行的，一条 SQL 语句代表着数据库的一个操作。</li>
+</ol>
+<h3 id="c语言中文网sql教程"><a class="markdownIt-Anchor" href="#c语言中文网sql教程"></a> C语言中文网SQL教程</h3>
+<p>基本操作</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 查看数据库 ,LIKE可选,不写就是查看全部  </span></span><br><span class="line"><span class="keyword">SHOW</span> DATABASES [<span class="keyword">LIKE</span> <span class="string">&#x27;数据库名&#x27;</span>];</span><br><span class="line"><span class="comment">-- 安装 MySQL 时系统自动创建的6个数据库，其各自功能如下：</span></span><br><span class="line"><span class="comment">-- information_schema：主要存储了系统中的一些数据库对象信息，比如用户表信息、列信息、权限信息、字符集信息和分区信息等。</span></span><br><span class="line"><span class="comment">-- mysql：MySQL 的核心数据库，类似于 SQL Server 中的 master 表，主要负责存储数据库用户、用户访问权限等 MySQL 自己需要使用的控制和管理信息。常用的比如在 mysql 数据库的 user 表中修改 root 用户密码。</span></span><br><span class="line"><span class="comment">-- performance_schema：主要用于收集数据库服务器性能参数。</span></span><br><span class="line"><span class="comment">-- sakila：MySQL 提供的样例数据库，该数据库共有 16 张表，这些数据表都是比较常见的，在设计数据库时，可以参照这些样例数据表来快速完成所需的数据表。</span></span><br><span class="line"><span class="comment">-- sys：MySQL 5.7 安装完成后会多一个 sys 数据库。sys 数据库主要提供了一些视图，数据都来自于 performation_schema，主要是让开发者和使用者更方便地查看性能问题。</span></span><br><span class="line"><span class="comment">-- world：world 数据库是 MySQL 自动创建的数据库，该数据库中只包括 3 张数据表，分别保存城市，国家和国家使用的语言等内容。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 创建数据库</span></span><br><span class="line"><span class="comment">-- 字符集是用来定义 MySQL 存储字符串的方式，校对规则定义了比较字符串的方式。</span></span><br><span class="line"><span class="keyword">CREATE</span> DATABASE [IF <span class="keyword">NOT</span> <span class="keyword">EXISTS</span>] <span class="operator">&lt;</span>数据库名<span class="operator">&gt;</span></span><br><span class="line">[[<span class="keyword">DEFAULT</span>] <span class="type">CHARACTER</span> <span class="keyword">SET</span> <span class="operator">&lt;</span>字符集名<span class="operator">&gt;</span>] </span><br><span class="line">[[<span class="keyword">DEFAULT</span>] <span class="keyword">COLLATE</span> <span class="operator">&lt;</span>校对规则名<span class="operator">&gt;</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看数据库的定义声明</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> DATABASE test_db;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 使用 ALTER DATABASE 来修改已经被创建或者存在的数据库的相关参数</span></span><br><span class="line"><span class="keyword">ALTER</span> DATABASE [数据库名] &#123; </span><br><span class="line">[ <span class="keyword">DEFAULT</span> ] <span class="type">CHARACTER</span> <span class="keyword">SET</span> <span class="operator">&lt;</span>字符集名<span class="operator">&gt;</span> <span class="operator">|</span></span><br><span class="line">[ <span class="keyword">DEFAULT</span> ] <span class="keyword">COLLATE</span> <span class="operator">&lt;</span>校对规则名<span class="operator">&gt;</span>&#125;</span><br><span class="line"><span class="comment">-- ALTER DATABASE 用于更改数据库的全局特性。</span></span><br><span class="line"><span class="comment">-- 使用 ALTER DATABASE 需要获得数据库 ALTER 权限。</span></span><br><span class="line"><span class="comment">-- 数据库名称可以忽略，此时语句对应于默认数据库。</span></span><br><span class="line"><span class="comment">-- CHARACTER SET 子句用于更改默认的数据库字符集。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 删除数据库</span></span><br><span class="line"><span class="keyword">DROP</span> DATABASE [ IF <span class="keyword">EXISTS</span> ] <span class="operator">&lt;</span>数据库名<span class="operator">&gt;</span></span><br><span class="line"><span class="comment">-- MySQL 安装后，系统会自动创建名为 information_schema 和 mysql 的两个系统数据库，系统数据库存放一些和数据库相关的信息，如果删除了这两个数据库，MySQL 将不能正常工作。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- USE 语句用来完成一个数据库到另一个数据库的跳转</span></span><br><span class="line"><span class="comment">-- 创建数据库之后，该数据库不会自动成为当前数据库</span></span><br><span class="line">USE <span class="operator">&lt;</span>数据库名<span class="operator">&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 单行注释</span></span><br><span class="line"># 单行注释</span><br><span class="line"></span><br><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">多行注释</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 查看帮助命令,查询内容是关键字,可以用LIKE</span></span><br><span class="line">HELP <span class="string">&#x27;查询内容&#x27;</span></span><br></pre></td></tr></table></figure>
+<p><code>SQL语句的大小写规则</code><br />
+MySQL 用服务器主机的底层文件系统所包含的目录和文件来表示数据库和表。因此，数据库名和表名的默认大小写取决于服务器主机的操作系统在命名方面的规定。<br />
+<img src="https://image.yayan.xyz/20230303141301.png" alt="MySQL大小写规则" /></p>
+<h5 id="常见错误"><a class="markdownIt-Anchor" href="#常见错误"></a> 常见错误</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> 开头 服务器错误</span><br><span class="line"><span class="number">2</span> 开头 客户端错误</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.yayan.xyz/20230311114517.png" alt="" /><br />
+<img src="https://image.yayan.xyz/20230311114532.png" alt="" /><br />
+<img src="https://image.yayan.xyz/20230311114459.png" alt="" /></p>
+<h5 id="数据库设计"><a class="markdownIt-Anchor" href="#数据库设计"></a> 数据库设计</h5>
+<p><code>数据库设计三个范式</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>第一范式： 要求任何一张表必须有主键，每一个字段原子性不可再分。</span><br><span class="line"></span><br><span class="line"><span class="number">2.</span>第二范式： 建立在第一范式的基础之上，要求所有非主键字段完全依赖主键，不要产生部分依赖。</span><br><span class="line">(学术编号<span class="operator">+</span>教师编号,学生姓名,教师姓名)<span class="operator">-</span><span class="operator">&gt;</span>(学生编号,教师编号)(学生编号,学生姓名)(教师编号,教师姓名)</span><br><span class="line"></span><br><span class="line"><span class="number">3.</span>第三范式： 建立在第二范式的基础之上，要求所有非主键字段直接依赖主键，不要产生传递依赖。</span><br><span class="line">(学生编号,学生姓名,班级编号,班级名称)<span class="operator">-</span><span class="operator">&gt;</span>(学生编号,学生姓名,班级编号)(班级编号,班级名称)</span><br></pre></td></tr></table></figure>
+<h5 id="mysql数据类型"><a class="markdownIt-Anchor" href="#mysql数据类型"></a> MySQL数据类型</h5>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">整型:TINYINT(<span class="number">1</span>字节,<span class="number">255</span>) <span class="type">SMALLINT</span>(<span class="number">2</span>字节,<span class="number">65535</span>)  MEDIUMINT(<span class="number">3</span>字节,<span class="number">16777214</span>) <span class="type">INT</span>(<span class="number">4</span>字节,<span class="number">4294967295</span>) <span class="type">BIGINT</span>(<span class="number">8</span>字节,)</span><br><span class="line"></span><br><span class="line">浮点型:<span class="type">FLOAT</span>(<span class="number">4</span>字节) <span class="keyword">DOUBLE</span>(<span class="number">8</span>字符) <span class="type">DECIMAL</span>(M<span class="operator">+</span><span class="number">2</span>字节,指定精度)</span><br><span class="line"></span><br><span class="line">日期型:<span class="keyword">YEAR</span>(yyyy,<span class="number">1</span>字节)  <span class="type">TIME</span>(HH:MM:SS,<span class="number">3</span>字节) <span class="type">DATE</span>(YYYY<span class="operator">-</span>MM<span class="operator">-</span>DD,三字节) DATETIME(YYYY<span class="operator">-</span>MM<span class="operator">-</span>DD HH:MM:SS,<span class="number">8</span>字节)</span><br><span class="line"></span><br><span class="line">字符串类型:<span class="type">CHAR</span>(M字节,定长) <span class="type">VARCHAR</span>(L<span class="operator">+</span><span class="number">1</span>字节,L实际长度)　TINYTEXT(L字节,<span class="number">2</span><span class="operator">*</span><span class="operator">*</span><span class="number">8</span>) TEXT(L<span class="operator">+</span><span class="number">2</span>字节,<span class="number">2</span><span class="operator">*</span><span class="operator">*</span><span class="number">16</span>) MEDIUMTEXT(L<span class="operator">+</span><span class="number">3</span>字节,<span class="number">2</span><span class="operator">*</span><span class="operator">*</span><span class="number">24</span>) LONGTEXT(L<span class="operator">+</span><span class="number">3</span>字节,<span class="number">2</span><span class="operator">*</span><span class="operator">*</span><span class="number">32</span>) ENUM() <span class="keyword">SET</span>()</span><br><span class="line"></span><br><span class="line">二进制类型:BIT()  <span class="type">BINARY</span>() <span class="type">VARBINARY</span>() <span class="type">BLOB</span>()</span><br><span class="line"></span><br><span class="line">转义符: 用\</span><br></pre></td></tr></table></figure>
+<p><code>系统变量</code></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- MySQL 中的系统变量以两个“@”开头。</span></span><br><span class="line"><span class="keyword">SHOW</span> <span class="keyword">GLOBAL</span> VARIABLES; </span><br><span class="line"><span class="keyword">SHOW</span> SESSION VARIABLES;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 设置</span></span><br><span class="line"><span class="keyword">SET</span> @<span class="variable">@global</span>.innodb_file_per_table<span class="operator">=</span><span class="keyword">default</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="mysql存储引擎"><a class="markdownIt-Anchor" href="#mysql存储引擎"></a> MySQL存储引擎</h5>
+<p><code>存储引擎就是指表的类型。数据库的存储引擎决定了表在计算机中的存储方式。</code></p>
+<p><img src="https://image.yayan.xyz/20230311122012.png" alt="" /></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> ENGINES;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> default_storage_engine<span class="operator">=</span><span class="operator">&lt;</span> 存储引擎名 <span class="operator">&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><code>InnoDB</code></p>
+<blockquote>
+<p>1.支持事务,实现了4个隔离级别<br />
+2.灾难恢复性好,commit rollback crash-recovery<br />
+3.行级锁<br />
+4.缓存处理<br />
+5.支持外键</p>
+</blockquote>
+<p>使用InnoDB时，MySQL会在数据目录(Data )下创建一个名为ibdata1的10MB大小的自动扩展数据文件，以及两个名为ib_logfile0和ib_logfile1的5MB大小的日志文件。<br />
+InnoDB存储引擎和MyISAM不太一样，虽然也有.frm文件来存放表结构定义相关的元数据，但是表数据和索引数据是存放在一起的.至于是每个表单独存放还是所有表存放在一起，用户可以自己设置。</p>
+<p><strong>物理存储结构</strong></p>
+<ol>
+<li>数据文件(表数据和索引数据)<br />
+数据文件用来存放数据表中的数据和所有的索引数据，包括主键和其他普通索引。<br />
+InnoDB存储的数据采用表空间(Tablepace)进行存放设计。表空间是用来存放MySQL系统相关信息的一个特殊共享表空间。<br />
+InnoDB的表空间分为以下两种形式∶<br />
+共享表空间，表数据和索引都存放在同一个表空间。默认的表空间文件就是上面所提到的MySQL初始化路径下的 ibdata1文件。<br />
+独立表空间，每个表的数据和索引被存放在一个单独的.ibd文件中。</li>
+<li>日志文件<br />
+默认情况下，InnoDB存储引擎的数据目录下会有两个名为ib_logfile0和ib_Jogfile1的文件。在MySQL官方手册中将其称为InnoDB存储引擎的重做日志文件( redo log file )。<br />
+重做日志文件对InnoDB存储擎至关重要。InnoDB可以通过重做日志将数据库宕机时已经完成但还没有来得及将数据写入磁盘的事务恢复，也能将所有部分完成并已经写入磁盘的末完成事务回滚，并且将数据还原，以此来保证数据的完整性。<br />
+每个InnoDB存储引擎至少有1个重做日志文件组 ( group )，每个文件组下至少有2个重做日志文件，如默认的ib_Jogfile0和ib_logfile1。</li>
+</ol>
+<p><code>MyISAM</code><br />
+<code>优</code></p>
+<blockquote>
+<p>占用空间小<br />
+访问速度快，对事务完整性没有要求或以SELECT、INSERT为主的应用基本上都可以使用这个<br />
+引擎来创建表可以配合锁，实现操作系统下的复制备份<br />
+支持全文检索(InnoDB在MySQL 5.6版本以后也支持全文检索)数据紧凑存储，因此可获得更<br />
+小的索引和更快的全表扫描性能。<br />
+MyISAM对整张表加锁，而不是针对行。读取时会对需要读到的所有表加共享锁，写入时对表加排他锁。但是在表有读取查询的同时也可以往表中插入新的记录（这被称为并发插入)。<br />
+三种索引:B-Tree,R-Tree,Full-Text<br />
+<code>缺</code><br />
+不支持事务的完整性和并发性<br />
+不支持行级锁，使用表级锁，并发性差<br />
+主机宕机后，MyISAM表易损坏，灾难恢复性不佳数据库崩溃后无法安全恢复<br />
+只缓存索引，数据的缓存是利用操作系统缓冲区来实现的，可能会引发过多的系统调用，且效率不佳</p>
+</blockquote>
+<p><strong>物理存储</strong></p>
+<p>MyISAM存储引擎的表在数据库中被存储成3个物理文件，文件名与表名相同。扩展名为frm、MYD和MYI。其中:</p>
+<p>frm为扩展名的文件存储表的结构;<br />
+MYD为扩展名的文件存储数据，其是MYData的缩写;<br />
+MYI为扩展名的文件存储索引，其是MYIndex的缩写。不管表有多少索引，都是存放在同一个.MYT文件中.</p>
+<p><code>不同存储引擎存储的方式</code><br />
+MySQL中的每一个数据表在磁盘上至少被表示为一个文件，即存放着该数据表结构定义的.frm 文件。不同的存储引擎还有其它用来存放数据和索引信息的文件。</p>
+<p>从MySQL 8.0版本开始，frm 表结构定义文件被取消，MySQL把表结构信息都写到了系统表空间。</p>
+<p><img src="https://image.yayan.xyz/20230311134621.png" alt="" /></p>
+<h5 id="数据表的基本操作"><a class="markdownIt-Anchor" href="#数据表的基本操作"></a> 数据表的基本操作</h5>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://gladdduck.github.io/2023/03/07/python100%E5%A4%A931-40/" title="python100天31-40" target="_blank" rel="external">https://gladdduck.github.io/2023/03/07/python100天31-40/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/cofess" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/avatar.jpg" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <div>个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/03/16/LeetCode%E5%89%91%E6%8C%87offer1/" title="LeecCode剑指offer1"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/02/27/python100%E5%A4%A91-15/" title="python100天1-15"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat,facebook,twitter" data-mobile-sites="weibo,qq,qzone"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/cofess" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+        <li><a href="http://weibo.com/cofess" target="_blank" title="Weibo" data-toggle=tooltip data-placement=top><i class="icon icon-weibo"></i></a></li>
+        
+        <li><a href="https://twitter.com/iwebued" target="_blank" title="Twitter" data-toggle=tooltip data-placement=top><i class="icon icon-twitter"></i></a></li>
+        
+        <li><a href="https://www.behance.net/cofess" target="_blank" title="Behance" data-toggle=tooltip data-placement=top><i class="icon icon-behance"></i></a></li>
+        
+        <li><a href="/atom.xml" target="_blank" title="Rss" data-toggle=tooltip data-placement=top><i class="icon icon-rss"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: '',
+    appKey: '',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
+
+
+
+
+
+
+
+</body>
+</html>
