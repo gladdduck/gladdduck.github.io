@@ -10,8 +10,7 @@ toc: true # 是否启用内容索引
 😍😍😍
 ### 流程
 
-![1694228618814](image/Git/1694228618814.png)
-
+![](https://image.yayan.xyz/1694228618814.png)
 
 - 远程仓库(github)
 - 本地仓库(本机)
@@ -147,7 +146,7 @@ git commit --amend -m "提交说明"
 3. 修改或删除之后,已commit
     - git checkout commit_id 文件名
 
-![1695030753653](image/Git/1695030753653.png)
+![](https://image.yayan.xyz/1695030753653.png)
 
 ---
 
@@ -155,7 +154,7 @@ git commit --amend -m "提交说明"
 
 
 `普通日志`
-![1695086367249](image/Git/1695086367249.png)
+![](https://image.yayan.xyz/1695086367249.png)
 
 `引用日志`
 
@@ -170,7 +169,7 @@ git reflog
 ---
 
 ### 标签管理
-![1695087977610](image/Git/1695087977610.png)
+![](https://image.yayan.xyz/1695087977610.png)
 
 发行: 在github上create a new release
 
