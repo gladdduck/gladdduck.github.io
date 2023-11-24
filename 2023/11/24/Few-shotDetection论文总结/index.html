@@ -30,10 +30,11 @@
 <meta property="og:image" content="https://image.yayan.xyz/20231114212512.png">
 <meta property="og:image" content="https://image.yayan.xyz/20231124163026.png">
 <meta property="og:image" content="https://image.yayan.xyz/20231114212457.png">
+<meta property="og:image" content="https://image.yayan.xyz/20231124210649.png">
 <meta property="og:image" content="https://image.yayan.xyz/20231112160553.png">
 <meta property="og:image" content="https://image.yayan.xyz/20231124170553.png">
 <meta property="article:published_time" content="2023-11-24T12:54:49.892Z">
-<meta property="article:modified_time" content="2023-11-24T09:14:47.927Z">
+<meta property="article:modified_time" content="2023-11-24T13:30:55.645Z">
 <meta property="article:author" content="syxue">
 <meta property="article:tag" content="Few-shot Object Detection">
 <meta name="twitter:card" content="summary">
@@ -423,10 +424,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/11/24/Few-shotDetection%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3k(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 3.5k(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 12(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 14(分)</span>
 	
 
       </div>
@@ -563,7 +564,6 @@
 2. Meta-RCNN
 3. Attention-RPN
 4. Meta-DETR
-
 5. Frustratingly Simple Few-Shot Object Detection
 6.Meta-Learning to Detect Rare Objects
 
@@ -587,7 +587,7 @@
 <li>损失函数中的分类损失,使用softmax之后的类别</li>
 </ol>
 <p><strong>补充</strong><br />
-<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/NW07_x1jx7uSkMm98yUkOg"> Deep Traffic 微信公众号:Meta-RCNN</a></p>
+<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/NW07_x1jx7uSkMm98yUkOg"> Deep Traffic 微信公众号:FSRW</a></p>
 <hr />
 <!-- Meta-RCNN -->
 <h3 id="2-meta-r-cnn-towards-general-solver-for-instance-level-low-shot-learning"><a class="markdownIt-Anchor" href="#2-meta-r-cnn-towards-general-solver-for-instance-level-low-shot-learning"></a> 2. Meta R-CNN: Towards General Solver for Instance-Level Low-Shot Learning</h3>
@@ -668,7 +668,8 @@
 </li>
 </ol>
 <p><strong>补充</strong><br />
-<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Jp378IF7tTUoz06wjPdmRA"> Deep Traffic 微信公众号:Meta-RCNN</a></p>
+<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Jp378IF7tTUoz06wjPdmRA"> Deep Traffic 微信公众号:Meta-RCNN</a><br />
+<strong>补充</strong></p>
 <hr />
 <!-- Attention-RPN -->
 <h3 id="3-few-shot-object-detection-with-attention-rpn-and-multi-relation-detector"><a class="markdownIt-Anchor" href="#3-few-shot-object-detection-with-attention-rpn-and-multi-relation-detector"></a> 3. Few-Shot Object Detection with Attention-RPN and Multi-Relation Detector</h3>
@@ -684,16 +685,60 @@
 <li>RPN对novel class的提议不好</li>
 <li>现有的模型都需要fine-tune</li>
 </ol>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Iuqf4TtVeKF1zLtk1VuoXQ"> Deep Traffic 微信公众号:Attention-RPN</a></p>
+<!-- Meta-DETR -->
 <h3 id="4-meta-detr-image-level-few-shot-object-detection-with-inter-class-correlation-exploitation"><a class="markdownIt-Anchor" href="#4-meta-detr-image-level-few-shot-object-detection-with-inter-class-correlation-exploitation"></a> 4. Meta-DETR: Image-Level Few-Shot Object Detection with Inter-Class Correlation Exploitation</h3>
 <p><img src="https://image.yayan.xyz/20231114212457.png" alt="" /></p>
 <p><strong>问题</strong>:</p>
 <ol>
 <li>低质量的新类区域建议</li>
-<li>忽略了不同类的类间相关性</li>
+<li>单次推理只能检测一个类,忽略了不同类的类间相关性</li>
 </ol>
 <p><strong>思想</strong>:</p>
-<p><strong>补充</strong><br />
-<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/Iuqf4TtVeKF1zLtk1VuoXQ"> Deep Traffic 微信公众号:Meta-RCNN</a></p>
+<ol>
+<li>共享的特征抽取器把查询图像和支持图像提取到相同的特征空间中</li>
+<li>通过相关聚合模块(CAM)执行查询和支持直接的匹配，CAM进一步把支持类映射到一组预定义的任务编码中,这些任务编码以类无关的方式区分支持类</li>
+<li>最后,通过transformer架构(Deformable-DETR)预测对象位置和相应任务编码</li>
+</ol>
+<p><strong>关键点</strong>:<br />
+<img src="https://image.yayan.xyz/20231124210649.png" alt="" /></p>
+<ol>
+<li>
+<p>Feature Matching:通过稍微修改注意力机制实现特征匹配,旨在过滤掉与支持类无关的特征;<br />
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">A</mi><mo>=</mo><mi mathvariant="normal">Attn</mi><mo>⁡</mo><mo stretchy="false">(</mo><mi mathvariant="bold">Q</mi><mo separator="true">,</mo><mi mathvariant="bold">S</mi><mo stretchy="false">)</mo><mo>=</mo><mi mathvariant="normal">Softmax</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mfrac><mrow><mo stretchy="false">(</mo><mrow><mi mathvariant="bold">Q</mi><mi mathvariant="bold">W</mi></mrow><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mrow><mi mathvariant="bold">S</mi><mi mathvariant="bold">W</mi></mrow><msup><mo stretchy="false">)</mo><mi mathvariant="normal">T</mi></msup></mrow><msqrt><mi>d</mi></msqrt></mfrac><mo fence="true">)</mo></mrow><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">\mathbf{A}=\operatorname{Attn}(\mathbf{Q}, \mathbf{S})=\operatorname{Softmax}\left(\frac{(\mathbf{Q W})(\mathbf{S W})^{\mathrm{T}}}{\sqrt{d}}\right),</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf">A</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mop"><span class="mord mathrm">A</span><span class="mord mathrm">t</span><span class="mord mathrm">t</span><span class="mord mathrm">n</span></span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">Q</span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathbf">S</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.80002em;vertical-align:-0.65002em;"></span><span class="mop"><span class="mord mathrm">S</span><span class="mord mathrm">o</span><span class="mord mathrm" style="margin-right:0.07778em;">f</span><span class="mord mathrm">t</span><span class="mord mathrm">m</span><span class="mord mathrm">a</span><span class="mord mathrm">x</span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.128365em;"><span style="top:-2.5335085em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord sqrt mtight"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.937845em;"><span class="svg-align" style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mtight" style="padding-left:0.833em;"><span class="mord mathnormal mtight">d</span></span></span><span style="top:-2.8978450000000002em;"><span class="pstrut" style="height:3em;"></span><span class="hide-tail mtight" style="min-width:0.853em;height:1.08em;"><svg width='400em' height='1.08em' viewBox='0 0 400000 1080' preserveAspectRatio='xMinYMin slice'><path d='M95,702
+c-2.7,0,-7.17,-2.7,-13.5,-8c-5.8,-5.3,-9.5,-10,-9.5,-14
+c0,-2,0.3,-3.3,1,-4c1.3,-2.7,23.83,-20.7,67.5,-54
+c44.2,-33.3,65.8,-50.3,66.5,-51c1.3,-1.3,3,-2,5,-2c4.7,0,8.7,3.3,12,10
+s173,378,173,378c0.7,0,35.3,-71,104,-213c68.7,-142,137.5,-285,206.5,-429
+c69,-144,104.5,-217.7,106.5,-221
+l0 -0
+c5.3,-9.3,12,-14,20,-14
+H400000v40H845.2724
+s-225.272,467,-225.272,467s-235,486,-235,486c-2.7,4.7,-9,7,-19,7
+c-6,0,-10,-1,-12,-3s-194,-422,-194,-422s-65,47,-65,47z
+M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.102155em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mopen mtight">(</span><span class="mord mtight"><span class="mord mathbf mtight">Q</span><span class="mord mathbf mtight" style="margin-right:0.01597em;">W</span></span><span class="mclose mtight">)</span><span class="mopen mtight">(</span><span class="mord mtight"><span class="mord mathbf mtight">S</span><span class="mord mathbf mtight" style="margin-right:0.01597em;">W</span></span><span class="mclose mtight"><span class="mclose mtight">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9190928571428572em;"><span style="top:-2.931em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathrm mtight">T</span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.538em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span></span></span></span><br />
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="bold">Q</mi><mi mathvariant="bold">F</mi></msub><mo>=</mo><mi mathvariant="bold">A</mi><mi>σ</mi><mo stretchy="false">(</mo><mi mathvariant="bold">S</mi><mo stretchy="false">)</mo><mo>⊙</mo><mi mathvariant="bold">Q</mi></mrow><annotation encoding="application/x-tex">\mathbf{Q}_{\mathbf{F}}=\mathbf{A} \sigma(\mathbf{S}) \odot \mathbf{Q}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8805499999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord"><span class="mord mathbf">Q</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33027699999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathbf mtight">F</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathbf">A</span></span><span class="mord mathnormal" style="margin-right:0.03588em;">σ</span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">S</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⊙</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8805499999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathbf">Q</span></span></span></span></span></p>
+</li>
+<li>
+<p>Encoding Matching:为了实现相关元学习，给每个支持类的预定义任务编码，并将查询特征与其对应的任务编码进行匹配，以便可以对任务编码而不是特定类进行最终预测。</p>
+<ul>
+<li>此处的任务编码就是Transformer中的正弦函数位置编码</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Q</mi><mi>E</mi></msub><mo>=</mo><mi mathvariant="bold">A</mi><mi mathvariant="bold">T</mi></mrow><annotation encoding="application/x-tex">Q_E=\mathbf{A}\mathbf{T}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05764em;">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf">A</span></span><span class="mord"><span class="mord mathbf">T</span></span></span></span></span></li>
+</ul>
+</li>
+<li>
+<p>Modeling Background for Open-Set Prediction,给背景一个支持占位和任务编码</p>
+</li>
+</ol>
+<p><strong>训练</strong>:</p>
+<ol>
+<li>给定一个查询图像，随机抽取代表不同支持类的K张支持图像。只保留属于采样支持类的Ground Truth真实标注框作为检测目标。此外，每个对象的分类目标是真是标注类的任务编码，而不是真实标注类本身。
+<ul>
+<li>标注类转任务编码:<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>χ</mi><mrow><mo fence="true">(</mo><msub><mi>s</mi><mi>i</mi></msub><mo fence="true">)</mo></mrow><mo>=</mo><mi>i</mi><mo separator="true">,</mo><mspace width="1em"/><mi>i</mi><mo>∈</mo><mo stretchy="false">{</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mo>⋯</mo><mtext> </mtext><mo separator="true">,</mo><mi>C</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\chi\left(s_{i}\right)=i,  \quad i \in\{1,2, \cdots, C\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">χ</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">i</span><span class="mpunct">,</span><span class="mspace" style="margin-right:1em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">⋯</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mclose">}</span></span></span></span>,具体实现不重要…</li>
+<li>最终的任务是:将目标类的标签映射到相应任务编码的标签</li>
+</ul>
+</li>
+</ol>
 <hr />
 <h3 id="5-frustratingly-simple-few-shot-object-detection"><a class="markdownIt-Anchor" href="#5-frustratingly-simple-few-shot-object-detection"></a> 5. Frustratingly Simple Few-Shot Object Detection</h3>
 <p><img src="https://image.yayan.xyz/20231112160553.png" alt="" /></p>
