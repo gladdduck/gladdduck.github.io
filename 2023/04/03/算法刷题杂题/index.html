@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>蓝桥杯题目 | Gladdduck</title>
+  <title>算法刷题杂题 | Gladdduck</title>
   <meta name="description" content="A 题目连接  n个人,从第一个开始传球,经过m次回到第一个人手里的方法数  做题思路:笨比方法:1作为root,建了棵二叉树,每次分裂出两个节点,然后再dfs,搜索路径数量(叶节点是1),超内存了 正确思路:dp[i][j] 表示传了i次在j手里的可能,判断一下1和n的边界情况 12345678910111213141516n,m&#x3D;input().split()n&#x3D;int(n)m&#x3D;int(m)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="蓝桥杯题目">
-<meta property="og:url" content="https://gladdduck.github.io/2023/04/03/%E8%93%9D%E6%A1%A5%E6%9D%AF%E6%9D%82%E9%A2%98/index.html">
+<meta property="og:title" content="算法刷题杂题">
+<meta property="og:url" content="https://gladdduck.github.io/2023/04/03/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E6%9D%82%E9%A2%98/index.html">
 <meta property="og:site_name" content="Gladdduck">
 <meta property="og:description" content="A 题目连接  n个人,从第一个开始传球,经过m次回到第一个人手里的方法数  做题思路:笨比方法:1作为root,建了棵二叉树,每次分裂出两个节点,然后再dfs,搜索路径数量(叶节点是1),超内存了 正确思路:dp[i][j] 表示传了i次在j手里的可能,判断一下1和n的边界情况 12345678910111213141516n,m&#x3D;input().split()n&#x3D;int(n)m&#x3D;int(m)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-03T09:24:36.314Z">
-<meta property="article:modified_time" content="2023-11-26T05:18:56.215Z">
+<meta property="article:modified_time" content="2023-11-26T05:33:12.207Z">
 <meta property="article:author" content="syxue">
 <meta property="article:tag" content="算法刷题笔记">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="https://gladdduck.github.io/2023/04/03/%E8%93%9D%E6%A1%A5%E6%9D%AF%E6%9D%82%E9%A2%98/index.html">
+  <link rel="canonical" href="https://gladdduck.github.io/2023/04/03/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E6%9D%82%E9%A2%98/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
   
@@ -371,14 +371,14 @@
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-蓝桥杯杂题" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-算法刷题杂题" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      蓝桥杯题目
+      算法刷题杂题
     </h1>
   
 
@@ -386,7 +386,7 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2023/04/03/%E8%93%9D%E6%A1%A5%E6%9D%AF%E6%9D%82%E9%A2%98/" class="article-date">
+	<a href="/2023/04/03/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E6%9D%82%E9%A2%98/" class="article-date">
 	  <time datetime="2023-04-03T09:24:36.314Z" itemprop="datePublished">2023-04-03</time>
 	</a>
 </span>
@@ -412,7 +412,7 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/04/03/%E8%93%9D%E6%A1%A5%E6%9D%AF%E6%9D%82%E9%A2%98/#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/04/03/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E6%9D%82%E9%A2%98/#comments" class="article-comment-link">评论</a></span>
         
 	
 		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.9k(字)</span>
@@ -447,7 +447,7 @@
 </blockquote>
 <p>思路:笨比方法:以为两次BFS就行,每次都拿到最大的,这样有可能本来上三角一次,下三角一次最大,但是第一次走最大路径把这个打破了,会导致上下三角有的没拿到</p>
 <p>正确思路:f[i][j][h][k];表示两条路同时走，第一条路径走到(i,j)时，第二条走到（h,k）时的最大数字和；</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line"></span><br><span class="line">m=[[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n*n):</span><br><span class="line">    x,y,v=<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>,<span class="built_in">input</span>().split()))</span><br><span class="line">    <span class="keyword">if</span> v==<span class="number">0</span> <span class="keyword">and</span> x==<span class="number">0</span> <span class="keyword">and</span> y==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    m[x][y]=v</span><br><span class="line"></span><br><span class="line">dp=[[[[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> h <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">                dp[i][j][h][k]=<span class="built_in">max</span>(</span><br><span class="line">                    dp[i-<span class="number">1</span>][j][h-<span class="number">1</span>][k],</span><br><span class="line">                    dp[i-<span class="number">1</span>][j][h][k-<span class="number">1</span>],</span><br><span class="line">                    dp[i][j-<span class="number">1</span>][h-<span class="number">1</span>][k],</span><br><span class="line">                    dp[i][j-<span class="number">1</span>][h][k-<span class="number">1</span>]</span><br><span class="line">                )+m[i][j]+m[h][k]</span><br><span class="line">                <span class="keyword">if</span> i==h <span class="keyword">and</span> j==k:</span><br><span class="line">                    dp[i][j][h][k]-=m[h][k]</span><br><span class="line">              </span><br><span class="line"><span class="built_in">print</span>(dp[n][n][n][n])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">n=<span class="built_in">int</span>(<span class="built_in">input</span>())</span><br><span class="line"></span><br><span class="line">m=[[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n*n):</span><br><span class="line">    x,y,v=<span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>,<span class="built_in">input</span>().split()))</span><br><span class="line">    <span class="keyword">if</span> v==<span class="number">0</span> <span class="keyword">and</span> x==<span class="number">0</span> <span class="keyword">and</span> y==<span class="number">0</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    m[x][y]=v</span><br><span class="line"></span><br><span class="line">dp=[[[[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> h <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>,n+<span class="number">1</span>):</span><br><span class="line">                dp[i][j][h][k]=<span class="built_in">max</span>(</span><br><span class="line">                    dp[i-<span class="number">1</span>][j][h-<span class="number">1</span>][k],</span><br><span class="line">                    dp[i-<span class="number">1</span>][j][h][k-<span class="number">1</span>],</span><br><span class="line">                    dp[i][j-<span class="number">1</span>][h-<span class="number">1</span>][k],</span><br><span class="line">                    dp[i][j-<span class="number">1</span>][h][k-<span class="number">1</span>]</span><br><span class="line">                )+m[i][j]+m[h][k]</span><br><span class="line">                <span class="keyword">if</span> i==h <span class="keyword">and</span> j==k:</span><br><span class="line">                    dp[i][j][h][k]-=m[h][k]</span><br><span class="line">            </span><br><span class="line"><span class="built_in">print</span>(dp[n][n][n][n])</span><br></pre></td></tr></table></figure>
 <h3 id="d"><a class="markdownIt-Anchor" href="#d"></a> D</h3>
 <p><a target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/54569/D">题目链接</a></p>
 <blockquote>
@@ -519,7 +519,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="https://gladdduck.github.io/2023/04/03/%E8%93%9D%E6%A1%A5%E6%9D%AF%E6%9D%82%E9%A2%98/" title="蓝桥杯题目" target="_blank" rel="external">https://gladdduck.github.io/2023/04/03/蓝桥杯杂题/</a>
+      <a href="https://gladdduck.github.io/2023/04/03/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E6%9D%82%E9%A2%98/" title="算法刷题杂题" target="_blank" rel="external">https://gladdduck.github.io/2023/04/03/算法刷题杂题/</a>
     </li>
     
     <li class="post-copyright-license">
