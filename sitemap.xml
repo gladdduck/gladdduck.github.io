@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://gladdduck.github.io/2023/12/03/Hexo%E5%8D%9A%E5%AE%A2%E5%8F%82%E6%95%B0%E8%AE%B0%E5%BD%95/</loc>
+    
+    <lastmod>2023-12-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://gladdduck.github.io/2023/04/03/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E6%9D%82%E9%A2%98/</loc>
     
     <lastmod>2023-11-26</lastmod>
@@ -407,16 +416,7 @@
   </url>
   
   <url>
-    <loc>https://gladdduck.github.io/tags/index.html</loc>
-    
-    <lastmod>2022-10-17</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://gladdduck.github.io/repository/index.html</loc>
+    <loc>https://gladdduck.github.io/categories/index.html</loc>
     
     <lastmod>2022-10-17</lastmod>
     
@@ -434,7 +434,7 @@
   </url>
   
   <url>
-    <loc>https://gladdduck.github.io/categories/index.html</loc>
+    <loc>https://gladdduck.github.io/tags/index.html</loc>
     
     <lastmod>2022-10-17</lastmod>
     
@@ -444,6 +444,15 @@
   
   <url>
     <loc>https://gladdduck.github.io/links/index.html</loc>
+    
+    <lastmod>2022-10-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://gladdduck.github.io/repository/index.html</loc>
     
     <lastmod>2022-10-17</lastmod>
     
@@ -461,13 +470,6 @@
 
   
   <url>
-    <loc>https://gladdduck.github.io/tags/BingChat/</loc>
-    <lastmod>2023-12-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://gladdduck.github.io/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -482,21 +484,21 @@
   </url>
   
   <url>
+    <loc>https://gladdduck.github.io/tags/BingChat/</loc>
+    <lastmod>2023-12-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://gladdduck.github.io/tags/Blazor/</loc>
+    <lastmod>2023-12-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://gladdduck.github.io/tags/PaddleOCRSharp/</loc>
-    <lastmod>2023-12-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://gladdduck.github.io/tags/Few-shotObjectDetection/</loc>
-    <lastmod>2023-12-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://gladdduck.github.io/tags/Git/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -510,14 +512,28 @@
   </url>
   
   <url>
-    <loc>https://gladdduck.github.io/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/</loc>
+    <loc>https://gladdduck.github.io/tags/Few-shotObjectDetection/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://gladdduck.github.io/tags/Blazor/</loc>
+    <loc>https://gladdduck.github.io/tags/Hexo/</loc>
+    <lastmod>2023-12-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://gladdduck.github.io/tags/Git/</loc>
+    <lastmod>2023-12-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://gladdduck.github.io/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -566,13 +582,6 @@
   </url>
   
   <url>
-    <loc>https://gladdduck.github.io/tags/VS2022/</loc>
-    <lastmod>2023-12-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://gladdduck.github.io/tags/VSCode-Github/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -580,7 +589,7 @@
   </url>
   
   <url>
-    <loc>https://gladdduck.github.io/tags/Zero-shot-Detection/</loc>
+    <loc>https://gladdduck.github.io/tags/VS2022/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -594,7 +603,7 @@
   </url>
   
   <url>
-    <loc>https://gladdduck.github.io/tags/git-Time-out/</loc>
+    <loc>https://gladdduck.github.io/tags/Zero-shot-Detection/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -615,14 +624,14 @@
   </url>
   
   <url>
-    <loc>https://gladdduck.github.io/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/</loc>
+    <loc>https://gladdduck.github.io/tags/git-Time-out/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://gladdduck.github.io/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://gladdduck.github.io/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -643,14 +652,14 @@
   </url>
   
   <url>
-    <loc>https://gladdduck.github.io/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/</loc>
+    <loc>https://gladdduck.github.io/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://gladdduck.github.io/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
+    <loc>https://gladdduck.github.io/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -664,28 +673,7 @@
   </url>
   
   <url>
-    <loc>https://gladdduck.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2023-12-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://gladdduck.github.io/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
-    <lastmod>2023-12-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://gladdduck.github.io/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/</loc>
-    <lastmod>2023-12-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://gladdduck.github.io/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</loc>
+    <loc>https://gladdduck.github.io/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -699,20 +687,41 @@
   </url>
   
   <url>
+    <loc>https://gladdduck.github.io/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/</loc>
+    <lastmod>2023-12-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://gladdduck.github.io/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
+    <lastmod>2023-12-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://gladdduck.github.io/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2023-12-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://gladdduck.github.io/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
-
-  
   <url>
-    <loc>https://gladdduck.github.io/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/</loc>
+    <loc>https://gladdduck.github.io/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
+  
+
   
   <url>
     <loc>https://gladdduck.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
@@ -722,7 +731,7 @@
   </url>
   
   <url>
-    <loc>https://gladdduck.github.io/categories/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://gladdduck.github.io/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -730,6 +739,13 @@
   
   <url>
     <loc>https://gladdduck.github.io/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2023-12-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://gladdduck.github.io/categories/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2023-12-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
