@@ -26,7 +26,7 @@
 <meta property="og:description" content="# Few-shot Object Detection  ## 综述  ### Few-Shot Object Detection: A Comprehensive Survey  1. 问题定义:N-way K-shot表示使用K个样本来训练N个类别 2. 和few-shot learning,semi-supervised learning,increamental learning的区别 3">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-24T12:54:49.892Z">
-<meta property="article:modified_time" content="2023-12-03T06:09:17.047Z">
+<meta property="article:modified_time" content="2023-12-08T09:33:22.000Z">
 <meta property="article:author" content="syxue">
 <meta property="article:tag" content="Few-shotObjectDetection">
 <meta name="twitter:card" content="summary">
@@ -415,10 +415,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/11/24/Few-shotDetection%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 5.6k(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 8k(字)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 23(分)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 33(分)</span>
 	
 
       </div>
@@ -794,6 +794,47 @@ $f\left(u_{i}\right)$作用是为质量不同的预测框赋予不同的权重,�
 ![](https://image.yayan.xyz/20231203114632.png)
 
 **问题**:
+1. 在目标检测中,分类和定位是完全不同的两个子任务,使用相同的特征进行这两个任务不好
+
+
+**思想**:
+1. 提出了Adaptive Fully-Dual Network(AFD-Net,自适应全双网络),将分类和定位解耦
+   - 查询图像使用双询问编码（Dual Query Encoder，DQE）输出用于分类和定位的查询他特征
+   - 支持图像使用双注意力生成（Dual Attention Generator，DAG）输出用于分类和定位的类被注意(支持)特征
+   - 用于分类和定位的查询特征和支持特征分别送入双聚合器（Dual Aggregator，DA）用于分类和定位
+2. Dual Attention Generator比Dual Query Encoder多了一个Max Pool来保证支持特征的大小和查询特征的大小一致
+![](https://image.yayan.xyz/20231203145704.png)
+分类分支使用卷积处理,回归任务使用全连接处理,最后各乘一个可学习的权重,concat在一起
+3. Dual Aggregator的聚合方式和8.(FSDetView) Few-Shot Object Detection and Viewpoint Estimation for Objects in the Wild.一样
+
+
+
+
+
+
+
+### 12. (DeFRCN) DeFRCN: Decoupled Faster R-CNN for Few-Shot Object Detection
+![](https://image.yayan.xyz/20231204214547.png)
+
+
+**问题**:
+1. multi-stage (RPN vs. RCNN)
+   - RPN应该是类无关的
+   - RCNN应该是类相关的
+   - 但是二者共用一个backbone,梯度会回流到backbone带来冲突
+   - 通过梯度调整三个模块(backbone,RPN,RCNN)之间的解耦程度来缓解整个模型不被其中一个支配
+2. multi-task (classification vs. localization).
+   - 分类任务需要平移不变性,而定位任务对位置敏感
+   - 在分类分支上使用一个有效的分数校准模块来实现解耦两个任务
+
+**思想**:
+1. 在RPN,RCNN和backbone之间引入GDL,使用一个decoupling coefficient $\lambda$来控制梯度的流动,从而减少不同模块之间的相互影响,
+$\mathbb{G}_{(\mathcal{A}, \lambda)}(x) =\mathcal{A}(x)$
+$\frac{\mathrm{d} \mathbb{G}_{(\mathcal{A}, \lambda)}}{\mathrm{d} x} =\lambda \nabla_{\mathcal{A}}$
+$\lambda$有三种可能,分开讨论
+
+2. PCB由一个预训练模型，一个ROIAlign层和一个分类器组成.首先从支持集中提取特征 ,然后使用RoIAlign与GroundTruth生成MK个实例,然后对k个实例的特征取平均,得到m个类别原型$p_c$. 然后给定$\hat{y}$(由检测器得到),利用预测出来的框,使用RoIAlign对齐,得到预测特征,计算预测特征$x_i$和类原型$p_c$之间的相似度分数$s_i^{cos}$,最后的预测类别得分为:
+$s_{i}^{\ddagger}=\alpha \cdot s_{i}+(1-\alpha) \cdot s_{i}^{\cos }$
 
 
 
@@ -805,7 +846,133 @@ $f\left(u_{i}\right)$作用是为质量不同的预测框赋予不同的权重,�
 
 
 
-### 12. (DeFRCN) DeFRCN: Decoupled Faster R-CNN for Few-Shot Object Detection</p>
+
+
+
+
+
+
+
+### 13. (FCT) Few-Shot Object Detection with Fully Cross-Transformer
+![](https://image.yayan.xyz/20231206190239.png)
+**问题**:
+1. 之前的工作,支持分支和查询分支的交互仅限于在检测头,剩余的几百个层的特征都是独立的,
+
+**思想**:
+1. backbone中的Cross-Transformer之前
+   - 在送入之前,把图像分成$4×4×3$大小的patches.然后展平扩展通道数为$C_1$
+   - 加上位置编码,和批次编码之后($X_{q}^{\prime}=X_{q}+\mathbf{E}_{q}^{p o s}+\mathbf{E}^{b r a}[0], X_{s}^{\prime}=X_{s}+\mathbf{E}_{s}^{p o s}+\mathbf{E}^{b r a}[1]$),再经过映射得到KVQ(为了减少计算量,使用了空间缩减)
+2. The Asymmetric-Batched Cross-Attention,非对称批处理交叉注意
+   - 支持图像通常大于1,且不固定,这个模块一次计算查询图像与同一类的所有支持图像之间的注意。
+![](https://image.yayan.xyz/20231206201930.png)
+   - 对支持图像进行平均池化,使得匹配查询分支的批量大小
+   - 对查询图像进行重复,使得匹配支持分支的批量大小
+   - 聚合之后做多头注意力+MLP
+3. The Cross-Transformer Detection Head用于在最终检测之前联合提取建议和支持图像的RoI特征
+   - 从支持分支提取出100个候选框取平均,只有一个
+   - 从查询分支提取出100个候选框
+   - 使用3.Few-Shot Object Detection with Attention-RPN and Multi-Relation Detector中的两两匹配方法进行预测
+
+
+### 14. (DeDETR) Decoupled DETR For Few-shot Object Detection
+
+![](https://image.yayan.xyz/20231205210339.png)
+
+**问题**:
+1. FasterRCNN存在定位准确,分类不准确的问题,DETR同样存在(因为极端样本不平衡导致参数优化中数据丰富的类的旧知识占主导地位，这意味着模型总是对数据丰富的类有一定的偏向。)
+2. 解码器只会使用编码器最后一层的输出作为输入,但是编码器到解码器是一个从浅到深再回到浅的过程,所以浅编码器可能会更好地匹配浅解码器
+3. 不仅解码器的最后一层能产生正确的预测结果，解码器中间层的输出有时也能产生更好的预测结果。
+
+
+**思想**:
+1. Decoupled prompts (DePrompt):
+   - 来自新类的少数样本很难将像 DETR 这样的大型模型推向合适的最优值,因此为新类和基类分配单独的权重集
+   - 分别为base class 和novel class构建独立的deformable selfattention modules,DePrompt的输出作为编码器的输入,DePrompt的输出由公式决定(w的三种设置)
+   $f_{\text {DePrompt }}(x)=w * f_{b_{p m t}}(x)+(1-w) * f_{n_{p m t}}(x)$
+
+2. 编码器和解码器之间的Skip connection,有两种方式
+   - 可学习的连接,每一层解码器的输入都有前面所有编码器层的输出乘可学习的权重矩阵得到
+   $Mem\_new^j=\sum_{i}^{i=6} A_{i j} * Men\_ori^i$
+   - 软连接,每一层解码器的输入都有前面对应的$6-j$层和最后一层编码器的输出得到
+   $Mem\_new^j=A * M e m \_o r i^{\{6\}}+(1-A) * M e m_{-} o r i^{\{i\}}$
+3. Adaptive decoder selection来解决5个中间层解码器的输出可能比最后一层获得更好的检测结果
+   - $Dec\_new =\sum_{j}^{j=6} B_{j} * Dec\_ori^j$
+   - 用可学习的参数动态调整每个层输出的权重
+
+
+
+### 15. (FSRC) Few-shot Object Detection with Refined Contrastive Learning
+
+![](https://image.yayan.xyz/20231207200929.png)
+
+
+**问题**:
+1. 各个类别的检测精度的标准差很大,表明模型对不同类别的检测能力差异很大
+
+**思想**:
+1.在RoiPool前都和FasterRCNN一样,不同的地方在于加上了RCL模块
+2. 使用细粒度的对比学习增强学习能力(和10.FSCE: Few-Shot Object Detection via Contrastive Proposal Encoding的区别在于FSCE把所有的类(前景和背景)都考虑进去进行对比),本文先把类间距小的类(相似类)挑出来,然后在这些Resemblance Group中使用对比学习
+3. 找到相似类对
+   - 需要IoU和真实框大于阈值,并且分类错误
+   - 当一个相似类对出现的次数超过某个阈值后,把这些相似类对中的类都记录下来,作为一个Resemblance Group
+   - 只有当预测的类别或者真实的类别属于Resemblance Group中的类时,才会进行对比学习
+   - 这个测量应该在训练过程中使用,因为在刚开始的时候,模型倾向于基类
+4. 损失函数
+$L_{R C L}=\frac{1}{N_{R C L}} \sum_{i=1}^{N_{R C L}} w\left(u_{i}\right) \cdot L_{z_{i}}$
+
+$N_{R C L} = N_{a l l}, I_{c}&lt;I_{m}$.
+$N_{R C L} = N_{G_{R}}, I_{c} \geqslant I_{m}$.
+
+$L_{z_{i}}=\frac{-1}{N_{y_{i}}-1} \sum_{j=1, j \neq i}^{N} I\left\{y_{i}=y_{j}\right\} \cdot \log \frac{e^{\tilde{z_{i}} \cdot \tilde{z_{j} / \tau}}}{\sum_{k=1}^{N} I_{k \neq i} \cdot e^{\tilde{z_{i}} \cdot \tilde{z_{k}} / \tau}}$
+
+
+### 16. (ECEA) ECEA: Extensible Co-Existing Attention for Few-Shot Object Detection
+![](http://image.yayan.xyz/20231208131820.png)
+
+
+**问题**:
+1. 很少考虑到局部到全局的定位(kshot样本可能只能提供novel class的一部分,比如只有狗头,但是要检测出狗身子)
+
+**Related Work值得借鉴**
+
+**思想**:
+1. 提出了一个Extensible Co-Existing Attention(ECEA)模块，使模型能够根据局部部分推断全局对象。本质上，该模型在具有丰富样本的基本阶段不断学习可扩展的能力，并将其转移到新的阶段，可以帮助少镜头模型快速适应将局部区域扩展到共存区域。
+2. 使用ResNet101的后三层构建多尺度模块经过特征融合之后送到ECEA模块中
+3. 将特征图划分为一系列patch,表示为$x_q$,每个patch利用deformable cnn来获得N个extensible regions,...看不懂了
+$\operatorname{EA}\left(x_{q}\right)=\sum_{n=1}^{N} \frac{e^{x_{q} W^{q} \cdot\left(x_{q} W_{n}^{k}\right)^{T}}}{\sum_{n=1}^{N} e^{x_{q} W^{q} \cdot\left(x_{q} W_{n}^{k}\right)^{T}}} \cdot x_{q} W_{n}^{v},$
+(类似与:一个patch经过$W$得到$K,V,Q$,然后和其他patch计算相似度,然后和其他patch的$V$相乘,得到最终的特征)
+
+3. 补充3: Extensible Liner (应该是Deformable 实现)学习到N个可扩展区域的位置和形状,然后和当前的区域进行点积运算,得到相似度分数,然后在和另一个Extensible Liner学习到N个可扩展区域$V$相乘,得到最终的特征(也是$K,V,Q$的形式,但是$K,V$中包含了N个相关的扩展区域?)
+4. 构建了级联的多头多层的Extensible Module,扩展的区域更大,视野更大,更能获得对象的定位
+$\operatorname{MHEA}(x)=\sum_{m=1}^{M} W_{m} \operatorname{EA}(x)$
+
+
+### 17. (VFA) Few-Shot Object Detection via Variational Feature Aggregation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 总结</p>
 
       
     </div>
