@@ -26,7 +26,7 @@
 <meta property="og:description" content="# Few-shot Object Detection  ## 综述  ### Few-Shot Object Detection: A Comprehensive Survey  1. 问题定义:N-way K-shot表示使用K个样本来训练N个类别 2. 和few-shot learning,semi-supervised learning,increamental learning的区别 3">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-11-24T12:54:49.892Z">
-<meta property="article:modified_time" content="2023-12-08T09:33:22.000Z">
+<meta property="article:modified_time" content="2023-12-10T05:42:15.594Z">
 <meta property="article:author" content="syxue">
 <meta property="article:tag" content="Few-shotObjectDetection">
 <meta name="twitter:card" content="summary">
@@ -415,7 +415,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/11/24/Few-shotDetection%E8%AE%BA%E6%96%87%E6%80%BB%E7%BB%93/#comments" class="article-comment-link">评论</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 8k(字)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 8.1k(字)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 33(分)</span>
@@ -949,7 +949,16 @@ $\operatorname{MHEA}(x)=\sum_{m=1}^{M} W_{m} \operatorname{EA}(x)$
 
 ### 17. (VFA) Few-Shot Object Detection via Variational Feature Aggregation
 
+![](https://image.yayan.xyz/20231209144136.png)
 
+**问题**:
+1. class-specific aggregation和class-agnostic aggregation的区别没看懂,没看出来带来什么影响
+2. 因为novel class的样本太少了,样本间的方差太大,预测结果和样本的质量关系很大
+
+
+**思想**:
+1. 使用class-agnostic aggregation聚合,即在训练时随机挑选一个支持类和查询的RoIfeature进行聚合得到聚合特征
+2. 使用Variational Feature Aggregation(VFA),先将支持特征转为分布,然后从分布中采样出特征.由于分布不特定于特定的示例,所以方差具有鲁棒性
 
 
 
