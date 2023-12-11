@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://gladdduck.github.io/picturewall/test.html</loc>
+    
+    <lastmod>2023-12-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://gladdduck.github.io/links/index.html</loc>
     
     <lastmod>2023-12-11</lastmod>
