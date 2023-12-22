@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>LeetCode每日一题2023 | Gladdduck</title>
+  <meta name="description" content="2023.12LeetCode每日一题  2023.12.11 最小体力消耗路径[中等] 1631. 最小体力消耗路径  自己思路  深搜\宽搜:统计所有路径，然后找到最小的路径 动态规划:dp[i][j]表示到达i,j的最小消耗，dp[i][j]&#x3D;min(dp[i-1][j],dp[i][j-1])+abs(heights[i][j]-heights[i-1][j-1])  错误: 题目求的不">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode每日一题2023">
+<meta property="og:url" content="https://gladdduck.github.io/2023/12/11/LeetCode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982023/index.html">
+<meta property="og:site_name" content="Gladdduck">
+<meta property="og:description" content="2023.12LeetCode每日一题  2023.12.11 最小体力消耗路径[中等] 1631. 最小体力消耗路径  自己思路  深搜\宽搜:统计所有路径，然后找到最小的路径 动态规划:dp[i][j]表示到达i,j的最小消耗，dp[i][j]&#x3D;min(dp[i-1][j],dp[i][j-1])+abs(heights[i][j]-heights[i-1][j-1])  错误: 题目求的不">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://image.yayan.xyz/20231216162436.png">
+<meta property="article:published_time" content="2023-12-11T11:42:27.397Z">
+<meta property="article:modified_time" content="2023-12-22T01:56:05.272Z">
+<meta property="article:author" content="syxue">
+<meta property="article:tag" content="算法刷题笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://image.yayan.xyz/20231216162436.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://gladdduck.github.io/2023/12/11/LeetCode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982023/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/icon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/gladdduck" target="_blank">
+          <img class="img-circle img-rotate" src="/images/icon.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Gladdduck</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">KB Master</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Suzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-picture">
+          <a href="/picturewall">
+            
+            <i class="icon icon-starfish"></i>
+            
+            <span class="menu-title">图片墙</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>自己JB的记录</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">hexo博客配置</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">23</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/">快捷命令</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95/">论文记录</a><span class="category-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BingChat/" rel="tag">BingChat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blazor/" rel="tag">Blazor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlazorLocalization/" rel="tag">BlazorLocalization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSharp/" rel="tag">CSharp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cypher/" rel="tag">Cypher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataloader/" rel="tag">Dataloader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataset/" rel="tag">Dataset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Few-shotObjectDetection/" rel="tag">Few-shotObjectDetection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Linux快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Neo4j快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PaddleOCRSharp/" rel="tag">PaddleOCRSharp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Python学习笔记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sampler/" rel="tag">Sampler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS2022/" rel="tag">VS2022</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCode-Github/" rel="tag">VSCode Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode-%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">Vscode 阿里云</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zero-shot-Detection/" rel="tag">Zero-shot Detection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collate-fn/" rel="tag">collate_fn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-Time-out/" rel="tag">git Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" rel="tag">hexo博客配置gitalk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" rel="tag">hexo博客配置picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" rel="tag">hexo博客配置pure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mmfewshot/" rel="tag">mmfewshot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" rel="tag">python3 标准库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">代码阅读</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE%E6%A3%80%E6%B5%8B/" rel="tag">垃圾检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">多个域名访问同一个服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" rel="tag">快速傅里叶变换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag">搭建博客</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%BC%9A%E8%AE%AE/" rel="tag">目标检测会议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" rel="tag">知识图谱表示</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">算法刷题笔记</a><span class="tag-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/BingChat/" style="font-size: 13px;">BingChat</a> <a href="/tags/Blazor/" style="font-size: 13px;">Blazor</a> <a href="/tags/BlazorLocalization/" style="font-size: 13px;">BlazorLocalization</a> <a href="/tags/CSharp/" style="font-size: 13px;">CSharp</a> <a href="/tags/Cypher/" style="font-size: 13px;">Cypher</a> <a href="/tags/Dataloader/" style="font-size: 13px;">Dataloader</a> <a href="/tags/Dataset/" style="font-size: 13px;">Dataset</a> <a href="/tags/Few-shotObjectDetection/" style="font-size: 13px;">Few-shotObjectDetection</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Linux快捷命令</a> <a href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Neo4j快捷命令</a> <a href="/tags/PaddleOCRSharp/" style="font-size: 13px;">PaddleOCRSharp</a> <a href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13.67px;">Python学习笔记</a> <a href="/tags/Sampler/" style="font-size: 13px;">Sampler</a> <a href="/tags/VS2022/" style="font-size: 13px;">VS2022</a> <a href="/tags/VSCode-Github/" style="font-size: 13px;">VSCode Github</a> <a href="/tags/Vscode-%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 13px;">Vscode 阿里云</a> <a href="/tags/Zero-shot-Detection/" style="font-size: 13px;">Zero-shot Detection</a> <a href="/tags/collate-fn/" style="font-size: 13px;">collate_fn</a> <a href="/tags/git-Time-out/" style="font-size: 13px;">git Time out</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" style="font-size: 13px;">hexo博客配置gitalk</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" style="font-size: 13px;">hexo博客配置picgo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" style="font-size: 13px;">hexo博客配置pure</a> <a href="/tags/mmfewshot/" style="font-size: 13px;">mmfewshot</a> <a href="/tags/neo4j%E5%AE%89%E8%A3%85/" style="font-size: 13px;">neo4j安装</a> <a href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 13.67px;">python3 标准库</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 13px;">代码阅读</a> <a href="/tags/%E5%9E%83%E5%9C%BE%E6%A3%80%E6%B5%8B/" style="font-size: 13px;">垃圾检测</a> <a href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">多个域名访问同一个服务器</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 13px;">快捷键</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" style="font-size: 13px;">快速傅里叶变换</a> <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 13px;">排序算法</a> <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="font-size: 13.33px;">搭建博客</a> <a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%BC%9A%E8%AE%AE/" style="font-size: 13px;">目标检测会议</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" style="font-size: 13px;">知识图谱表示</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" style="font-size: 13px;">知识点</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" style="font-size: 14px;">算法刷题笔记</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/12/15/DEViT%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" class="thumb">
+    
+    
+        <span style="background-image:url(https://image.yayan.xyz/小鸭子.png)" alt="DEViT代码阅读" class="thumb-image"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95/">论文记录</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/12/15/DEViT%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" class="title">DEViT代码阅读</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-15T06:48:19.603Z" itemprop="datePublished">2023-12-15</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/12/11/LeetCode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982023/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/12/11/LeetCode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982023/" class="title">LeetCode每日一题2023</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-11T11:42:27.397Z" itemprop="datePublished">2023-12-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/12/11/hexo%E6%96%B0%E5%A2%9E%E8%8F%9C%E5%8D%95%E6%A0%8F/" class="thumb">
+    
+    
+        <span style="background-image:url(https://image.yayan.xyz/小鸭子.png)" alt="Hexo博客新增菜单栏" class="thumb-image"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/12/11/hexo%E6%96%B0%E5%A2%9E%E8%8F%9C%E5%8D%95%E6%A0%8F/" class="title">Hexo博客新增菜单栏</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-11T06:27:08.586Z" itemprop="datePublished">2023-12-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/12/10/mmfewshot%E9%85%8D%E7%BD%AE/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/12/10/mmfewshot%E9%85%8D%E7%BD%AE/" class="title">mmfewshot配置</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-10T07:46:36.918Z" itemprop="datePublished">2023-12-10</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2023/12/03/Hexo%E5%8D%9A%E5%AE%A2%E5%8F%82%E6%95%B0%E8%AE%B0%E5%BD%95/" class="thumb">
+    
+    
+        <span style="background-image:url(https://image.yayan.xyz/小鸭子.png)" alt="Hexo博客参数记录" class="thumb-image"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a>
+              </p>
+              <p class="item-title">
+                <a href="/2023/12/03/Hexo%E5%8D%9A%E5%AE%A2%E5%8F%82%E6%95%B0%E8%AE%B0%E5%BD%95/" class="title">Hexo博客参数记录</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2023-12-03T05:54:00.181Z" itemprop="datePublished">2023-12-03</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#202312leetcode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text"> 2023.12LeetCode每日一题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#20231211-%E6%9C%80%E5%B0%8F%E4%BD%93%E5%8A%9B%E6%B6%88%E8%80%97%E8%B7%AF%E5%BE%84%E4%B8%AD%E7%AD%89"><span class="toc-number">1.1.</span> <span class="toc-text"> 2023.12.11 最小体力消耗路径[中等]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%B7%B1%E6%80%9D%E8%B7%AF"><span class="toc-number">1.1.1.</span> <span class="toc-text"> 自己思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3"><span class="toc-number">1.1.2.</span> <span class="toc-text"> 题解</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20231213-%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-iv%E5%9B%B0%E9%9A%BE"><span class="toc-number">1.2.</span> <span class="toc-text"> 2023.12.13 下一个更大元素 IV[困难]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-i%E7%AE%80%E5%8D%95"><span class="toc-number">1.2.1.</span> <span class="toc-text"> 下一个更大元素 I[简单]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-ii%E4%B8%AD%E7%AD%89"><span class="toc-number">1.2.2.</span> <span class="toc-text"> 下一个更大元素 II[中等]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-iii%E4%B8%AD%E7%AD%89"><span class="toc-number">1.2.3.</span> <span class="toc-text"> 下一个更大元素 III[中等]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0-iv%E5%9B%B0%E9%9A%BE"><span class="toc-number">1.2.4.</span> <span class="toc-text"> 下一个更大元素 IV[困难]</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20231213-%E5%AD%97%E5%85%B8%E5%BA%8F%E6%9C%80%E5%B0%8F%E5%9B%9E%E6%96%87%E4%B8%B2%E7%AE%80%E5%8D%95"><span class="toc-number">1.3.</span> <span class="toc-text"> 2023.12.13 字典序最小回文串[简单]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%B7%B1%E6%80%9D%E8%B7%AF-2"><span class="toc-number">1.3.1.</span> <span class="toc-text"> 自己思路</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20231215-%E5%8F%8D%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%A5%87%E6%95%B0%E5%B1%82%E4%B8%AD%E7%AD%89"><span class="toc-number">1.4.</span> <span class="toc-text"> 2023.12.15 反转二叉树的奇数层[中等]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%B7%B1%E6%80%9D%E8%B7%AF-3"><span class="toc-number">1.4.1.</span> <span class="toc-text"> 自己思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E8%A7%A3-2"><span class="toc-number">1.4.2.</span> <span class="toc-text"> 题解</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20231216-%E7%BB%9F%E8%AE%A1%E5%8C%BA%E9%97%B4%E4%B8%AD%E7%9A%84%E6%95%B4%E6%95%B0%E6%95%B0%E7%9B%AE%E8%8B%A6%E9%9A%BE"><span class="toc-number">1.5.</span> <span class="toc-text"> 2023.12.16 统计区间中的整数数目[苦难]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%AE%B5%E6%A0%91%E6%9C%80%E7%AE%80%E5%8D%95%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.5.1.</span> <span class="toc-text"> 线段树最简单模板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%AE%B5%E6%A0%91lazy%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.5.2.</span> <span class="toc-text"> 线段树Lazy模板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%AE%B5%E6%A0%91%E7%A6%BB%E6%95%A3%E5%8C%96%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.5.3.</span> <span class="toc-text"> 线段树离散化模板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.5.4.</span> <span class="toc-text"> 线段树动态开点模板</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20231217-%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF%E7%AE%80%E5%8D%95"><span class="toc-number">1.6.</span> <span class="toc-text"> 2023.12.17 使用最小花费爬楼梯[简单]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20231218-%E5%AF%BB%E6%89%BE%E5%B3%B0%E5%80%BC%E4%B8%AD%E7%AD%89"><span class="toc-number">1.7.</span> <span class="toc-text"> 2023.12.18 寻找峰值[中等]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20231219-%E5%AF%BB%E6%89%BE%E5%B3%B0%E5%80%BC-ii%E4%B8%AD%E7%AD%89"><span class="toc-number">1.8.</span> <span class="toc-text"> 2023.12.19 寻找峰值 II[中等]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20231220-%E5%88%A4%E5%88%AB%E9%A6%96%E5%AD%97%E6%AF%8D%E7%BC%A9%E7%95%A5%E8%AF%8D%E7%AE%80%E5%8D%95"><span class="toc-number">1.9.</span> <span class="toc-text"> 2023.12.20 判别首字母缩略词[简单]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20231221-%E7%BE%8E%E4%B8%BD%E5%A1%94-ii%E4%B8%AD%E7%AD%89"><span class="toc-number">1.10.</span> <span class="toc-text"> 2023.12.21 美丽塔 II[中等]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#20231222-%E5%BE%97%E5%88%B0%E5%B1%B1%E5%BD%A2%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%91%E5%88%A0%E9%99%A4%E6%AC%A1%E6%95%B0%E5%9B%B0%E9%9A%BE"><span class="toc-number">1.11.</span> <span class="toc-text"> 2023.12.22 得到山形数组的最少删除次数[困难]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97%E6%A8%A1%E6%9D%BF"><span class="toc-number">1.11.1.</span> <span class="toc-text"> 最长递增子序列模板</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%97%E5%88%B0%E5%B1%B1%E5%BD%A2%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%91%E5%88%A0%E9%99%A4%E6%AC%A1%E6%95%B0"><span class="toc-number">1.11.2.</span> <span class="toc-text"> 得到山形数组的最少删除次数</span></a></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-LeetCode每日一题2023" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LeetCode每日一题2023
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/12/11/LeetCode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982023/" class="article-date">
+	  <time datetime="2023-12-11T11:42:27.397Z" itemprop="datePublished">2023-12-11</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">算法刷题笔记</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/12/11/LeetCode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982023/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 4.3k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 19(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="202312leetcode每日一题"><a class="markdownIt-Anchor" href="#202312leetcode每日一题"></a> 2023.12LeetCode每日一题</h2>
+<h3 id="20231211-最小体力消耗路径中等"><a class="markdownIt-Anchor" href="#20231211-最小体力消耗路径中等"></a> 2023.12.11 最小体力消耗路径[中等]</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-with-minimum-effort/description/?envType=daily-question&amp;envId=2023-12-11">1631. 最小体力消耗路径</a></p>
+<h4 id="自己思路"><a class="markdownIt-Anchor" href="#自己思路"></a> 自己思路</h4>
+<ol>
+<li>深搜\宽搜:统计所有路径，然后找到最小的路径</li>
+<li>动态规划:dp[i][j]表示到达i,j的最小消耗，dp[i][j]=min(dp[i-1][j],dp[i][j-1])+abs(heights[i][j]-heights[i-1][j-1])</li>
+</ol>
+<p><strong>错误</strong>: 题目求的不是最小消耗的路径,而是这个路径上最大绝对值差值的最小()</p>
+<h4 id="题解"><a class="markdownIt-Anchor" href="#题解"></a> 题解</h4>
+<ol>
+<li>二分:二分的是最大绝对值差值,然后判断是否能够到达终点(深搜宽搜),能到就继续缩小差值,不能就增大差值</li>
+<li>并查集:将所有边按照权值从小到大排序,然后依次加入并查集,如果起点和终点连通,那么这个权值就是答案</li>
+<li>最短路径算法:当前最短路径可以表示为这条路径上最大的权重(普通的最短路径应该表示为这条路径上权重的和),然后使用最短路径算法求解</li>
+</ol>
+<h3 id="20231213-下一个更大元素-iv困难"><a class="markdownIt-Anchor" href="#20231213-下一个更大元素-iv困难"></a> 2023.12.13 下一个更大元素 IV[困难]</h3>
+<h4 id="下一个更大元素-i简单"><a class="markdownIt-Anchor" href="#下一个更大元素-i简单"></a> 下一个更大元素 I[简单]</h4>
+<ol>
+<li>先在nums2中找到当前元素的位置,然后从这个位置开始遍历,找到第一个比当前元素大的元素,如果找不到就返回-1</li>
+<li>单调栈+Hash表,先对nums2进行单调栈处理(从后往前记录(相当于当前元素和他左边的元素无关),从栈底到栈顶递增),然后用一个map记录每个数字对应的右边第一个比它大的数字,最后遍历nums1,直接从map中取值</li>
+</ol>
+<h4 id="下一个更大元素-ii中等"><a class="markdownIt-Anchor" href="#下一个更大元素-ii中等"></a> 下一个更大元素 II[中等]</h4>
+<ol>
+<li>单调栈+循环数组,循环数组使用取余的方式实现, 单调栈里存的是数组下标(元素从栈底到栈顶递减),当栈顶的元素被弹出来时,说明当前元素是栈顶元素右边第一个比它大的元素,栈顶元素的答案就是遍历到的当前元素</li>
+</ol>
+<h4 id="下一个更大元素-iii中等"><a class="markdownIt-Anchor" href="#下一个更大元素-iii中等"></a> 下一个更大元素 III[中等]</h4>
+<ol>
+<li>分析＋单调栈,对一个数字:564973,从后往前找(因为是最小的,动后面的肯定最小)</li>
+</ol>
+<ul>
+<li>对于3,后面没有比它大的数字,所以3不动</li>
+<li>对于73,没有比7大的数字,所以不动</li>
+<li>对于973,没有比9大的数字,所以不动</li>
+<li>对于4973,找到后面比4大的最小的数字,交换4和7,得到567,在对剩下的数字排序,得到349,答案就是567349</li>
+</ul>
+<ol start="2">
+<li>类似<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-permutation/description/">31.下一个排列</a></li>
+</ol>
+<ul>
+<li>[31.下一个排列],从后往前先找到第一个正序对,然后再从后往前找到第一个比这个正序对中的第一个数字大的数字,交换这两个数字,然后将后面的数字排序</li>
+<li>[31.下一个排列]也可以用1的方法做</li>
+</ul>
+<h4 id="下一个更大元素-iv困难"><a class="markdownIt-Anchor" href="#下一个更大元素-iv困难"></a> 下一个更大元素 IV[困难]</h4>
+<ol>
+<li>用一个最小堆q来存储已经找到下一个比他大的元素,用一个单调栈st来存储还没找到下一个比他大的元素的元素,具体操作:
+<ul>
+<li>如果q非空,且堆顶元素小于栈顶元素,说明堆顶的这个元素找到了第二个比他大的元素,重复操作直到堆顶元素大于栈顶元素或者堆为空</li>
+<li>如果st非空,且栈顶元素小于当前元素,说明栈顶元素找到了第一个比他大的元素,将栈顶元素弹出加入到堆中,重复操作直到栈顶元素大于当前元素或者栈为空</li>
+<li>将当前元素入栈</li>
+</ul>
+</li>
+<li>最小堆复杂度是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>,使用单调栈替换掉最小堆,复杂度就是<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>
+<ul>
+<li>用一个stack2代替最小堆,只要保证stack2是一个从栈底到栈顶单调递减的栈,如何保证stack2是单调递减的:从1可知堆顶的元素一定是大于栈里的,因此在stack1弹出来的时候,不要一个个弹,用切片弹,然后把整个切片加入到stack2中,这样就保证了stack2是单调递减的</li>
+</ul>
+</li>
+</ol>
+<h3 id="20231213-字典序最小回文串简单"><a class="markdownIt-Anchor" href="#20231213-字典序最小回文串简单"></a> 2023.12.13 字典序最小回文串[简单]</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lexicographically-smallest-palindrome/?envType=daily-question&amp;envId=2023-12-13">2697. 字典序最小回文串</a></p>
+<h4 id="自己思路-2"><a class="markdownIt-Anchor" href="#自己思路-2"></a> 自己思路</h4>
+<ol>
+<li>从左开始遍历到字符串长度的中间,如果遇到不相等的字符,那么就将这两个字符替换为二者之间最小的(双指针)</li>
+</ol>
+<h3 id="20231215-反转二叉树的奇数层中等"><a class="markdownIt-Anchor" href="#20231215-反转二叉树的奇数层中等"></a> 2023.12.15 反转二叉树的奇数层[中等]</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-odd-levels-of-binary-tree/?envType=daily-question&amp;envId=2023-12-15">2415. 反转二叉树的奇数层</a></p>
+<h4 id="自己思路-3"><a class="markdownIt-Anchor" href="#自己思路-3"></a> 自己思路</h4>
+<ol>
+<li>宽搜,难点在于如何存储每一层的节点,想法是用两个队列,一个从左往右搜左子树的,一个从右往左搜右子树的,这样顺序就是对称的.到奇数层直接交换两个队列的当前节点的值就行</li>
+<li>想复杂了,只要交换值就行,不用交换节点</li>
+</ol>
+<h4 id="题解-2"><a class="markdownIt-Anchor" href="#题解-2"></a> 题解</h4>
+<ol>
+<li>宽搜,把每一层的节点都存到list里,奇数层交换</li>
+<li>深搜, 传递两个节点,一个从最左边往下搜, 一个从最右边往下搜,奇数层则交换这两个节点的值</li>
+</ol>
+<h3 id="20231216-统计区间中的整数数目苦难"><a class="markdownIt-Anchor" href="#20231216-统计区间中的整数数目苦难"></a> 2023.12.16 统计区间中的整数数目[苦难]</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-integers-in-intervals/description/?envType=daily-question&amp;envId=2023-12-16">2276. 统计区间中的整数数目</a></p>
+<p>线段树解决的是「区间和」问题，并且该「区间」会被修改。</p>
+<h4 id="线段树最简单模板"><a class="markdownIt-Anchor" href="#线段树最简单模板"></a> 线段树最简单模板</h4>
+<p>思想:将数组看成一棵树,叶子节点是数组的值,非叶子节点代表了其叶子节点区间的和/最大值/最小值.<br />
+<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/range-sum-query-mutable/">307. 区域和检索 - 数组可修改</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SegTreeSimple</span>:</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, nums</span>):</span><br><span class="line">    self.tree = [<span class="number">0</span>] * (<span class="number">4</span> * <span class="built_in">len</span>(nums))</span><br><span class="line">    self.nums=nums</span><br><span class="line">    self.build(<span class="number">1</span>,<span class="number">0</span>,<span class="built_in">len</span>(nums)-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">build</span>(<span class="params">self, cur, left, right</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    l,r表示的是当前需要构建的区间</span></span><br><span class="line"><span class="string">    cur是[l,r]区间的在树中的节点</span></span><br><span class="line"><span class="string">    l==r说明到达了树的叶子节点,那么cur的值就是数组的值</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="comment"># 到达当前节点</span></span><br><span class="line">    <span class="keyword">if</span> left==right:</span><br><span class="line">      self.tree[cur] = self.nums[left]</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    mid = (left + right) // <span class="number">2</span></span><br><span class="line">    <span class="comment">#　构建左右子树</span></span><br><span class="line">    self.build(cur * <span class="number">2</span>, left, mid)</span><br><span class="line">    self.build(cur * <span class="number">2</span> + <span class="number">1</span>, mid + <span class="number">1</span>, right)</span><br><span class="line">    <span class="comment"># 向上更新</span></span><br><span class="line">    self.pushup(cur)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">pushup</span>(<span class="params">self, root</span>):</span><br><span class="line">    <span class="comment"># 求区间   和/最大值/最小值</span></span><br><span class="line">    self.tree[root] = self.tree[root * <span class="number">2</span>] + self.tree[root * <span class="number">2</span> + <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 区间更新</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">updateArrange</span>(<span class="params">self, cur, left, right, start, end , val</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    cur是当前在数中的节点</span></span><br><span class="line"><span class="string">    l,r是要更新的区间</span></span><br><span class="line"><span class="string">    start,end是当前区间</span></span><br><span class="line"><span class="string">    val是要更新的值</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> start == end:</span><br><span class="line">        self.tree[cur] = val</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    <span class="keyword">if</span> left&lt;start <span class="keyword">or</span> right&gt;end:</span><br><span class="line">        <span class="keyword">return</span> </span><br><span class="line">    mid = (start + end) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> left &lt;= mid:</span><br><span class="line">        self.updateArrange(cur * <span class="number">2</span>, left, right, start, mid, val)</span><br><span class="line">    <span class="keyword">if</span> right&gt;mid:</span><br><span class="line">        self.updateArrange(cur * <span class="number">2</span> + <span class="number">1</span>, left, right, mid+<span class="number">1</span>, end, val)</span><br><span class="line">    self.pushup(cur)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 单点更新</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">update</span>(<span class="params">self, cur, left, right, index, val</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    cur是当前区间在树中的节点</span></span><br><span class="line"><span class="string">    l,r是要更新的数组的区间</span></span><br><span class="line"><span class="string">    index是要更新的数组的索引</span></span><br><span class="line"><span class="string">    val是要更新的值</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> left == right:</span><br><span class="line">      <span class="comment"># 覆盖式,也可是增量式</span></span><br><span class="line">      self.tree[cur] = val</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    mid = (left + right) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> index &lt;= mid:</span><br><span class="line">      self.update(cur * <span class="number">2</span>, left, mid, index, val)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      self.update(cur * <span class="number">2</span> + <span class="number">1</span>, mid + <span class="number">1</span>, right, index, val)</span><br><span class="line">    self.pushup(cur)</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 区间查询</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">query</span>(<span class="params">self, cur, left, right, start, end</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    left,right是要查询的区间</span></span><br><span class="line"><span class="string">    cur是当前区间对应的树的节点</span></span><br><span class="line"><span class="string">    start,end是当前区间</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="comment"># 当前区间完全处于查询区间之内</span></span><br><span class="line">    <span class="keyword">if</span> left &lt;= start <span class="keyword">and</span> end &lt;= right:</span><br><span class="line">      <span class="keyword">return</span> self.tree[cur]</span><br><span class="line">    mid = (start + end) // <span class="number">2</span></span><br><span class="line">    ans = <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> left &lt;= mid:</span><br><span class="line">      ans += self.query(cur * <span class="number">2</span>, left, right, start, mid)</span><br><span class="line">    <span class="keyword">if</span> right &gt; mid:</span><br><span class="line">      ans += self.query(cur * <span class="number">2</span> + <span class="number">1</span>, left, right, mid + <span class="number">1</span>, end)</span><br><span class="line">    <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+<h4 id="线段树lazy模板"><a class="markdownIt-Anchor" href="#线段树lazy模板"></a> 线段树Lazy模板</h4>
+<p>思想:<br />
+在上面查询的时候,如果当前区间包括在查询区间里面,那么就可以直接返回当前区间的值而不用向下传递.<br />
+在区间修改时,如果当前区间包括在修改区间里面,那么也可以直接修改当前区间的值而不用向下传递(如果向下传递的话相当于遍历其子树时间复杂度为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span>).<br />
+做法是使用一个lazy数组记录当前区间需要向下传递的值,在查询,如果当前区间需要向下传递的值不为0,那么就向下传递,并且将当前区间的lazy值清零</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SegTreeLazy</span>:</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, nums</span>):</span><br><span class="line">    self.tree = [<span class="number">0</span>] * (<span class="number">4</span> * <span class="built_in">len</span>(nums))</span><br><span class="line">    self.lazy = [<span class="number">0</span>] * (<span class="number">4</span> * <span class="built_in">len</span>(nums))</span><br><span class="line">    self.nums=nums</span><br><span class="line">    self.build(<span class="number">1</span>,<span class="number">0</span>,<span class="built_in">len</span>(nums)-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">build</span>(<span class="params">self, cur, left, right</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    l,r表示的是当前需要构建的区间</span></span><br><span class="line"><span class="string">    cur是[l,r]区间的在树中的节点</span></span><br><span class="line"><span class="string">    l==r说明到达了树的叶子节点,那么cur的值就是数组的值</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="comment"># 到达当前节点</span></span><br><span class="line">    <span class="keyword">if</span> left==right:</span><br><span class="line">      self.tree[cur] = self.nums[left]</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    mid = (left + right) // <span class="number">2</span></span><br><span class="line">    <span class="comment">#　构建左右子树</span></span><br><span class="line">    self.build(cur * <span class="number">2</span>, left, mid)</span><br><span class="line">    self.build(cur * <span class="number">2</span> + <span class="number">1</span>, mid + <span class="number">1</span>, right)</span><br><span class="line">    <span class="comment"># 向上更新</span></span><br><span class="line">    self.pushup(cur)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">pushup</span>(<span class="params">self, root</span>):</span><br><span class="line">    <span class="comment"># 求区间   和/最大值/最小值</span></span><br><span class="line">    self.tree[root] = self.tree[root * <span class="number">2</span>] + self.tree[root * <span class="number">2</span> + <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 单点更新</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">update</span>(<span class="params">self, cur, left, right, index, val</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    cur是当前区间在树中的节点</span></span><br><span class="line"><span class="string">    l,r是要更新的数组的区间</span></span><br><span class="line"><span class="string">    index是要更新的数组的索引</span></span><br><span class="line"><span class="string">    val是要更新的值</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">if</span> left == right:</span><br><span class="line">      <span class="comment"># 覆盖式,也可是增量式</span></span><br><span class="line">      self.tree[cur] = val</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    mid = (left + right) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> index &lt;= mid:</span><br><span class="line">      self.update(cur * <span class="number">2</span>, left, mid, index, val)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">      self.update(cur * <span class="number">2</span> + <span class="number">1</span>, mid + <span class="number">1</span>, right, index, val)</span><br><span class="line">    self.pushup(cur)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 区间更新</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">updateRange</span>(<span class="params">self, cur, left, right, start, end, val</span>):</span><br><span class="line">    <span class="comment"># 当前区间完全处于查询区间之内</span></span><br><span class="line">    <span class="keyword">if</span> left &lt;= start <span class="keyword">and</span> end &lt;= right:</span><br><span class="line">      <span class="comment"># 只更新当前区间的值,不向下传递</span></span><br><span class="line">      self.tree[cur] += val * (end - start + <span class="number">1</span>)</span><br><span class="line">      <span class="comment"># 记录当前区间需要向下传递的值,如果不是区间没必要向下传递</span></span><br><span class="line">      <span class="keyword">if</span> start != end:</span><br><span class="line">        self.lazy[cur] += val</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    mid = (start + end) // <span class="number">2</span></span><br><span class="line">    <span class="comment"># 向下传递lazy值,如果是覆盖式更新,不能使用self.lazy!-0判断,需要使用额外的bool数组</span></span><br><span class="line">    <span class="keyword">if</span> self.lazy[cur] != <span class="number">0</span>:</span><br><span class="line">      self.pushdown(cur, start, end, mid)</span><br><span class="line">    <span class="keyword">if</span> left &lt;= mid:</span><br><span class="line">      self.updateRange(cur * <span class="number">2</span>, left, right, start, mid, val)</span><br><span class="line">    <span class="keyword">if</span> right &gt; mid:</span><br><span class="line">      self.updateRange(cur * <span class="number">2</span> + <span class="number">1</span>, left, right, mid + <span class="number">1</span>, end, val)</span><br><span class="line">    self.pushup(cur)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">pushdown</span>(<span class="params">self, cur, start, end, mid</span>):</span><br><span class="line">    <span class="comment"># 向下传递lazy值,值传递到子节点</span></span><br><span class="line">    self.tree[cur * <span class="number">2</span>] += self.lazy[cur] * (mid - start + <span class="number">1</span>)</span><br><span class="line">    self.tree[cur * <span class="number">2</span> + <span class="number">1</span>] += self.lazy[cur] * (end - mid)</span><br><span class="line">    self.lazy[cur * <span class="number">2</span>] += self.lazy[cur]</span><br><span class="line">    self.lazy[cur * <span class="number">2</span> + <span class="number">1</span>] += self.lazy[cur]</span><br><span class="line">    self.lazy[cur] = <span class="number">0</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 区间查询</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">query</span>(<span class="params">self, cur, left, right, start, end</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    left,right是要查询的区间</span></span><br><span class="line"><span class="string">    cur是当前区间对应的树的节点</span></span><br><span class="line"><span class="string">    start,end是当前区间</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="comment"># 当前区间完全处于查询区间之内</span></span><br><span class="line">    <span class="keyword">if</span> left &lt;= start <span class="keyword">and</span> end &lt;= right:</span><br><span class="line">      <span class="keyword">return</span> self.tree[cur]</span><br><span class="line">    mid = (start + end) // <span class="number">2</span></span><br><span class="line">    ans = <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> self.lazy[cur] != <span class="number">0</span>:</span><br><span class="line">       self.pushdown(cur, start, end, mid)</span><br><span class="line">    <span class="keyword">if</span> left &lt;= mid:</span><br><span class="line">      ans += self.query(cur * <span class="number">2</span>, left, right, start, mid)</span><br><span class="line">    <span class="keyword">if</span> right &gt; mid:</span><br><span class="line">      ans += self.query(cur * <span class="number">2</span> + <span class="number">1</span>, left, right, mid + <span class="number">1</span>, end)</span><br><span class="line">    <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+<h4 id="线段树离散化模板"><a class="markdownIt-Anchor" href="#线段树离散化模板"></a> 线段树离散化模板</h4>
+<p><img src="http://image.yayan.xyz/20231216162436.png" alt="" /><br />
+思想:<br />
+需要直到全部的区间坐标<br />
+做好原数组与离散后数组的映射关系<br />
+<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/falling-squares/description/">699. 掉落的方块</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SegTreeDiscrete</span>:</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, n </span>):</span><br><span class="line">    self.tree = [<span class="number">0</span>] * (<span class="number">4</span> * n)</span><br><span class="line">    self.lazy = [<span class="number">0</span>] * (<span class="number">4</span> * n)</span><br><span class="line">    self.build(<span class="number">1</span>,<span class="number">0</span>,n-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">build</span>(<span class="params">self, cur, left, right</span>):</span><br><span class="line">    <span class="keyword">if</span> left==right:</span><br><span class="line">      self.tree[cur] = <span class="number">0</span></span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    mid = (left + right) // <span class="number">2</span></span><br><span class="line">    self.build(cur * <span class="number">2</span>, left, mid)</span><br><span class="line">    self.build(cur * <span class="number">2</span> + <span class="number">1</span>, mid + <span class="number">1</span>, right)</span><br><span class="line">    self.pushup(cur)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">pushup</span>(<span class="params">self, root</span>):</span><br><span class="line">    self.tree[root] = <span class="built_in">max</span>(self.tree[root * <span class="number">2</span>] , self.tree[root * <span class="number">2</span> + <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">updateRange</span>(<span class="params">self, cur, left, right, start, end, val</span>):</span><br><span class="line">    <span class="keyword">if</span> left &lt;= start <span class="keyword">and</span> end &lt;= right:</span><br><span class="line">      self.tree[cur] = val</span><br><span class="line">      <span class="keyword">if</span> start != end:</span><br><span class="line">        self.lazy[cur] = val</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    mid = (start + end) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> self.lazy[cur] != <span class="number">0</span>:</span><br><span class="line">      self.pushdown(cur, start, end, mid)</span><br><span class="line">    <span class="keyword">if</span> left &lt;= mid:</span><br><span class="line">      self.updateRange(cur * <span class="number">2</span>, left, right, start, mid, val)</span><br><span class="line">    <span class="keyword">if</span> right &gt; mid:</span><br><span class="line">      self.updateRange(cur * <span class="number">2</span> + <span class="number">1</span>, left, right, mid + <span class="number">1</span>, end, val)</span><br><span class="line">    self.pushup(cur)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">pushdown</span>(<span class="params">self, cur, start, end, mid</span>):</span><br><span class="line">    self.tree[cur * <span class="number">2</span>] = self.tree[cur]</span><br><span class="line">    self.tree[cur * <span class="number">2</span> + <span class="number">1</span>] = self.tree[cur]</span><br><span class="line">    self.lazy[cur * <span class="number">2</span>] = self.lazy[cur]</span><br><span class="line">    self.lazy[cur * <span class="number">2</span> + <span class="number">1</span>] = self.lazy[cur]</span><br><span class="line">    self.lazy[cur] = <span class="number">0</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">query</span>(<span class="params">self, cur, left, right, start, end</span>):</span><br><span class="line">    <span class="keyword">if</span> left &lt;= start <span class="keyword">and</span> end &lt;= right:</span><br><span class="line">      <span class="keyword">return</span> self.tree[cur]</span><br><span class="line">    mid = (start + end) // <span class="number">2</span></span><br><span class="line">    ans = -<span class="number">1</span></span><br><span class="line">    <span class="keyword">if</span> self.lazy[cur] != <span class="number">0</span>:</span><br><span class="line">       self.pushdown(cur, start, end, mid)</span><br><span class="line">    <span class="keyword">if</span> left &lt;= mid:</span><br><span class="line">      ans = <span class="built_in">max</span>(self.query(cur * <span class="number">2</span>, left, right, start, mid), ans)</span><br><span class="line">    <span class="keyword">if</span> right &gt; mid:</span><br><span class="line">      ans = <span class="built_in">max</span>(self.query(cur * <span class="number">2</span> + <span class="number">1</span>, left, right, mid + <span class="number">1</span>, end), ans)</span><br><span class="line">    <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="comment"># 离散化,原值-&gt;离散后的索引(值)</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">discrete</span>(<span class="params">self,nums</span>):</span><br><span class="line">        num_set = <span class="built_in">set</span>(nums)</span><br><span class="line">        num_list = <span class="built_in">sorted</span>(<span class="built_in">list</span>(num_set))</span><br><span class="line">        <span class="keyword">return</span> &#123;num: idx + <span class="number">1</span> <span class="keyword">for</span> idx, num <span class="keyword">in</span> <span class="built_in">enumerate</span>(num_list)&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">fallingSquares</span>(<span class="params">self, positions: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        n = <span class="built_in">len</span>(positions)</span><br><span class="line">        arr = [<span class="number">0</span>] * (<span class="number">2</span> * n)</span><br><span class="line">        size = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            arr[i * <span class="number">2</span>] = positions[i][<span class="number">0</span>]</span><br><span class="line">            arr[i * <span class="number">2</span> + <span class="number">1</span>] = positions[i][<span class="number">0</span>] + positions[i][<span class="number">1</span>]</span><br><span class="line">            size = <span class="built_in">max</span>(size, arr[i * <span class="number">2</span> + <span class="number">1</span>])</span><br><span class="line">        arr_map = self.discrete(arr)</span><br><span class="line">        st = SegTreeDiscrete(<span class="built_in">len</span>(arr_map))</span><br><span class="line">        res = []</span><br><span class="line">        height = <span class="number">0</span></span><br><span class="line">        max_height = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            l = arr_map[positions[i][<span class="number">0</span>]]</span><br><span class="line">            h = positions[i][<span class="number">1</span>]</span><br><span class="line">            r = arr_map[positions[i][<span class="number">0</span>] + h]</span><br><span class="line">            </span><br><span class="line">            height = st.query(<span class="number">1</span>, l, r-<span class="number">1</span> , <span class="number">0</span>, <span class="built_in">len</span>(arr_map)-<span class="number">1</span>)</span><br><span class="line">            st.updateRange(<span class="number">1</span>, l, r-<span class="number">1</span>,<span class="number">0</span>,<span class="built_in">len</span>(arr_map)-<span class="number">1</span>, height + h)</span><br><span class="line"></span><br><span class="line">            max_height = <span class="built_in">max</span>(max_height, height + h)</span><br><span class="line">            res.append(max_height)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>
+<h4 id="线段树动态开点模板"><a class="markdownIt-Anchor" href="#线段树动态开点模板"></a> 线段树动态开点模板</h4>
+<p>思想:<br />
+不能在程序开始时就完成初始线段树的构建，在区间查询或区间修改时，根据传入的区间信息来动态地创建结点<br />
+<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-integers-in-intervals/description/?envType=daily-question&amp;envId=2023-12-16">2276. 统计区间中的整数数目</a><br />
+<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/range-module/">715. Range 模块</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Node</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">      self.leftChild = <span class="literal">None</span></span><br><span class="line">      self.rightChild = <span class="literal">None</span></span><br><span class="line">      self.val = <span class="number">0</span></span><br><span class="line">      self.lazy = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SegTreeDynamicPointer</span>:</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">    self.root = Node()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">pushup</span>(<span class="params">self, curNode</span>):</span><br><span class="line">    curNode.val=curNode.leftChild.val+curNode.rightChild.val</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">AddNode</span>(<span class="params">self, curNode</span>):</span><br><span class="line">    <span class="keyword">if</span> curNode.leftChild == <span class="literal">None</span>:</span><br><span class="line">      curNode.leftChild = Node()</span><br><span class="line">    <span class="keyword">if</span> curNode.rightChild == <span class="literal">None</span>:</span><br><span class="line">      curNode.rightChild = Node()</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">pushdown</span>(<span class="params">self, curNode, start, end, mid</span>):</span><br><span class="line">    curNode.leftChild.val = (mid - start + <span class="number">1</span>)</span><br><span class="line">    curNode.rightChild.val = (end - mid)</span><br><span class="line">    curNode.leftChild.lazy = curNode.lazy</span><br><span class="line">    curNode.rightChild.lazy = curNode.lazy</span><br><span class="line">    curNode.lazy = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># 区间更新</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">updateRange</span>(<span class="params">self, curNode, left, right, start, end, val</span>):</span><br><span class="line">    <span class="comment"># 当前区间完全处于查询区间之内</span></span><br><span class="line">    <span class="keyword">if</span> left &lt;= start <span class="keyword">and</span> end &lt;= right:</span><br><span class="line">      curNode.val = (end-start+<span class="number">1</span>)</span><br><span class="line">      <span class="keyword">if</span> start != end:</span><br><span class="line">        curNode.lazy = <span class="number">1</span></span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    <span class="comment"># 动态开点</span></span><br><span class="line">    self.AddNode(curNode)</span><br><span class="line">    mid = (start + end) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> curNode.lazy != <span class="number">0</span>:</span><br><span class="line">      self.pushdown(curNode, start, end, mid)</span><br><span class="line">    <span class="keyword">if</span> left &lt;= mid:</span><br><span class="line">      self.updateRange(curNode.leftChild, left, right, start, mid, val)</span><br><span class="line">    <span class="keyword">if</span> right &gt; mid:</span><br><span class="line">      self.updateRange(curNode.rightChild, left, right, mid + <span class="number">1</span>, end, val)</span><br><span class="line">    self.pushup(curNode)</span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 区间查询</span></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">query</span>(<span class="params">self, curNode, left, right, start, end</span>):</span><br><span class="line">    <span class="keyword">if</span> left &lt;= start <span class="keyword">and</span> end &lt;= right:</span><br><span class="line">      <span class="keyword">return</span> curNode.val</span><br><span class="line">    self.AddNode(curNode)</span><br><span class="line">    mid = (start + end) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> curNode.lazy != <span class="number">0</span>:</span><br><span class="line">       self.pushdown(curNode, start, end, mid)</span><br><span class="line">    ans = <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> left &lt;= mid:</span><br><span class="line">      ans += self.query(curNode.leftChild, left, right, start, mid)</span><br><span class="line">    <span class="keyword">if</span> right &gt; mid:</span><br><span class="line">      ans += self.query(curNode.rightChild, left, right, mid + <span class="number">1</span>, end)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">int</span>(ans)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CountIntervals</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.tree=SegTreeDynamicPointer()</span><br><span class="line">        self.N=<span class="number">1e9</span>+<span class="number">1</span></span><br><span class="line">        self.node=self.tree.root</span><br><span class="line">        self.max_num=<span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">self, left: <span class="built_in">int</span>, right: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        self.max_num=<span class="built_in">max</span>(self.max_num,right)</span><br><span class="line">        self.tree.updateRange(self.node,left,right,<span class="number">0</span>,self.N,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">count</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> self.tree.query(self.node,<span class="number">0</span>,self.max_num,<span class="number">0</span>,self.N)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="20231217-使用最小花费爬楼梯简单"><a class="markdownIt-Anchor" href="#20231217-使用最小花费爬楼梯简单"></a> 2023.12.17 使用最小花费爬楼梯[简单]</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-cost-climbing-stairs/?envType=daily-question&amp;envId=2023-12-17">746. 使用最小花费爬楼梯</a></p>
+<p>思路:简单动态规划,第一阶和第二阶应该是0</p>
+<h3 id="20231218-寻找峰值中等"><a class="markdownIt-Anchor" href="#20231218-寻找峰值中等"></a> 2023.12.18 寻找峰值[中等]</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-peak-element/?envType=daily-question&amp;envId=2023-12-18">162. 寻找峰值</a></p>
+<p>思路:单调栈从栈底到栈顶递增,栈底元素一定大于其左边元素,同时也大于栈中其他元素,因此答案就是栈底元素</p>
+<h3 id="20231219-寻找峰值-ii中等"><a class="markdownIt-Anchor" href="#20231219-寻找峰值-ii中等"></a> 2023.12.19 寻找峰值 II[中等]</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-a-peak-element-ii/?envType=daily-question&amp;envId=2023-12-19">1901. 寻找峰值 II</a></p>
+<p>思路:一维的峰值扩展到二维,无思路</p>
+<p>题解:二分,使用二分分行,然后找到每一行的最大值,用这一行的最大值和他的上下两行的值比较,如果上面的大则继续二分上面的行,否则二分下面的行</p>
+<h3 id="20231220-判别首字母缩略词简单"><a class="markdownIt-Anchor" href="#20231220-判别首字母缩略词简单"></a> 2023.12.20 判别首字母缩略词[简单]</h3>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/check-if-a-string-is-an-acronym-of-words/?envType=daily-question&amp;envId=2023-12-20">2828. 判别首字母缩略词</a></p>
+<p>思路:数组里面每个单次的首字符看看能不能组成这个单词,先判断两个长度是不是一样</p>
+<h3 id="20231221-美丽塔-ii中等"><a class="markdownIt-Anchor" href="#20231221-美丽塔-ii中等"></a> 2023.12.21 美丽塔 II[中等]</h3>
+<p>思路:暴力,两重循环,判断每个点的左右两边是否满足条件,但是肯定超时</p>
+<p>题解:先预处理每个点左右两边,左边为例,用单调栈(从栈底到栈顶递增,存下标),如果当前元素比栈顶元素小,那么就弹出栈顶元素,直到栈顶元素大于当前元素,那么栈顶元素到当前元素之间的元素都是比当前元素大的,这区间只能选择当前元素的高度,然后再加上栈顶元素左边的高度和,得到了当前元素左边的高度和,右边的高度和同理,然后再遍历每个点,每个点的答案就是左边的高度和+右边的高度和-当前点的高度</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 预处理代码</span></span><br><span class="line">prefix[i]=(long)(i-left.Peek())*maxHeights[i]+prefix[left.Peek()];</span><br><span class="line">suffix[i]=(long)(right.Peek()-i)*maxHeights[i]+suffix[right.Peek()];</span><br><span class="line"><span class="comment"># 答案代码</span></span><br><span class="line">res=Math.Max(suffix[i]-maxHeights[i]+prefix[i],res);</span><br></pre></td></tr></table></figure>
+<h3 id="20231222-得到山形数组的最少删除次数困难"><a class="markdownIt-Anchor" href="#20231222-得到山形数组的最少删除次数困难"></a> 2023.12.22 得到山形数组的最少删除次数[困难]</h3>
+<h4 id="最长递增子序列模板"><a class="markdownIt-Anchor" href="#最长递增子序列模板"></a> 最长递增子序列模板</h4>
+<p><strong>动态规划</strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><msup><mi>N</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(N^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">MaxSeqInN2</span>(<span class="params">self,nums</span>):</span><br><span class="line">  n=<span class="built_in">len</span>(nums)</span><br><span class="line">  dp=[<span class="number">1</span>]*(n)</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">      <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i):</span><br><span class="line">          <span class="keyword">if</span> nums[i]&gt;nums[j]:</span><br><span class="line">              dp[i]=<span class="built_in">max</span>(dp[i],dp[j]+<span class="number">1</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">max</span>(dp)</span><br></pre></td></tr></table></figure>
+<p><strong>长度数组</strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false">(</mo><mi>N</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>N</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">O(NlogN)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">MaxSeqInLogn</span>(<span class="params">self,nums</span>):</span><br><span class="line">  n=<span class="built_in">len</span>(nums)</span><br><span class="line">  len2num=[<span class="built_in">float</span>(<span class="string">&#x27;inf&#x27;</span>)]*(n+<span class="number">1</span>)</span><br><span class="line">  len2num[<span class="number">0</span>]=<span class="built_in">float</span>(<span class="string">&#x27;-inf&#x27;</span>)</span><br><span class="line">  ans=-<span class="number">1</span></span><br><span class="line">  <span class="keyword">for</span> i,num <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">      lengthIndex=bisect_left(len2num,num)</span><br><span class="line">      len2num[lengthIndex]=num</span><br><span class="line">      ans=<span class="built_in">max</span>(ans,lengthIndex)</span><br><span class="line">  <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+<h4 id="得到山形数组的最少删除次数"><a class="markdownIt-Anchor" href="#得到山形数组的最少删除次数"></a> 得到山形数组的最少删除次数</h4>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-number-of-removals-to-make-mountain-array/">1671. 得到山形数组的最少删除次数</a></p>
+<p>思路:以为和美丽塔 II一样,但是区别在于这一题需要左边的长度越长越好,美丽塔 II有个高度</p>
+<p>题解:预处理每个点左右两边的最长递增子序列,遍历每个点,当前点的答案就是左边的最长递增子序列+右边的最长递增子序列-1(当前点被计算了两次)</p>
+<p>###　2023.12.23</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://gladdduck.github.io/2023/12/11/LeetCode%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%982023/" title="LeetCode每日一题2023" target="_blank" rel="external">https://gladdduck.github.io/2023/12/11/LeetCode每日一题2023/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/gladdduck" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/icon.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/gladdduck" target="_blank"><span class="text-dark">Gladdduck</span><small class="ml-1x">KB Master</small></a></h3>
+        <div>我写的个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/12/15/DEViT%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" title="DEViT代码阅读"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/12/11/hexo%E6%96%B0%E5%A2%9E%E8%8F%9C%E5%8D%95%E6%A0%8F/" title="Hexo博客新增菜单栏"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/donate.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/donate.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '644a1091cfd20b8f33ef',
+    clientSecret: '4c5cc91dbfe067c804fcef958817d41acc9ba545',
+    repo: 'gladdduck.github.io',
+    owner: 'gladdduck',
+    admin: ['gladdduck'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: ''
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>
