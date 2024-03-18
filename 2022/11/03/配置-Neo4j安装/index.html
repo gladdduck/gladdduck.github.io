@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Neo4j&amp;JDK安装踩坑 | Gladdduck</title>
+  <meta name="description" content="前言 最近要开始打工了 😟 😟 😟 😟 创建一个知识图谱(可视化)嵌入到一个系统里面,当作子系统. 期待的效果是百度百科影视图谱,任务太艰巨了. 😔 😔 😔 😔 如果你看到了这篇博客,有好的解决方案都可以帮帮我. 😘 😘 😘 😘  正文  踩坑 😭😭😭😭  问题: 123想创建多个数据库用,刚开始默认有两个,一个neo4j,一个system.希望创建别的数据库.比">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Neo4j&amp;JDK安装踩坑">
+<meta property="og:url" content="https://gladdduck.github.io/2022/11/03/%E9%85%8D%E7%BD%AE-Neo4j%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:site_name" content="Gladdduck">
+<meta property="og:description" content="前言 最近要开始打工了 😟 😟 😟 😟 创建一个知识图谱(可视化)嵌入到一个系统里面,当作子系统. 期待的效果是百度百科影视图谱,任务太艰巨了. 😔 😔 😔 😔 如果你看到了这篇博客,有好的解决方案都可以帮帮我. 😘 😘 😘 😘  正文  踩坑 😭😭😭😭  问题: 123想创建多个数据库用,刚开始默认有两个,一个neo4j,一个system.希望创建别的数据库.比">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.yayan.xyz/20221103175926.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103180045.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103183512.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103175926.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103180846.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103183313.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103181021.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103174240.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103174641.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103174753.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103174829.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103175408.png">
+<meta property="og:image" content="https://image.yayan.xyz/20221103175425.png">
+<meta property="article:published_time" content="2022-11-03T09:31:04.917Z">
+<meta property="article:modified_time" content="2022-11-03T10:35:37.710Z">
+<meta property="article:author" content="syxue">
+<meta property="article:tag" content="neo4j安装">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.yayan.xyz/20221103175926.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://gladdduck.github.io/2022/11/03/%E9%85%8D%E7%BD%AE-Neo4j%E5%AE%89%E8%A3%85/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/icon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/gladdduck" target="_blank">
+          <img class="img-circle img-rotate" src="/images/icon.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Gladdduck</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">KB Master</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Suzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-picture">
+          <a href="/picturewall">
+            
+            <i class="icon icon-starfish"></i>
+            
+            <span class="menu-title">图片墙</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>自己JB的记录</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">hexo博客配置</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/">快捷命令</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95/">论文记录</a><span class="category-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BingChat/" rel="tag">BingChat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blazor/" rel="tag">Blazor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlazorLocalization/" rel="tag">BlazorLocalization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSharp/" rel="tag">CSharp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cypher/" rel="tag">Cypher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataloader/" rel="tag">Dataloader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataset/" rel="tag">Dataset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Few-shotObjectDetection/" rel="tag">Few-shotObjectDetection</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kaggle/" rel="tag">Kaggle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Linux快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Neo4j快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PaddleOCRSharp/" rel="tag">PaddleOCRSharp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Python学习笔记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sampler/" rel="tag">Sampler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS2022/" rel="tag">VS2022</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCode-Github/" rel="tag">VSCode Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode/" rel="tag">Vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode-%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">Vscode 阿里云</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zero-shot-Detection/" rel="tag">Zero-shot Detection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collate-fn/" rel="tag">collate_fn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-Time-out/" rel="tag">git Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" rel="tag">hexo博客配置gitalk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" rel="tag">hexo博客配置picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" rel="tag">hexo博客配置pure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mmfewshot/" rel="tag">mmfewshot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" rel="tag">python3 标准库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">代码阅读</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE%E6%A3%80%E6%B5%8B/" rel="tag">垃圾检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">多个域名访问同一个服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" rel="tag">快速傅里叶变换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag">搭建博客</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%BC%9A%E8%AE%AE/" rel="tag">目标检测会议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" rel="tag">知识图谱表示</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">算法刷题笔记</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/BingChat/" style="font-size: 13px;">BingChat</a> <a href="/tags/Blazor/" style="font-size: 13px;">Blazor</a> <a href="/tags/BlazorLocalization/" style="font-size: 13px;">BlazorLocalization</a> <a href="/tags/CSharp/" style="font-size: 13px;">CSharp</a> <a href="/tags/Cypher/" style="font-size: 13px;">Cypher</a> <a href="/tags/Dataloader/" style="font-size: 13px;">Dataloader</a> <a href="/tags/Dataset/" style="font-size: 13px;">Dataset</a> <a href="/tags/Few-shotObjectDetection/" style="font-size: 13.33px;">Few-shotObjectDetection</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 13px;">Hadoop</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Kaggle/" style="font-size: 13px;">Kaggle</a> <a href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Linux快捷命令</a> <a href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Neo4j快捷命令</a> <a href="/tags/PaddleOCRSharp/" style="font-size: 13px;">PaddleOCRSharp</a> <a href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13.67px;">Python学习笔记</a> <a href="/tags/Sampler/" style="font-size: 13px;">Sampler</a> <a href="/tags/VS2022/" style="font-size: 13px;">VS2022</a> <a href="/tags/VSCode-Github/" style="font-size: 13px;">VSCode Github</a> <a href="/tags/Vscode/" style="font-size: 13px;">Vscode</a> <a href="/tags/Vscode-%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 13px;">Vscode 阿里云</a> <a href="/tags/Zero-shot-Detection/" style="font-size: 13px;">Zero-shot Detection</a> <a href="/tags/collate-fn/" style="font-size: 13px;">collate_fn</a> <a href="/tags/git-Time-out/" style="font-size: 13px;">git Time out</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" style="font-size: 13px;">hexo博客配置gitalk</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" style="font-size: 13px;">hexo博客配置picgo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" style="font-size: 13px;">hexo博客配置pure</a> <a href="/tags/mmfewshot/" style="font-size: 13px;">mmfewshot</a> <a href="/tags/neo4j%E5%AE%89%E8%A3%85/" style="font-size: 13px;">neo4j安装</a> <a href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 13.67px;">python3 标准库</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 13px;">代码阅读</a> <a href="/tags/%E5%9E%83%E5%9C%BE%E6%A3%80%E6%B5%8B/" style="font-size: 13px;">垃圾检测</a> <a href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">多个域名访问同一个服务器</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 13px;">快捷键</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" style="font-size: 13px;">快速傅里叶变换</a> <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 13px;">排序算法</a> <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="font-size: 13.33px;">搭建博客</a> <a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%BC%9A%E8%AE%AE/" style="font-size: 13px;">目标检测会议</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" style="font-size: 13px;">知识图谱表示</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" style="font-size: 13px;">知识点</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" style="font-size: 14px;">算法刷题笔记</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/18/%E7%AE%97%E6%B3%95-%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/18/%E7%AE%97%E6%B3%95-%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-18T13:28:14.565Z" itemprop="datePublished">2024-03-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/16/%E5%AE%9E%E4%B9%A0-Hadoop%E7%9F%A5%E8%AF%86%E7%82%B9/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/16/%E5%AE%9E%E4%B9%A0-Hadoop%E7%9F%A5%E8%AF%86%E7%82%B9/" class="title">Hadoop学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-16T08:26:52.655Z" itemprop="datePublished">2024-03-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/14/%E5%AE%9E%E4%B9%A0-Kaggle-OTTO%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/14/%E5%AE%9E%E4%B9%A0-Kaggle-OTTO%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/" class="title">Kaggle-OTTO比赛回顾</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-14T10:50:22.943Z" itemprop="datePublished">2024-03-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/11/%E9%85%8D%E7%BD%AE-vscode%E5%85%8D%E5%AF%86%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/11/%E9%85%8D%E7%BD%AE-vscode%E5%85%8D%E5%AF%86%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="title">vscode免密连接服务器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-11T07:09:42.878Z" itemprop="datePublished">2024-03-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/06/%E7%AE%97%E6%B3%95-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7%E5%88%86%E7%B1%BB%E6%80%BB%E7%BB%93/" class="thumb">
+    
+    
+        <span style="background-image:url(https://image.yayan.xyz/小鸭子.png)" alt="位运算技巧分类总结" class="thumb-image"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/06/%E7%AE%97%E6%B3%95-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7%E5%88%86%E7%B1%BB%E6%80%BB%E7%BB%93/" class="title">位运算技巧分类总结</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-06T02:05:35.115Z" itemprop="datePublished">2024-03-06</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text"> 前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AD%A3%E6%96%87"><span class="toc-number">2.</span> <span class="toc-text"> 正文</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B8%A9%E5%9D%91"><span class="toc-number">2.1.</span> <span class="toc-text"> 踩坑</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">2.1.1.</span> <span class="toc-text"> 问题:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.2.</span> <span class="toc-text"> </span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3"><span class="toc-number">2.2.1.</span> <span class="toc-text"> 解决:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%89%8D%E9%A1%BB%E7%9F%A5"><span class="toc-number">2.3.</span> <span class="toc-text"> 配置前须知</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jdk%E5%AE%89%E8%A3%85"><span class="toc-number">2.4.</span> <span class="toc-text"> JDK安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#neo4j%E5%AE%89%E8%A3%85"><span class="toc-number">2.5.</span> <span class="toc-text"> neo4j安装</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-配置-Neo4j安装" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Neo4j&amp;JDK安装踩坑
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2022/11/03/%E9%85%8D%E7%BD%AE-Neo4j%E5%AE%89%E8%A3%85/" class="article-date">
+	  <time datetime="2022-11-03T09:31:04.917Z" itemprop="datePublished">2022-11-03</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/11/03/%E9%85%8D%E7%BD%AE-Neo4j%E5%AE%89%E8%A3%85/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.4k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 5(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>最近要开始打工了<br />
+😟 😟 😟 😟<br />
+创建一个知识图谱(可视化)嵌入到一个系统里面,当作子系统.</p>
+<p>期待的效果是<a target="_blank" rel="noopener" href="https://baike.baidu.com/lemmagraph/graphview?lemmaId=56059649&amp;featureId=06a4e94ff6154c81ede88422&amp;classify=teleplay&amp;fromModule=lemma_graph-tree">百度百科影视图谱</a>,任务太艰巨了.<br />
+😔 😔 😔 😔<br />
+如果你看到了这篇博客,有好的解决方案都可以帮帮我.<br />
+😘 😘 😘 😘</p>
+<h1 id="正文"><a class="markdownIt-Anchor" href="#正文"></a> 正文</h1>
+<h2 id="踩坑"><a class="markdownIt-Anchor" href="#踩坑"></a> 踩坑</h2>
+<p>😭😭😭😭</p>
+<h3 id="问题"><a class="markdownIt-Anchor" href="#问题"></a> 问题:</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">想创建多个数据库用,刚开始默认有两个,一个neo4j,一个system.</span><br><span class="line">希望创建别的数据库.</span><br><span class="line">比如:</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.yayan.xyz/20221103175926.png" alt="" /></p>
+<p>网上搜索了很多办法,最坑的一个:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">创建:create database name</span><br><span class="line">删除:drop database name</span><br></pre></td></tr></table></figure>
+<p>看着挺好,试了很多遍报错</p>
+<p><img src="https://image.yayan.xyz/20221103180045.png" alt="" /></p>
+<p>看了<a target="_blank" rel="noopener" href="https://neo4j.com/docs/cypher-manual/4.2/administration/databases/">文档</a>才知道,<strong>这是企业版专属命令,社区版用不了…</strong></p>
+<h2 id=""><a class="markdownIt-Anchor" href="#"></a> <img src="https://image.yayan.xyz/20221103183512.png" alt="" /></h2>
+<h3 id="解决"><a class="markdownIt-Anchor" href="#解决"></a> 解决:</h3>
+<p><a target="_blank" rel="noopener" href="https://neo4j.com/docs/operations-manual/4.3/manage-databases/configuration/">neo4j官网</a></p>
+<p><strong>新建数据库</strong><br />
+在 <code>neo4j\conf\neo4j.conf</code>中,<br />
+找到 <code>dbms.default_database=defaultdatabase</code><br />
+修改后面的名字</p>
+<blockquote>
+<p>如果数据库不存在,就会创建一个新的<br />
+如果存在,启动之后就会设为默认的数据库</p>
+</blockquote>
+<p>但是有一个弊端:<br />
+<img src="https://image.yayan.xyz/20221103175926.png" alt="" /><br />
+这种方式还是切换不了数据库</p>
+<p>cypher命令 <code>use databasename</code>也不能用</p>
+<p>上面两种方法都会报错<br />
+<img src="https://image.yayan.xyz/20221103180846.png" alt="" /></p>
+<p>因为<strong>社区版只能开启一个用户数据库…</strong><br />
+<img src="https://image.yayan.xyz/20221103183313.png" alt="" /><br />
+如果想切换数据库只能修改配置文件,然后重启(neo4j restart)或者开一个新的进程(neo4j start).</p>
+<hr />
+<p><strong>删除数据库</strong></p>
+<p>把 <code>neo4j\data\</code>文件夹下面的<br />
+<img src="https://image.yayan.xyz/20221103181021.png" alt="" /><br />
+对应的数据库名字删除,即可.</p>
+<h2 id="配置前须知"><a class="markdownIt-Anchor" href="#配置前须知"></a> 配置前须知</h2>
+<p>neo4j现在已经到5.x了,<br />
+neo4j 3.x版本需要jdk8<br />
+neo4j 4.x版本需要jdk11</p>
+<p>安装之前需要把jdk安装好,我用的neo4j4.3.19,<br />
+jdk11.2</p>
+<h2 id="jdk安装"><a class="markdownIt-Anchor" href="#jdk安装"></a> JDK安装</h2>
+<p>jdk有很多资料,建议找一个时间最近的,不要找好几年前的.</p>
+<ol>
+<li>下载jdk安装包<br />
+<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/">官网下载</a>需要注册,可以用<a target="_blank" rel="noopener" href="https://repo.huaweicloud.com/java/jdk/">其他镜像</a></li>
+<li>如果需要,更改路径,但是要记住<br />
+<img src="https://image.yayan.xyz/20221103174240.png" alt="" /><br />
+(没图了,网上找的图)</li>
+<li>一路next之后,如果jdk目录里没有jre</li>
+</ol>
+<blockquote>
+<p>命令:<br />
+bin\jlink.exe --module-path jmods --add-modules java desktop --output jre<br />
+就多了一个jre文件夹</p>
+</blockquote>
+<ol start="4">
+<li>配置环境变量<br />
+<img src="https://image.yayan.xyz/20221103174641.png" alt="" /></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">%JAVA_HOME%\bin</span><br><span class="line">%JAVA_HOME%\jre\bin</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.yayan.xyz/20221103174753.png" alt="" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar</span><br></pre></td></tr></table></figure>
+<p><img src="https://image.yayan.xyz/20221103174829.png" alt="" /></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zll-wyf/p/15095664.html">解释每个变量的作用</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME</span><br><span class="line">    变量名：JAVA_HOME</span><br><span class="line">    变量值：C:\develop\Java\jdk1.8.0_191</span><br><span class="line">    用途：定义一个变量，供其他地方使用</span><br><span class="line"></span><br><span class="line">Path</span><br><span class="line">    变量名：Path</span><br><span class="line">    变量值：%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;</span><br><span class="line">    用途：让系统在任何路径下都可以识别java、javac、javap等命令</span><br><span class="line"></span><br><span class="line">CLASSPATH</span><br><span class="line">    变量名：CLASSPATH</span><br><span class="line">    变量值：.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar</span><br><span class="line">    用途：告诉jvm要使用或执行的class放在什么路径上，便于JVM加载class文件，.;表示当前路径，tools.jar和dt.jar为类库路径</span><br><span class="line"></span><br><span class="line">CLASSPATH详解</span><br><span class="line">    - tools.jar</span><br><span class="line">    工具类库(编译和运行等)，它跟我们程序中用到的基础类库没有关系。我们注意到在Path中变量值bin目录下的各个exe工具的大小都很小，一般都在27KB左右，这是因为它们实际上仅仅相当于是一层代码的包装，这些工具的实现所要用到的类库都在tools.jar中，用压缩软件打开tools.jar，你会发现有很多文件是和bin目录下的exe工具相对性的。当然，如果tools.jar的功能只有这些的话，那么我们根本不用把它加入到CLASSPATH变量中，因为bin目录下的工具自己可以完成对这些类库的调用，因此tools.jar应该还有其他的功能。在里面还可以看到有Applet和RMI等相关的文件，因此tools.jar应该还是远程调用等必须的jar包。tools.jar的其他作用可以查看其他资料。</span><br><span class="line"></span><br><span class="line">    - dt.jar</span><br><span class="line">    运行环境类库，主要是Swing包，这一点通过用压缩软件打开dt.jar也可以看到。如果在开发时候没有用到Swing包，那么可以不用将dt.jar添加到CLASSPATH变量中。</span><br><span class="line">    CLASSPATH中的类库是由Application ClassLoader或者我们自定义的类加载器来加载的，这里当然不能包括基础类库，如果包括基础类库的话，并用两个不同的自定义类加载器去加载该基础类，那它得到的该基础类就不是唯一的了，这样便不能保证Java类的安全性。</span><br><span class="line"></span><br><span class="line">    - 基本类库和扩展类库rt.jar</span><br><span class="line">    基本类库是所有的 import java.* 开头的类，在 %JAVA_HOME%\jre\lib 目录下（如其中的 rt.jar、resource.jar ），类加载机制提到，该目录下的类会由 Bootstrap ClassLoader 自动加载，并通过亲委派模型保证了基础类库只会被Bootstrap ClassLoader加载，这也就保证了基础类的唯一性。</span><br><span class="line"></span><br><span class="line">    - 扩展类库是所有的 import javax.* 开头的类，在 %JAVA_HOME%\jre\lib\ext 目录下，该目录下的类是由Extension ClassLoader 自动加载，不需要我们指定。</span><br><span class="line"></span><br><span class="line">    - rt.jar 默认就在根ClassLoader的加载路径里面，放在CLASSPATH也是多此一举。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>验证</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmd里输入:</span><br><span class="line">java -version</span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
+<h2 id="neo4j安装"><a class="markdownIt-Anchor" href="#neo4j安装"></a> neo4j安装</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">neo4j有三个版本</span><br><span class="line">一个是社区版:和桌面版基本上没区别,桌面版就是一个应用程序,社区版需要用命令行启动</span><br><span class="line">一个是企业版:收费,没用过,功能很多,上面有体会</span><br><span class="line">一个是桌面版:有可以操作的页面,方便,但是会有点慢</span><br></pre></td></tr></table></figure>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://neo4j.com/download-center/">官网下载</a>,找对应的安装zip(社区版)</li>
+<li>下载解压</li>
+<li>配置环境变量<br />
+<img src="https://image.yayan.xyz/20221103175408.png" alt="" /><br />
+<img src="https://image.yayan.xyz/20221103175425.png" alt="" /></li>
+<li>cmd中输入:neo4j start 就可以启动了,浏览器输入访问</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:7474/browser/</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>默认用户名密码都是<strong>neo4j</strong></li>
+</ol>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://gladdduck.github.io/2022/11/03/%E9%85%8D%E7%BD%AE-Neo4j%E5%AE%89%E8%A3%85/" title="Neo4j&amp;JDK安装踩坑" target="_blank" rel="external">https://gladdduck.github.io/2022/11/03/配置-Neo4j安装/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/gladdduck" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/icon.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/gladdduck" target="_blank"><span class="text-dark">Gladdduck</span><small class="ml-1x">KB Master</small></a></h3>
+        <div>我写的个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2022/11/04/%E6%9D%82%E8%B0%88-Neo4j%E6%B5%8F%E8%A7%88%E5%99%A8%E7%AB%AF%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="Neo4j浏览器端快捷键"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2022/10/26/%E9%85%8D%E7%BD%AE-%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D/" title="多个域名访问同一个服务器"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/donate.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/donate.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '644a1091cfd20b8f33ef',
+    clientSecret: '4c5cc91dbfe067c804fcef958817d41acc9ba545',
+    repo: 'gladdduck.github.io',
+    owner: 'gladdduck',
+    admin: ['gladdduck'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: ''
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>

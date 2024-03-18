@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Blazor学习笔记 | Gladdduck</title>
+  <meta name="description" content="😍😍😍  Blazor 用C#代替JavaScript创建丰富的UI  页面组件  组件   以razor结尾,文件名首字母大写,HTML和C#代码的组合. 类似vue,在组件中可以使用@来引用变量   1234567&lt;h1 style&#x3D;&quot;font-style:@_headingFontStyle&quot;&gt;@_headingText&lt;&#x2F;h1&gt;@code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Blazor学习笔记">
+<meta property="og:url" content="https://gladdduck.github.io/2023/09/16/%E7%AC%94%E8%AE%B0-C#-Blazor%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Gladdduck">
+<meta property="og:description" content="😍😍😍  Blazor 用C#代替JavaScript创建丰富的UI  页面组件  组件   以razor结尾,文件名首字母大写,HTML和C#代码的组合. 类似vue,在组件中可以使用@来引用变量   1234567&lt;h1 style&#x3D;&quot;font-style:@_headingFontStyle&quot;&gt;@_headingText&lt;&#x2F;h1&gt;@code">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-16T05:56:55.560Z">
+<meta property="article:modified_time" content="2023-11-26T05:19:32.110Z">
+<meta property="article:author" content="syxue">
+<meta property="article:tag" content="Blazor">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://gladdduck.github.io/2023/09/16/%E7%AC%94%E8%AE%B0-C#-Blazor%E7%AC%94%E8%AE%B0/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/icon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/gladdduck" target="_blank">
+          <img class="img-circle img-rotate" src="/images/icon.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Gladdduck</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">KB Master</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Suzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-picture">
+          <a href="/picturewall">
+            
+            <i class="icon icon-starfish"></i>
+            
+            <span class="menu-title">图片墙</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>自己JB的记录</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">hexo博客配置</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/">快捷命令</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95/">论文记录</a><span class="category-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BingChat/" rel="tag">BingChat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blazor/" rel="tag">Blazor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlazorLocalization/" rel="tag">BlazorLocalization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSharp/" rel="tag">CSharp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cypher/" rel="tag">Cypher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataloader/" rel="tag">Dataloader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataset/" rel="tag">Dataset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Few-shotObjectDetection/" rel="tag">Few-shotObjectDetection</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kaggle/" rel="tag">Kaggle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Linux快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Neo4j快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PaddleOCRSharp/" rel="tag">PaddleOCRSharp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Python学习笔记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sampler/" rel="tag">Sampler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS2022/" rel="tag">VS2022</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCode-Github/" rel="tag">VSCode Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode/" rel="tag">Vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode-%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">Vscode 阿里云</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zero-shot-Detection/" rel="tag">Zero-shot Detection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collate-fn/" rel="tag">collate_fn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-Time-out/" rel="tag">git Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" rel="tag">hexo博客配置gitalk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" rel="tag">hexo博客配置picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" rel="tag">hexo博客配置pure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mmfewshot/" rel="tag">mmfewshot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" rel="tag">python3 标准库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">代码阅读</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE%E6%A3%80%E6%B5%8B/" rel="tag">垃圾检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">多个域名访问同一个服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" rel="tag">快速傅里叶变换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag">搭建博客</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%BC%9A%E8%AE%AE/" rel="tag">目标检测会议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" rel="tag">知识图谱表示</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">算法刷题笔记</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/BingChat/" style="font-size: 13px;">BingChat</a> <a href="/tags/Blazor/" style="font-size: 13px;">Blazor</a> <a href="/tags/BlazorLocalization/" style="font-size: 13px;">BlazorLocalization</a> <a href="/tags/CSharp/" style="font-size: 13px;">CSharp</a> <a href="/tags/Cypher/" style="font-size: 13px;">Cypher</a> <a href="/tags/Dataloader/" style="font-size: 13px;">Dataloader</a> <a href="/tags/Dataset/" style="font-size: 13px;">Dataset</a> <a href="/tags/Few-shotObjectDetection/" style="font-size: 13.33px;">Few-shotObjectDetection</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 13px;">Hadoop</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Kaggle/" style="font-size: 13px;">Kaggle</a> <a href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Linux快捷命令</a> <a href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Neo4j快捷命令</a> <a href="/tags/PaddleOCRSharp/" style="font-size: 13px;">PaddleOCRSharp</a> <a href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13.67px;">Python学习笔记</a> <a href="/tags/Sampler/" style="font-size: 13px;">Sampler</a> <a href="/tags/VS2022/" style="font-size: 13px;">VS2022</a> <a href="/tags/VSCode-Github/" style="font-size: 13px;">VSCode Github</a> <a href="/tags/Vscode/" style="font-size: 13px;">Vscode</a> <a href="/tags/Vscode-%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 13px;">Vscode 阿里云</a> <a href="/tags/Zero-shot-Detection/" style="font-size: 13px;">Zero-shot Detection</a> <a href="/tags/collate-fn/" style="font-size: 13px;">collate_fn</a> <a href="/tags/git-Time-out/" style="font-size: 13px;">git Time out</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" style="font-size: 13px;">hexo博客配置gitalk</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" style="font-size: 13px;">hexo博客配置picgo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" style="font-size: 13px;">hexo博客配置pure</a> <a href="/tags/mmfewshot/" style="font-size: 13px;">mmfewshot</a> <a href="/tags/neo4j%E5%AE%89%E8%A3%85/" style="font-size: 13px;">neo4j安装</a> <a href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 13.67px;">python3 标准库</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 13px;">代码阅读</a> <a href="/tags/%E5%9E%83%E5%9C%BE%E6%A3%80%E6%B5%8B/" style="font-size: 13px;">垃圾检测</a> <a href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">多个域名访问同一个服务器</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 13px;">快捷键</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" style="font-size: 13px;">快速傅里叶变换</a> <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 13px;">排序算法</a> <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="font-size: 13.33px;">搭建博客</a> <a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%BC%9A%E8%AE%AE/" style="font-size: 13px;">目标检测会议</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" style="font-size: 13px;">知识图谱表示</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" style="font-size: 13px;">知识点</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" style="font-size: 14px;">算法刷题笔记</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/18/%E7%AE%97%E6%B3%95-%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/18/%E7%AE%97%E6%B3%95-%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-18T13:28:14.565Z" itemprop="datePublished">2024-03-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/16/%E5%AE%9E%E4%B9%A0-Hadoop%E7%9F%A5%E8%AF%86%E7%82%B9/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/16/%E5%AE%9E%E4%B9%A0-Hadoop%E7%9F%A5%E8%AF%86%E7%82%B9/" class="title">Hadoop学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-16T08:26:52.655Z" itemprop="datePublished">2024-03-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/14/%E5%AE%9E%E4%B9%A0-Kaggle-OTTO%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/14/%E5%AE%9E%E4%B9%A0-Kaggle-OTTO%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/" class="title">Kaggle-OTTO比赛回顾</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-14T10:50:22.943Z" itemprop="datePublished">2024-03-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/11/%E9%85%8D%E7%BD%AE-vscode%E5%85%8D%E5%AF%86%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/11/%E9%85%8D%E7%BD%AE-vscode%E5%85%8D%E5%AF%86%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="title">vscode免密连接服务器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-11T07:09:42.878Z" itemprop="datePublished">2024-03-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/06/%E7%AE%97%E6%B3%95-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7%E5%88%86%E7%B1%BB%E6%80%BB%E7%BB%93/" class="thumb">
+    
+    
+        <span style="background-image:url(https://image.yayan.xyz/小鸭子.png)" alt="位运算技巧分类总结" class="thumb-image"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/06/%E7%AE%97%E6%B3%95-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7%E5%88%86%E7%B1%BB%E6%80%BB%E7%BB%93/" class="title">位运算技巧分类总结</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-06T02:05:35.115Z" itemprop="datePublished">2024-03-06</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#blazor"><span class="toc-number">1.</span> <span class="toc-text"> Blazor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E7%BB%84%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text"> 页面组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6"><span class="toc-number">2.1.</span> <span class="toc-text"> 组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%8F%82%E6%95%B0"><span class="toc-number">2.2.</span> <span class="toc-text"> 组件参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E5%A4%9A%E5%8F%82%E6%95%B0"><span class="toc-number">2.3.</span> <span class="toc-text"> 组件多参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">3.</span> <span class="toc-text"> 组件生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E6%A8%A1%E6%9D%BF"><span class="toc-number">4.</span> <span class="toc-text"> 组件模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E6%96%B9%E6%B3%95"><span class="toc-number">5.</span> <span class="toc-text"> 组件方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text"> 事件处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">7.</span> <span class="toc-text"> 数据绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E5%AD%97%E6%AE%B5"><span class="toc-number">7.1.</span> <span class="toc-text"> 绑定字段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">7.2.</span> <span class="toc-text"> 绑定对象的属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%91%E5%AE%9A%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-number">7.3.</span> <span class="toc-text"> 绑定数据格式化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%B6%E7%BB%84%E4%BB%B6%E5%8F%82%E6%95%B0%E7%BB%91%E5%AE%9A%E5%88%B0%E5%AD%90%E7%BB%84%E4%BB%B6"><span class="toc-number">7.4.</span> <span class="toc-text"> 父组件参数绑定到子组件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%92%8C%E9%A1%B5%E9%9D%A2%E5%AF%BC%E8%88%AA"><span class="toc-number">8.</span> <span class="toc-text"> 路由和页面导航</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#blazor-server%E5%92%8Cblazor-webassembly"><span class="toc-number">9.</span> <span class="toc-text"> Blazor Server和Blazor WebAssembly</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-笔记-C#-Blazor笔记" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Blazor学习笔记
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2023/09/16/%E7%AC%94%E8%AE%B0-C#-Blazor%E7%AC%94%E8%AE%B0/" class="article-date">
+	  <time datetime="2023-09-16T05:56:55.560Z" itemprop="datePublished">2023-09-16</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Blazor/" rel="tag">Blazor</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2023/09/16/%E7%AC%94%E8%AE%B0-C#-Blazor%E7%AC%94%E8%AE%B0/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 1.5k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 7(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>😍😍😍</p>
+<h2 id="blazor"><a class="markdownIt-Anchor" href="#blazor"></a> Blazor</h2>
+<p>用C#代替JavaScript创建丰富的UI</p>
+<h2 id="页面组件"><a class="markdownIt-Anchor" href="#页面组件"></a> 页面组件</h2>
+<h3 id="组件"><a class="markdownIt-Anchor" href="#组件"></a> 组件</h3>
+<blockquote>
+<ol>
+<li>以razor结尾,文件名首字母大写,HTML和C#代码的组合.</li>
+<li>类似vue,在组件中可以使用@来引用变量</li>
+</ol>
+</blockquote>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 style=<span class="string">&quot;font-style:@_headingFontStyle&quot;</span>&gt;@_headingText&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line">@code &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">string</span> _headingFontStyle = <span class="string">&quot;italic&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">string</span> _headingText = <span class="string">&quot;你好,世界!&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="组件参数"><a class="markdownIt-Anchor" href="#组件参数"></a> 组件参数</h3>
+<blockquote>
+<ol>
+<li>定义一个带有[Parameter]的公共属性,在父类使用这个组件时,可以传参</li>
+</ol>
+</blockquote>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件:Child</span></span><br><span class="line">&lt;h1&gt;@Title&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line">@code &#123;</span><br><span class="line">    [<span class="meta">Parameter</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Title &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;Child Title=<span class="string">&quot;传递参数&quot;</span> /&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="组件多参数"><a class="markdownIt-Anchor" href="#组件多参数"></a> 组件多参数</h3>
+<blockquote>
+<ol>
+<li>当子组件可携带多个参数时,不用每个参数都进行定义.</li>
+<li>使用@attributes语法关联字段进行绑定</li>
+</ol>
+</blockquote>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一种方式,单独传参</span></span><br><span class="line">&lt;input title=<span class="string">&quot;@Title&quot;</span> <span class="keyword">value</span>=<span class="string">&quot;@Value&quot;</span>  /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种方式,attribute字典传参</span></span><br><span class="line">&lt;input @attributes=<span class="string">&quot;ButtonAttributes&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@code &#123;</span><br><span class="line">    [<span class="meta">Parameter</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Title &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125; = <span class="string">&quot;Hello&quot;</span>;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">Parameter</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Value &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125; = <span class="string">&quot;10&quot;</span>;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">Parameter</span>]</span><br><span class="line">    <span class="keyword">public</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">object</span>&gt; ButtonAttributes &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125; = <span class="keyword">new</span> Dictionary&lt;<span class="built_in">string</span>, <span class="built_in">object</span>&gt;()</span><br><span class="line">&#123;</span><br><span class="line">        &#123; <span class="string">&quot;title&quot;</span>,<span class="string">&quot;Hello&quot;</span> &#125; ,</span><br><span class="line">        &#123; <span class="string">&quot;value&quot;</span>,<span class="string">&quot;10&quot;</span> &#125; ,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="组件生命周期"><a class="markdownIt-Anchor" href="#组件生命周期"></a> 组件生命周期</h2>
+<hr />
+<h2 id="组件模板"><a class="markdownIt-Anchor" href="#组件模板"></a> 组件模板</h2>
+<blockquote>
+<ol>
+<li>父组件在使用子组件时，可以向子组件中插入代码片段.类似vue中的插槽?</li>
+</ol>
+</blockquote>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 子组件，构建一个RenderFragment模板</span></span><br><span class="line">@typeparam IData</span><br><span class="line">&lt;table&gt;</span><br><span class="line"></span><br><span class="line">    &lt;thead&gt;</span><br><span class="line">        @HeaderTemplate</span><br><span class="line">    &lt;/thead&gt;</span><br><span class="line">    &lt;tbody&gt;</span><br><span class="line">        @foreach (<span class="keyword">var</span> item <span class="keyword">in</span> Data)</span><br><span class="line">        &#123;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line"></span><br><span class="line">                &lt;td&gt;@RowTemplate(item)&lt;/td&gt;</span><br><span class="line">            &lt;/tr&gt;</span><br><span class="line">        &#125;</span><br><span class="line">    &lt;/tbody&gt;</span><br><span class="line"></span><br><span class="line">&lt;/table&gt;</span><br><span class="line"></span><br><span class="line">@code &#123;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">Parameter</span>]</span><br><span class="line">    <span class="keyword">public</span> RenderFragment HeaderTemplate &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">Parameter</span>]</span><br><span class="line">    <span class="keyword">public</span> RenderFragment&lt;IData&gt; RowTemplate &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">Parameter</span>]</span><br><span class="line">    <span class="keyword">public</span> IReadOnlyList&lt;IData&gt; Data &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 父组件使用时传递html标签</span></span><br><span class="line">&lt;TableTemplate Data=<span class="string">&quot;students&quot;</span>&gt;</span><br><span class="line">    &lt;HeaderTemplate&gt;</span><br><span class="line">        &lt;th&gt;Id&lt;/th&gt;</span><br><span class="line">        &lt;th&gt;Name&lt;/th&gt;</span><br><span class="line">    &lt;/HeaderTemplate&gt;</span><br><span class="line"></span><br><span class="line">    &lt;RowTemplate&gt;</span><br><span class="line">        &lt;td&gt;@context.Id&lt;/td&gt;</span><br><span class="line">        &lt;td&gt;@context.Name&lt;/td&gt;</span><br><span class="line">    &lt;/RowTemplate&gt;</span><br><span class="line">&lt;/TableTemplate&gt;</span><br><span class="line">@code&#123;</span><br><span class="line">    <span class="keyword">public</span> List&lt;Student&gt; students &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> Task <span class="title">OnInitializedAsync</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        students = <span class="keyword">new</span> List&lt;Student&gt;();</span><br><span class="line">        students.Add(<span class="keyword">new</span> Student() &#123; Id = <span class="number">1</span>, Name = <span class="string">&quot;John&quot;</span> &#125;);</span><br><span class="line">        students.Add(<span class="keyword">new</span> Student() &#123; Id = <span class="number">2</span>, Name = <span class="string">&quot;Mary&quot;</span> &#125;);</span><br><span class="line">        students.Add(<span class="keyword">new</span> Student() &#123; Id = <span class="number">3</span>, Name = <span class="string">&quot;Jane&quot;</span> &#125;);</span><br><span class="line">        students.Add(<span class="keyword">new</span> Student() &#123; Id = <span class="number">4</span>, Name = <span class="string">&quot;Peter&quot;</span> &#125;);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">base</span>.OnInitializedAsync();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="组件方法"><a class="markdownIt-Anchor" href="#组件方法"></a> 组件方法</h2>
+<blockquote>
+<ol>
+<li>子组件时间完成之后的一个回调,当子组件发生某个事件之后通知父组件，父组件的一个响应函数</li>
+<li>下面的例子，当子组件发生点击事件之后，父组件可做出相应的反应</li>
+</ol>
+</blockquote>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 子组件：ChildCallBack</span></span><br><span class="line"></span><br><span class="line">&lt;button @onclick=<span class="string">&quot;OnClickChild&quot;</span>&gt;</span><br><span class="line">       Click</span><br><span class="line">&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">@code &#123;</span><br><span class="line">    [<span class="meta">Parameter</span>]</span><br><span class="line">    <span class="keyword">public</span> EventCallback&lt;MouseEventArgs&gt; OnClickCallback &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// </span></span><br><span class="line">     <span class="function"><span class="keyword">private</span> <span class="keyword">async</span> <span class="keyword">void</span> <span class="title">OnClickChild</span>()</span>&#123;</span><br><span class="line">        <span class="comment">// do somethings</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// ()传递参数</span></span><br><span class="line">        OnClickCallback.InvokeAsync(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;ChildCallBack OnClickCallback=<span class="string">&quot;ReceiveDataFromSideBar&quot;</span>&gt;&lt;/ChildCallBack&gt;</span><br><span class="line"></span><br><span class="line">@code&#123;</span><br><span class="line">     <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ReceiveDataFromSideBar</span>(<span class="params"><span class="built_in">int</span> number</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 可接受参数做处理</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="事件处理"><a class="markdownIt-Anchor" href="#事件处理"></a> 事件处理</h2>
+<blockquote>
+<ol>
+<li>在标签中使用@绑定一个事件，一种使用lambda表达式直接处理，一种使用函数</li>
+</ol>
+</blockquote>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 1.lambda</span></span><br><span class="line">&lt;input @onchange=<span class="string">&quot;@(()=&gt;Console.WriteLine(&quot;</span>Hello<span class="string">&quot;))&quot;</span> /&gt;</span><br><span class="line">&lt;button @onclick=<span class="string">&quot;@(()=&gt;Console.WriteLine(&quot;</span>Hello<span class="string">&quot;))&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.@code中使用函数</span></span><br><span class="line"></span><br><span class="line">&lt;button @onclick=<span class="string">&quot;Show&quot;</span> /&gt;</span><br><span class="line">@code</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Show</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">       <span class="comment">//当按钮被点击, 将执行下面代码</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.携带事件参数，在默认的情况下, 我们如果只编写一个事件触发的方法, 并且明确它是否有参数, 在UI元素绑定方法上, 我们都无需传递参数</span></span><br><span class="line">&lt;button @onclick=<span class="string">&quot;Show&quot;</span> /&gt;</span><br><span class="line">@code&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Show</span>(<span class="params">MouseEventArgs  e</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4.可重载，带有事件或不带事件</span></span><br><span class="line">&lt;button @onclick=<span class="string">&quot;@(e=&gt;Show(e))&quot;</span> /&gt;  <span class="comment">//调用带事件参数的方法</span></span><br><span class="line">&lt;button @onclick=<span class="string">&quot;@(()=&gt;Show())&quot;</span> /&gt;  <span class="comment">//调用不带事件参数的方法</span></span><br><span class="line">@code</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//不带事件参数的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Show</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//带事件参数的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Show</span>(<span class="params">MouseEventArgs e</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="数据绑定"><a class="markdownIt-Anchor" href="#数据绑定"></a> 数据绑定</h2>
+<h3 id="绑定字段"><a class="markdownIt-Anchor" href="#绑定字段"></a> 绑定字段</h3>
+<blockquote>
+<ol>
+<li>类似vue中的v-bind，可以绑定C#字段,双向绑定</li>
+<li>@xxx和@bind的区别：value=“@xxx”: 只能做到属性呈现到UI元素当中, 元素发生变化并不会影响到属性变更。</li>
+</ol>
+</blockquote>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;input @bind=<span class="string">&quot;Name&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line">@code &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="built_in">string</span> Name&#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="绑定对象的属性"><a class="markdownIt-Anchor" href="#绑定对象的属性"></a> 绑定对象的属性</h3>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;input @bind=<span class="string">&quot;Stu.Name&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">@code&#123;</span><br><span class="line">    <span class="keyword">public</span> Student Stu &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125; = <span class="keyword">new</span> Student()</span><br><span class="line">    &#123;</span><br><span class="line">        Name = <span class="string">&quot;123&quot;</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Student</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="绑定数据格式化"><a class="markdownIt-Anchor" href="#绑定数据格式化"></a> 绑定数据格式化</h3>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;input @bind=<span class="string">&quot;StartDate&quot;</span> @bind:format=<span class="string">&quot;yyyy-MM-dd&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line">@code &#123;</span><br><span class="line">    [<span class="meta">Parameter</span>]</span><br><span class="line">    <span class="keyword">public</span> DateTime StartDate &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125; = <span class="keyword">new</span> DateTime(<span class="number">2020</span>, <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="父组件参数绑定到子组件"><a class="markdownIt-Anchor" href="#父组件参数绑定到子组件"></a> 父组件参数绑定到子组件</h3>
+<blockquote>
+<ol>
+<li>当父组件的参数改变时，子组件中的参数也会同时改变</li>
+</ol>
+</blockquote>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ChildComponent </span></span><br><span class="line">&lt;p&gt;Year: @Year&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">@code &#123;</span><br><span class="line">    [<span class="meta">Parameter</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> Year &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">Parameter</span>]</span><br><span class="line">    <span class="keyword">public</span> EventCallback&lt;<span class="built_in">int</span>&gt; YearChanged &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 父组件</span></span><br><span class="line">&lt;ChildComponent @bind-Year=<span class="string">&quot;ParentYear&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line">&lt;input @bind=<span class="string">&quot;ParentYear&quot;</span> /&gt;</span><br><span class="line"></span><br><span class="line">@code &#123;</span><br><span class="line">    [<span class="meta">Parameter</span>]</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> ParentYear &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125; = <span class="number">1978</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<hr />
+<h2 id="路由和页面导航"><a class="markdownIt-Anchor" href="#路由和页面导航"></a> 路由和页面导航</h2>
+<blockquote>
+<ol>
+<li>@page “/xxx” 组件的路由</li>
+<li>@page “/xxx/{aaa}”  aaa是路由传参，在@code中添加一个公共字段aaa，</li>
+<li>@page “/xxx/{aaa:int}”  指定参数类型</li>
+<li>NavigationManager.NavigateTo(“/test/999”); 跳转页面(NavLink 也可以)</li>
+</ol>
+</blockquote>
+<hr />
+<h2 id="blazor-server和blazor-webassembly"><a class="markdownIt-Anchor" href="#blazor-server和blazor-webassembly"></a> Blazor Server和Blazor WebAssembly</h2>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/aspnet/core/blazor/hosting-models?view=aspnetcore-7.0">官网说明</a></p>
+<blockquote>
+<p>服务器把东西全部运行在浏览器的沙盒里,</p>
+</blockquote>
+<ul>
+<li>Blazor WebAssembly的优点
+<ul>
+<li>在浏览器中执行C#代码，不需要额外的插件</li>
+<li>可以基于WebAssembly的性能优势和可在浏览器内执行的能力，获得更快页面处理速度</li>
+<li>支持无服务器和离线场景</li>
+</ul>
+</li>
+<li>Blazor WebAssembl的缺点
+<ul>
+<li>需要加载太多资源，首次展现速度较慢</li>
+<li>由于所有代码都在浏览器中执行，不能嵌入机密数据</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Blazor Server类似MVC,但是Server是长连接,在服务器端计算结果差异,浏览器拿到差异渲染(blazor.server.js)</p>
+</blockquote>
+<ul>
+<li>Blazor Server的优点
+<ul>
+<li>页面加载是轻量级的</li>
+<li>服务器可以使用机密数据，例如访问数据库</li>
+<li>它支持100%的浏览器，即使是那些没有WASM支持的浏览器，如Internet Explorer。</li>
+</ul>
+</li>
+<li>Blazor Server的缺点
+<ul>
+<li>需要一个<a target="_blank" rel="noopener" href="http://ASP.NET">http://ASP.NET</a> Core服务器</li>
+<li>不支持无服务器和离线场景</li>
+<li>大量SignalR连接可能引发性能问题,保持连接</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://gladdduck.github.io/2023/09/16/%E7%AC%94%E8%AE%B0-C#-Blazor%E7%AC%94%E8%AE%B0/" title="Blazor学习笔记" target="_blank" rel="external">https://gladdduck.github.io/2023/09/16/笔记-C#-Blazor笔记/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/gladdduck" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/icon.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/gladdduck" target="_blank"><span class="text-dark">Gladdduck</span><small class="ml-1x">KB Master</small></a></h3>
+        <div>我写的个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2023/10/09/%E9%85%8D%E7%BD%AE-Blazor%E4%B8%AD%E7%9A%84Localization/" title="Blazor中的Localization"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2023/09/09/%E5%AE%9E%E4%B9%A0-Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Git学习笔记"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/donate.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/donate.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '644a1091cfd20b8f33ef',
+    clientSecret: '4c5cc91dbfe067c804fcef958817d41acc9ba545',
+    repo: 'gladdduck.github.io',
+    owner: 'gladdduck',
+    admin: ['gladdduck'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: ''
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Kaggle-OTTO比赛回顾 | Gladdduck</title>
+  <meta name="description" content="1. 比赛任务 The goal of this competition is to predict e-commerce clicks, cart additions, and orders. You’ll build a multi-objective recommender system based on previous events in a user session. 这场比赛的目标">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kaggle-OTTO比赛回顾">
+<meta property="og:url" content="https://gladdduck.github.io/2024/03/14/%E5%AE%9E%E4%B9%A0-Kaggle-OTTO%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/index.html">
+<meta property="og:site_name" content="Gladdduck">
+<meta property="og:description" content="1. 比赛任务 The goal of this competition is to predict e-commerce clicks, cart additions, and orders. You’ll build a multi-objective recommender system based on previous events in a user session. 这场比赛的目标">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.yayan.xyz/20240314194614.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240314194528.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240314190025.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240314194910.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240316125957.png">
+<meta property="article:published_time" content="2024-03-14T10:50:22.943Z">
+<meta property="article:modified_time" content="2024-03-16T05:34:08.341Z">
+<meta property="article:author" content="syxue">
+<meta property="article:tag" content="Kaggle">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.yayan.xyz/20240314194614.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://gladdduck.github.io/2024/03/14/%E5%AE%9E%E4%B9%A0-Kaggle-OTTO%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/icon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/gladdduck" target="_blank">
+          <img class="img-circle img-rotate" src="/images/icon.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Gladdduck</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">KB Master</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Suzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-picture">
+          <a href="/picturewall">
+            
+            <i class="icon icon-starfish"></i>
+            
+            <span class="menu-title">图片墙</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>自己JB的记录</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">hexo博客配置</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/">快捷命令</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95/">论文记录</a><span class="category-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BingChat/" rel="tag">BingChat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blazor/" rel="tag">Blazor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlazorLocalization/" rel="tag">BlazorLocalization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSharp/" rel="tag">CSharp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cypher/" rel="tag">Cypher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataloader/" rel="tag">Dataloader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataset/" rel="tag">Dataset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Few-shotObjectDetection/" rel="tag">Few-shotObjectDetection</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kaggle/" rel="tag">Kaggle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Linux快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Neo4j快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PaddleOCRSharp/" rel="tag">PaddleOCRSharp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Python学习笔记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sampler/" rel="tag">Sampler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS2022/" rel="tag">VS2022</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCode-Github/" rel="tag">VSCode Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode/" rel="tag">Vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode-%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">Vscode 阿里云</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zero-shot-Detection/" rel="tag">Zero-shot Detection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collate-fn/" rel="tag">collate_fn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-Time-out/" rel="tag">git Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" rel="tag">hexo博客配置gitalk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" rel="tag">hexo博客配置picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" rel="tag">hexo博客配置pure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mmfewshot/" rel="tag">mmfewshot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" rel="tag">python3 标准库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">代码阅读</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE%E6%A3%80%E6%B5%8B/" rel="tag">垃圾检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">多个域名访问同一个服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" rel="tag">快速傅里叶变换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag">搭建博客</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%BC%9A%E8%AE%AE/" rel="tag">目标检测会议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" rel="tag">知识图谱表示</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">算法刷题笔记</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/BingChat/" style="font-size: 13px;">BingChat</a> <a href="/tags/Blazor/" style="font-size: 13px;">Blazor</a> <a href="/tags/BlazorLocalization/" style="font-size: 13px;">BlazorLocalization</a> <a href="/tags/CSharp/" style="font-size: 13px;">CSharp</a> <a href="/tags/Cypher/" style="font-size: 13px;">Cypher</a> <a href="/tags/Dataloader/" style="font-size: 13px;">Dataloader</a> <a href="/tags/Dataset/" style="font-size: 13px;">Dataset</a> <a href="/tags/Few-shotObjectDetection/" style="font-size: 13.33px;">Few-shotObjectDetection</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 13px;">Hadoop</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Kaggle/" style="font-size: 13px;">Kaggle</a> <a href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Linux快捷命令</a> <a href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Neo4j快捷命令</a> <a href="/tags/PaddleOCRSharp/" style="font-size: 13px;">PaddleOCRSharp</a> <a href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13.67px;">Python学习笔记</a> <a href="/tags/Sampler/" style="font-size: 13px;">Sampler</a> <a href="/tags/VS2022/" style="font-size: 13px;">VS2022</a> <a href="/tags/VSCode-Github/" style="font-size: 13px;">VSCode Github</a> <a href="/tags/Vscode/" style="font-size: 13px;">Vscode</a> <a href="/tags/Vscode-%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 13px;">Vscode 阿里云</a> <a href="/tags/Zero-shot-Detection/" style="font-size: 13px;">Zero-shot Detection</a> <a href="/tags/collate-fn/" style="font-size: 13px;">collate_fn</a> <a href="/tags/git-Time-out/" style="font-size: 13px;">git Time out</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" style="font-size: 13px;">hexo博客配置gitalk</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" style="font-size: 13px;">hexo博客配置picgo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" style="font-size: 13px;">hexo博客配置pure</a> <a href="/tags/mmfewshot/" style="font-size: 13px;">mmfewshot</a> <a href="/tags/neo4j%E5%AE%89%E8%A3%85/" style="font-size: 13px;">neo4j安装</a> <a href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 13.67px;">python3 标准库</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 13px;">代码阅读</a> <a href="/tags/%E5%9E%83%E5%9C%BE%E6%A3%80%E6%B5%8B/" style="font-size: 13px;">垃圾检测</a> <a href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">多个域名访问同一个服务器</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 13px;">快捷键</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" style="font-size: 13px;">快速傅里叶变换</a> <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 13px;">排序算法</a> <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="font-size: 13.33px;">搭建博客</a> <a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%BC%9A%E8%AE%AE/" style="font-size: 13px;">目标检测会议</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" style="font-size: 13px;">知识图谱表示</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" style="font-size: 13px;">知识点</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" style="font-size: 14px;">算法刷题笔记</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/18/%E7%AE%97%E6%B3%95-%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/18/%E7%AE%97%E6%B3%95-%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-18T13:28:14.565Z" itemprop="datePublished">2024-03-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/16/%E5%AE%9E%E4%B9%A0-Hadoop%E7%9F%A5%E8%AF%86%E7%82%B9/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/16/%E5%AE%9E%E4%B9%A0-Hadoop%E7%9F%A5%E8%AF%86%E7%82%B9/" class="title">Hadoop学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-16T08:26:52.655Z" itemprop="datePublished">2024-03-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/14/%E5%AE%9E%E4%B9%A0-Kaggle-OTTO%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/14/%E5%AE%9E%E4%B9%A0-Kaggle-OTTO%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/" class="title">Kaggle-OTTO比赛回顾</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-14T10:50:22.943Z" itemprop="datePublished">2024-03-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/11/%E9%85%8D%E7%BD%AE-vscode%E5%85%8D%E5%AF%86%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/11/%E9%85%8D%E7%BD%AE-vscode%E5%85%8D%E5%AF%86%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="title">vscode免密连接服务器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-11T07:09:42.878Z" itemprop="datePublished">2024-03-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/06/%E7%AE%97%E6%B3%95-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7%E5%88%86%E7%B1%BB%E6%80%BB%E7%BB%93/" class="thumb">
+    
+    
+        <span style="background-image:url(https://image.yayan.xyz/小鸭子.png)" alt="位运算技巧分类总结" class="thumb-image"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/06/%E7%AE%97%E6%B3%95-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7%E5%88%86%E7%B1%BB%E6%80%BB%E7%BB%93/" class="title">位运算技巧分类总结</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-06T02:05:35.115Z" itemprop="datePublished">2024-03-06</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%AF%94%E8%B5%9B%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.</span> <span class="toc-text"> 1. 比赛任务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">2.</span> <span class="toc-text"> 2. 数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%80%9D%E8%B7%AF"><span class="toc-number">3.</span> <span class="toc-text"> 3. 思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#candidate-generation"><span class="toc-number">3.1.</span> <span class="toc-text"> Candidate Generation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#what-is-the-co-visitation-matrix-really"><span class="toc-number">3.2.</span> <span class="toc-text"> What is the co-visitation matrix, really?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#candidate-rerank-model-lb-0575"><span class="toc-number">3.3.</span> <span class="toc-text"> Candidate ReRank Model - [LB 0.575]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%80%99%E9%80%89%E5%95%86%E5%93%81%E7%94%9F%E6%88%90"><span class="toc-number">3.3.1.</span> <span class="toc-text"> 候选商品生成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E6%8E%92%E5%90%8D%E4%B8%8E%E6%9C%80%E7%BB%88%E9%80%89%E6%8B%A9"><span class="toc-number">3.3.2.</span> <span class="toc-text"> 重排名与最终选择</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#co-visitation-matrix"><span class="toc-number">3.4.</span> <span class="toc-text"> Co-visitation Matrix</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%80%99%E9%80%89%E5%95%86%E5%93%81%E7%94%9F%E6%88%90-2"><span class="toc-number">3.4.1.</span> <span class="toc-text"> 候选商品生成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E6%8E%92%E5%90%8D%E4%B8%8E%E6%9C%80%E7%BB%88%E9%80%89%E6%8B%A9-2"><span class="toc-number">3.4.2.</span> <span class="toc-text"> 重排名与最终选择</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#how-to-build-a-gbt-ranker-model"><span class="toc-number">3.5.</span> <span class="toc-text"> How To Build a GBT Ranker Model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#word2vec-how-to-training-and-submission"><span class="toc-number">3.6.</span> <span class="toc-text"> 💡 Word2Vec How-to [training and submission]🚀🚀🚀</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8word2vec%E7%9B%B4%E6%8E%A5%E8%8E%B7%E5%8F%9620%E4%B8%AA%E5%95%86%E5%93%81"><span class="toc-number">3.6.1.</span> <span class="toc-text"> 使用word2vec直接获取20个商品</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8word2vec-%E8%8E%B7%E5%8F%96%E5%80%99%E9%80%89%E5%95%86%E5%93%81"><span class="toc-number">3.6.2.</span> <span class="toc-text"> 使用word2vec 获取候选商品</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#matrix-factorization-pytorchmerlin-dataloader"><span class="toc-number">3.7.</span> <span class="toc-text"> 💡Matrix Factorization [PyTorch+Merlin Dataloader]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#226th-place-solution-two-cents-from-a-first-timer"><span class="toc-number">3.8.</span> <span class="toc-text"> 226th (?!) Place Solution &amp; Two-cents from a First-timer</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-实习-Kaggle-OTTO比赛回顾" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Kaggle-OTTO比赛回顾
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2024/03/14/%E5%AE%9E%E4%B9%A0-Kaggle-OTTO%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/" class="article-date">
+	  <time datetime="2024-03-14T10:50:22.943Z" itemprop="datePublished">2024-03-14</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Kaggle/" rel="tag">Kaggle</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2024/03/14/%E5%AE%9E%E4%B9%A0-Kaggle-OTTO%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 8.6k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 40(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="1-比赛任务"><a class="markdownIt-Anchor" href="#1-比赛任务"></a> 1. 比赛任务</h2>
+<p>The goal of this competition is to predict e-commerce clicks, cart additions, and orders. You’ll build a multi-objective recommender system based on previous events in a user session.</p>
+<p>这场比赛的目标是预测电子商务点击量、购物车添加量和订单。您将基于用户会话中以前的事件构建一个多目标推荐系统。</p>
+<p>The training data contains full e-commerce session information. For each session in the test data, your task it to predict the aid values for each session type thats occur after the last timestamp ts in the test session. In other words, the test data contains sessions truncated by timestamp, and you are to predict what occurs after the point of truncation.</p>
+<p>训练数据包含完整的电子商务会话信息。对于测试数据中的每个会话，您的任务是预测测试会话中最后一个时间戳ts之后出现的每个会话类型的商品编号(20个)。换句话说，测试数据包含按时间戳截断的会话，您要预测截断点之后会发生什么。</p>
+<p><strong>总结:</strong> 给定每个用户每个时刻的行为(点击,加购,付款)的商品编号,给出下一个时刻,该用户三种行为最可能的20个商品编号.</p>
+<h2 id="2-数据集"><a class="markdownIt-Anchor" href="#2-数据集"></a> 2. 数据集</h2>
+<p><strong>数据描述:</strong><br />
+<img src="https://image.yayan.xyz/20240314194614.png" alt="" /></p>
+<blockquote>
+<p>2,899,779 sessions<br />
+1,855,603 items<br />
+216,716,096 events<br />
+194,720,954 clicks<br />
+16,896,191 carts<br />
+5,098,951 orders</p>
+</blockquote>
+<p><strong>训练数据:</strong><br />
+<img src="https://image.yayan.xyz/20240314194528.png" alt="" /></p>
+<p><strong>提交样例文件:</strong><br />
+<img src="https://image.yayan.xyz/20240314190025.png" alt="" /></p>
+<h2 id="3-思路"><a class="markdownIt-Anchor" href="#3-思路"></a> 3. 思路</h2>
+<h3 id="candidate-generation"><a class="markdownIt-Anchor" href="#candidate-generation"></a> Candidate Generation</h3>
+<p><a target="_blank" rel="noopener" href="https://www.kaggle.com/competitions/otto-recommender-system/discussion/364721">Candidate Generation方法</a><br />
+<img src="https://image.yayan.xyz/20240314194910.png" alt="" /><br />
+原因:像这个数据量的数据直接放到模型里是不可能的事,所以按照上面的流程一步步来.</p>
+<p><strong>Step 1 - Generate Candidates</strong><br />
+用来选择候选商品的一些标准：</p>
+<ul>
+<li>以前购买的物品</li>
+<li>回购的物品</li>
+<li>总体上最受欢迎的项目</li>
+<li>基于某种聚类技术的相似项目</li>
+<li>基于共同访问矩阵等类似项目</li>
+</ul>
+<p><strong>Step 2 - ReRank and Choose 20</strong><br />
+通过上一步,商品会少很多,然后可以按照一些规则来选择20个商品.</p>
+<ul>
+<li>Ranker Model</li>
+<li>Handcrafted Rules</li>
+</ul>
+<h3 id="what-is-the-co-visitation-matrix-really"><a class="markdownIt-Anchor" href="#what-is-the-co-visitation-matrix-really"></a> What is the co-visitation matrix, really?</h3>
+<p><a target="_blank" rel="noopener" href="https://www.kaggle.com/competitions/otto-recommender-system/discussion/365358">What is the co-visitation matrix, really?</a></p>
+<p>It is very interesting to think of modern techniques in the context of their roots.</p>
+<p>“Radek is a _”.当我们预测横线上的词的时候, 三元模型会从&quot;Radek&quot;, “is”, and “a” 看,然后统计哪个单词和着三个单词出现的次数最多.</p>
+<p>但是可能并没有那么多的&quot;Radek&quot;, “is”, and &quot;a&quot;的出现过.<br />
+所以这就是RNN(or word2vec)的出现,他们会看 “Radek was an _”, &quot;Tommy is a __&quot;作为例子.</p>
+<p>那么，这与共访矩阵有什么关系呢？<br />
+共访问矩阵统计两个动作在非常接近的情况下的共出现。<br />
+如果用户购买了a，在购买B后不久，我们将这些值存储在一起。<br />
+我们计算计数，并根据最近的历史来估计未来行动的概率。<br />
+理解共同访问矩阵方法中发生的事情是非常重要的…</p>
+<h3 id="candidate-rerank-model-lb-0575"><a class="markdownIt-Anchor" href="#candidate-rerank-model-lb-0575"></a> Candidate ReRank Model - [LB 0.575]</h3>
+<p><a target="_blank" rel="noopener" href="https://www.kaggle.com/code/cdeotte/candidate-rerank-model-lb-0-575?scriptVersionId=111214204">Candidate ReRank Model - LB 0.575</a></p>
+<p><strong>Step 1 - Generate Candidates</strong><br />
+对每一个用户生成候选商品,五种方法:</p>
+<ul>
+<li>用户点击、购物车、订单的用户历史记录</li>
+<li>测试数据一周内最受欢迎的20次点击、购物车、订单</li>
+<li>点击/购物车/订单到购物车/订单 的共同访问矩阵(带有类型权重)</li>
+<li>称为buy2buy的购物车/订单到购物车/订单的共访问矩阵</li>
+<li>点击/购物车/订单与点击的共访问矩阵（带时间权重）</li>
+</ul>
+<p><strong>Step 2 - ReRank and Choose 20</strong><br />
+从上面的候选列表中选择20个作为最终预测结果,选取的顺序为:</p>
+<ul>
+<li>最近访问过的项目</li>
+<li>以前多次访问的项目</li>
+<li>以前在购物车或订单中的项目</li>
+<li>购物车/订单到购物车/订单的共同访问矩阵</li>
+<li>当前热门项目</li>
+</ul>
+<h4 id="候选商品生成"><a class="markdownIt-Anchor" href="#候选商品生成"></a> 候选商品生成</h4>
+<p>“Carts Orders” Co-visitation Matrix - Type Weighted</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">构建思路:</span></span><br><span class="line"><span class="string">按照用户和时间进行排序</span></span><br><span class="line"><span class="string">df.groupby(&#x27;session&#x27;).cumcount()求出每个用户的行数</span></span><br><span class="line"><span class="string">保留每个用户最近的30个行为</span></span><br><span class="line"><span class="string">df.merge(df, on=&#x27;session&#x27;)创建每个用户的行为对其他行为的关系(目的是构建商品和商品的关系)</span></span><br><span class="line"><span class="string">筛选出时间间隔小于1天 且商品编号不相同的行,删除重复的值</span></span><br><span class="line"><span class="string">根据行为的权重系数,对商品之间的关系进行赋值</span></span><br><span class="line"><span class="string">得到了每个商品之间的权重系数</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line">type_weight = &#123;<span class="number">0</span>:<span class="number">1</span>, <span class="number">1</span>:<span class="number">6</span>, <span class="number">2</span>:<span class="number">3</span>&#125;</span><br><span class="line">df = df.sort_values([<span class="string">&#x27;session&#x27;</span>, <span class="string">&#x27;ts&#x27;</span>], ascending=[<span class="literal">True</span>, <span class="literal">False</span>])  <span class="comment"># 根据&#x27;session&#x27;和&#x27;ts&#x27;排序数据框，先升序排&#x27;session&#x27;再降序排&#x27;ts&#x27;</span></span><br><span class="line"><span class="comment"># 使用SESSION的TAIL</span></span><br><span class="line">df = df.reset_index(drop=<span class="literal">True</span>)  <span class="comment"># 重设索引并删除原索引</span></span><br><span class="line">df[<span class="string">&#x27;n&#x27;</span>] = df.groupby(<span class="string">&#x27;session&#x27;</span>).cumcount()  <span class="comment"># 对&#x27;session&#x27;进行分组计数</span></span><br><span class="line">df = df.loc[df.n &lt; <span class="number">30</span>].drop(<span class="string">&#x27;n&#x27;</span>, axis=<span class="number">1</span>)  <span class="comment"># 保留每个&#x27;session&#x27;组的前30行，然后删除计数列&#x27;n&#x27;</span></span><br><span class="line"><span class="comment"># 创建对关系</span></span><br><span class="line">df = df.merge(df, on=<span class="string">&#x27;session&#x27;</span>)  <span class="comment"># 在&#x27;session&#x27;列上合并数据框自身，创建对关系</span></span><br><span class="line">df = df.loc[((df.ts_x - df.ts_y).<span class="built_in">abs</span>() &lt; <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>) &amp; (df.aid_x != df.aid_y)]  <span class="comment"># 选择时间间隔小于1天且&#x27;aid_x&#x27;不等于&#x27;aid_y&#x27;的行</span></span><br><span class="line"><span class="comment"># 内存管理，分部计算</span></span><br><span class="line">df = df.loc[(df.aid_x &gt;= PART*SIZE) &amp; (df.aid_x &lt; (PART+<span class="number">1</span>)*SIZE)]  <span class="comment"># 根据&#x27;aid_x&#x27;值进行分块处理</span></span><br><span class="line"><span class="comment"># 分配权重</span></span><br><span class="line">df = df[[<span class="string">&#x27;session&#x27;</span>, <span class="string">&#x27;aid_x&#x27;</span>, <span class="string">&#x27;aid_y&#x27;</span>, <span class="string">&#x27;type_y&#x27;</span>]].drop_duplicates([<span class="string">&#x27;session&#x27;</span>, <span class="string">&#x27;aid_x&#x27;</span>, <span class="string">&#x27;aid_y&#x27;</span>])  <span class="comment"># 根据指定列去除重复行，选择指定列</span></span><br><span class="line">df[<span class="string">&#x27;wgt&#x27;</span>] = df.type_y.<span class="built_in">map</span>(type_weight)  <span class="comment"># 根据&#x27;type_y&#x27;映射权重值到&#x27;wgt&#x27;列</span></span><br><span class="line">df = df[[<span class="string">&#x27;aid_x&#x27;</span>, <span class="string">&#x27;aid_y&#x27;</span>, <span class="string">&#x27;wgt&#x27;</span>]]  <span class="comment"># 保留&#x27;aid_x&#x27;, &#x27;aid_y&#x27;, &#x27;wgt&#x27;三列</span></span><br><span class="line">df.wgt = df.wgt.astype(<span class="string">&#x27;float32&#x27;</span>)  <span class="comment"># 将&#x27;wgt&#x27;列转换为float32类型</span></span><br><span class="line">df = df.groupby([<span class="string">&#x27;aid_x&#x27;</span>, <span class="string">&#x27;aid_y&#x27;</span>]).wgt.<span class="built_in">sum</span>()  <span class="comment"># 根据&#x27;aid_x&#x27;, &#x27;aid_y&#x27;分组，并求&#x27;wgt&#x27;列的和</span></span><br></pre></td></tr></table></figure>
+<p>“Buy2Buy” Co-visitation Matrix</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">构建思路:</span></span><br><span class="line"><span class="string">按照用户和时间进行排序</span></span><br><span class="line"><span class="string">df.groupby(&#x27;session&#x27;).cumcount()求出每个用户的行数</span></span><br><span class="line"><span class="string">保留每个用户最近的30个行为</span></span><br><span class="line"><span class="string">df.merge(df, on=&#x27;session&#x27;)创建每个用户的行为对其他行为的关系(目的是构建商品和商品的关系)</span></span><br><span class="line"><span class="string">筛选出时间间隔小于14天 且商品编号不相同的行,删除重复的值</span></span><br><span class="line"><span class="string">权重全部是1(加购和加购之间的关系),对商品和商品之间的关系进行分组求和</span></span><br><span class="line"><span class="string">得到了每个商品之间的权重系数</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line">df = df.loc[df[<span class="string">&#x27;type&#x27;</span>].isin([<span class="number">1</span>,<span class="number">2</span>])] <span class="comment"># 仅保留购物车和订单</span></span><br><span class="line">df = df.sort_values([<span class="string">&#x27;session&#x27;</span>,<span class="string">&#x27;ts&#x27;</span>],ascending=[<span class="literal">True</span>,<span class="literal">False</span>]) <span class="comment"># 按&#x27;session&#x27;和&#x27;ts&#x27;降序排序</span></span><br><span class="line"><span class="comment"># 使用SESSION的TAIL</span></span><br><span class="line">df = df.reset_index(drop=<span class="literal">True</span>) <span class="comment"># 重新设置索引并丢弃原索引</span></span><br><span class="line">df[<span class="string">&#x27;n&#x27;</span>] = df.groupby(<span class="string">&#x27;session&#x27;</span>).cumcount() <span class="comment"># 计算每个&#x27;session&#x27;组的行数</span></span><br><span class="line"><span class="comment"># 保留用户最近的30个行为</span></span><br><span class="line">df = df.loc[df.n&lt;<span class="number">30</span>].drop(<span class="string">&#x27;n&#x27;</span>,axis=<span class="number">1</span>) <span class="comment"># 仅保留每个&#x27;session&#x27;组的前30行，并删除&#x27;n&#x27;列</span></span><br><span class="line"><span class="comment"># 创建成对关系</span></span><br><span class="line">df = df.merge(df, on=<span class="string">&#x27;session&#x27;</span>) <span class="comment"># 在&#x27;session&#x27;上合并数据框自身，创建成对关系</span></span><br><span class="line">df = df.loc[((df.ts_x - df.ts_y).<span class="built_in">abs</span>() &lt; <span class="number">14</span> * <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>) &amp; (df.aid_x != df.aid_y)] <span class="comment"># 筛选出时间间隔小于14天且&#x27;aid_x&#x27;不等于&#x27;aid_y&#x27;的行</span></span><br><span class="line"><span class="comment"># 内存管理，分部计算</span></span><br><span class="line">df = df.loc[(df.aid_x &gt;= PART*SIZE) &amp; (df.aid_x &lt; (PART+<span class="number">1</span>)*SIZE)] <span class="comment"># 根据&#x27;aid_x&#x27;的值对数据框进行分块处理</span></span><br><span class="line"><span class="comment"># 分配权重</span></span><br><span class="line">df = df[[<span class="string">&#x27;session&#x27;</span>, <span class="string">&#x27;aid_x&#x27;</span>, <span class="string">&#x27;aid_y&#x27;</span>, <span class="string">&#x27;type_y&#x27;</span>]].drop_duplicates([<span class="string">&#x27;session&#x27;</span>, <span class="string">&#x27;aid_x&#x27;</span>, <span class="string">&#x27;aid_y&#x27;</span>]) <span class="comment"># 根据&#x27;session&#x27;, &#x27;aid_x&#x27;, &#x27;aid_y&#x27;列去除重复行，并选择指定列</span></span><br><span class="line">df[<span class="string">&#x27;wgt&#x27;</span>] = <span class="number">1</span> <span class="comment"># 添加&#x27;wgt&#x27;列，并赋值为1</span></span><br><span class="line">df = df[[<span class="string">&#x27;aid_x&#x27;</span>, <span class="string">&#x27;aid_y&#x27;</span>, <span class="string">&#x27;wgt&#x27;</span>]] <span class="comment"># 仅保留&#x27;aid_x&#x27;, &#x27;aid_y&#x27;, &#x27;wgt&#x27;三列</span></span><br><span class="line">df.wgt = df.wgt.astype(<span class="string">&#x27;float32&#x27;</span>) <span class="comment"># 将&#x27;wgt&#x27;列的数据类型转换为float32</span></span><br><span class="line">df = df.groupby([<span class="string">&#x27;aid_x&#x27;</span>, <span class="string">&#x27;aid_y&#x27;</span>]).wgt.<span class="built_in">sum</span>() <span class="comment"># 根据&#x27;aid_x&#x27;, &#x27;aid_y&#x27;分组，并对&#x27;wgt&#x27;列求和</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>“Clicks” Co-visitation Matrix - Time Weighted</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">构建思路:</span></span><br><span class="line"><span class="string">按照用户和时间进行排序</span></span><br><span class="line"><span class="string">df.groupby(&#x27;session&#x27;).cumcount()求出每个用户的行数</span></span><br><span class="line"><span class="string">保留每个用户最近的30个行为</span></span><br><span class="line"><span class="string">df.merge(df, on=&#x27;session&#x27;)创建每个用户的行为对其他行为的关系(目的是构建商品和商品的关系)</span></span><br><span class="line"><span class="string">筛选出时间间隔小于1天 且商品编号不相同的行,删除重复的值</span></span><br><span class="line"><span class="string">按时间顺序对商品和商品之间的关系进行赋值,时间越近权重越大</span></span><br><span class="line"><span class="string">得到了每个商品之间的权重系数</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line">df = df.sort_values([<span class="string">&#x27;session&#x27;</span>, <span class="string">&#x27;ts&#x27;</span>], ascending=[<span class="literal">True</span>, <span class="literal">False</span>])  <span class="comment"># 按&#x27;session&#x27;和&#x27;ts&#x27;排序，&#x27;session&#x27;升序，&#x27;ts&#x27;降序</span></span><br><span class="line"><span class="comment"># 使用SESSION的TAIL</span></span><br><span class="line">df = df.reset_index(drop=<span class="literal">True</span>)  <span class="comment"># 重置索引并删除旧索引</span></span><br><span class="line">df[<span class="string">&#x27;n&#x27;</span>] = df.groupby(<span class="string">&#x27;session&#x27;</span>).cumcount()  <span class="comment"># 对&#x27;session&#x27;进行计数</span></span><br><span class="line">df = df.loc[df.n &lt; <span class="number">30</span>].drop(<span class="string">&#x27;n&#x27;</span>, axis=<span class="number">1</span>)  <span class="comment"># 保留每个&#x27;session&#x27;组的前30行，然后删除计数列</span></span><br><span class="line"><span class="comment"># 创建对关系</span></span><br><span class="line">df = df.merge(df, on=<span class="string">&#x27;session&#x27;</span>)  <span class="comment"># 在&#x27;session&#x27;上合并数据框自身，创建对关系</span></span><br><span class="line">df = df.loc[((df.ts_x - df.ts_y).<span class="built_in">abs</span>() &lt; <span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>) &amp; (df.aid_x != df.aid_y)]  <span class="comment"># 选择时间间隔小于1天且&#x27;aid_x&#x27;不等于&#x27;aid_y&#x27;的行</span></span><br><span class="line"><span class="comment"># 内存管理，分部计算</span></span><br><span class="line">df = df.loc[(df.aid_x &gt;= PART*SIZE) &amp; (df.aid_x &lt; (PART+<span class="number">1</span>)*SIZE)]  <span class="comment"># 根据&#x27;aid_x&#x27;的值对数据框进行分块处理</span></span><br><span class="line"><span class="comment"># 分配权重</span></span><br><span class="line">df = df[[<span class="string">&#x27;session&#x27;</span>, <span class="string">&#x27;aid_x&#x27;</span>, <span class="string">&#x27;aid_y&#x27;</span>, <span class="string">&#x27;ts_x&#x27;</span>]].drop_duplicates([<span class="string">&#x27;session&#x27;</span>, <span class="string">&#x27;aid_x&#x27;</span>, <span class="string">&#x27;aid_y&#x27;</span>])  <span class="comment"># 根据指定列去除重复行</span></span><br><span class="line">df[<span class="string">&#x27;wgt&#x27;</span>] = <span class="number">1</span> + <span class="number">3</span>*(df.ts_x - <span class="number">1659304800</span>) / (<span class="number">1662328791</span> - <span class="number">1659304800</span>)  <span class="comment"># 根据公式计算权重</span></span><br><span class="line">df = df[[<span class="string">&#x27;aid_x&#x27;</span>, <span class="string">&#x27;aid_y&#x27;</span>, <span class="string">&#x27;wgt&#x27;</span>]]  <span class="comment"># 保留&#x27;aid_x&#x27;, &#x27;aid_y&#x27;, &#x27;wgt&#x27;三列</span></span><br><span class="line">df.wgt = df.wgt.astype(<span class="string">&#x27;float32&#x27;</span>)  <span class="comment"># 将&#x27;wgt&#x27;列的数据类型转换为float32</span></span><br><span class="line">df = df.groupby([<span class="string">&#x27;aid_x&#x27;</span>, <span class="string">&#x27;aid_y&#x27;</span>]).wgt.<span class="built_in">sum</span>()  <span class="comment"># 根据&#x27;aid_x&#x27;, &#x27;aid_y&#x27;分组，并对&#x27;wgt&#x27;列求和</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 商品的矩阵构建完成之后都经历下面的步骤</span></span><br><span class="line">tmp = tmp.reset_index()</span><br><span class="line"><span class="comment"># 按照权重进行排序</span></span><br><span class="line">tmp = tmp.sort_values([<span class="string">&#x27;aid_x&#x27;</span>,<span class="string">&#x27;wgt&#x27;</span>],ascending=[<span class="literal">True</span>,<span class="literal">False</span>])</span><br><span class="line">tmp = tmp.reset_index(drop=<span class="literal">True</span>)</span><br><span class="line"><span class="comment"># 保留每个商品的前15(不定)个关系</span></span><br><span class="line">tmp[<span class="string">&#x27;n&#x27;</span>] = tmp.groupby(<span class="string">&#x27;aid_x&#x27;</span>).aid_y.cumcount()</span><br><span class="line">tmp = tmp.loc[tmp.n&lt;<span class="number">15</span>].drop(<span class="string">&#x27;n&#x27;</span>,axis=<span class="number">1</span>)</span><br><span class="line">tmp.groupby(<span class="string">&#x27;aid_x&#x27;</span>).aid_y.apply(<span class="built_in">list</span>).to_dict()</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">总结:</span></span><br><span class="line"><span class="string">1. &quot;Carts Orders&quot; Co-visitation Matrix - Type Weighted</span></span><br><span class="line"><span class="string">含义:根据用户的历史行为分配商品之间的权重系数对应top_20_buys</span></span><br><span class="line"><span class="string">2. &quot;Buy2Buy&quot; Co-visitation Matrix</span></span><br><span class="line"><span class="string">含义:根据用户的加购和购买行为分配商品之间的权重系数对应top_20_buy2buy</span></span><br><span class="line"><span class="string">3. &quot;Clicks&quot; Co-visitation Matrix - Time Weighted</span></span><br><span class="line"><span class="string">含义:根据用户的行为时间分配商品之间的权重系数对应top_20_clicks</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+<h4 id="重排名与最终选择"><a class="markdownIt-Anchor" href="#重排名与最终选择"></a> 重排名与最终选择</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">type_weight_multipliers = &#123;<span class="number">0</span>: <span class="number">1</span>, <span class="number">1</span>: <span class="number">6</span>, <span class="number">2</span>: <span class="number">3</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">suggest_clicks</span>(<span class="params">df</span>):</span><br><span class="line">   <span class="comment"># USER HISTORY AIDS AND TYPES</span></span><br><span class="line">   aids = df.aid.tolist()  <span class="comment"># 获取用户历史商品id</span></span><br><span class="line">   ty = df.<span class="built_in">type</span>.tolist()  <span class="comment"># 获取用户历史行为</span></span><br><span class="line">   unique_aids = <span class="built_in">list</span>(<span class="built_in">dict</span>.fromkeys(aids[::-<span class="number">1</span>]))  <span class="comment"># 获取不重复的商品id</span></span><br><span class="line">   <span class="comment"># 如果历史商品id大于等于20个,则返回前20个商品id</span></span><br><span class="line">   <span class="keyword">if</span> <span class="built_in">len</span>(unique_aids) &gt;= <span class="number">20</span>:</span><br><span class="line">       <span class="comment"># 根据商品id出现的时间,对商品id进行排序</span></span><br><span class="line">       weights = np.logspace(<span class="number">0.1</span>, <span class="number">1</span>, <span class="built_in">len</span>(aids), base=<span class="number">2</span>, endpoint=<span class="literal">True</span>) - <span class="number">1</span></span><br><span class="line">       <span class="comment"># 记录商品id:权重</span></span><br><span class="line">       aids_temp = Counter() </span><br><span class="line">       <span class="comment"># 商品,权重,类型</span></span><br><span class="line">       <span class="keyword">for</span> aid, w, t <span class="keyword">in</span> <span class="built_in">zip</span>(aids, weights, ty): </span><br><span class="line">           <span class="comment"># id权重=时间权重*类型权重</span></span><br><span class="line">           aids_temp[aid] += w * type_weight_multipliers[t]</span><br><span class="line">        <span class="comment"># 返回权重最大的前20个商品id</span></span><br><span class="line">       sorted_aids = [k <span class="keyword">for</span> k,v <span class="keyword">in</span> aids_temp.most_common(<span class="number">20</span>)]</span><br><span class="line">       <span class="keyword">return</span> sorted_aids</span><br><span class="line">   <span class="comment"># 如果不够20个, 从点击最高的商品关系中找到最近点击的商品 然后取出最关联的20个商品</span></span><br><span class="line">   aids2 = <span class="built_in">list</span>(itertools.chain(*[top_20_clicks[aid] <span class="keyword">for</span> aid <span class="keyword">in</span> unique_aids <span class="keyword">if</span> aid <span class="keyword">in</span> top_20_click]))</span><br><span class="line">   <span class="comment"># 从最近点击的商品的最关联的商品中找打出现次数最多的商品</span></span><br><span class="line">   top_aids2 = [aid2 <span class="keyword">for</span> aid2, cnt <span class="keyword">in</span> Counter(aids2).most_common(<span class="number">20</span>) <span class="keyword">if</span> aid2 <span class="keyword">not</span> <span class="keyword">in</span> unique_aids]</span><br><span class="line">   <span class="comment"># 将这些商品和用户历史商品合并</span></span><br><span class="line">   result = unique_aids + top_aids2[:<span class="number">20</span> - <span class="built_in">len</span>(unique_aids)]</span><br><span class="line">   <span class="comment"># 如果历史商品加上最关联的商品还不够20个,则从test中的历史数据中找到点击最高的商品</span></span><br><span class="line">   <span class="keyword">return</span> result + <span class="built_in">list</span>(top_clicks)[:<span class="number">20</span> - <span class="built_in">len</span>(result)]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">suggest_buys</span>(<span class="params">df</span>):</span><br><span class="line">   <span class="comment"># USER HISTORY AIDS AND TYPES</span></span><br><span class="line">   aids = df.aid.tolist()  <span class="comment"># 获取用户历史商品id</span></span><br><span class="line">   ty = df.<span class="built_in">type</span>.tolist()  <span class="comment"># 获取用户历史行为</span></span><br><span class="line">   unique_aids = <span class="built_in">list</span>(<span class="built_in">dict</span>.fromkeys(aids[::-<span class="number">1</span>]))  <span class="comment"># 获取所有行为不重复的商品id</span></span><br><span class="line">   <span class="comment"># 只保留用户历史加购和购买的行为(商品id)</span></span><br><span class="line">   df = df.loc[(df[<span class="string">&#x27;type&#x27;</span>] == <span class="number">1</span>) | (df[<span class="string">&#x27;type&#x27;</span>] == <span class="number">2</span>)]  </span><br><span class="line">   <span class="comment"># 获取加购和购买的不重复商品id</span></span><br><span class="line">   unique_buys = <span class="built_in">list</span>(<span class="built_in">dict</span>.fromkeys(df.aid.tolist()[::-<span class="number">1</span>]))  </span><br><span class="line">   <span class="comment"># 如果历史行为商品id大于等于20个,则根据历史行为返回商品id</span></span><br><span class="line">   <span class="keyword">if</span> <span class="built_in">len</span>(unique_aids) &gt;= <span class="number">20</span>:</span><br><span class="line">       <span class="comment"># 时间权重</span></span><br><span class="line">       weights = np.logspace(<span class="number">0.5</span>, <span class="number">1</span>, <span class="built_in">len</span>(aids), base=<span class="number">2</span>, endpoint=<span class="literal">True</span>) - <span class="number">1</span> </span><br><span class="line">       aids_temp = Counter() </span><br><span class="line">       <span class="comment"># id权重=时间权重*类型权重</span></span><br><span class="line">       <span class="keyword">for</span> aid, w, t <span class="keyword">in</span> <span class="built_in">zip</span>(aids, weights, types): </span><br><span class="line">           aids_temp[aid] += w * type_weight_multipliers[t] </span><br><span class="line">       <span class="comment"># 找到与用户历史购买/加购行为最相关的20个商品id</span></span><br><span class="line">       aids3 = <span class="built_in">list</span>(itertools.chain(*[top_20_buy2buy[aid] <span class="keyword">for</span> aid <span class="keyword">in</span> unique_buys <span class="keyword">if</span> aid <span class="keyword">in</span> top_20_buy2buy]))  </span><br><span class="line">       <span class="comment"># 对这些商品id的权重增加0.1</span></span><br><span class="line">       <span class="keyword">for</span> aid <span class="keyword">in</span> aids3: aids_temp[aid] += <span class="number">0.1</span></span><br><span class="line">       <span class="comment"># 返回权重最大的前20个商品id</span></span><br><span class="line">       sorted_aids = [k <span class="keyword">for</span> k, v <span class="keyword">in</span> aids_temp.most_common(<span class="number">20</span>)]</span><br><span class="line">       <span class="keyword">return</span> sorted_aids</span><br><span class="line">   <span class="comment"># 找到与用户历史所有行为的商品行为上最相关的20个商品id</span></span><br><span class="line">   aids2 = <span class="built_in">list</span>(itertools.chain(*[top_20_buys[aid] <span class="keyword">for</span> aid <span class="keyword">in</span> unique_aids <span class="keyword">if</span> aid <span class="keyword">in</span> top_20_buys]))  </span><br><span class="line">   <span class="comment"># 找到与用户历史购买/加购行为的商品最相关的20个商品id</span></span><br><span class="line">   aids3 = <span class="built_in">list</span>(itertools.chain(*[top_20_buy2buy[aid] <span class="keyword">for</span> aid <span class="keyword">in</span> unique_buys <span class="keyword">if</span> aid <span class="keyword">in</span> top_20_buy2buy]))  </span><br><span class="line">   <span class="comment"># 对这些商品出现的次数进行统计</span></span><br><span class="line">   top_aids2 = [aid2 <span class="keyword">for</span> aid2, cnt <span class="keyword">in</span> Counter(aids2 + aids3).most_common(<span class="number">20</span>) <span class="keyword">if</span> aid2 <span class="keyword">not</span> <span class="keyword">in</span> unique_aids]  </span><br><span class="line">    <span class="comment"># 获取最终结果,历史行为商品id+最相关的商品id</span></span><br><span class="line">   result = unique_aids + top_aids2[:<span class="number">20</span> - <span class="built_in">len</span>(unique_aids)] </span><br><span class="line">   <span class="comment"># 如果这些商品还不够20个,则从test中的历史数据中找到购买最高的商品</span></span><br><span class="line">   <span class="keyword">return</span> result + <span class="built_in">list</span>(top_orders)[:<span class="number">20</span> - <span class="built_in">len</span>(result)]  </span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成预测结果</span></span><br><span class="line">pred_df_clicks = test_df.sort_values([<span class="string">&quot;session&quot;</span>, <span class="string">&quot;ts&quot;</span>]).groupby([<span class="string">&quot;session&quot;</span>]).apply(</span><br><span class="line">    <span class="keyword">lambda</span> x: suggest_clicks(x)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">pred_df_buys = test_df.sort_values([<span class="string">&quot;session&quot;</span>, <span class="string">&quot;ts&quot;</span>]).groupby([<span class="string">&quot;session&quot;</span>]).apply(</span><br><span class="line">    <span class="keyword">lambda</span> x: suggest_buys(x)</span><br><span class="line">)</span><br><span class="line">clicks_pred_df = pd.DataFrame(pred_df_clicks.add_suffix(<span class="string">&quot;_clicks&quot;</span>), columns=[<span class="string">&quot;labels&quot;</span>]).reset_index()</span><br><span class="line">orders_pred_df = pd.DataFrame(pred_df_buys.add_suffix(<span class="string">&quot;_orders&quot;</span>), columns=[<span class="string">&quot;labels&quot;</span>]).reset_index()</span><br><span class="line">carts_pred_df = pd.DataFrame(pred_df_buys.add_suffix(<span class="string">&quot;_carts&quot;</span>), columns=[<span class="string">&quot;labels&quot;</span>]).reset_index()</span><br><span class="line">pred_df = pd.concat([clicks_pred_df, orders_pred_df, carts_pred_df])</span><br><span class="line">pred_df.columns = [<span class="string">&quot;session_type&quot;</span>, <span class="string">&quot;labels&quot;</span>]</span><br><span class="line">pred_df[<span class="string">&quot;labels&quot;</span>] = pred_df.labels.apply(<span class="keyword">lambda</span> x: <span class="string">&quot; &quot;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>,x)))</span><br><span class="line">pred_df.to_csv(<span class="string">&quot;submission.csv&quot;</span>, index=<span class="literal">False</span>)</span><br><span class="line">pred_df.head()</span><br></pre></td></tr></table></figure>
+<h3 id="co-visitation-matrix"><a class="markdownIt-Anchor" href="#co-visitation-matrix"></a> Co-visitation Matrix</h3>
+<p><a target="_blank" rel="noopener" href="https://www.kaggle.com/code/vslaykovsky/co-visitation-matrix">Co-visitation Matrix</a></p>
+<p><strong>Step 1 - Generate Candidates</strong></p>
+<ul>
+<li>总会有一些商品是经常点击的并且一起买,利用这个思想构建一个协同矩阵</li>
+<li>
+<ul>
+<li>首先，我们查看同一会话中在时间上彼此接近（&lt;1天）的所有事件对。我们计算共同访问矩阵<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mrow><mi>a</mi><mi>i</mi><mi>d</mi><mn>1</mn><mtext>，</mtext><mi>a</mi><mi>i</mi><mi>d</mi><mn>2</mn></mrow></msub></mrow><annotation encoding="application/x-tex">M_{aid1，aid2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">d</span><span class="mord mtight">1</span><span class="mord cjk_fallback mtight">，</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">d</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>通过对所有会话中的每对事件对的全局数量进行计数。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>对于每个商品id,我们发现前20个最频繁的<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>i</mi><mi>d</mi><mn>2</mn><mo>=</mo><mi>a</mi><mi>r</mi><mi>g</mi><mi>s</mi><mi>o</mi><mi>r</mi><mi>t</mi><mtext>（</mtext><mi>M</mi><mo stretchy="false">[</mo><mi>a</mi><mi>i</mi><mi>d</mi><mo stretchy="false">]</mo><mtext>）</mtext><mo stretchy="false">[</mo><mo>−</mo><mn>20</mn><mo>:</mo><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">aid2=argsort（M[aid]）[-20:]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal">i</span><span class="mord mathnormal">d</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">s</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">t</span><span class="mord cjk_fallback">（</span><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="mopen">[</span><span class="mord mathnormal">a</span><span class="mord mathnormal">i</span><span class="mord mathnormal">d</span><span class="mclose">]</span><span class="mord cjk_fallback">）</span><span class="mopen">[</span><span class="mord">−</span><span class="mord">2</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mclose">]</span></span></span></span></li>
+</ul>
+</li>
+</ul>
+<p><strong>Step 2 - ReRank and Choose 20</strong></p>
+<ul>
+<li>从上面的候选列表中选择出现频率最高的20个作为最终预测结果</li>
+</ul>
+<h4 id="候选商品生成-2"><a class="markdownIt-Anchor" href="#候选商品生成-2"></a> 候选商品生成</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys  <span class="comment"># 导入sys模块</span></span><br><span class="line"><span class="keyword">import</span> gc  <span class="comment"># 导入gc模块</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gen_pairs</span>(<span class="params">df</span>):  <span class="comment"># 定义一个函数用于生成pairs</span></span><br><span class="line">   df = df.query(<span class="string">&#x27;session % @SAMPLING == 0&#x27;</span>).groupby(<span class="string">&#x27;session&#x27;</span>, as_index=<span class="literal">False</span>, sort=<span class="literal">False</span>).apply(<span class="keyword">lambda</span> g: g.tail(<span class="number">30</span>)).reset_index(drop=<span class="literal">True</span>)  <span class="comment"># 根据条件筛选数据并截取每个会话的最后30条记录</span></span><br><span class="line">   df = pd.merge(df, df, on=<span class="string">&#x27;session&#x27;</span>)  <span class="comment"># 在会话上进行自连接</span></span><br><span class="line">   pairs = df.query(<span class="string">&#x27;abs(ts_x - ts_y) &lt; 24 * 60 * 60 * 1000 and aid_x != aid_y&#x27;</span>)[[<span class="string">&#x27;session&#x27;</span>, <span class="string">&#x27;aid_x&#x27;</span>, <span class="string">&#x27;aid_y&#x27;</span>]].drop_duplicates()  <span class="comment"># 筛选满足条件的数据对</span></span><br><span class="line">   <span class="keyword">return</span> pairs[[<span class="string">&#x27;aid_x&#x27;</span>, <span class="string">&#x27;aid_y&#x27;</span>]].values  <span class="comment"># 返回数据对中的&#x27;aid_x&#x27;和&#x27;aid_y&#x27;值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gen_aid_pairs</span>():  <span class="comment"># 定义一个函数生成aid_pairs </span></span><br><span class="line">   all_pairs = defaultdict(<span class="keyword">lambda</span>: Counter())  <span class="comment"># 初始化一个空字典用于存储所有数据配对</span></span><br><span class="line">   all_pair_chunks = []  <span class="comment"># 初始化一个空列表用于存储所有的数据块</span></span><br><span class="line">   <span class="keyword">with</span> tqdm(glob.glob(<span class="string">&#x27;../input/otto-chunk-data-inparquet-format/*_parquet/*&#x27;</span>), desc=<span class="string">&#x27;Chunks&#x27;</span>) <span class="keyword">as</span> prog:  <span class="comment"># 使用tqdm来展示进度条，并遍历文件</span></span><br><span class="line">       <span class="keyword">for</span> idx, chunk_file <span class="keyword">in</span> <span class="built_in">enumerate</span>(prog):  <span class="comment"># 遍历文件</span></span><br><span class="line">           <span class="keyword">with</span> multiprocessing.Pool() <span class="keyword">as</span> p:  <span class="comment"># 创建多进程池</span></span><br><span class="line">               chunk = pd.read_parquet(chunk_file).drop(columns=[<span class="string">&#x27;type&#x27;</span>])  <span class="comment"># 从parquet文件中读取数据块</span></span><br><span class="line">               pair_chunks = p.<span class="built_in">map</span>(gen_pairs, np.array_split(chunk, <span class="number">120</span>))  <span class="comment"># 将数据块拆分并使用gen_pairs函数生成数据对</span></span><br><span class="line">               pair_chunks = np.concatenate(pair_chunks, axis=<span class="number">0</span>)  <span class="comment"># 将数据块连接成一个数组</span></span><br><span class="line">               all_pair_chunks.append(pair_chunks)  <span class="comment"># 将数据块添加到数据块列表中</span></span><br><span class="line"></span><br><span class="line">               <span class="keyword">if</span> DEBUG <span class="keyword">and</span> idx &gt;= <span class="number">3</span>:  <span class="comment"># 如果处于DEBUG模式且索引大于等于3时，跳出循环</span></span><br><span class="line">                   <span class="keyword">break</span></span><br><span class="line">               <span class="keyword">del</span> chunk, pair_chunks  <span class="comment"># 删除数据块和数据对</span></span><br><span class="line">               gc.collect()  <span class="comment"># 回收内存</span></span><br><span class="line"></span><br><span class="line">   df = pd.DataFrame(data=np.concatenate(all_pair_chunks), columns=[<span class="string">&#x27;aid1&#x27;</span>, <span class="string">&#x27;aid2&#x27;</span>])  <span class="comment"># 创建包含所有数据对的数据框</span></span><br><span class="line">   top_aids = df.groupby(<span class="string">&#x27;aid1&#x27;</span>).apply(<span class="keyword">lambda</span> df: Counter(df.aid2).most_common(<span class="number">40</span>)).to_dict()  <span class="comment"># 根据&#x27;aid1&#x27;分组，并获取前40个最常见的&#x27;aid2&#x27;值</span></span><br><span class="line">   <span class="keyword">return</span> top_aids  <span class="comment"># 返回每个&#x27;aid1&#x27;对应的前40个最常见的&#x27;aid2&#x27;值的字典</span></span><br><span class="line"><span class="comment">#    top_aids的数据结构如下：</span></span><br><span class="line"><span class="comment">#    &#123;aid1: [(aid2, count), (aid2, count), ...], aid1: [(aid2, count), (aid2, count), ...], ...&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="重排名与最终选择-2"><a class="markdownIt-Anchor" href="#重排名与最终选择-2"></a> 重排名与最终选择</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">suggest_aids</span>(<span class="params">df</span>):</span><br><span class="line">    <span class="comment"># 选择用户最后操作的20个商品id</span></span><br><span class="line">    aids = df.tail(<span class="number">20</span>).aid.tolist()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(aids) &gt;= <span class="number">20</span>:</span><br><span class="line">        <span class="keyword">return</span> aids</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 最后的行为不够20个,就从top_40_cnt中找到与用户最后行为最相关的商品</span></span><br><span class="line">    aids = <span class="built_in">set</span>(aids)</span><br><span class="line">    new_aids = Counter()</span><br><span class="line">    <span class="keyword">for</span> aid <span class="keyword">in</span> aids:</span><br><span class="line">        new_aids.update(top_40_cnt.get(aid, Counter()))</span><br><span class="line">    <span class="comment"># 选取出现次数最多的商品</span></span><br><span class="line">    top_aids2 = [aid2 <span class="keyword">for</span> aid2, cnt <span class="keyword">in</span> new_aids.most_common(<span class="number">20</span>) <span class="keyword">if</span> aid2 <span class="keyword">not</span> <span class="keyword">in</span> aids]        </span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(aids) + top_aids2[:<span class="number">20</span> - <span class="built_in">len</span>(aids)]</span><br><span class="line"></span><br><span class="line">pred_df = test_df.sort_values([<span class="string">&quot;session&quot;</span>, <span class="string">&quot;type&quot;</span>, <span class="string">&quot;ts&quot;</span>]).groupby([<span class="string">&quot;session&quot;</span>]).apply(</span><br><span class="line">    <span class="keyword">lambda</span> x: suggest_aids(x)</span><br><span class="line">)</span><br><span class="line"><span class="comment">##################</span></span><br><span class="line"><span class="comment"># BELOW IS CODE ADDED BY CHRIS</span></span><br><span class="line"><span class="comment"># 将click, order, cart的预测结果分开处理</span></span><br></pre></td></tr></table></figure>
+<h3 id="how-to-build-a-gbt-ranker-model"><a class="markdownIt-Anchor" href="#how-to-build-a-gbt-ranker-model"></a> How To Build a GBT Ranker Model</h3>
+<p><a target="_blank" rel="noopener" href="https://www.kaggle.com/code/radek1/training-an-xgboost-ranker-on-the-gpu">🏆 Training an XGBoost Ranker on the GPU 🔥🔥🔥</a><br />
+<a target="_blank" rel="noopener" href="https://www.kaggle.com/code/radek1/polars-proof-of-concept-lgbm-ranker">💡 [polars] Proof of concept: LGBM Ranker🧪🧪🧪</a><br />
+<a target="_blank" rel="noopener" href="https://www.kaggle.com/competitions/otto-recommender-system/discussion/370210">How To Build a GBT Ranker Model</a></p>
+<p><strong>Step 1 - Generate Candidates</strong><br />
+使用上面的方法生成候选商品列表<br />
+每行一个session一个aid,数据内容如下</p>
+<ul>
+<li>session (i.e. user)</li>
+<li>aid (i.e. item)</li>
+<li>user features</li>
+<li>item features</li>
+<li>user-item interaction features</li>
+<li>click target (i.e 0 or 1)</li>
+<li>cart target (i.e. 0 or 1)</li>
+<li>order target (i.e. 0 or 1)</li>
+</ul>
+<p><strong>Step 2 - ReRank and Choose 20</strong><br />
+使用GBT模型最终的20个商品进行预测</p>
+<ol>
+<li>
+<p>Step 1<br />
+构建模型的数据集:训练数据是公开数据的前三周,验证数据是第四周.<br />
+验证数据又被分为valid A 和valid B, B是ground truth<br />
+对每个session先给出50个候选商品id,然后得到了一个(number_of_session * 50, 2)大小的dataframe,类似:<br />
+| session | aid |<br />
+| — | — |<br />
+| 1 | 1234 |<br />
+| 1 | 9841 |<br />
+| 2 | 5845 |<br />
+| 2 | 8984 |</p>
+</li>
+<li>
+<p>Setp 2<br />
+创建商品特征(item feature),使用训练数据和验证数据A</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">item_features = train.groupby(<span class="string">&#x27;aid&#x27;</span>).agg(&#123;<span class="string">&#x27;aid&#x27;</span>:<span class="string">&#x27;count&#x27;</span>,<span class="string">&#x27;session&#x27;</span>:<span class="string">&#x27;nunique&#x27;</span>,<span class="string">&#x27;type&#x27;</span>:<span class="string">&#x27;mean&#x27;</span>&#125;)</span><br><span class="line">item_features.columns = [<span class="string">&#x27;item_item_count&#x27;</span>,<span class="string">&#x27;item_user_count&#x27;</span>,<span class="string">&#x27;item_buy_ratio&#x27;</span>]</span><br><span class="line"><span class="comment"># 分别是商品-商品的关系,商品-用户的火热度,商品-购买系数概率</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>Setp 3<br />
+创建用户特征(user feature),使用验证数据A</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">user_features = train.groupby(<span class="string">&#x27;session&#x27;</span>).agg(&#123;<span class="string">&#x27;session&#x27;</span>:<span class="string">&#x27;count&#x27;</span>,<span class="string">&#x27;aid&#x27;</span>:<span class="string">&#x27;nunique&#x27;</span>,<span class="string">&#x27;type&#x27;</span>:<span class="string">&#x27;mean&#x27;</span>&#125;)</span><br><span class="line">user_features.columns = [<span class="string">&#x27;user_user_count&#x27;</span>,<span class="string">&#x27;user_item_count&#x27;</span>,<span class="string">&#x27;user_buy_ratio&#x27;</span>]</span><br><span class="line"><span class="comment"># 分别是用户-用户的关系,用户-商品的购买了,用户-购买系数概率</span></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>
+<p>Setp 4<br />
+创建用户-商品交互特征(user-item interaction feature),使用验证数据A<br />
+思路很多没有具体给出.例如:<br />
+创建用户-商品点击交互特征<br />
+| session | aid | item_click|<br />
+| — | — | — |</p>
+</li>
+<li>
+<p>Setp 5<br />
+将特征添加到candidate dataframe中</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">candidates = candidates.merge(item_features, left_on=<span class="string">&#x27;aid&#x27;</span>, right_index=<span class="literal">True</span>, how=<span class="string">&#x27;left&#x27;</span>).fillna(-<span class="number">1</span>)</span><br><span class="line">candidates = candidates.merge(user_features, left_on=<span class="string">&#x27;session&#x27;</span>, right_index=<span class="literal">True</span>, how=<span class="string">&#x27;left&#x27;</span>).fillna(-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>然后candidate dataframe类似:</p>
+<table>
+<thead>
+<tr>
+<th>session</th>
+<th>aid</th>
+<th>item_feat1</th>
+<th>item_feat2</th>
+<th>user_feat1</th>
+<th>user_feat2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1234</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr>
+<td>1</td>
+<td>9841</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+</tr>
+<tr>
+<td>2</td>
+<td>5845</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+</tr>
+<tr>
+<td>2</td>
+<td>8984</td>
+<td>13</td>
+<td>14</td>
+<td>15</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<ol start="6">
+<li>Setp 6<br />
+构建ground truth,例如<code>test_labels.parquet</code>:<br />
+| session | type | ground_truth |<br />
+| — | — | — |<br />
+| 1 | carts | [5456,4545,98741,2355] |<br />
+| 2 | carts | [1257,8653,2547] |</li>
+</ol>
+<p>然后将其转换为如下:</p>
+<table>
+<thead>
+<tr>
+<th>session</th>
+<th>aid</th>
+<th>cart</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>5456</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>4545</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>98741</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>然后将其合并到candidate dataframe中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">candidates = candidates.merge(cart_target,on=[<span class="string">&#x27;user&#x27;</span>,<span class="string">&#x27;item&#x27;</span>],how=<span class="string">&#x27;left&#x27;</span>).fillna(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>candidates dataframe类似:</p>
+<table>
+<thead>
+<tr>
+<th>session</th>
+<th>aid</th>
+<th>item_feat1</th>
+<th>item_feat2</th>
+<th>user_feat1</th>
+<th>user_feat2</th>
+<th>cart</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1234</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>9841</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>5845</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>8984</td>
+<td>13</td>
+<td>14</td>
+<td>15</td>
+<td>16</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<ol start="7">
+<li>Setp 7<br />
+训练,不适用user和aid列:</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xgboost <span class="keyword">as</span> xgb  <span class="comment"># 导入XGBoost库</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GroupKFold  <span class="comment"># 从sklearn库中导入GroupKFold模块</span></span><br><span class="line"></span><br><span class="line">skf = GroupKFold(n_splits=<span class="number">5</span>)  <span class="comment"># 使用GroupKFold方法划分数据集为5折交叉验证</span></span><br><span class="line"><span class="comment"># groups参数的作用是指定用于分组的特征列。在GroupKFold交叉验证中，通过指定groups参数，可以确保在交叉验证过程中，同一组内的数据样本不会同时出现在训练集和验证集中，以避免数据泄露和提高模型的准确性。在这里，candidates[&#x27;user&#x27;]列被用作分组的特征列，以确保每个用户的数据在交叉验证时能够保持独立。</span></span><br><span class="line"><span class="keyword">for</span> fold, (train_idx, valid_idx) <span class="keyword">in</span> <span class="built_in">enumerate</span>(skf.split(candidates, candidates[<span class="string">&#x27;click&#x27;</span>], groups=candidates[<span class="string">&#x27;user&#x27;</span>])):  <span class="comment"># 遍历每一个交叉验证折数</span></span><br><span class="line"></span><br><span class="line">   X_train = candidates.loc[train_idx, FEATURES]  <span class="comment"># 获取训练集特征数据</span></span><br><span class="line">   y_train = candidates.loc[train_idx, <span class="string">&#x27;click&#x27;</span>]  <span class="comment"># 获取训练集标签数据</span></span><br><span class="line">   X_valid = candidates.loc[valid_idx, FEATURES]  <span class="comment"># 获取验证集特征数据</span></span><br><span class="line">   y_valid = candidates.loc[valid_idx, <span class="string">&#x27;click&#x27;</span>]  <span class="comment"># 获取验证集标签数据</span></span><br><span class="line"></span><br><span class="line">   <span class="comment"># 如果有50个候选项，则使用50个作为分组信息</span></span><br><span class="line"><span class="comment"># 创建一个XGBoost中的DMatrix对象，用于存储训练集的特征数据、标签数据以及分组信息。</span></span><br><span class="line"><span class="comment"># 创建DMatrix对象，可以使训练数据更高效地传递给XGBoost模型，并且能够利用分组信息优化模型的学习过程。</span></span><br><span class="line">   dtrain = xgb.DMatrix(X_train, y_train, group=[<span class="number">50</span>] * (<span class="built_in">len</span>(train_idx)//<span class="number">50</span>) )  <span class="comment"># 创建训练集的DMatrix</span></span><br><span class="line">   dvalid = xgb.DMatrix(X_valid, y_valid, group=[<span class="number">50</span>] * (<span class="built_in">len</span>(valid_idx)//<span class="number">50</span>) )  <span class="comment"># 创建验证集的DMatrix</span></span><br><span class="line"></span><br><span class="line">   xgb_parms = &#123;<span class="string">&#x27;objective&#x27;</span>:<span class="string">&#x27;rank:pairwise&#x27;</span>, <span class="string">&#x27;tree_method&#x27;</span>:<span class="string">&#x27;gpu_hist&#x27;</span>&#125;  <span class="comment"># 设置XGBoost的参数</span></span><br><span class="line">   model = xgb.train(xgb_parms, </span><br><span class="line">       dtrain=dtrain,</span><br><span class="line">       evals=[(dtrain,<span class="string">&#x27;train&#x27;</span>),(dvalid,<span class="string">&#x27;valid&#x27;</span>)],</span><br><span class="line">       num_boost_round=<span class="number">1000</span>,</span><br><span class="line">       verbose_eval=<span class="number">100</span>)  <span class="comment"># 训练XGBoost模型</span></span><br><span class="line">   model.save_model(<span class="string">f&#x27;XGB_fold<span class="subst">&#123;fold&#125;</span>_click.xgb&#x27;</span>)  <span class="comment"># 保存训练好的模型</span></span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>Setp 8<br />
+推理:为了进行推理，我们创建了一个新的候选数据帧，但这次是根据Kaggle的测试数据。然后，我们从Kaggle训练的所有4周加上Kaggle测试的1周中制作项目特征(item feature)。我们通过Kaggle测试制作用户特征(user feature)。我们将这些特征合并到我们的候选者中。然后，我们使用保存的模型来推断点击量的预测。最后，我们通过对预测进行排序并选择20个。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">preds = np.zeros(<span class="built_in">len</span>(test_candidates))  <span class="comment"># 初始化一个全零数组用于存储预测值</span></span><br><span class="line"><span class="keyword">for</span> fold <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):  <span class="comment"># 遍历5个交叉验证折数</span></span><br><span class="line">   model = xgb.Booster()  <span class="comment"># 创建一个XGBoost模型</span></span><br><span class="line">   model.load_model(<span class="string">f&#x27;XGB_fold<span class="subst">&#123;fold&#125;</span>_click.xgb&#x27;</span>)  <span class="comment"># 载入训练好的XGBoost模型</span></span><br><span class="line">   model.set_param(&#123;<span class="string">&#x27;predictor&#x27;</span>: <span class="string">&#x27;gpu_predictor&#x27;</span>&#125;)  <span class="comment"># 设置模型参数为GPU加速预测</span></span><br><span class="line">   dtest = xgb.DMatrix(data=test_candidates[FEATURES])  <span class="comment"># 创建测试集的DMatrix对象</span></span><br><span class="line"><span class="comment"># 结果是每个候选值的预测得分（概率）</span></span><br><span class="line">   preds += model.predict(dtest)/<span class="number">5</span>  <span class="comment"># 对测试集进行预测，并将结果累加求平均</span></span><br><span class="line"></span><br><span class="line">predictions = test_candidates[[<span class="string">&#x27;user&#x27;</span>,<span class="string">&#x27;item&#x27;</span>]].copy()  <span class="comment"># 复制测试集的&#x27;user&#x27;和&#x27;item&#x27;列作为预测结果的基础</span></span><br><span class="line">predictions[<span class="string">&#x27;pred&#x27;</span>] = preds  <span class="comment"># 将预测结果添加到predictions中</span></span><br><span class="line"></span><br><span class="line">predictions = predictions.sort_values([<span class="string">&#x27;user&#x27;</span>,<span class="string">&#x27;pred&#x27;</span>], ascending=[<span class="literal">True</span>,<span class="literal">False</span>]).reset_index(drop=<span class="literal">True</span>)  <span class="comment"># 对预测结果按&#x27;user&#x27;和&#x27;pred&#x27;进行排序，并重置索引</span></span><br><span class="line">predictions[<span class="string">&#x27;n&#x27;</span>] = predictions.groupby(<span class="string">&#x27;user&#x27;</span>).item.cumcount().astype(<span class="string">&#x27;int8&#x27;</span>)  <span class="comment"># 根据&#x27;user&#x27;分组后，计算每个用户的条目数量作为序号</span></span><br><span class="line">predictions = predictions.loc[predictions.n&lt;<span class="number">20</span>]  <span class="comment"># 保留每个用户前20个预测结果</span></span><br><span class="line">sub = predictions.groupby(<span class="string">&#x27;user&#x27;</span>).item.apply(<span class="built_in">list</span>)  <span class="comment"># 根据用户分组，将预测结果转换为列表</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sub = sub.to_frame().reset_index()  <span class="comment"># 将预测结果转换为DataFrame格式</span></span><br><span class="line">sub.item = sub.item.apply(<span class="keyword">lambda</span> x: <span class="string">&quot; &quot;</span>.join(<span class="built_in">map</span>(<span class="built_in">str</span>,x)))  <span class="comment"># 将列表中的数字转换为字符串并拼接成一个字符串</span></span><br><span class="line">sub.columns = [<span class="string">&#x27;session_type&#x27;</span>,<span class="string">&#x27;labels&#x27;</span>]  <span class="comment"># 重命名DataFrame的列名</span></span><br><span class="line">sub.session_type = sub.session_type.astype(<span class="string">&#x27;str&#x27;</span>)+ <span class="string">&#x27;_clicks&#x27;</span>  <span class="comment"># 修改&#x27;session_type&#x27;列的数据类型</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="word2vec-how-to-training-and-submission"><a class="markdownIt-Anchor" href="#word2vec-how-to-training-and-submission"></a> 💡 Word2Vec How-to [training and submission]🚀🚀🚀</h3>
+<p><a target="_blank" rel="noopener" href="https://www.kaggle.com/code/radek1/word2vec-how-to-training-and-submission">💡 Word2Vec How-to [training and submission]🚀🚀🚀</a></p>
+<p>A session where one action follows another action is very much like a sentence!</p>
+<p>类似地，在这里我们可以利用这样一个事实，即在一个紧密的序列中出现的商品id可能有一些相似之处。</p>
+<p>所以我们使用word2vec模型来训练商品id的嵌入向量，然后使用这些向量来计算商品id之间的相似度。</p>
+<p>这样给定一个商品的id就可以找到和她类似的商品id。</p>
+<h4 id="使用word2vec直接获取20个商品"><a class="markdownIt-Anchor" href="#使用word2vec直接获取20个商品"></a> 使用word2vec直接获取20个商品</h4>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 将用户的所有行为的商品id转换为一个句子,[&#x27;aid1&#x27;,&#x27;aid2&#x27;,&#x27;aid3&#x27;,&#x27;aid4&#x27;]</span></span><br><span class="line">sentences_df = pl.concat([train, test]).groupby(<span class="string">&#x27;session&#x27;</span>).agg(</span><br><span class="line">    pl.col(<span class="string">&#x27;aid&#x27;</span>).alias(<span class="string">&#x27;sentence&#x27;</span>)</span><br><span class="line">)</span><br><span class="line">sentences = sentences_df[<span class="string">&#x27;sentence&#x27;</span>].to_list()</span><br><span class="line"><span class="comment"># 训练word2vec模型</span></span><br><span class="line">w2vec = Word2Vec(sentences=sentences, vector_size=<span class="number">32</span>, min_count=<span class="number">1</span>, workers=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建aid到索引的映射字典</span></span><br><span class="line">aid2idx = &#123;aid: i <span class="keyword">for</span> i, aid <span class="keyword">in</span> <span class="built_in">enumerate</span>(w2vec. index_to_key)&#125;  </span><br><span class="line"><span class="comment"># 创建一个Annoy索引对象，指定向量维度为32，距离度量方式为欧氏距离</span></span><br><span class="line">index = AnnoyIndex(<span class="number">32</span>, <span class="string">&#x27;euclidean&#x27;</span>)  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历aid2idx字典</span></span><br><span class="line"><span class="keyword">for</span> aid, idx <span class="keyword">in</span> aid2idx.items():  </span><br><span class="line">   index.add_item(idx, w2vec.wv.vectors[idx])  <span class="comment"># 将向量添加到Annoy索引对象中</span></span><br><span class="line">   </span><br><span class="line">index.build(<span class="number">10</span>)  <span class="comment"># 构建Annoy索引，其中10表示构建索引时要使用的树的数量</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># index存储的是 索引-&gt;向量</span></span><br><span class="line"><span class="comment"># aid2idx存储的是 商品id-&gt;索引</span></span><br><span class="line">sample_sub = pd.read_csv(<span class="string">&#x27;../input/otto-recommender-system//sample_submission.csv&#x27;</span>)  <span class="comment"># 从CSV文件中读取sample_sub数据</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">选择最近的20个商品</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从测试集中获取每个用户的AID列表和类型列表</span></span><br><span class="line">test_session_AIDs = test.to_pandas().reset_index(drop=<span class="literal">True</span>).groupby(<span class="string">&#x27;session&#x27;</span>)[<span class="string">&#x27;aid&#x27;</span>].apply(<span class="built_in">list</span>)</span><br><span class="line">test_session_types = test.to_pandas().reset_index(drop=<span class="literal">True</span>).groupby(<span class="string">&#x27;session&#x27;</span>)[<span class="string">&#x27;type&#x27;</span>].apply(<span class="built_in">list</span>)</span><br><span class="line"></span><br><span class="line">labels = []  <span class="comment"># 初始化一个空列表用于存储标签结果</span></span><br><span class="line"></span><br><span class="line">type_weight_multipliers = &#123;<span class="number">0</span>: <span class="number">1</span>, <span class="number">1</span>: <span class="number">6</span>, <span class="number">2</span>: <span class="number">3</span>&#125;  <span class="comment"># 定义类型权重</span></span><br><span class="line"><span class="keyword">for</span> AIDs, types <span class="keyword">in</span> <span class="built_in">zip</span>(test_session_AIDs, test_session_types):  <span class="comment"># 遍历测试集中的每个用户的AID和类型</span></span><br><span class="line">   <span class="keyword">if</span> <span class="built_in">len</span>(AIDs) &gt;= <span class="number">20</span>:  <span class="comment"># 如果AID数量大于等于20</span></span><br><span class="line">       <span class="comment"># 如果我们有足够的AID（大于等于20）我们不需要查找候选项！我们只需使用旧的逻辑</span></span><br><span class="line">       weights=np.logspace(<span class="number">0.1</span>,<span class="number">1</span>,<span class="built_in">len</span>(AIDs),base=<span class="number">2</span>, endpoint=<span class="literal">True</span>)-<span class="number">1</span>  <span class="comment"># 根据AID数量生成对应的权重</span></span><br><span class="line">       aids_temp=defaultdict(<span class="keyword">lambda</span>: <span class="number">0</span>)  <span class="comment"># 初始化一个默认值为0的字典</span></span><br><span class="line">       <span class="keyword">for</span> aid,w,t <span class="keyword">in</span> <span class="built_in">zip</span>(AIDs,weights,types):  <span class="comment"># 遍历AID，权重和类型</span></span><br><span class="line">           aids_temp[aid]+= w * type_weight_multipliers[t]  <span class="comment"># 根据AID和类型计算加权得分</span></span><br><span class="line">       </span><br><span class="line">       sorted_aids=[k <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">sorted</span>(aids_temp.items(), key=<span class="keyword">lambda</span> item: -item[<span class="number">1</span>])]  <span class="comment"># 按照加权得分对AID进行排序</span></span><br><span class="line">       labels.append(sorted_aids[:<span class="number">20</span>])  <span class="comment"># 将前20个AID添加到标签中</span></span><br><span class="line">   <span class="keyword">else</span>:  <span class="comment"># 如果AID数量小于20</span></span><br><span class="line">       <span class="comment"># 这里我们没有20个AID要输出-我们将使用word2vec嵌入来生成候选项！</span></span><br><span class="line">       AIDs = <span class="built_in">list</span>(<span class="built_in">dict</span>.fromkeys(AIDs[::-<span class="number">1</span>]))  <span class="comment"># 移除重复项并反转AID列表</span></span><br><span class="line"></span><br><span class="line">       <span class="comment"># 获取时间最近的AID</span></span><br><span class="line">       most_recent_aid = AIDs[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># most_recent_aid是商品id,aid2idx[most_recent_aid]拿到对应的索引</span></span><br><span class="line">        <span class="comment"># index.get_nns_by_item(aid2idx[most_recent_aid], 21)根据索引获取向量并计算最近的21个商品</span></span><br><span class="line">       <span class="comment"># 寻找一些邻居</span></span><br><span class="line">       nns = [w2vec.wv.index_to_key[i] <span class="keyword">for</span> i <span class="keyword">in</span> index.get_nns_by_item(aid2idx[most_recent_aid], <span class="number">21</span>)[<span class="number">1</span>:]]  <span class="comment"># 使用Annoy索引找到最近邻的AID</span></span><br><span class="line">       labels.append((AIDs+nns)[:<span class="number">20</span>])  <span class="comment"># 将AID和邻居的AID组合，取前20个作为标签</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用word2vec-获取候选商品"><a class="markdownIt-Anchor" href="#使用word2vec-获取候选商品"></a> 使用word2vec 获取候选商品</h4>
+<p>和covisiation matrix类似,使用word2vec可以获取最相关的商品</p>
+<p>数据为:</p>
+<table>
+<thead>
+<tr>
+<th>session</th>
+<th>aid</th>
+<th>type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>10</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>20</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>20</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>30</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">假如通过上面的代码我们已经类似的获取到了最相关的商品</span><br><span class="line">| session | aid |</span><br><span class="line">| --- | --- |</span><br><span class="line">| <span class="number">1</span> | <span class="number">11</span> | </span><br><span class="line">| <span class="number">1</span> | <span class="number">20</span> |</span><br><span class="line">| <span class="number">2</span> | <span class="number">25</span> | </span><br><span class="line">| <span class="number">2</span> | <span class="number">6</span> | </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">那么下面还有几个步骤</span><br><span class="line"></span><br><span class="line"><span class="number">1.</span> Step <span class="number">1</span>: Add ordering information to our candidates.</span><br><span class="line">word2vec模型是按照相似度评分来排序的,所以我们需要添加一些排序信息</span><br><span class="line"></span><br><span class="line">| session | aid | rank |</span><br><span class="line">| --- | --- | --- |</span><br><span class="line">| <span class="number">1</span> | <span class="number">11</span> | <span class="number">1</span> |</span><br><span class="line">| <span class="number">1</span> | <span class="number">20</span> | <span class="number">2</span> |</span><br><span class="line">| <span class="number">2</span> | <span class="number">25</span> | <span class="number">1</span> |</span><br><span class="line">| <span class="number">2</span> | <span class="number">6</span> | <span class="number">2</span> |</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">2.</span> 将这些信息合并到candidates中</span><br><span class="line">| session | aid | rank | <span class="built_in">type</span> |</span><br><span class="line">| --- | --- | --- | --- |</span><br><span class="line">| <span class="number">1</span> | <span class="number">11</span> | <span class="number">1</span> | null |</span><br><span class="line">| <span class="number">1</span> | <span class="number">20</span> | <span class="number">2</span> | <span class="number">0</span> |</span><br><span class="line">| <span class="number">1</span> | <span class="number">10</span> | null | <span class="number">0</span> |</span><br><span class="line">| <span class="number">2</span> | <span class="number">25</span> | <span class="number">1</span> | null |</span><br><span class="line">| <span class="number">2</span> | <span class="number">6</span> | <span class="number">2</span> | null |</span><br><span class="line">| <span class="number">2</span> | <span class="number">20</span> | null | <span class="number">1</span> |</span><br><span class="line">| <span class="number">2</span> | <span class="number">30</span> | null | <span class="number">0</span> |</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">3.</span> 使用Ranker模型进行预测,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">### 💡 [2 methods] How-to ensemble predictions 🏅🏅🏅</span></span><br><span class="line">[💡 [<span class="number">2</span> methods] How-to ensemble predictions 🏅🏅🏅](https://www.kaggle.com/code/radek1/<span class="number">2</span>-methods-how-to-ensemble-predictions)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">对预测结果集成:</span><br><span class="line">- 投票集成(voting ensemble)</span><br><span class="line">- 加权投票集成(voting ensemble <span class="keyword">with</span> weights),对好结果有更大的权重</span><br><span class="line"></span><br><span class="line">```python</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">read_sub</span>(<span class="params">path, weight=<span class="number">1</span></span>):  <span class="comment"># 定义一个函数用于加载和预处理提交结果</span></span><br><span class="line">   <span class="string">&#x27;&#x27;&#x27;a helper function for loading and preprocessing submissions&#x27;&#x27;&#x27;</span></span><br><span class="line">   <span class="keyword">return</span> (</span><br><span class="line">       pl.read_csv(path)  <span class="comment"># 从路径中读取CSV文件</span></span><br><span class="line">           .with_column(pl.col(<span class="string">&#x27;labels&#x27;</span>).<span class="built_in">str</span>.split(by=<span class="string">&#x27; &#x27;</span>))  <span class="comment"># 将&#x27;labels&#x27;列按空格拆分为列表</span></span><br><span class="line">           .with_column(pl.lit(weight).alias(<span class="string">&#x27;vote&#x27;</span>))  <span class="comment"># 新增名为&#x27;vote&#x27;的列，其中填充权重值</span></span><br><span class="line">           .explode(<span class="string">&#x27;labels&#x27;</span>)  <span class="comment"># 展开&#x27;labels&#x27;列中的列表</span></span><br><span class="line">           .rename(&#123;<span class="string">&#x27;labels&#x27;</span>: <span class="string">&#x27;aid&#x27;</span>&#125;)  <span class="comment"># 重命名&#x27;labels&#x27;为&#x27;aid&#x27;</span></span><br><span class="line">           .with_column(pl.col(<span class="string">&#x27;aid&#x27;</span>).cast(pl.UInt32))  <span class="comment"># 将&#x27;aid&#x27;列转换为UInt32类型</span></span><br><span class="line">           .with_column(pl.col(<span class="string">&#x27;vote&#x27;</span>).cast(pl.UInt8))  <span class="comment"># 将&#x27;vote&#x27;列转换为UInt8类型</span></span><br><span class="line">   )</span><br><span class="line"><span class="comment"># 有无权重</span></span><br><span class="line">subs = [read_sub(path) <span class="keyword">for</span> path <span class="keyword">in</span> paths]</span><br><span class="line">subs = [read_sub(path, weight) <span class="keyword">for</span> path, weight <span class="keyword">in</span> <span class="built_in">zip</span>(paths, [<span class="number">1</span>, <span class="number">0.55</span>, <span class="number">0.55</span>])]</span><br></pre></td></tr></table></figure>
+<p>读取后的数据为:</p>
+<table>
+<thead>
+<tr>
+<th>session_type</th>
+<th>aid</th>
+<th>vote</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1_clicks</td>
+<td>1234</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1_clicks</td>
+<td>9841</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2_clicks</td>
+<td>5845</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>由于内存限制,只能进行join:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">subs = subs[<span class="number">0</span>].join(subs[<span class="number">1</span>], how=<span class="string">&#x27;outer&#x27;</span>, on=[<span class="string">&#x27;session_type&#x27;</span>, <span class="string">&#x27;aid&#x27;</span>]).join(subs[<span class="number">2</span>], how=<span class="string">&#x27;outer&#x27;</span>, on=[<span class="string">&#x27;session_type&#x27;</span>, <span class="string">&#x27;aid&#x27;</span>], suffix=<span class="string">&#x27;_right2&#x27;</span>)</span><br><span class="line">subs.head()</span><br></pre></td></tr></table></figure>
+<p>合并后的数据</p>
+<table>
+<thead>
+<tr>
+<th>session_type</th>
+<th>aid</th>
+<th>vote</th>
+<th>vote_right</th>
+<th>vote_right2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1_clicks</td>
+<td>1234</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1_clicks</td>
+<td>9841</td>
+<td>1</td>
+<td>null</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2_clicks</td>
+<td>5845</td>
+<td>1</td>
+<td>1</td>
+<td>null</td>
+</tr>
+<tr>
+<td>2_clicks</td>
+<td>8984</td>
+<td>1</td>
+<td>null</td>
+<td>null</td>
+</tr>
+</tbody>
+</table>
+<p>用0填充null值,然后对vote求和,排序:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">subs = (subs</span><br><span class="line">    .fill_null(<span class="number">0</span>)</span><br><span class="line">    .with_column((pl.col(<span class="string">&#x27;vote&#x27;</span>) + pl.col(<span class="string">&#x27;vote_right&#x27;</span>) + pl.col(<span class="string">&#x27;vote_right2&#x27;</span>)).alias(<span class="string">&#x27;vote_sum&#x27;</span>))</span><br><span class="line">    .drop([<span class="string">&#x27;vote&#x27;</span>, <span class="string">&#x27;vote_right&#x27;</span>, <span class="string">&#x27;vote_right2&#x27;</span>])</span><br><span class="line">    .sort(by=<span class="string">&#x27;vote_sum&#x27;</span>)</span><br><span class="line">    .reverse()</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>数据如下:</p>
+<table>
+<thead>
+<tr>
+<th>session_type</th>
+<th>aid</th>
+<th>vote_sum</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1_clicks</td>
+<td>1234</td>
+<td>3</td>
+</tr>
+<tr>
+<td>2_clicks</td>
+<td>5845</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1_clicks</td>
+<td>9841</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>然后对每个类型选择前20个商品,然后聚合成数组:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">preds = subs.groupby(<span class="string">&#x27;session_type&#x27;</span>).agg([</span><br><span class="line">    pl.col(<span class="string">&#x27;aid&#x27;</span>).head(<span class="number">20</span>).alias(<span class="string">&#x27;labels&#x27;</span>)</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line">preds = preds.with_column(pl.col(<span class="string">&#x27;labels&#x27;</span>).apply(<span class="keyword">lambda</span> lst: <span class="string">&#x27; &#x27;</span>.join([<span class="built_in">str</span>(aid) <span class="keyword">for</span> aid <span class="keyword">in</span> lst])))</span><br></pre></td></tr></table></figure>
+<h3 id="matrix-factorization-pytorchmerlin-dataloader"><a class="markdownIt-Anchor" href="#matrix-factorization-pytorchmerlin-dataloader"></a> 💡Matrix Factorization [PyTorch+Merlin Dataloader]</h3>
+<p>与word2vec类似,使用矩阵分解来获取商品的嵌入向量</p>
+<p><a target="_blank" rel="noopener" href="https://www.kaggle.com/code/cpmpml/matrix-factorization-with-gpu">💡Matrix Factorization with GPU [PyTorch+Merlin Dataloader]</a></p>
+<p>使用Pytorch的Embedding层来训练商品的嵌入向量,然后使用这些向量来计算商品id之间的相似度.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构建aid_pairs</span></span><br><span class="line">train_pairs = cudf.concat([train, test])[[<span class="string">&#x27;session&#x27;</span>, <span class="string">&#x27;aid&#x27;</span>]]</span><br><span class="line"><span class="keyword">del</span> train, test</span><br><span class="line"></span><br><span class="line">train_pairs[<span class="string">&#x27;aid_next&#x27;</span>] = train_pairs.groupby(<span class="string">&#x27;session&#x27;</span>).aid.shift(-<span class="number">1</span>)</span><br><span class="line">train_pairs = train_pairs[[<span class="string">&#x27;aid&#x27;</span>, <span class="string">&#x27;aid_next&#x27;</span>]].dropna().reset_index(drop=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>aid</th>
+<th>aid_next</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="comment"># WordEmbedding模型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MatrixFactorization</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, n_aids, n_factors</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.aid_factors = nn.Embedding(n_aids, n_factors, sparse=<span class="literal">True</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, aid1, aid2</span>):</span><br><span class="line">        aid1 = self.aid_factors(aid1)</span><br><span class="line">        aid2 = self.aid_factors(aid2)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> (aid1 * aid2).<span class="built_in">sum</span>(dim=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 评价指标</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AverageMeter</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Computes and stores the average and current value&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, fmt=<span class="string">&#x27;:f&#x27;</span></span>):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.fmt = fmt</span><br><span class="line">        self.reset()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reset</span>(<span class="params">self</span>):</span><br><span class="line">        self.val = <span class="number">0</span></span><br><span class="line">        self.avg = <span class="number">0</span></span><br><span class="line">        self.<span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">        self.count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">update</span>(<span class="params">self, val, n=<span class="number">1</span></span>):</span><br><span class="line">        self.val = val</span><br><span class="line">        self.<span class="built_in">sum</span> += val * n</span><br><span class="line">        self.count += n</span><br><span class="line">        self.avg = self.<span class="built_in">sum</span> / self.count</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__str__</span>(<span class="params">self</span>):</span><br><span class="line">        fmtstr = <span class="string">&#x27;&#123;name&#125; &#123;val&#x27;</span> + self.fmt + <span class="string">&#x27;&#125; (&#123;avg&#x27;</span> + self.fmt + <span class="string">&#x27;&#125;)&#x27;</span></span><br><span class="line">        <span class="keyword">return</span> fmtstr.<span class="built_in">format</span>(**self.__dict__)    </span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 训练</span></span><br><span class="line">model.to(<span class="string">&#x27;cuda&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(num_epochs):</span><br><span class="line">    <span class="keyword">for</span> batch, _ <span class="keyword">in</span> train_dl_merlin:</span><br><span class="line">        model.train()</span><br><span class="line">        losses = AverageMeter(<span class="string">&#x27;Loss&#x27;</span>, <span class="string">&#x27;:.4e&#x27;</span>)</span><br><span class="line">            </span><br><span class="line">        aid1, aid2 = batch[<span class="string">&#x27;aid&#x27;</span>], batch[<span class="string">&#x27;aid_next&#x27;</span>]</span><br><span class="line">        aid1 = aid1.to(<span class="string">&#x27;cuda&#x27;</span>)</span><br><span class="line">        aid2 = aid2.to(<span class="string">&#x27;cuda&#x27;</span>)</span><br><span class="line">        output_pos = model(aid1, aid2)</span><br><span class="line">        output_neg = model(aid1, aid2[torch.randperm(aid2.shape[<span class="number">0</span>])])</span><br><span class="line">        </span><br><span class="line">        output = torch.cat([output_pos, output_neg])</span><br><span class="line">        targets = torch.cat([torch.ones_like(output_pos), torch.zeros_like(output_pos)])</span><br><span class="line">        loss = criterion(output, targets)</span><br><span class="line">        losses.update(loss.item())</span><br><span class="line">        </span><br><span class="line">        optimizer.zero_grad()</span><br><span class="line">        loss.backward()</span><br><span class="line">        optimizer.step()</span><br><span class="line">        </span><br><span class="line">    model.<span class="built_in">eval</span>()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        accuracy = AverageMeter(<span class="string">&#x27;accuracy&#x27;</span>)</span><br><span class="line">        <span class="keyword">for</span> batch, _ <span class="keyword">in</span> valid_dl_merlin:</span><br><span class="line">            aid1, aid2 = batch[<span class="string">&#x27;aid&#x27;</span>], batch[<span class="string">&#x27;aid_next&#x27;</span>]</span><br><span class="line">            output_pos = model(aid1, aid2)</span><br><span class="line">            output_neg = model(aid1, aid2[torch.randperm(aid2.shape[<span class="number">0</span>])])</span><br><span class="line">            accuracy_batch = torch.cat([output_pos.sigmoid() &gt; <span class="number">0.5</span>, output_neg.sigmoid() &lt; <span class="number">0.5</span>]).<span class="built_in">float</span>().mean()</span><br><span class="line">            accuracy.update(accuracy_batch, aid1.shape[<span class="number">0</span>])</span><br><span class="line">            </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&#x27;<span class="subst">&#123;epoch+<span class="number">1</span>:02d&#125;</span>: * TrainLoss <span class="subst">&#123;losses.avg:<span class="number">.3</span>f&#125;</span>  * Accuracy <span class="subst">&#123;accuracy.avg:<span class="number">.3</span>f&#125;</span>&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取嵌入并计算相似度</span></span><br><span class="line">embeddings = model.aid_factors.weight.detach().cpu().numpy()</span><br><span class="line"></span><br><span class="line">knn = NearestNeighbors(n_neighbors=<span class="number">21</span>, metric=<span class="string">&#x27;euclidean&#x27;</span>)</span><br><span class="line">knn.fit(embeddings)</span><br><span class="line"></span><br><span class="line">_, aid_nns = knn.kneighbors(embeddings)</span><br><span class="line"></span><br><span class="line">sample_sub = pd.read_csv(<span class="string">&#x27;../input/otto-recommender-system//sample_submission.csv&#x27;</span>)</span><br><span class="line">test = cudf.read_parquet(<span class="string">&#x27;../input/otto-full-optimized-memory-footprint/test.parquet&#x27;</span>)</span><br><span class="line"></span><br><span class="line">session_types = [<span class="string">&#x27;clicks&#x27;</span>, <span class="string">&#x27;carts&#x27;</span>, <span class="string">&#x27;orders&#x27;</span>]</span><br><span class="line">gr = test.reset_index(drop=<span class="literal">True</span>).to_pandas().groupby(<span class="string">&#x27;session&#x27;</span>)</span><br><span class="line">test_session_AIDs = gr[<span class="string">&#x27;aid&#x27;</span>].apply(<span class="built_in">list</span>)</span><br><span class="line">test_session_types = gr[<span class="string">&#x27;type&#x27;</span>].apply(<span class="built_in">list</span>)</span><br><span class="line"></span><br><span class="line">labels = []</span><br><span class="line"></span><br><span class="line">type_weight_multipliers = &#123;<span class="number">0</span>: <span class="number">1</span>, <span class="number">1</span>: <span class="number">6</span>, <span class="number">2</span>: <span class="number">3</span>&#125;</span><br><span class="line"><span class="keyword">for</span> AIDs, types <span class="keyword">in</span> <span class="built_in">zip</span>(test_session_AIDs, test_session_types):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(AIDs) &gt;= <span class="number">20</span>:</span><br><span class="line">        <span class="comment"># if we have enough aids (over equals 20) we don&#x27;t need to look for candidates! we just use the old logic</span></span><br><span class="line">        weights=np.logspace(<span class="number">0.1</span>,<span class="number">1</span>,<span class="built_in">len</span>(AIDs),base=<span class="number">2</span>, endpoint=<span class="literal">True</span>)-<span class="number">1</span></span><br><span class="line">        aids_temp=defaultdict(<span class="keyword">lambda</span>: <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">for</span> aid,w,t <span class="keyword">in</span> <span class="built_in">zip</span>(AIDs,weights,types): </span><br><span class="line">            aids_temp[aid]+= w * type_weight_multipliers[t]</span><br><span class="line">            </span><br><span class="line">        sorted_aids=[k <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">sorted</span>(aids_temp.items(), key=<span class="keyword">lambda</span> item: -item[<span class="number">1</span>])]</span><br><span class="line">        labels.append(sorted_aids[:<span class="number">20</span>])</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="comment"># here we don&#x27;t have 20 aids to output -- we will use approximate nearest neighbor search and our embeddings</span></span><br><span class="line">        <span class="comment"># to generate candidates!</span></span><br><span class="line">        AIDs = <span class="built_in">list</span>(<span class="built_in">dict</span>.fromkeys(AIDs[::-<span class="number">1</span>]))</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># let&#x27;s grab the most recent aid</span></span><br><span class="line">        most_recent_aid = AIDs[<span class="number">0</span>]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># and look for some neighbors!</span></span><br><span class="line">        nns = <span class="built_in">list</span>(aid_nns[most_recent_aid])</span><br><span class="line">                        </span><br><span class="line">        labels.append((AIDs+nns)[:<span class="number">20</span>])</span><br><span class="line"></span><br><span class="line">labels_as_strings = [<span class="string">&#x27; &#x27;</span>.join([<span class="built_in">str</span>(l) <span class="keyword">for</span> l <span class="keyword">in</span> lls]) <span class="keyword">for</span> lls <span class="keyword">in</span> labels]</span><br><span class="line"></span><br><span class="line">predictions = pd.DataFrame(data=&#123;<span class="string">&#x27;session_type&#x27;</span>: test_session_AIDs.index, <span class="string">&#x27;labels&#x27;</span>: labels_as_strings&#125;)</span><br><span class="line"></span><br><span class="line">prediction_dfs = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> st <span class="keyword">in</span> session_types:</span><br><span class="line">    modified_predictions = predictions.copy()</span><br><span class="line">    modified_predictions.session_type = modified_predictions.session_type.astype(<span class="string">&#x27;str&#x27;</span>) + <span class="string">f&#x27;_<span class="subst">&#123;st&#125;</span>&#x27;</span></span><br><span class="line">    prediction_dfs.append(modified_predictions)</span><br><span class="line"></span><br><span class="line">submission = pd.concat(prediction_dfs).reset_index(drop=<span class="literal">True</span>)</span><br><span class="line">submission.to_csv(<span class="string">&#x27;submission.csv&#x27;</span>, index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="226th-place-solution-two-cents-from-a-first-timer"><a class="markdownIt-Anchor" href="#226th-place-solution-two-cents-from-a-first-timer"></a> 226th (?!) Place Solution &amp; Two-cents from a First-timer</h3>
+<p><a target="_blank" rel="noopener" href="https://www.kaggle.com/competitions/otto-recommender-system/discussion/383657">226th (?!) Place Solution &amp; Two-cents from a First-timer</a></p>
+<p><img src="https://image.yayan.xyz/20240316125957.png" alt="" /></p>
+<ol>
+<li>Item Co-visitation Matrix<br />
+entirely based one Chris’ notebook</li>
+</ol>
+<ul>
+<li>Order matrix: Click/cart/order to click/cart/order with type weighting</li>
+<li>Buy2buy matrix: Cart/order to cart/order</li>
+<li>Click matrix: click/cart/order to clicks with time weighting</li>
+</ul>
+<ol start="2">
+<li>Feature Feneration</li>
+</ol>
+<ul>
+<li>
+<p>Item features (for each aid)</p>
+</li>
+<li>
+<ul>
+<li>Count of events (click/cart/order)</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Sum of event weight</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Quarter of day (QoD) with most events (0-3)</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Day of week (DoW) with most events (0-6)</li>
+</ul>
+</li>
+<li>
+<p>User features (for each session)</p>
+</li>
+<li>
+<ul>
+<li>Count of events (click/cart/order) and interacted items (aid)</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Sum of event weight</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>QoD with most events (0-3)</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>DoW with most events (0-6)</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Number of days with events</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Days from first to last events</li>
+</ul>
+</li>
+<li>
+<p>User-item features (for each session-aid pair)</p>
+</li>
+<li>
+<ul>
+<li>Count of events (click/cart/order) and interacted items (aid)</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Sum of event weight</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>QoD with most events in both categorical (0-3) and one-hot encoded (0/1 for each) format</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>DoW with most events in both categorical (0-6) and one-hot encoded (0/1 for each) format</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>last_n = item_chronological_rank / user_total_event_count</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>last_ts = (user_item_last_timestamp - start_week_timestamp) / (end_week_timestamp - start_week_timestamp)</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>Candidate Selection<br />
+partly based on Chris’ notebook<br />
+For each session,I select top X most relevant items in each event type</li>
+</ol>
+<ul>
+<li>会话单击/点选/订购项目的次数</li>
+<li>共访权总和</li>
+<li>该商品是否为本周点击次数最多/购买次数最多的商品</li>
+</ul>
+<ol start="4">
+<li>Ranker</li>
+</ol>
+<ul>
+<li>Rule-base ranker in Chris’ notebook</li>
+<li>XGBRanker with <code>rank:pairwise</code> objective</li>
+<li>
+<ul>
+<li>the model is overfitting and requires a lot of hyperparameter tuning</li>
+</ul>
+</li>
+</ul>
+<ol start="5">
+<li>Solution Ensemble</li>
+</ol>
+<ul>
+<li>use their public LB scores as weights</li>
+<li>Ensemble of XGBRanker above and public submissions</li>
+<li>Ensemble of above two ranker methods and public submissions</li>
+</ul>
+<p>6, what have I learned</p>
+<ul>
+<li>read the discussion and notebooks forums</li>
+<li>try as many ideas as possible</li>
+<li>know every line of code you write</li>
+</ul>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://gladdduck.github.io/2024/03/14/%E5%AE%9E%E4%B9%A0-Kaggle-OTTO%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/" title="Kaggle-OTTO比赛回顾" target="_blank" rel="external">https://gladdduck.github.io/2024/03/14/实习-Kaggle-OTTO比赛回顾/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/gladdduck" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/icon.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/gladdduck" target="_blank"><span class="text-dark">Gladdduck</span><small class="ml-1x">KB Master</small></a></h3>
+        <div>我写的个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2024/03/16/%E5%AE%9E%E4%B9%A0-Hadoop%E7%9F%A5%E8%AF%86%E7%82%B9/" title="Hadoop学习笔记"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2024/03/11/%E9%85%8D%E7%BD%AE-vscode%E5%85%8D%E5%AF%86%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8/" title="vscode免密连接服务器"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/donate.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/donate.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '644a1091cfd20b8f33ef',
+    clientSecret: '4c5cc91dbfe067c804fcef958817d41acc9ba545',
+    repo: 'gladdduck.github.io',
+    owner: 'gladdduck',
+    admin: ['gladdduck'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: ''
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>

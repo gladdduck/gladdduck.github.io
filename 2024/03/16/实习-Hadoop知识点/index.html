@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Hadoop学习笔记 | Gladdduck</title>
+  <meta name="description" content="Hadoop概述  大数据  大量(Volume),多样(Variety),高速(Velocity),价值(Volue) 全体数据取代随机样本 混杂性取代精确性 相关关系取代因果关系   Hadoop的体系 Hadoop是对海量数据进行大规模分布式处理的开源软件框架   HDFS—分布式文件系统； MapReduce—分布式处理模型； HBase—分布式数据库（非SQL） HCatalog—Ha">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop学习笔记">
+<meta property="og:url" content="https://gladdduck.github.io/2024/03/16/%E5%AE%9E%E4%B9%A0-Hadoop%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+<meta property="og:site_name" content="Gladdduck">
+<meta property="og:description" content="Hadoop概述  大数据  大量(Volume),多样(Variety),高速(Velocity),价值(Volue) 全体数据取代随机样本 混杂性取代精确性 相关关系取代因果关系   Hadoop的体系 Hadoop是对海量数据进行大规模分布式处理的开源软件框架   HDFS—分布式文件系统； MapReduce—分布式处理模型； HBase—分布式数据库（非SQL） HCatalog—Ha">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.yayan.xyz/20240316163048.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240318211258.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240318211326.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240318210658.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240318191544.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240318192200.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240318195105.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240318195306.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240318200601.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240318201159.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240318202739.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240318202833.png">
+<meta property="article:published_time" content="2024-03-16T08:26:52.655Z">
+<meta property="article:modified_time" content="2024-03-18T13:20:24.903Z">
+<meta property="article:author" content="syxue">
+<meta property="article:tag" content="Hadoop">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.yayan.xyz/20240316163048.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://gladdduck.github.io/2024/03/16/%E5%AE%9E%E4%B9%A0-Hadoop%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/icon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/gladdduck" target="_blank">
+          <img class="img-circle img-rotate" src="/images/icon.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Gladdduck</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">KB Master</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Suzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-picture">
+          <a href="/picturewall">
+            
+            <i class="icon icon-starfish"></i>
+            
+            <span class="menu-title">图片墙</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>自己JB的记录</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">hexo博客配置</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">26</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/">快捷命令</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95/">论文记录</a><span class="category-list-count">6</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BingChat/" rel="tag">BingChat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blazor/" rel="tag">Blazor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlazorLocalization/" rel="tag">BlazorLocalization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSharp/" rel="tag">CSharp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cypher/" rel="tag">Cypher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataloader/" rel="tag">Dataloader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataset/" rel="tag">Dataset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Few-shotObjectDetection/" rel="tag">Few-shotObjectDetection</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kaggle/" rel="tag">Kaggle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Linux快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Neo4j快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PaddleOCRSharp/" rel="tag">PaddleOCRSharp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Python学习笔记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sampler/" rel="tag">Sampler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS2022/" rel="tag">VS2022</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCode-Github/" rel="tag">VSCode Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode/" rel="tag">Vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode-%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">Vscode 阿里云</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zero-shot-Detection/" rel="tag">Zero-shot Detection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collate-fn/" rel="tag">collate_fn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-Time-out/" rel="tag">git Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" rel="tag">hexo博客配置gitalk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" rel="tag">hexo博客配置picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" rel="tag">hexo博客配置pure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mmfewshot/" rel="tag">mmfewshot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" rel="tag">python3 标准库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" rel="tag">代码阅读</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE%E6%A3%80%E6%B5%8B/" rel="tag">垃圾检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">多个域名访问同一个服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" rel="tag">快速傅里叶变换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag">搭建博客</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%BC%9A%E8%AE%AE/" rel="tag">目标检测会议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" rel="tag">知识图谱表示</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">算法刷题笔记</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/BingChat/" style="font-size: 13px;">BingChat</a> <a href="/tags/Blazor/" style="font-size: 13px;">Blazor</a> <a href="/tags/BlazorLocalization/" style="font-size: 13px;">BlazorLocalization</a> <a href="/tags/CSharp/" style="font-size: 13px;">CSharp</a> <a href="/tags/Cypher/" style="font-size: 13px;">Cypher</a> <a href="/tags/Dataloader/" style="font-size: 13px;">Dataloader</a> <a href="/tags/Dataset/" style="font-size: 13px;">Dataset</a> <a href="/tags/Few-shotObjectDetection/" style="font-size: 13.33px;">Few-shotObjectDetection</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 13px;">Hadoop</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Kaggle/" style="font-size: 13px;">Kaggle</a> <a href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Linux快捷命令</a> <a href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Neo4j快捷命令</a> <a href="/tags/PaddleOCRSharp/" style="font-size: 13px;">PaddleOCRSharp</a> <a href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13.67px;">Python学习笔记</a> <a href="/tags/Sampler/" style="font-size: 13px;">Sampler</a> <a href="/tags/VS2022/" style="font-size: 13px;">VS2022</a> <a href="/tags/VSCode-Github/" style="font-size: 13px;">VSCode Github</a> <a href="/tags/Vscode/" style="font-size: 13px;">Vscode</a> <a href="/tags/Vscode-%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 13px;">Vscode 阿里云</a> <a href="/tags/Zero-shot-Detection/" style="font-size: 13px;">Zero-shot Detection</a> <a href="/tags/collate-fn/" style="font-size: 13px;">collate_fn</a> <a href="/tags/git-Time-out/" style="font-size: 13px;">git Time out</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" style="font-size: 13px;">hexo博客配置gitalk</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" style="font-size: 13px;">hexo博客配置picgo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" style="font-size: 13px;">hexo博客配置pure</a> <a href="/tags/mmfewshot/" style="font-size: 13px;">mmfewshot</a> <a href="/tags/neo4j%E5%AE%89%E8%A3%85/" style="font-size: 13px;">neo4j安装</a> <a href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 13.67px;">python3 标准库</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E9%98%85%E8%AF%BB/" style="font-size: 13px;">代码阅读</a> <a href="/tags/%E5%9E%83%E5%9C%BE%E6%A3%80%E6%B5%8B/" style="font-size: 13px;">垃圾检测</a> <a href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">多个域名访问同一个服务器</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 13px;">快捷键</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" style="font-size: 13px;">快速傅里叶变换</a> <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 13px;">排序算法</a> <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="font-size: 13.33px;">搭建博客</a> <a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%BC%9A%E8%AE%AE/" style="font-size: 13px;">目标检测会议</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" style="font-size: 13px;">知识图谱表示</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" style="font-size: 13px;">知识点</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" style="font-size: 14px;">算法刷题笔记</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/18/%E7%AE%97%E6%B3%95-%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/18/%E7%AE%97%E6%B3%95-%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95/" class="title">(no title)</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-18T13:28:14.565Z" itemprop="datePublished">2024-03-18</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/16/%E5%AE%9E%E4%B9%A0-Hadoop%E7%9F%A5%E8%AF%86%E7%82%B9/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/16/%E5%AE%9E%E4%B9%A0-Hadoop%E7%9F%A5%E8%AF%86%E7%82%B9/" class="title">Hadoop学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-16T08:26:52.655Z" itemprop="datePublished">2024-03-16</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/14/%E5%AE%9E%E4%B9%A0-Kaggle-OTTO%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/14/%E5%AE%9E%E4%B9%A0-Kaggle-OTTO%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/" class="title">Kaggle-OTTO比赛回顾</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-14T10:50:22.943Z" itemprop="datePublished">2024-03-14</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/11/%E9%85%8D%E7%BD%AE-vscode%E5%85%8D%E5%AF%86%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/11/%E9%85%8D%E7%BD%AE-vscode%E5%85%8D%E5%AF%86%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="title">vscode免密连接服务器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-11T07:09:42.878Z" itemprop="datePublished">2024-03-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/06/%E7%AE%97%E6%B3%95-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7%E5%88%86%E7%B1%BB%E6%80%BB%E7%BB%93/" class="thumb">
+    
+    
+        <span style="background-image:url(https://image.yayan.xyz/小鸭子.png)" alt="位运算技巧分类总结" class="thumb-image"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/06/%E7%AE%97%E6%B3%95-%E4%BD%8D%E8%BF%90%E7%AE%97%E6%8A%80%E5%B7%A7%E5%88%86%E7%B1%BB%E6%80%BB%E7%BB%93/" class="title">位运算技巧分类总结</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-06T02:05:35.115Z" itemprop="datePublished">2024-03-06</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#hadoop%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text"> Hadoop概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE"><span class="toc-number">1.1.</span> <span class="toc-text"> 大数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hadoop%E7%9A%84%E4%BD%93%E7%B3%BB"><span class="toc-number">1.2.</span> <span class="toc-text"> Hadoop的体系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B8%8E%E4%BA%91%E8%AE%A1%E7%AE%97%E5%85%B3%E7%B3%BB"><span class="toc-number">1.3.</span> <span class="toc-text"> 大数据与云计算关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9Fhdfs"><span class="toc-number">2.</span> <span class="toc-text"> 分布式文件系统HDFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8Bmapreduce"><span class="toc-number">3.</span> <span class="toc-text"> 分布式计算模型MapReduce</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9Fyarn"><span class="toc-number">4.</span> <span class="toc-text"> 通用资源管理系统Yarn</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%8D%8F%E8%B0%83%E5%99%A8zookeeper"><span class="toc-number">5.</span> <span class="toc-text"> 分布式协调器Zookeeper</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#zookerper%E7%AE%80%E4%BB%8B"><span class="toc-number">5.1.</span> <span class="toc-text"> Zookerper简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zookerper%E6%9E%B6%E6%9E%84"><span class="toc-number">5.2.</span> <span class="toc-text"> Zookerper架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zookerper%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">5.3.</span> <span class="toc-text"> Zookerper数据模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zookeeper%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">5.4.</span> <span class="toc-text"> Zookeeper的一致性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9Dsession%E6%9C%BA%E5%88%B6"><span class="toc-number">5.4.1.</span> <span class="toc-text"> 会话（Session）机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%91%E8%A7%86watcher%E6%9C%BA%E5%88%B6"><span class="toc-number">5.4.2.</span> <span class="toc-text"> 监视（Watcher）机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zookeeper%E7%9A%84%E8%87%AA%E8%BA%AB%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">5.5.</span> <span class="toc-text"> Zookeeper的自身一致性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E5%AD%90%E5%B9%BF%E6%92%ADzab-zookeeper-atomic-broadcast"><span class="toc-number">5.5.1.</span> <span class="toc-text"> 原子广播ZAB (ZooKeeper Atomic Broadcast)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#zookeeper%E7%9A%84%E9%80%89%E4%B8%BE%E6%9C%BA%E5%88%B6"><span class="toc-number">5.6.</span> <span class="toc-text"> Zookeeper的选举机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E4%B8%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8E%9F%E5%88%99"><span class="toc-number">5.6.1.</span> <span class="toc-text"> 选举的基本原则</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%89%E4%B8%BE%E6%B5%81%E7%A8%8B"><span class="toc-number">5.6.2.</span> <span class="toc-text"> 选举流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#shell%E6%93%8D%E4%BD%9C"><span class="toc-number">5.6.3.</span> <span class="toc-text"> Shell操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#api%E6%93%8D%E4%BD%9C"><span class="toc-number">5.6.4.</span> <span class="toc-text"> API操作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93hbase"><span class="toc-number">6.</span> <span class="toc-text"> 分布式数据库HBase</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">6.1.</span> <span class="toc-text"> 简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#nosql%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80-cap%E7%90%86%E8%AE%BA%E4%B8%8Ebase%E7%90%86%E8%AE%BA"><span class="toc-number">6.1.1.</span> <span class="toc-text"> NoSQL理论基础: CAP理论与BASE理论</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hbase%E9%80%BB%E8%BE%91%E7%BB%93%E6%9E%84"><span class="toc-number">6.1.2.</span> <span class="toc-text"> HBase逻辑结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hbase%E7%89%A9%E7%90%86%E7%BB%93%E6%9E%84"><span class="toc-number">6.1.3.</span> <span class="toc-text"> HBase物理结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hbase%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">6.1.4.</span> <span class="toc-text"> HBase数据模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%9E%B6%E6%9E%84"><span class="toc-number">6.1.5.</span> <span class="toc-text"> 基本架构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hbase%E6%93%8D%E4%BD%9C"><span class="toc-number">6.2.</span> <span class="toc-text"> HBase操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#shell%E6%93%8D%E4%BD%9C-2"><span class="toc-number">6.2.1.</span> <span class="toc-text"> Shell操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">6.2.1.1.</span> <span class="toc-text"> 基本操作</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ddl%E6%93%8D%E4%BD%9C"><span class="toc-number">6.2.1.2.</span> <span class="toc-text"> DDL操作</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#dml%E6%93%8D%E4%BD%9C"><span class="toc-number">6.2.1.3.</span> <span class="toc-text"> DML操作</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#api%E6%93%8D%E4%BD%9C-2"><span class="toc-number">6.2.2.</span> <span class="toc-text"> API操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hbase%E4%B8%80%E4%BA%9B%E5%8E%9F%E7%90%86"><span class="toc-number">6.3.</span> <span class="toc-text"> HBase一些原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#hbase%E6%9E%B6%E6%9E%84"><span class="toc-number">6.3.1.</span> <span class="toc-text"> HBase架构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hbase%E7%9A%84%E5%86%99%E6%B5%81%E7%A8%8B"><span class="toc-number">6.3.2.</span> <span class="toc-text"> HBase的写流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hbase%E7%9A%84%E8%AF%BB%E6%B5%81%E7%A8%8B"><span class="toc-number">6.3.3.</span> <span class="toc-text"> HBase的读流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hbase%E7%9A%84flush%E6%93%8D%E4%BD%9C"><span class="toc-number">6.3.4.</span> <span class="toc-text"> HBase的Flush操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hbase%E7%9A%84compaction%E6%93%8D%E4%BD%9C"><span class="toc-number">6.3.5.</span> <span class="toc-text"> HBase的Compaction操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#hbase%E7%9A%84split%E6%93%8D%E4%BD%9C"><span class="toc-number">6.3.6.</span> <span class="toc-text"> HBase的Split操作</span></a></li></ol></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-实习-Hadoop知识点" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Hadoop学习笔记
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2024/03/16/%E5%AE%9E%E4%B9%A0-Hadoop%E7%9F%A5%E8%AF%86%E7%82%B9/" class="article-date">
+	  <time datetime="2024-03-16T08:26:52.655Z" itemprop="datePublished">2024-03-16</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Hadoop/" rel="tag">Hadoop</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2024/03/16/%E5%AE%9E%E4%B9%A0-Hadoop%E7%9F%A5%E8%AF%86%E7%82%B9/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 6.4k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 23(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="hadoop概述"><a class="markdownIt-Anchor" href="#hadoop概述"></a> Hadoop概述</h2>
+<h3 id="大数据"><a class="markdownIt-Anchor" href="#大数据"></a> 大数据</h3>
+<ul>
+<li>大量(Volume),多样(Variety),高速(Velocity),价值(Volue)</li>
+<li>全体数据取代随机样本</li>
+<li>混杂性取代精确性</li>
+<li>相关关系取代因果关系</li>
+</ul>
+<h3 id="hadoop的体系"><a class="markdownIt-Anchor" href="#hadoop的体系"></a> Hadoop的体系</h3>
+<p>Hadoop是对海量数据进行大规模分布式处理的开源软件框架</p>
+<p><img src="https://image.yayan.xyz/20240316163048.png" alt="" /></p>
+<ul>
+<li>HDFS—分布式文件系统；</li>
+<li>MapReduce—分布式处理模型；</li>
+<li>HBase—分布式数据库（非SQL）</li>
+<li>HCatalog—Hadoop内部数据整合工具，实现不同数据处理工具的数据类型相互转换机制；</li>
+<li>Pig—流式数据的数据处理语言及其运行环境；</li>
+<li>Hive—数据仓库管理工具，提供SQL查询功能；</li>
+<li>ZooKeeper—分布式协调器。</li>
+</ul>
+<h3 id="大数据与云计算关系"><a class="markdownIt-Anchor" href="#大数据与云计算关系"></a> 大数据与云计算关系</h3>
+<ul>
+<li>云计算就是把一大堆廉价机器组织起来，通过网络向用户提供海量资源的高性能可靠服务。</li>
+<li>云计算为大数据处理提供了可能和途径</li>
+<li>大数据为云计算具有的大规模与分布式计算能力提供了应用空间，利用云计算解决了传统数据管理系统无法解决的问题</li>
+</ul>
+<h2 id="分布式文件系统hdfs"><a class="markdownIt-Anchor" href="#分布式文件系统hdfs"></a> 分布式文件系统HDFS</h2>
+<h2 id="分布式计算模型mapreduce"><a class="markdownIt-Anchor" href="#分布式计算模型mapreduce"></a> 分布式计算模型MapReduce</h2>
+<h2 id="通用资源管理系统yarn"><a class="markdownIt-Anchor" href="#通用资源管理系统yarn"></a> 通用资源管理系统Yarn</h2>
+<h2 id="分布式协调器zookeeper"><a class="markdownIt-Anchor" href="#分布式协调器zookeeper"></a> 分布式协调器Zookeeper</h2>
+<h3 id="zookerper简介"><a class="markdownIt-Anchor" href="#zookerper简介"></a> Zookerper简介</h3>
+<p>Zookeeper是一个开源的分布式的，为分布式框架提供协调服务的Apache项目</p>
+<p>是一个基于观察者模式设计的分布式服务管理框架，它负责存储和管理大家都关心的数据，然后接受观察者的注册，一旦这些数据的状态发生变化，Zookeeper就将负责通知已经在Zookeeper上注册的那些观察者做出相应的反应。</p>
+<h3 id="zookerper架构"><a class="markdownIt-Anchor" href="#zookerper架构"></a> Zookerper架构</h3>
+<p>ZooKeeper是一个由奇数（2n+1）台同构服务器组成的集群，它采用主-从结构</p>
+<ul>
+<li>一台主服务器Leader，若干台从服务器Follower，只要有超过半数的服务器能够工作，ZooKeeper集群就能正常工作</li>
+<li>集群内所有服务器均保持同步，都接受客户端的读写请求</li>
+<li>如果ZooKeeper集群中的Leader出现了故障，那么Follower们就会通过一定的策略，选举出一个新的Leader；</li>
+</ul>
+<p>Learder功能：</p>
+<ul>
+<li>启动或重启时恢复数据</li>
+<li>检测Follower的心跳</li>
+<li>结束Foller发来的请求根据不同的类型做出处理，比如写</li>
+</ul>
+<p>Follower功能：</p>
+<ul>
+<li>接受Leader的消息，并完成工作</li>
+<li>向Leader发送心跳</li>
+<li>接受客户端的请求，如果为读请求，直接返回结果，如果为写请求，转发给Leader</li>
+</ul>
+<h3 id="zookerper数据模型"><a class="markdownIt-Anchor" href="#zookerper数据模型"></a> Zookerper数据模型</h3>
+<p>Zookeeper维护一个类似于树状的文件系统</p>
+<ul>
+<li>树状结构中有一个根节点，称为&quot;/&quot;，其他节点建立在根节点上，每个节点称为ZNode</li>
+<li>每个节点可以存储不超过1MB的数据，持久性的ZNode还可以在创建子节点</li>
+</ul>
+<p>ZNode的类型：</p>
+<ul>
+<li>持久性节点：一旦创建，除非主动删除，否则一直存在</li>
+<li>持久性顺序节点：一旦创建，除非主动删除，否则一直存在，节点名后面会有一个递增的序号</li>
+<li>临时节点：客户端断开连接后，该节点会被删除</li>
+<li>临时顺序节点：客户端断开连接后，该节点会被删除，节点名后面会有一个递增的序号</li>
+</ul>
+<p>ZNode组成：</p>
+<ol>
+<li>访问控制列表（ACL）：控制对ZNode的访问权限</li>
+<li>ZNode自身状态信息：创建者ID等</li>
+<li>ZNode数据：存储的数据</li>
+</ol>
+<h3 id="zookeeper的一致性"><a class="markdownIt-Anchor" href="#zookeeper的一致性"></a> Zookeeper的一致性</h3>
+<h4 id="会话session机制"><a class="markdownIt-Anchor" href="#会话session机制"></a> 会话（Session）机制</h4>
+<ul>
+<li>当客户端成功连接到ZooKeeper时，就与之建立了一个会话，客户端通过定时向ZooKeeper发送心跳消息来保持会话有效</li>
+<li>如果ZooKeeper在规定时间段（默认为180秒）内未能收到某个客户端的心跳消息，则使其会话失效，即导致该客户端与ZooKeeper断开</li>
+<li>如果因服务器负载过重、网络阻塞等导致客户端与ZooKeeper集群内某个服务器断开，客户端只要在规定时间段内与ZooKeeper集群内的任何一个服务器连接上，该会话仍然有效。</li>
+</ul>
+<h4 id="监视watcher机制"><a class="markdownIt-Anchor" href="#监视watcher机制"></a> 监视（Watcher）机制</h4>
+<ul>
+<li>客户端可以在某个Znode上设置一个Watcher（监视器），来监视该Znode的状态；</li>
+<li>Watcher一次性有效</li>
+<li>一旦被设置了Watcher的Znode的状态发生变化，ZooKeeper服务端会将此事件通知设置Watcher的客户端，并根据事件类型触发回调客户端事先设置的处理逻辑</li>
+</ul>
+<h3 id="zookeeper的自身一致性"><a class="markdownIt-Anchor" href="#zookeeper的自身一致性"></a> Zookeeper的自身一致性</h3>
+<p><strong>myid</strong>:Zookeeper集群中每个服务器的唯一标识，myid文件中只包含一个数字，这个数字就是这个服务器的编号<br />
+<strong>ZXID</strong>:</p>
+<ul>
+<li>ZooKeeper为每个事务操作分配一个全局单调递增的事务编号（ZXID），每个ZXID对应于一次事务操作，它随事务一起被记入事务日志.</li>
+<li>ZXID是一个64位二进制数，其高32位为Leader周期的编号，称作epoch，新选出的Leader的epoch为其前任Leader的epoch值加1</li>
+<li>ZXID的低32位是一个单调递增的计数器，Leader在执行一个新的事务操作时，都会对该计数器作加1操作，其与epoch组合成此事务操作的ZXID</li>
+<li>每当选举出一个新的Leader时，就从该Leader的事务日志内挑选出数值最大的事务编号ZXID，对其中的epoch值作加1操作，以此作为新Leader的周期编号，并将低32位置0，从而形成新的ZXID</li>
+</ul>
+<h4 id="原子广播zab-zookeeper-atomic-broadcast"><a class="markdownIt-Anchor" href="#原子广播zab-zookeeper-atomic-broadcast"></a> 原子广播ZAB (ZooKeeper Atomic Broadcast)</h4>
+<p><strong>恢复模式</strong>：</p>
+<ul>
+<li>系统启动或Leader发生故障时，ZAB进入恢复模式</li>
+<li>立即进行一次Leader选举，选出一个新的Leader</li>
+<li>让集群中至少有超过半数的Follower与Leader具有相同的系统状态，即实现数据同步</li>
+<li>ZAB退出恢复模式，进入广播模式</li>
+</ul>
+<p><strong>广播模式（写流程）</strong>：</p>
+<ul>
+<li>Leader收到客户端发来的事务操作请求时，Leader通过ZAB的广播模式向集群内的所有Follower进行消息广播，即发送事务操作请求消息</li>
+<li>各个Follower收到Leader广播（发送）的事务操作请求后，把将要作的事务操作及其ZXID记入各自的事务日志，然后向Leader回复ack（确认）消息</li>
+<li>若Leader收不到超过半数的Follower回复的ack消息，则取消本次更新操作</li>
+<li>若Leader收到超过半数的Follower回复的ack（确认）消息，则向Follower们进行消息广播—向它们发送commit（许可）消息</li>
+<li>Follower收到Leader的commit消息，就真正执行本次更新操作，即更新内存或Znode内的数据</li>
+<li>整个ZAB的广播模式执行过程是一个整体，不能被打断，其结果只有成功或失败，不存在中间状态</li>
+</ul>
+<p><img src="https://image.yayan.xyz/20240318211258.png" alt="写流程之写入请求直接发送给Leader节点" /></p>
+<p><img src="https://image.yayan.xyz/20240318211326.png" alt="写流程之写入请求发送给follower节点" /></p>
+<h3 id="zookeeper的选举机制"><a class="markdownIt-Anchor" href="#zookeeper的选举机制"></a> Zookeeper的选举机制</h3>
+<h4 id="选举的基本原则"><a class="markdownIt-Anchor" href="#选举的基本原则"></a> 选举的基本原则</h4>
+<ul>
+<li>选举开始时，ZooKeeper集群内各台服务器上的数据不一定会完全一致，在选出Leader之后，就要以该Leader为基准来同步其他服务器上的数据；</li>
+<li>应该把集群内拥有最新数据的服务器选为Leader，故必须挑选其事务日志中具有最大ZXID的那台服务器作为Leader，因为该服务器进行了最新的事务操作，故其拥有的数据是最新的，以其作为基准来恢复和同步数据，则可以保证数据的完整性；</li>
+<li>若具有最大ZXID的服务器不止一个，则选其中myid最大者为Leader</li>
+</ul>
+<h4 id="选举流程"><a class="markdownIt-Anchor" href="#选举流程"></a> 选举流程</h4>
+<p><img src="https://image.yayan.xyz/20240318210658.png" alt="" /></p>
+<ol>
+<li>集群内各服务器均进入LOOKING状态，进行一轮选举投票，即各服务器均向其他服务器发送投票消息，消息的内容为自身的myid和自身最大的ZXID，也就是把自身定为候选Leader（争作Leader）</li>
+<li>各服务器接收投票消息（包括自己的票），从中挑选出具有最大ZXID的服务器作为候选Leader ，若这样的服务器有多个，则挑选其中myid最大者</li>
+<li>各服务器统计本轮投票中候选Leader的得票数
+<ul>
+<li>若未过半数，则把前一步挑选出的候选Leader的myid和ZXID记入投票消息，进行下一轮投票</li>
+<li>如果候选Leader得票数过半，则判别候选Leader是否是自身，若是，则该服务器进入LEADING状态，否则该服务器进入FOLLOWING状态</li>
+</ul>
+</li>
+</ol>
+<p>###　Zookeeper的操作</p>
+<h4 id="shell操作"><a class="markdownIt-Anchor" href="#shell操作"></a> Shell操作</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看节点</span></span><br><span class="line"><span class="built_in">ls</span> /</span><br><span class="line"><span class="comment"># 查看节点详细信息</span></span><br><span class="line"><span class="built_in">ls</span> -s /</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建永久节点</span></span><br><span class="line">create /node1 <span class="string">&quot;data1&quot;</span></span><br><span class="line"><span class="comment"># 创建永久顺序节点</span></span><br><span class="line">create -s /node2 <span class="string">&quot;data2&quot;</span></span><br><span class="line"><span class="comment"># 创建临时节点</span></span><br><span class="line">create -e /node3 <span class="string">&quot;data3&quot;</span></span><br><span class="line"><span class="comment"># 创建临时顺序节点</span></span><br><span class="line">create -s -e /node4 <span class="string">&quot;data4&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看节点数据</span></span><br><span class="line">get -s /node1</span><br><span class="line"><span class="comment"># 查看节点详细信息</span></span><br><span class="line"><span class="built_in">stat</span> /node1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改节点数据</span></span><br><span class="line"><span class="built_in">set</span> /node1 <span class="string">&quot;data1-1&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除节点</span></span><br><span class="line">delete /node1</span><br><span class="line"><span class="comment"># 删除节点并递归删除子节点</span></span><br><span class="line">deleteall /node1</span><br></pre></td></tr></table></figure>
+<h4 id="api操作"><a class="markdownIt-Anchor" href="#api操作"></a> API操作</h4>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建监视点</span></span><br><span class="line"><span class="comment">// 1. 创建配置对象</span></span><br><span class="line"><span class="keyword">private</span> <span class="type">String</span> <span class="variable">connectString</span> <span class="operator">=</span> <span class="string">&quot;hadoop102:2181,hadoop103:2181,hadoop104:2181&quot;</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="type">int</span> <span class="variable">sessionTimeout</span> <span class="operator">=</span> <span class="number">2000</span>;</span><br><span class="line"><span class="keyword">private</span> ZooKeeper zkClient;</span><br><span class="line"><span class="comment">// 2. 创建zookeeper的连接</span></span><br><span class="line">zkClient = <span class="keyword">new</span> <span class="title class_">ZooKeeper</span>(connectString, sessionTimeout, <span class="keyword">new</span> <span class="title class_">Watcher</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">process</span><span class="params">(WatchedEvent watchedEvent)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;默认回调函数&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 使用自定义的监视</span></span><br><span class="line">zk.exists(<span class="string">&quot;/path/to/znode&quot;</span>, <span class="keyword">new</span> <span class="title class_">Watcher</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">process</span><span class="params">(WatchedEvent event)</span> &#123;</span><br><span class="line">        <span class="comment">// 处理监视事件的逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 使用默认的监视</span></span><br><span class="line">zk.exists(<span class="string">&quot;/path/to/znode&quot;</span>, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="分布式数据库hbase"><a class="markdownIt-Anchor" href="#分布式数据库hbase"></a> 分布式数据库HBase</h2>
+<h3 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h3>
+<p>HBase是一种以HDFS为依据的分布式可扩展NoSQL列族数据库</p>
+<h4 id="nosql理论基础-cap理论与base理论"><a class="markdownIt-Anchor" href="#nosql理论基础-cap理论与base理论"></a> NoSQL理论基础: CAP理论与BASE理论</h4>
+<p>传统关系数据库技术的核心特征：事务操作必须遵循ACID（原子性Atomicity、一致性Consistancy、隔离性Isolation、持久性Durability）原则，具有强事务、强一致性。</p>
+<p>NoSQL数据库的特点：NoSQL方案弱化事务处理的ACID特性，一般不持支传统数据库的SQL查询语言</p>
+<p>CAP理论：在设计和部署分布式应用时，存在三个核心的系统需求：</p>
+<ul>
+<li>C：Consistency（一致性）—在对数据进行更新和删除操作后，用户都能看到相同的数据视图。</li>
+<li>A：Availability（可用性）—可用性主要是指系统能够很好地为用户服务，不出现用户操作失败或者访问超时等用户体验不佳的情况（比如由强一致性带来的副作用）。</li>
+<li>P：Partition Tolerance（分区容错性）—分区容错性和可扩展性是紧密相关的，好的分区容错性要求一个分布式系统就像是一个运转正常的整体，当系统中有部分网络或节点发生故障时，仍然能够依靠系统中其余完好的部分来保证系统正常运作。</li>
+<li>CAP理论的核心：一个分布式系统不可能同时很好地满足一致性C，可用性A、分区容错性P这三个需求，最多只能同时较好地满足其中的两个需求。</li>
+</ul>
+<p>OldSQL为了不降低可用性，通常对数据采用不分散存储的策略，使可扩展性（即分区容错性P）受到限制，可看作保证C、A，放弃P；</p>
+<p>NoSQL为了获得可扩展性，又不降低可用性，在设计中就会弱化甚至去除事务的ACID要求，可看作保证A、P，放弃C。</p>
+<p>BASE (BA,S,E) 理论：牺牲强一致性，获得可用性或可靠性，表现为以下三点：</p>
+<ul>
+<li>BA：Basically Availability（基本可用）</li>
+<li>S：Soft State（软状态）—允许系统中的数据存在中间状态，而这个中间状态不会影响系统的整体可用性。硬状态”是指严格遵循ACID原则的事务功能；</li>
+<li>E: Eventually Consistency（最终一致性）—系统中的数据经过一段时间后，最终会达到一致的状态。</li>
+</ul>
+<h4 id="hbase逻辑结构"><a class="markdownIt-Anchor" href="#hbase逻辑结构"></a> HBase逻辑结构</h4>
+<p>HBase的逻辑结构可以看作是一个二维的表格结构,行代表RowKey(<strong>唯一,按RowKey排序</strong>),列代表列族,其中列族下面可以有多个列限定符,每个列限定符下面存储一个值,这个值可以是多个版本的,每个版本都有一个时间戳,时间戳是一个64位的整数,代表了这个版本的时间,时间戳越大,版本越新</p>
+<p><img src="https://image.yayan.xyz/20240318191544.png" alt="" /></p>
+<h4 id="hbase物理结构"><a class="markdownIt-Anchor" href="#hbase物理结构"></a> HBase物理结构</h4>
+<p>HBase的物理结构是基于HDFS的,每个表都会有一个对应的目录,目录下面有两个子目录,分别是data和wal,其中data目录存储了HFile文件,而wal目录存储了WAL文件(Write-Ahead-Log,预写日志).</p>
+<p>HBase的RegionServer和HMaster不负责存储数据,只负责管理数据,而实际的数据存储在HDFS上</p>
+<h4 id="hbase数据模型"><a class="markdownIt-Anchor" href="#hbase数据模型"></a> HBase数据模型</h4>
+<ol>
+<li>Namespace: 命名空间,类似于关系数据库中的database概念.命名空间下可以有多个表,HBase自带两个命名空间,分别是default和hbase,hbase中存放的是HBase内置的表,其中meta表存放了所有表的元数据信息</li>
+<li>Table: 表,类似于关系数据库中的table概念,表中存放的是多行数据,每行数据都有一个唯一的RowKey,表中的数据是按照RowKey进行排序的</li>
+<li>Row: HBase表中的每行数据都由一个RowKey和多个Column（列）组成，数据是按照RowKey的字典顺序存储的，并且查询数据时只能根据RowKey进行检索，所以RowKey的设计十分重要</li>
+<li>Cell: 由{rowkey,  columnFamily：columnQualifier, timestamp} 唯一确定的单元。Cell为空时,不会存储在HBase中.</li>
+</ol>
+<h4 id="基本架构"><a class="markdownIt-Anchor" href="#基本架构"></a> 基本架构</h4>
+<p><img src="https://image.yayan.xyz/20240318192200.png" alt="" /></p>
+<ol>
+<li>
+<p>Master服务器负责管理所有Region服务器和数据表(hbase:meta)</p>
+<ul>
+<li>其本身不存储HBase中的数据；</li>
+<li>接收用户对<strong>表格</strong>创建修改删除的命令并执行</li>
+<li>监控region是否需要进行负载均衡，故障转移和region的拆分</li>
+</ul>
+</li>
+<li>
+<p>Region服务器是HBase中最核心的部分：</p>
+<ul>
+<li>Region服务器是HBase的读写节点，它为用户提供对<strong>数据表数据</strong>的读写服务</li>
+<li>一张数据表被划分成(横向划分)多个HRegion，这些HRegion被分布到Region服务器集群内进行管理</li>
+</ul>
+</li>
+<li>
+<p>HRegion是一个HBase表横向切割的结果:</p>
+<ul>
+<li>在HRegion中,每个列族又被分为一个Store.每个Store中存储了一个列族的数据,不包含空元素</li>
+<li>Store中包含一个MemStore,一个Block Cache和多个HFile,MemStore负责缓存写入的数据(有序,每次flush都回形成一个HFile),Block Cache负责缓存读取的数据,HFile是HBase中的数据存储文件</li>
+</ul>
+</li>
+<li>
+<p>Zookeeper监视Region服务器和Master服务器的运行状态</p>
+<ul>
+<li>各个Region服务器会在ZooKeeper的Z节点/server上建立临时性顺序节点，Master服务器在/server上设置Watcher，可以随时感知到各个Region服务器的运行状态；</li>
+<li>当前的Active Master服务器在ZooKeeper上建立临时性Z节点/Master，各个Region服务器和Master集群内的其它服务器均在/Master上设置Watcher，它们可以随时感知到当前的Active Master服务器的工作（运行）状态；</li>
+</ul>
+</li>
+</ol>
+<h3 id="hbase操作"><a class="markdownIt-Anchor" href="#hbase操作"></a> HBase操作</h3>
+<h4 id="shell操作-2"><a class="markdownIt-Anchor" href="#shell操作-2"></a> Shell操作</h4>
+<h5 id="基本操作"><a class="markdownIt-Anchor" href="#基本操作"></a> 基本操作</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建命名空间</span></span><br><span class="line">create_namespace <span class="string">&#x27;ns1&#x27;</span></span><br><span class="line"><span class="comment"># 查看所有命名空间</span></span><br><span class="line">list_namespace</span><br></pre></td></tr></table></figure>
+<h5 id="ddl操作"><a class="markdownIt-Anchor" href="#ddl操作"></a> DDL操作</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建表</span></span><br><span class="line"><span class="comment"># 在ns1命名空间下创建表table1,列族为cf1,cf2</span></span><br><span class="line">create <span class="string">&#x27;ns1:table1&#x27;</span>, <span class="string">&#x27;cf1&#x27;</span>, <span class="string">&#x27;cf2&#x27;</span></span><br><span class="line"><span class="comment"># 在ns1命名空间下创建表table1,列族为cf1,cf2,并指定版本数</span></span><br><span class="line">create <span class="string">&#x27;ns1:table1&#x27;</span>, &#123;NAME =&gt; <span class="string">&#x27;cf1&#x27;</span>, VERSIONS =&gt; 3&#125;, &#123;NAME =&gt; <span class="string">&#x27;cf2&#x27;</span>, VERSIONS =&gt; 5&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看表</span></span><br><span class="line">list</span><br><span class="line"><span class="comment"># 查看表详情</span></span><br><span class="line">describe <span class="string">&#x27;ns1:table1&#x27;</span></span><br><span class="line"><span class="comment"># 删除表</span></span><br><span class="line"><span class="built_in">disable</span> <span class="string">&#x27;ns1:table1&#x27;</span></span><br><span class="line">drop <span class="string">&#x27;ns1:table1&#x27;</span></span><br><span class="line"><span class="comment"># 修改表</span></span><br><span class="line"><span class="comment"># 修改表的列族的版本数</span></span><br><span class="line">alter <span class="string">&#x27;ns1:table1&#x27;</span>, &#123;NAME =&gt; <span class="string">&#x27;cf1&#x27;</span>, VERSIONS =&gt; 5&#125;</span><br><span class="line"><span class="comment"># 删除表的列族</span></span><br><span class="line">alter <span class="string">&#x27;ns1:table1&#x27;</span>, <span class="string">&#x27;delete&#x27;</span> =&gt; <span class="string">&#x27;cf1&#x27;</span></span><br><span class="line">alter <span class="string">&#x27;ns1:table1&#x27;</span>, &#123;NAME =&gt; <span class="string">&#x27;cf1&#x27;</span>, METHOD =&gt; <span class="string">&#x27;delete&#x27;</span>&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="dml操作"><a class="markdownIt-Anchor" href="#dml操作"></a> DML操作</h5>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 插入数据</span></span><br><span class="line"><span class="comment"># 如果重复写入相同rowKey，相同列的数据，会写入多个版本进行覆盖。</span></span><br><span class="line"><span class="comment"># 向ns1:table1表中插入一行数据,行键为row1,列族为cf1,列限定符为col1,值为value1</span></span><br><span class="line">put <span class="string">&#x27;ns1:table1&#x27;</span>, <span class="string">&#x27;row1&#x27;</span>, <span class="string">&#x27;cf1:col1&#x27;</span>, <span class="string">&#x27;value1&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取数据get</span></span><br><span class="line"><span class="comment"># 读取ns1:table1表中的一行数据,行键为row1</span></span><br><span class="line">get <span class="string">&#x27;ns1:table1&#x27;</span>, <span class="string">&#x27;row1&#x27;</span></span><br><span class="line"><span class="comment"># 读取ns1:table1表中的一行数据,行键为row1,列族为cf1</span></span><br><span class="line">get <span class="string">&#x27;ns1:table1&#x27;</span>, <span class="string">&#x27;row1&#x27;</span>, &#123;COLUMN =&gt; <span class="string">&#x27;cf1&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取数据scan</span></span><br><span class="line"><span class="comment"># 读取ns1:table1表中的所有数据</span></span><br><span class="line">scan <span class="string">&#x27;ns1:table1&#x27;</span></span><br><span class="line"><span class="comment"># 读取ns1:table1表中的所有数据,并指定列族</span></span><br><span class="line">scan <span class="string">&#x27;ns1:table1&#x27;</span>, &#123;COLUMN =&gt; <span class="string">&#x27;cf1&#x27;</span>&#125;</span><br><span class="line"><span class="comment"># 读取ns1:table1表中的所有数据,从row1开始,到row2结束</span></span><br><span class="line">scan <span class="string">&#x27;ns1:table1&#x27;</span>, &#123;STARTROW =&gt; <span class="string">&#x27;row1&#x27;</span>, ENDROW =&gt; <span class="string">&#x27;row2&#x27;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除数据</span></span><br><span class="line"><span class="comment"># 删除ns1:table1表中的一行数据,行键为row1</span></span><br><span class="line">delete <span class="string">&#x27;ns1:table1&#x27;</span>, <span class="string">&#x27;row1&#x27;</span></span><br><span class="line"><span class="comment"># 删除ns1:table1表中的一行数据,行键为row1,列为cf1中的name</span></span><br><span class="line">delete <span class="string">&#x27;ns1:table1&#x27;</span>, <span class="string">&#x27;row1&#x27;</span>, <span class="string">&#x27;cf1：name&#x27;</span></span><br><span class="line"><span class="comment"># 删除数据的所有版本</span></span><br><span class="line">deleteall <span class="string">&#x27;ns1:table1&#x27;</span>, <span class="string">&#x27;row1&#x27;</span>, <span class="string">&#x27;cf1：name&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行命令会标记数据为要删除，不会直接将数据彻底删除，删除数据只在特定时期清理磁盘时进行</span></span><br></pre></td></tr></table></figure>
+<h4 id="api操作-2"><a class="markdownIt-Anchor" href="#api操作-2"></a> API操作</h4>
+<p>HBase的客户端连接由ConnectionFactory类来创建，用户使用完成之后需要手动关闭连接。同时连接是一个重量级的，推荐一个进程使用一个连接，对HBase的命令通过连接中的两个属性Admin(DDL)和Table(DML)来实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建连接</span></span><br><span class="line"><span class="comment">//1. 创建配置对象</span></span><br><span class="line"><span class="type">Configuration</span> <span class="variable">conf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Configuration</span>();</span><br><span class="line"><span class="comment">// 2. 添加配置参数</span></span><br><span class="line">conf.set(<span class="string">&quot;hbase.zookeeper.quorum&quot;</span>,<span class="string">&quot;hadoop102,hadoop103,hadoop104&quot;</span>);</span><br><span class="line"><span class="comment">// 3. 创建hbase的连接</span></span><br><span class="line"><span class="comment">// 默认使用同步连接Connection                   </span></span><br><span class="line">connection = ConnectionFactory.createConnection(conf);</span><br><span class="line"><span class="comment">// 可以使用异步连接</span></span><br><span class="line"><span class="comment">// 主要影响后续的DML操作</span></span><br><span class="line">CompletableFuture&lt;AsyncConnection&gt; asyncConnection = ConnectionFactory.createAsyncConnection(conf);</span><br><span class="line"><span class="comment">// 4. 使用连接</span></span><br><span class="line">System.out.println(connection);</span><br><span class="line"><span class="comment">// 5. 关闭连接</span></span><br><span class="line">connection.close();</span><br></pre></td></tr></table></figure>
+<p>HBase在API操作时使用了装饰者（设计师）模式。因为shell命令的参数很多，所以在API中使用了装饰者模式，将参数封装成对象，然后通过对象的方法来实现shell命令的功能。</p>
+<h3 id="hbase一些原理"><a class="markdownIt-Anchor" href="#hbase一些原理"></a> HBase一些原理</h3>
+<h4 id="hbase架构"><a class="markdownIt-Anchor" href="#hbase架构"></a> HBase架构</h4>
+<p><img src="https://image.yayan.xyz/20240318195105.png" alt="" /></p>
+<ol>
+<li>hbase:meta 表中存储了 Hbase 集群中全部表的所有的Hregion 信息,在list命令中被过滤掉了</li>
+<li>StoreFile保存实际数据的物理文件，StoreFile以HFile的形式存储在HDFS上。每个Store会有一个或多个StoreFile（HFile），数据在每个StoreFile中都是有序的。</li>
+<li>MemStore写缓存，由于HFile中的数据要求是有序的，所以数据是先存储在MemStore中，排好序后，等到达刷写时机才会刷写到HFile，每次刷写都会形成一个新的HFile。</li>
+<li>WAL由于数据要经MemStore排序后才能刷写到HFile，但把数据保存在内存中会有很高的概率导致数据丢失，为了解决这个问题，数据会先写在一个叫做Write-Ahead logfile的文件中，然后再写入MemStore中。所以在系统出现故障的时候，数据可以通过这个日志文件重建。</li>
+<li>Store</li>
+</ol>
+<h4 id="hbase的写流程"><a class="markdownIt-Anchor" href="#hbase的写流程"></a> HBase的写流程</h4>
+<p><img src="https://image.yayan.xyz/20240318195306.png" alt="" /></p>
+<ol>
+<li>Client先访问zookeeper，获取hbase:meta表位于哪个RegionServer。</li>
+<li>访问对应的Region Server，获取hbase:meta表，根据读请求的namespace:table/rowkey，查询出目标数据位于哪个RegionServer中的哪个Region中。并将该table的region信息以及meta表的位置信息缓存在客户端的meta cache，方便下次访问。</li>
+<li>与目标RegionServer进行通讯；</li>
+<li>将数据顺序写入（追加）到WAL(HLog)；</li>
+<li>将数据写入对应的MemStore，数据会在MemStore进行排序；</li>
+<li>向客户端发送ack；</li>
+<li>等达到MemStore的刷写时机后，将数据刷写到HFile。</li>
+<li>在步骤4，5，源码的步骤是先写入HLog，在写入MemStore，然后再同步HLog。如果HLog如果写入失败，就会事务回滚。</li>
+</ol>
+<h4 id="hbase的读流程"><a class="markdownIt-Anchor" href="#hbase的读流程"></a> HBase的读流程</h4>
+<p><img src="https://image.yayan.xyz/20240318200601.png" alt="" /></p>
+<blockquote>
+<p>误区：HBase的读流程并不是只读BlockCache的数据，考虑这种情况:<br />
+第一次写数据的时候成功写入，并flush罗盘了<br />
+第二次写数据的时候写入了MemStore，但是此时把ts设置为了比第一次写的ts小，但是没有罗盘<br />
+如果只读BlockCache，那么第二次写的数据就会被读到，这样就会出现数据读取不是最新的情况。</p>
+</blockquote>
+<ol>
+<li>Client先访问zookeeper，获取hbase:meta表位于哪个RegionServer。</li>
+<li>访问对应的Region Server，获取hbase:meta表，根据读请求的namespace:table/rowkey，查询出目标数据位于哪个RegionServer中的哪个Region中。并将该table的region信息以及meta表的位置信息缓存在客户端的meta cache，方便下次访问。</li>
+<li>与目标RegionServer进行通讯；</li>
+<li>分别在BlockCache（读缓存），MemStore和StoreFile（HFile）中查询目标数据，并将查到的所有数据进行合并。此处所有数据是指同一条数据的不同版本（timestamp）或者不同的类型（Put/Delete）</li>
+<li>将从文件中查询到的数据块（Block，HFile数据存储单元，默认大小为64KB）缓存到BlockCache。</li>
+<li>将合并后的最终结果返回给客户端。</li>
+</ol>
+<h4 id="hbase的flush操作"><a class="markdownIt-Anchor" href="#hbase的flush操作"></a> HBase的Flush操作</h4>
+<p><img src="https://image.yayan.xyz/20240318201159.png" alt="" /></p>
+<ol>
+<li>Flush操作的基本单位是HRegion，即对HRegion的所有MemStore均进行Flush操作，并各自形成单独的StoreFile</li>
+<li>MemStore中的数据达到阈值（128M）后，其所在region的所有memstore都会刷写。</li>
+<li>到达自动刷写的时间（默认1小时），<strong>最后一次</strong>刷写的时间到当前时间间隔超过了自动刷写的时间间隔。</li>
+<li>HRegion的所有MemStore中的数据总量到达阈值（JVM heap的40%）后，也会触发Flush操作。
+<ul>
+<li>当阈值到低位线（总阈值的95%，JVM heap的38%）时，region会按照其所有memstore的大小顺序（由大到小）依次进行刷写。直到region server中所有memstore的总大小减小到上述值以下。</li>
+<li>当阈值到高位线时，region会同时阻止继续往所有的memstore写数据。</li>
+</ul>
+</li>
+</ol>
+<h4 id="hbase的compaction操作"><a class="markdownIt-Anchor" href="#hbase的compaction操作"></a> HBase的Compaction操作</h4>
+<p><img src="https://image.yayan.xyz/20240318202739.png" alt="" /><br />
+Compaction合并的原因：</p>
+<p>StoreFile是只读文件，其内容不能被更新（增加、修改、删除），以此提升表数据的安全性<br />
+如果要更新StoreFile内的表数据，则必须以新增StoreFile的形式进行，把欲更新的数据（包含属性或版本号）写入新增的StoreFile中</p>
+<p>（HBase不停的刷写，导致存储目录中有过多的数据文件，文件太多会导致维护困难、降低数据查询性能和效率。对一堆的文件进行I/O操作，耗时太多。所以HBase定期会对这些琐碎的文件进行整理，即合并Compaction。）</p>
+<p>Compaction合并的步骤：</p>
+<p>分为三步：排序文件、合并文件、代替原文件服务。</p>
+<p>HBase首先从待合并的文件中读出HFile中的key-value,再按照由小到大的顺序写入一个新文件(storeFile)中。这个新文件将代替所有之前的文件，对外提供服务。</p>
+<p>Compaction操作分为两种：</p>
+<ul>
+<li>Minor Compaction：只合并相邻的（3个）小文件，不会合并所有的文件，不会清理过期和删除的数据。</li>
+<li>major Compaction：合并所有的文件，产生一个新的文件。</li>
+</ul>
+<p>Compaction大合并时，清空以下数据：</p>
+<ol>
+<li>标记为删除的数据。
+<ul>
+<li>当我们删除数据时，HBase并没有把这些数据立即删除，而是将这些数据打了一个个标记，称为“墓碑”标记。在HBase合并时，会将这些带有墓碑标记的数据删除。</li>
+</ul>
+</li>
+<li>TTL过期数据
+<ul>
+<li>TTL(time to live)指数据包在网络中的时间。如果列族中设置了TTL过期时间，则在合并的过程中，发现过期的数据将被删除。</li>
+</ul>
+</li>
+<li>版本合并
+<ul>
+<li>若版本号超过了列族中预先设定的版本号，则将最早的一条数据删除。</li>
+</ul>
+</li>
+</ol>
+<p>Compaction合并的触发条件：</p>
+<ol>
+<li>内存中的数据flush刷写到硬盘上以后，会对当前Store中的文件进行判断，当数量达到阈值，则会触发Compaction。</li>
+<li>Compaction Checker线程定期检查是否触发Compaction，Checker会优先检查文件数量是否大于阈值，再判断是否满足major Compaction的条件的时间范围内（7天），如果满足，则触发一次大合并Major Compaction。</li>
+<li>手动合并</li>
+</ol>
+<h4 id="hbase的split操作"><a class="markdownIt-Anchor" href="#hbase的split操作"></a> HBase的Split操作</h4>
+<p><img src="https://image.yayan.xyz/20240318202833.png" alt="" /><br />
+Split原因：<br />
+随着HRegion内的数据被持续追加，StoreFile文件的数量和长度会不断增大，由此引起Store的不断增大，从而导致HRegion的长度持续增大；</p>
+<p>Split条件：<br />
+当1个region中的某个Store下所有StoreFile的总大小超过Min(R^2 * “hbase.hregion.memstore.flush.size”,&quot; hbase.hregion.max.filesize &quot;) 就会拆分，其中R为当前RegionServer中属于该table的region个数<br />
+具体的切分策略为：<br />
+第一次split：1^3 * 256 = 256MB<br />
+第二次split：2^3 * 256 = 2048MB<br />
+第三次split：3^3 * 256 = 6912MB<br />
+第四次split：4^3 * 256 = 16384MB &gt; 10GB，<br />
+因此取较小的值10GB 后面每次split的size都是10GB了。</p>
+<p>Split过程：<br />
+Region的拆分是由HRegionServer完成的，在操作之前需要通过ZK汇报master，修改对应的Meta表信息添加两列info：splitA和info：splitB信息。之后需要操作HDFS上面对应的文件，按照拆分后的Region范围进行标记区分，实际操作为创建文件引用，不会挪动数据。刚完成拆分的时候，两个Region都由原先的RegionServer管理。之后汇报给Master，由Master将修改后的信息写入到Meta表中。等待下一次触发负载均衡机制，才会修改Region的管理服务者，而数据要等到下一次压缩时，才会实际进行移动。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://gladdduck.github.io/2024/03/16/%E5%AE%9E%E4%B9%A0-Hadoop%E7%9F%A5%E8%AF%86%E7%82%B9/" title="Hadoop学习笔记" target="_blank" rel="external">https://gladdduck.github.io/2024/03/16/实习-Hadoop知识点/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/gladdduck" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/icon.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/gladdduck" target="_blank"><span class="text-dark">Gladdduck</span><small class="ml-1x">KB Master</small></a></h3>
+        <div>我写的个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2024/03/18/%E7%AE%97%E6%B3%95-%E7%BE%8E%E5%9B%A2%E7%AC%94%E8%AF%95/" title="(no title)"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2024/03/14/%E5%AE%9E%E4%B9%A0-Kaggle-OTTO%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/" title="Kaggle-OTTO比赛回顾"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/donate.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/donate.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '644a1091cfd20b8f33ef',
+    clientSecret: '4c5cc91dbfe067c804fcef958817d41acc9ba545',
+    repo: 'gladdduck.github.io',
+    owner: 'gladdduck',
+    admin: ['gladdduck'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: ''
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>
