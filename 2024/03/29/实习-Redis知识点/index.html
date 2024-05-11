@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>实习-Redis知识点 | Gladdduck</title>
+  <meta name="description" content="Redis 数据类型  五种基础数据类型：   String:底层使用C语言构建的简单动态字符串     Hash:数组 + 链表,用于对象数据     List:基于双向链表,用于时间(最新)数据     Set:intset或者hashtable, 用于找共同好友、共同喜好等     ZSet(有序集合),ziplist或者skiplist,用于排行榜、有权值排序的等   三种特殊数据类型：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实习-Redis知识点">
+<meta property="og:url" content="https://gladdduck.github.io/2024/03/29/%E5%AE%9E%E4%B9%A0-Redis%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+<meta property="og:site_name" content="Gladdduck">
+<meta property="og:description" content="Redis 数据类型  五种基础数据类型：   String:底层使用C语言构建的简单动态字符串     Hash:数组 + 链表,用于对象数据     List:基于双向链表,用于时间(最新)数据     Set:intset或者hashtable, 用于找共同好友、共同喜好等     ZSet(有序集合),ziplist或者skiplist,用于排行榜、有权值排序的等   三种特殊数据类型：">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://image.yayan.xyz/20240329183524.png">
+<meta property="og:image" content="https://image.yayan.xyz/20240329183544.png">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/database/redis/redis-event-handler.png">
+<meta property="og:image" content="https://oss.javaguide.cn/github/javaguide/database/redis/redis-expired-dictionary.png">
+<meta property="article:published_time" content="2024-03-29T07:23:07.889Z">
+<meta property="article:modified_time" content="2024-04-11T07:18:53.955Z">
+<meta property="article:author" content="syxue">
+<meta property="article:tag" content="Redis知识点">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://image.yayan.xyz/20240329183524.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://gladdduck.github.io/2024/03/29/%E5%AE%9E%E4%B9%A0-Redis%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Gladdduck" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/icon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1.4.0/dist/gitalk.min.css">
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body class="main-center theme-purple" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/gladdduck" target="_blank">
+          <img class="img-circle img-rotate" src="/images/icon.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Gladdduck</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">KB Master</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Suzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="搜索" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="想要查找什么..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">首页</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">归档</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">分类</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-repository">
+          <a href="/repository">
+            
+            <i class="icon icon-project"></i>
+            
+            <span class="menu-title">项目</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-picture">
+          <a href="/picturewall">
+            
+            <i class="icon icon-starfish"></i>
+            
+            <span class="menu-title">图片墙</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">关于</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">公告</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>自己JB的记录</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AE/">hexo博客配置</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">31</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/">快捷命令</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB%E9%85%8D%E7%BD%AE/">杂七杂八配置</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BA%E6%96%87%E8%AE%B0%E5%BD%95/">论文记录</a><span class="category-list-count">5</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BingChat/" rel="tag">BingChat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blazor/" rel="tag">Blazor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BlazorLocalization/" rel="tag">BlazorLocalization</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSharp/" rel="tag">CSharp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cypher/" rel="tag">Cypher</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataloader/" rel="tag">Dataloader</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Dataset/" rel="tag">Dataset</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Few-shotObjectDetection/" rel="tag">Few-shotObjectDetection</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hadoop/" rel="tag">Hadoop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kaggle/" rel="tag">Kaggle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Linux快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" rel="tag">Neo4j快捷命令</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PaddleOCRSharp/" rel="tag">PaddleOCRSharp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag">Python学习笔记</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">Redis知识点</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sampler/" rel="tag">Sampler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VS2022/" rel="tag">VS2022</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCode-Github/" rel="tag">VSCode Github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode/" rel="tag">Vscode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vscode-%E9%98%BF%E9%87%8C%E4%BA%91/" rel="tag">Vscode 阿里云</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Zero-shot-Detection/" rel="tag">Zero-shot Detection</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/collate-fn/" rel="tag">collate_fn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-Time-out/" rel="tag">git Time out</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" rel="tag">hexo博客配置gitalk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" rel="tag">hexo博客配置picgo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" rel="tag">hexo博客配置pure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mmfewshot/" rel="tag">mmfewshot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/neo4j%E5%AE%89%E8%A3%85/" rel="tag">neo4j安装</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" rel="tag">python3 标准库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%83%E5%9C%BE%E6%A3%80%E6%B5%8B/" rel="tag">垃圾检测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="tag">多个域名访问同一个服务器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95/" rel="tag">实习笔试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E7%BB%8F/" rel="tag">实习面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" rel="tag">快速傅里叶变换</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" rel="tag">排序算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" rel="tag">搭建博客</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%BC%9A%E8%AE%AE/" rel="tag">目标检测会议</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" rel="tag">知识图谱表示</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">知识点</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" rel="tag">算法刷题笔记</a><span class="tag-list-count">7</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/BingChat/" style="font-size: 13px;">BingChat</a> <a href="/tags/Blazor/" style="font-size: 13px;">Blazor</a> <a href="/tags/BlazorLocalization/" style="font-size: 13px;">BlazorLocalization</a> <a href="/tags/CSharp/" style="font-size: 13px;">CSharp</a> <a href="/tags/Cypher/" style="font-size: 13px;">Cypher</a> <a href="/tags/Dataloader/" style="font-size: 13px;">Dataloader</a> <a href="/tags/Dataset/" style="font-size: 13px;">Dataset</a> <a href="/tags/Few-shotObjectDetection/" style="font-size: 13.33px;">Few-shotObjectDetection</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/Hadoop/" style="font-size: 13px;">Hadoop</a> <a href="/tags/Hexo/" style="font-size: 13.33px;">Hexo</a> <a href="/tags/Kaggle/" style="font-size: 13px;">Kaggle</a> <a href="/tags/Linux%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Linux快捷命令</a> <a href="/tags/MySQL/" style="font-size: 13px;">MySQL</a> <a href="/tags/Neo4j%E5%BF%AB%E6%8D%B7%E5%91%BD%E4%BB%A4/" style="font-size: 13px;">Neo4j快捷命令</a> <a href="/tags/PaddleOCRSharp/" style="font-size: 13px;">PaddleOCRSharp</a> <a href="/tags/Python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 13.67px;">Python学习笔记</a> <a href="/tags/Redis%E7%9F%A5%E8%AF%86%E7%82%B9/" style="font-size: 13px;">Redis知识点</a> <a href="/tags/SQL/" style="font-size: 13px;">SQL</a> <a href="/tags/Sampler/" style="font-size: 13px;">Sampler</a> <a href="/tags/VS2022/" style="font-size: 13px;">VS2022</a> <a href="/tags/VSCode-Github/" style="font-size: 13px;">VSCode Github</a> <a href="/tags/Vscode/" style="font-size: 13px;">Vscode</a> <a href="/tags/Vscode-%E9%98%BF%E9%87%8C%E4%BA%91/" style="font-size: 13px;">Vscode 阿里云</a> <a href="/tags/Zero-shot-Detection/" style="font-size: 13px;">Zero-shot Detection</a> <a href="/tags/collate-fn/" style="font-size: 13px;">collate_fn</a> <a href="/tags/git-Time-out/" style="font-size: 13px;">git Time out</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEgitalk/" style="font-size: 13px;">hexo博客配置gitalk</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpicgo/" style="font-size: 13px;">hexo博客配置picgo</a> <a href="/tags/hexo%E5%8D%9A%E5%AE%A2%E9%85%8D%E7%BD%AEpure/" style="font-size: 13px;">hexo博客配置pure</a> <a href="/tags/mmfewshot/" style="font-size: 13px;">mmfewshot</a> <a href="/tags/neo4j%E5%AE%89%E8%A3%85/" style="font-size: 13px;">neo4j安装</a> <a href="/tags/python3-%E6%A0%87%E5%87%86%E5%BA%93/" style="font-size: 13.67px;">python3 标准库</a> <a href="/tags/%E5%9E%83%E5%9C%BE%E6%A3%80%E6%B5%8B/" style="font-size: 13px;">垃圾检测</a> <a href="/tags/%E5%A4%9A%E4%B8%AA%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8/" style="font-size: 13px;">多个域名访问同一个服务器</a> <a href="/tags/%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95/" style="font-size: 13px;">实习笔试</a> <a href="/tags/%E5%AE%9E%E4%B9%A0%E9%9D%A2%E7%BB%8F/" style="font-size: 13px;">实习面经</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 13px;">快捷键</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" style="font-size: 13px;">快速傅里叶变换</a> <a href="/tags/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" style="font-size: 13px;">排序算法</a> <a href="/tags/%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" style="font-size: 13.33px;">搭建博客</a> <a href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E4%BC%9A%E8%AE%AE/" style="font-size: 13px;">目标检测会议</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E8%A1%A8%E7%A4%BA/" style="font-size: 13px;">知识图谱表示</a> <a href="/tags/%E7%9F%A5%E8%AF%86%E7%82%B9/" style="font-size: 13px;">知识点</a> <a href="/tags/%E7%AE%97%E6%B3%95%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" style="font-size: 14px;">算法刷题笔记</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/12/">十二月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/11/">十一月 2023</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/10/">十月 2023</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/09/">九月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">六月 2023</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">四月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">三月 2023</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">二月 2023</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">十二月 2022</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">十一月 2022</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">十月 2022</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled ">
+        
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/29/%E5%AE%9E%E4%B9%A0-Redis%E7%9F%A5%E8%AF%86%E7%82%B9/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/29/%E5%AE%9E%E4%B9%A0-Redis%E7%9F%A5%E8%AF%86%E7%82%B9/" class="title">实习-Redis知识点</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-29T07:23:07.889Z" itemprop="datePublished">2024-03-29</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/26/%E5%AE%9E%E4%B9%A0-SQL%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/26/%E5%AE%9E%E4%B9%A0-SQL%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" class="title">SQL刷题笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-26T11:45:00.778Z" itemprop="datePublished">2024-03-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/26/%E5%AE%9E%E4%B9%A0-2024%E5%AE%9E%E4%B9%A0%E9%9D%A2%E7%BB%8F/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/26/%E5%AE%9E%E4%B9%A0-2024%E5%AE%9E%E4%B9%A0%E9%9D%A2%E7%BB%8F/" class="title">2024暑期实习面经</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-26T08:12:27.672Z" itemprop="datePublished">2024-03-26</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/23/%E5%AE%9E%E4%B9%A0-MySQL%E7%9F%A5%E8%AF%86%E7%82%B9/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/23/%E5%AE%9E%E4%B9%A0-MySQL%E7%9F%A5%E8%AF%86%E7%82%B9/" class="title">MySQL学习笔记</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-23T04:16:40.569Z" itemprop="datePublished">2024-03-23</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-thumb">
+              <a href="/2024/03/18/%E5%AE%9E%E4%B9%A0-2024%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95/" class="thumb">
+    
+    
+        <span class="thumb-image thumb-none"></span>
+    
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+              </p>
+              <p class="item-title">
+                <a href="/2024/03/18/%E5%AE%9E%E4%B9%A0-2024%E5%AE%9E%E4%B9%A0%E7%AC%94%E8%AF%95/" class="title">实习-2024春招笔试汇总</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2024-03-18T13:28:14.565Z" itemprop="datePublished">2024-03-18</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+  <aside class="sidebar sidebar-toc collapse   in  " id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">文章目录</h3>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#redis-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text"> Redis 数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E7%A7%8D%E5%B8%B8%E7%94%A8%E7%9A%84%E7%BC%93%E5%AD%98%E8%AF%BB%E5%86%99%E7%AD%96%E7%95%A5"><span class="toc-number">2.</span> <span class="toc-text"> 三种常用的缓存读写策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#cache-aside-pattern%E6%97%81%E8%B7%AF%E7%BC%93%E5%AD%98%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.1.</span> <span class="toc-text"> Cache Aside Pattern(旁路缓存模式)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#readwrite-through-pattern%E8%AF%BB%E5%86%99%E7%A9%BF%E9%80%8F%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.2.</span> <span class="toc-text"> Read&#x2F;Write Through Pattern(读写穿透模式)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#write-behind-pattern%E5%BC%82%E6%AD%A5%E7%BC%93%E5%AD%98%E5%86%99%E5%85%A5%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.3.</span> <span class="toc-text"> Write Behind Pattern(异步缓存写入模式)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis-%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6"><span class="toc-number">3.</span> <span class="toc-text"> Redis 持久化机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rdb%E6%8C%81%E4%B9%85%E5%8C%96snapshotting"><span class="toc-number">3.1.</span> <span class="toc-text"> RDB持久化(snapshotting)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aof%E6%8C%81%E4%B9%85%E5%8C%96append-only-file"><span class="toc-number">3.2.</span> <span class="toc-text"> AOF持久化(append-only file)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94"><span class="toc-number">3.3.</span> <span class="toc-text"> 两种方式对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis-%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text"> Redis 线程模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="toc-number">5.</span> <span class="toc-text"> Redis 内存管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis-%E4%BA%8B%E5%8A%A1"><span class="toc-number">6.</span> <span class="toc-text"> Redis 事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-number">7.</span> <span class="toc-text"> Redis 性能优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E4%BD%BF%E7%94%A8%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C%E5%87%8F%E5%B0%91%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93"><span class="toc-number">7.1.</span> <span class="toc-text"> 1.使用批量操作减少网络传输</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E5%A4%A7%E9%87%8F-key-%E9%9B%86%E4%B8%AD%E8%BF%87%E6%9C%9F%E9%97%AE%E9%A2%98"><span class="toc-number">7.2.</span> <span class="toc-text"> 2.大量 key 集中过期问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3bigkey%E5%A4%A7key"><span class="toc-number">7.3.</span> <span class="toc-text"> 3.BigKey(大key)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4hotkey%E7%83%AD%E7%82%B9-key"><span class="toc-number">7.4.</span> <span class="toc-text"> 4.HotKey(热点 key)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E6%85%A2%E6%9F%A5%E8%AF%A2%E5%91%BD%E4%BB%A4"><span class="toc-number">7.5.</span> <span class="toc-text"> 5.慢查询命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E5%86%85%E5%AD%98%E7%A2%8E%E7%89%87"><span class="toc-number">7.6.</span> <span class="toc-text"> 6.内存碎片</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E9%97%AE%E9%A2%98"><span class="toc-number">8.</span> <span class="toc-text"> 生产问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="toc-number">8.1.</span> <span class="toc-text"> 缓存穿透</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="toc-number">8.2.</span> <span class="toc-text"> 缓存击穿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9"><span class="toc-number">8.3.</span> <span class="toc-text"> 缓存雪崩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E7%BC%93%E5%AD%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%95%B0%E6%8D%AE%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7"><span class="toc-number">8.4.</span> <span class="toc-text"> 如何保证缓存和数据库数据的一致性</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-实习-Redis知识点" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      实习-Redis知识点
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2024/03/29/%E5%AE%9E%E4%B9%A0-Redis%E7%9F%A5%E8%AF%86%E7%82%B9/" class="article-date">
+	  <time datetime="2024-03-29T07:23:07.889Z" itemprop="datePublished">2024-03-29</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Redis%E7%9F%A5%E8%AF%86%E7%82%B9/" rel="tag">Redis知识点</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2024/03/29/%E5%AE%9E%E4%B9%A0-Redis%E7%9F%A5%E8%AF%86%E7%82%B9/#comments" class="article-comment-link">评论</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">字数统计: 5.5k(字)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">阅读时长: 19(分)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h2 id="redis-数据类型"><a class="markdownIt-Anchor" href="#redis-数据类型"></a> Redis 数据类型</h2>
+<ul>
+<li>五种基础数据类型：</li>
+<li>
+<ul>
+<li>String:底层使用C语言构建的简单动态字符串</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Hash:数组 + 链表,用于对象数据</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>List:基于双向链表,用于时间(最新)数据</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>Set:intset或者hashtable, 用于找共同好友、共同喜好等</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>ZSet(有序集合),ziplist或者skiplist,用于排行榜、有权值排序的等</li>
+</ul>
+</li>
+<li>三种特殊数据类型：HyperLogLog(基数统计)、Geo(地理位置)、Bitmap(位图)</li>
+</ul>
+<p><strong>问题:String和Hash存储对象数据的区别？</strong></p>
+<ul>
+<li>String 存储的是序列化后的对象数据，存放的是整个对象。Hash 是对对象的每个字段单独存储，可以获取部分字段的信息，也可以修改或者添加部分字段，节省网络流量。如果对象中某些字段需要经常变动或- String 存储相对来说更加节省内存，缓存相同数量的对象数据，String 消耗的内存约是 Hash 的一半。并且，存储具有多层嵌套的对象时也方便很多。如果系统对性能和资源消耗非常敏感的话，String 就非常适合。</li>
+</ul>
+<h2 id="三种常用的缓存读写策略"><a class="markdownIt-Anchor" href="#三种常用的缓存读写策略"></a> 三种常用的缓存读写策略</h2>
+<h3 id="cache-aside-pattern旁路缓存模式"><a class="markdownIt-Anchor" href="#cache-aside-pattern旁路缓存模式"></a> Cache Aside Pattern(旁路缓存模式)</h3>
+<p>Cache Aside Pattern 比较适合读请求比较多的场景。</p>
+<p>Cache Aside Pattern 中服务端需要同时维系 db 和 cache，并且是以 db 的结果为准。</p>
+<p><strong>写</strong></p>
+<ul>
+<li>先更新db</li>
+<li>然后直接删除cache</li>
+</ul>
+<p><strong>读</strong></p>
+<ul>
+<li>从cache中读取数据,读取到就直接返回</li>
+<li>读取不到就从db中读取,然后写入cache,并返回</li>
+</ul>
+<p>缺点:</p>
+<ol>
+<li>首次请求时，cache中没有数据，会导致大量的请求落到db上</li>
+<li>写操作比较频繁会频繁删除cache,影响缓存命中率</li>
+</ol>
+<h3 id="readwrite-through-pattern读写穿透模式"><a class="markdownIt-Anchor" href="#readwrite-through-pattern读写穿透模式"></a> Read/Write Through Pattern(读写穿透模式)</h3>
+<p>Read/Write Through Pattern 中服务端把 cache 视为主要数据存储，从中读取数据并将数据写入其中。cache 服务负责将此数据读取和写入 db，从而减轻了应用程序的职责。</p>
+<p><strong>写</strong></p>
+<ul>
+<li>先查 cache，cache 中不存在，直接更新 db。</li>
+<li>cache 中存在，则先更新 cache，然后 cache 服务自己更新 db（同步更新 cache 和 db）。</li>
+</ul>
+<p><strong>读</strong></p>
+<ul>
+<li>从 cache 中读取数据，读取到就直接返回 。</li>
+<li>读取不到的话，先从 db 加载，写入到 cache 后返回响应。</li>
+</ul>
+<h3 id="write-behind-pattern异步缓存写入模式"><a class="markdownIt-Anchor" href="#write-behind-pattern异步缓存写入模式"></a> Write Behind Pattern(异步缓存写入模式)</h3>
+<p>Read/Write Through 是同步更新 cache 和 db，而 Write Behind 则是只更新缓存，不直接更新 db，而是改为异步批量的方式来更新 db。</p>
+<p>这种方式对数据一致性带来了更大的挑战，比如 cache 数据可能还没异步更新 db 的话，cache 服务可能就就挂掉了。</p>
+<p>Write Behind Pattern 下 db 的写性能非常高，非常适合一些数据经常变化又对数据一致性要求没那么高的场景</p>
+<h2 id="redis-持久化机制"><a class="markdownIt-Anchor" href="#redis-持久化机制"></a> Redis 持久化机制</h2>
+<h3 id="rdb持久化snapshotting"><a class="markdownIt-Anchor" href="#rdb持久化snapshotting"></a> RDB持久化(snapshotting)</h3>
+<p><img src="https://image.yayan.xyz/20240329183524.png" alt="" /><br />
+在指定时间间隔后，将内存中的数据集快照写入数据库 ；在恢复时候，直接读取快照文件，进行数据的恢复 ；</p>
+<p><strong>优点</strong></p>
+<ol>
+<li>适合大规模的数据恢复</li>
+<li>对数据的完整性要求不高</li>
+</ol>
+<p><strong>缺点:</strong></p>
+<ol>
+<li>需要一定的时间间隔进行操作，如果redis意外宕机了，这个最后一次修改的数据就没有了。</li>
+<li>fork进程的时候，会占用一定的内容空间。</li>
+</ol>
+<p><strong>过程</strong></p>
+<ol>
+<li>Redis 调用forks。同时拥有父进程和子进程。</li>
+<li>子进程将数据集写入到一个临时 RDB 文件中。</li>
+<li>当子进程完成对新 RDB 文件的写入时，Redis 用新 RDB 文件替换原来的 RDB 文件，并删除旧的 RDB 文件。</li>
+</ol>
+<p><strong>触发机制</strong></p>
+<ol>
+<li>save的规则满足的情况下，会自动触发rdb原则</li>
+<li>执行flushall命令，也会触发我们的rdb原则</li>
+<li>退出redis，也会自动产生rdb文件</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>save</th>
+<th>bgsave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>是否阻塞</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>IO类型</td>
+<td>同步</td>
+<td>异步</td>
+</tr>
+<tr>
+<td>复杂度</td>
+<td>O(n)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>不会消耗额外的内存</td>
+<td>不会阻塞主线程</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>会阻塞主线程</td>
+<td>会fork子进程消耗额外的内存</td>
+</tr>
+</tbody>
+</table>
+<h3 id="aof持久化append-only-file"><a class="markdownIt-Anchor" href="#aof持久化append-only-file"></a> AOF持久化(append-only file)</h3>
+<p><img src="https://image.yayan.xyz/20240329183544.png" alt="" /><br />
+以日志的形式来记录每个写的操作，将Redis执行过的所有指令记录下来（读操作不记录），只许追加文件但不可以改写文件，redis启动之初会读取该文件重新构建数据，换言之，redis重启的话就根据日志文件的内容将写指令从前到后执行一次以完成数据的恢复工作。</p>
+<p><strong>流程</strong></p>
+<ol>
+<li>命令追加（append）：所有的写命令会追加到 AOF 缓冲区中。</li>
+<li>文件写入（write）：将 AOF 缓冲区的数据写入到 AOF 文件中。这一步需要调用write函数（系统调用），write将数据写入到了系统内核缓冲区之后直接返回了（延迟写）。注意！！！此时并没有同步到磁盘。</li>
+<li>文件同步（fsync）：AOF 缓冲区根据对应的持久化方式（ fsync 策略）向硬盘做同步操作。这一步需要调用 fsync 函数（系统调用）， fsync 针对单个文件操作，对其进行强制硬盘同步，fsync 将阻塞直到写入磁盘完成后返回，保证了数据持久化。</li>
+<li>文件重写（rewrite）：随着 AOF 文件越来越大，需要定期对 AOF 文件进行重写，达到压缩的目的。</li>
+<li>重启加载（load）：当 Redis 重启时，可以加载 AOF 文件进行数据恢复。</li>
+</ol>
+<p><strong>AOF持久化方式</strong></p>
+<ol>
+<li><code>appendfsync always</code>每一次修改都会同步，文件的完整性会更加好</li>
+<li><code>appendfsync everysec</code>没秒同步一次，可能会丢失一秒的数据</li>
+<li><code>appendfsync no</code>主线程调用 write 执行写操作后立即返回，让操作系统决定何时进行同步</li>
+</ol>
+<p><strong>缺点:</strong><br />
+1 相对于数据文件来说，aof远远大于rdb，修复速度比rdb慢！<br />
+2 Aof运行效率也要比rdb慢，所以我们redis默认的配置就是rdb持久化</p>
+<p><strong>问题:为什么是在执行完命令之后记录日志?</strong></p>
+<ul>
+<li>避免额外的检查开销，AOF 记录日志不会对命令进行语法检查；</li>
+<li>在命令执行完之后再记录，不会阻塞当前的命令执行。</li>
+</ul>
+<p>这样也带来了风险：</p>
+<ul>
+<li>如果刚执行完命令 Redis 就宕机会导致对应的修改丢失；</li>
+<li>可能会阻塞后续其他命令的执行（AOF 记录日志是在 Redis 主线程中进行的）</li>
+</ul>
+<h3 id="两种方式对比"><a class="markdownIt-Anchor" href="#两种方式对比"></a> 两种方式对比</h3>
+<p>RDB 比 AOF 优秀的地方：</p>
+<ul>
+<li>RDB 文件存储的内容是经过压缩的二进制数据， 保存着某个时间点的数据集，文件很小，适合做数据的备份，灾难恢复。AOF 文件存储的是每一次写命令，类似于 MySQL 的 binlog 日志，通常会比 RDB 文件大很多。当 AOF 变得太大时，Redis 能够在后台自动重写 AOF。新的 AOF 文件和原有的 AOF 文件所保存的数据库状态一样，但体积更小。不过， Redis 7.0 版本之前，如果在重写期间有写入命令，AOF 可能会使用大量内存，重写期间到达的所有写入命令都会写入磁盘两次。</li>
+<li>使用 RDB 文件恢复数据，直接解析还原数据即可，不需要一条一条地执行命令，速度非常快。而 AOF 则需要依次执行每个写命令，速度非常慢。也就是说，与 AOF 相比，恢复大数据集的时候，RDB 速度更快。</li>
+</ul>
+<p>AOF 比 RDB 优秀的地方：</p>
+<ul>
+<li>RDB 的数据安全性不如 AOF，没有办法实时或者秒级持久化数据。生成 RDB 文件的过程是比较繁重的， 虽然 BGSAVE 子进程写入 RDB 文件的工作不会阻塞主线程，但会对机器的 CPU 资源和内存资源产生影响，严重的情况下甚至会直接把 Redis 服务干宕机。AOF 支持秒级数据丢失（取决 fsync 策略，如果是 everysec，最多丢失 1 秒的数据），仅仅是追加命令到 AOF 文件，操作轻量。</li>
+<li>RDB 文件是以特定的二进制格式保存的，并且在 Redis 版本演进中有多个版本的 RDB，所以存在老版本的 Redis 服务不兼容新版本的 RDB 格式的问题。</li>
+<li>AOF 以一种易于理解和解析的格式包含所有操作的日志。你可以轻松地导出 AOF 文件进行分析，你也可以直接操作 AOF 文件来解决一些问题。比如，如果执行FLUSHALL命令意外地刷新了所有内容后，只要 AOF 文件没有被重写，删除最新命令并重启即可恢复之前的状态。</li>
+</ul>
+<h2 id="redis-线程模式"><a class="markdownIt-Anchor" href="#redis-线程模式"></a> Redis 线程模式</h2>
+<p>Redis 基于 Reactor 模式设计开发了一套高效的事件处理模型，这套事件处理模型对应的是 Redis 中的文件事件处理器（file event handler）。由于文件事件处理器（file event handler）是单线程方式运行的，所以我们一般都说 Redis 是单线程模型。<br />
+<img src="https://oss.javaguide.cn/github/javaguide/database/redis/redis-event-handler.png" alt="" /></p>
+<ul>
+<li>文件事件处理器使用 I/O 多路复用（multiplexing）程序来同时监听多个套接字，并根据套接字目前执行的任务来为套接字关联不同的事件处理器。</li>
+<li>当被监听的套接字准备好执行连接应答（accept）、读取（read）、写入（write）、关 闭（close）等操作时，与操作相对应的文件事件就会产生，这时文件事件处理器就会调用套接字之前关联好的事件处理器来处理这些事件。</li>
+<li>虽然文件事件处理器以单线程方式运行，但通过使用 I/O 多路复用程序来监听多个套接字，文件事件处理器既实现了高性能的网络通信模型，又可以很好地与 Redis 服务器中其他同样以单线程方式运行的模块进行对接，这保持了 Redis 内部单线程设计的简单性。</li>
+</ul>
+<p><strong>问题:Redis 为什么是单线程的？</strong></p>
+<ul>
+<li>Redis 采用单线程模型，主要是因为 Redis 的瓶颈主要在于网络带宽和读写速度，而不是 CPU 的计算能力。</li>
+<li>单线程模型可以避免多线程的频繁上下文切换，减少线程间的竞争，避免了加锁解锁的开销，简化了开发和维护。</li>
+</ul>
+<h2 id="redis-内存管理"><a class="markdownIt-Anchor" href="#redis-内存管理"></a> Redis 内存管理</h2>
+<p><strong>问题:Redis 如何判断数据是否过期？</strong><br />
+Redis 通过一个叫做过期字典（可以看作是 hash 表）来保存数据过期的时间。过期字典的键指向 Redis 数据库中的某个 key(键)，过期字典的值是一个 long long 类型的整数，这个整数保存了 key 所指向的数据库键的过期时间（毫秒精度的 UNIX 时间戳）。<br />
+<img src="https://oss.javaguide.cn/github/javaguide/database/redis/redis-expired-dictionary.png" alt="" /></p>
+<p><strong>问题:过期的数据删除策略有哪些？</strong></p>
+<ol>
+<li>惰性删除:当访问一个 key 时，Redis 会检查这个 key 是否过期，如果过期了就删除。这种策略可能会导致过期 key 堆积，占用大量内存。</li>
+<li>定期删除:每隔一段时间，Redis 会随机抽取一些 key，检查其是否过期，如果过期了就删除。Redis 底层会通过限制删除操作执行的时长和频率来减少删除操作对 CPU 时间的影响。</li>
+</ol>
+<p><strong>问题:Redis 内存淘汰策略有哪些？</strong></p>
+<ol>
+<li>volatile-lru:从已设置过期时间的数据集中挑选最近最少使用的数据淘汰。</li>
+<li>volatile-ttl:从已设置过期时间的数据集中挑选将要过期的数据淘汰。</li>
+<li>volatile-random:从已设置过期时间的数据集中随机挑选数据淘汰。</li>
+<li>allkeys-lru:从数据集中挑选最近最少使用的数据淘汰。</li>
+<li>allkeys-random:从数据集中随机挑选数据淘汰。</li>
+<li>no-enviction:禁止驱逐数据。当内存不足以容纳新写入数据时，新写入操作会报错</li>
+<li>volatile-lru:从已设置过期时间的数据集中挑选最不经常使用的数据淘汰。</li>
+<li>allkeys-lru:从数据集中挑选最不经常使用的数据淘汰。</li>
+</ol>
+<h2 id="redis-事务"><a class="markdownIt-Anchor" href="#redis-事务"></a> Redis 事务</h2>
+<p>Redis 事务提供了一种将多个命令请求打包的功能。然后，再按顺序执行打包的所有命令，并且不会被中途打断。</p>
+<ol>
+<li>开始事务:使用 MULTI 命令来开启一个事务。</li>
+<li>命令入队:将所有需要执行的命令放入队列中。</li>
+<li>执行事务:使用 EXEC 命令来执行事务中的所有命令。</li>
+<li>取消事务:使用 DISCARD 命令来取消事务。</li>
+<li>当调用 EXEC 命令执行事务时，如果一个被 WATCH 命令监视的 Key 被 其他客户端/Session 修改的话，整个事务都不会被执行。</li>
+<li>被 WATCH 监视的 Key 被修改的操作发生在事务内部，这个事务是可以被执行成功</li>
+<li>Redis 事务其实是不满足原子性的，Redis 事务是不支持回滚，Redis 事务的持久性也是没办法保证</li>
+</ol>
+<h2 id="redis-性能优化"><a class="markdownIt-Anchor" href="#redis-性能优化"></a> Redis 性能优化</h2>
+<h3 id="1使用批量操作减少网络传输"><a class="markdownIt-Anchor" href="#1使用批量操作减少网络传输"></a> 1.使用批量操作减少网络传输</h3>
+<h3 id="2大量-key-集中过期问题"><a class="markdownIt-Anchor" href="#2大量-key-集中过期问题"></a> 2.大量 key 集中过期问题</h3>
+<ol>
+<li>给 key 设置随机过期时间。</li>
+<li>开启 lazy-free（惰性删除/延迟释放），指的是让 Redis 采用异步方式延迟释放 key 使用的内存，将该操作交给单独的子线程处理，避免阻塞主线程。</li>
+</ol>
+<h3 id="3bigkey大key"><a class="markdownIt-Anchor" href="#3bigkey大key"></a> 3.BigKey(大key)</h3>
+<p>如果一个 key 对应的 value 所占用的内存比较大，那这个 key 就可以看作是 bigkey。</p>
+<ul>
+<li>String 类型的 value 超过 1MB</li>
+<li>复合类型（List、Hash、Set、Sorted Set 等）的 value 包含的元素超过 5000 个</li>
+<li>客户端超时阻塞：由于 Redis 执行命令是单线程处理，然后在操作大 key 时会比较耗时，那么就会阻塞 Redis，从客户端这一视角看，就是很久很久都没有响应。</li>
+<li>网络阻塞：每次获取大 key 产生的网络流量较大，如果一个 key 的大小是 1 MB，每秒访问量为 1000，那么每秒会产生 1000MB 的流量，这对于普通千兆网卡的服务器来说是灾难性的。</li>
+<li>工作线程阻塞：如果使用 del 删除大 key 时，会阻塞工作线程，这样就没办法处理后续的命令。</li>
+</ul>
+<ol>
+<li>使用 <code>redis-cli -p 6379 --bigkeys</code>查找,会对 Redis 的性能有一点影响。并且，这种方式只能找出每种数据结构 top 1 bigkey</li>
+<li>使用 <code>SCAN</code>查找</li>
+</ol>
+<p>bigkey 的常见处理以及优化办法如下（这些方法可以配合起来使用）：</p>
+<ul>
+<li>分割 bigkey：将一个 bigkey 分割为多个小 key。例如，将一个含有上万字段数量的 Hash 按照一定策略（比如二次哈希）拆分为多个 Hash。</li>
+<li>手动清理：Redis 4.0+ 可以使用 UNLINK 命令来异步删除一个或多个指定的 key。Redis 4.0 以下可以考虑使用 SCAN 命令结合 DEL 命令来分批次删除。</li>
+<li>采用合适的数据结构：例如，文件二进制数据不使用 String 保存、使用 HyperLogLog 统计页面 UV、Bitmap 保存状态信息（0/1）。</li>
+<li>开启 lazy-free（惰性删除/延迟释放） ：lazy-free 特性是 Redis 4.0 开始引入的，指的是让 Redis 采用异步方式延迟释放 key 使用的内存，将该操作交给单独的子线程处理，避免阻塞主线程。</li>
+</ul>
+<h3 id="4hotkey热点-key"><a class="markdownIt-Anchor" href="#4hotkey热点-key"></a> 4.HotKey(热点 key)</h3>
+<p>如果一个 key 的访问次数比较多且明显多于其他 key 的话，那这个 key 就可以看作是 hotkey（热 Key）处理 hotkey 会占用大量的 CPU 和带宽，可能会影响 Redis 实例对其他请求的正常处理。此外，如果突然访问 hotkey 的请求超出了 Redis 的处理能力，Redis 就会直接宕机。这种情况下，大量请求将落到后面的数据库上，可能会导致数据库崩溃。</p>
+<ol>
+<li>使用 <code>redis-cli -p 6379 --hotkeys</code>查找</li>
+<li>使用 <code>MONITOR</code>命令查找,该命令对 Redis 性能的影响比较大，因此禁止长时间开启 MONITOR</li>
+</ol>
+<p>hotkey 的常见处理以及优化办法如下（这些方法可以配合起来使用）：</p>
+<ul>
+<li>读写分离：主节点处理写请求，从节点处理读请求。</li>
+<li>使用 Redis Cluster：将热点数据分散存储在多个 Redis 节点上。</li>
+<li>二级缓存：hotkey 采用二级缓存的方式进行处理，将 hotkey 存放一份到 JVM 本地内存中（可以用 Caffeine）。</li>
+</ul>
+<h3 id="5慢查询命令"><a class="markdownIt-Anchor" href="#5慢查询命令"></a> 5.慢查询命令</h3>
+<ol>
+<li>发送命令</li>
+<li>命令排队</li>
+<li>命令执行</li>
+<li>返回结果<br />
+Redis 慢查询统计的是命令执行这一步骤的耗时，慢查询命令也就是那些命令执行时间较长的命令。<br />
+Redis 中的大部分命令都是 O(1)时间复杂度，但也有少部分 O(n) 时间复杂度的命令，例如：</li>
+</ol>
+<ul>
+<li>KEYS *：会返回所有符合规则的 key。</li>
+<li>HGETALL：会返回一个 Hash 中所有的键值对。</li>
+<li>LRANGE：会返回 List 中指定范围内的元素。</li>
+<li>SMEMBERS：返回 Set 中的所有元素。</li>
+<li>SINTER/SUNION/SDIFF：计算多个 Set 的交集/并集/差集。</li>
+</ul>
+<h3 id="6内存碎片"><a class="markdownIt-Anchor" href="#6内存碎片"></a> 6.内存碎片</h3>
+<p>将内存碎片简单地理解为那些不可用的空闲内存。操作系统为你分配了 32 字节的连续内存空间，而你存储数据实际只需要使用 24 字节内存空间，那这多余出来的 8 字节内存空间如果后续没办法再被分配存储其他数据的话，就可以被称为内存碎片</p>
+<ol>
+<li>Redis 存储数据的时候向操作系统申请的内存空间可能会大于数据实际需要的存储空间。</li>
+<li>频繁修改 Redis 中的数据也会产生内存碎片。当 Redis 中的某个数据删除时，Redis 通常不会轻易释放内存给操作系统。</li>
+</ol>
+<p><code>mem_fragmentation_ratio</code> （内存碎片率）= <code>used_memory_rss</code> (操作系统实际分配给 Redis 的物理内存空间大小)/ <code>used_memory</code>(Redis 内存分配器为了存储数据实际申请使用的内存空间大小)</p>
+<h2 id="生产问题"><a class="markdownIt-Anchor" href="#生产问题"></a> 生产问题</h2>
+<h3 id="缓存穿透"><a class="markdownIt-Anchor" href="#缓存穿透"></a> 缓存穿透</h3>
+<p>缓存穿透就是大量请求的 key 是不合理的，根本不存在于缓存中，也不存在于数据库中 。这就导致这些请求直接到了数据库上，根本没有经过缓存这一层，对数据库造成了巨大的压力，可能直接就被这么多请求弄宕机了。</p>
+<ol>
+<li>缓存无效数据：如果缓存和数据库都查不到某个 key 的数据就写一个到 Redis 中去并设置过期时间</li>
+<li>布隆过滤器: 布隆过滤器是一个非常神奇的数据结构，通过它我们可以非常方便地判断一个给定数据是否存在于海量数据中。我们可以把它看作由二进制向量（或者说位数组）和一系列随机映射函数（哈希函数）两部分组成的数据结构。相比于我们平时常用的 List、Map、Set 等数据结构，它占用空间更少并且效率更高，但是缺点是其返回的结果是概率性的，而不是非常准确的。理论情况下添加到集合中的元素越多，误报的可能性就越大。并且，存放在布隆过滤器的数据不容易删除。</li>
+<li>接口限流: 根据用户或者 IP 对接口进行限流，</li>
+</ol>
+<h3 id="缓存击穿"><a class="markdownIt-Anchor" href="#缓存击穿"></a> 缓存击穿</h3>
+<p>缓存击穿中，请求的 key 对应的是 热点数据 ，该数据 存在于数据库中，但不存在于缓存中（通常是因为缓存中的那份数据已经过期） 。这就可能会导致瞬时大量的请求直接打到了数据库上，对数据库造成了巨大的压力，可能直接就被这么多请求弄宕机了。</p>
+<ol>
+<li>设置热点数据永不过期或者过期时间比较长。</li>
+<li>针对热点数据提前预热，将其存入缓存中并设置合理的过期时间比如秒杀场景下的数据在秒杀结束之前不过期。</li>
+<li>请求数据库写数据到缓存之前，先获取互斥锁，保证只有一个请求会落到数据库上，减少数据库的压力。</li>
+</ol>
+<h3 id="缓存雪崩"><a class="markdownIt-Anchor" href="#缓存雪崩"></a> 缓存雪崩</h3>
+<p>缓存在同一时间大面积的失效，导致大量的请求都直接落到了数据库上，对数据库造成了巨大的压力。缓存服务宕机也会导致缓存雪崩现象，导致所有的请求都落到了数据库上。</p>
+<p>针对 Redis 服务不可用的情况：</p>
+<ol>
+<li>采用 Redis 集群，避免单机出现问题整个缓存服务都没办法使用。</li>
+<li>限流，避免同时处理大量的请求。</li>
+<li>多级缓存，例如本地缓存+Redis 缓存的组合，当 Redis 缓存出现问题时，还可以从本地缓存中获取到部分数据。</li>
+</ol>
+<h3 id="如何保证缓存和数据库数据的一致性"><a class="markdownIt-Anchor" href="#如何保证缓存和数据库数据的一致性"></a> 如何保证缓存和数据库数据的一致性</h3>
+<p>更新 DB，然后直接删除 cache 。</p>
+<p>如果更新数据库成功，而删除缓存这一步失败的情况的话，简单说两个解决方案：</p>
+<ol>
+<li>缓存失效时间变短（不推荐，治标不治本）：我们让缓存数据的过期时间变短，这样的话缓存就会从数据库中加载数据。另外，这种解决办法对于先操作缓存后操作数据库的场景不适用。</li>
+<li>增加 cache 更新重试机制（常用）：如果 cache 服务当前不可用导致缓存删除失败的话，我们就隔一段时间进行重试，重试次数可以自己定。如果多次重试还是失败的话，我们可以把当前更新失败的 key 存入队列中，等缓存服务可用之后，再将缓存中对应的 key 删除即可。</li>
+</ol>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://gladdduck.github.io/2024/03/29/%E5%AE%9E%E4%B9%A0-Redis%E7%9F%A5%E8%AF%86%E7%82%B9/" title="实习-Redis知识点" target="_blank" rel="external">https://gladdduck.github.io/2024/03/29/实习-Redis知识点/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/gladdduck" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/icon.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/gladdduck" target="_blank"><span class="text-dark">Gladdduck</span><small class="ml-1x">KB Master</small></a></h3>
+        <div>我写的个人简介。</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+           
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2024/03/26/%E5%AE%9E%E4%B9%A0-SQL%E5%88%B7%E9%A2%98%E8%AE%B0%E5%BD%95/" title="SQL刷题笔记"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn " data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="文章目录" role="button">    <span>[&nbsp;</span><span>文章目录</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>赏</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/donate.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/donate.png" alt="扫码支持" title="扫一扫" />
+              </div>
+              <p class="text-muted mv">扫码打赏，你说多少就多少</p>
+              <p class="text-grey">打开微信扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> 支付宝</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> 微信支付</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/gladdduck" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css"> -->
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1.6.2/dist/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/blueimp-md5@2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+  var gitalk = new Gitalk({
+    clientID: '644a1091cfd20b8f33ef',
+    clientSecret: '4c5cc91dbfe067c804fcef958817d41acc9ba545',
+    repo: 'gladdduck.github.io',
+    owner: 'gladdduck',
+    admin: ['gladdduck'],
+    id: md5(location.pathname),
+    distractionFreeMode: true,
+    language: 'zh-CN',
+    enableHotKey: ''
+  })
+  gitalk.render('comments')
+  </script>
+      
+
+
+
+
+
+
+
+</body>
+</html>
